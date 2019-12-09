@@ -1,4 +1,4 @@
-(defproject clogram "0.0.0"
+(defproject clogram "0.0.1"
   :description "A Telegram Bot Library for Clojure"
   :url "https://github.com/meinside/clogram"
   :license {:name "The MIT License"
