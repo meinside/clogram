@@ -36,8 +36,8 @@ TODO - Add guides here.
 
 ## Todo
 
-- [ ] Add tests.
 - [ ] Add functions for long-polling updates.
+- [ ] Add tests.
 - [ ] Add functions for webhook.
 
 ## License
