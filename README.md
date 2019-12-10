@@ -10,7 +10,7 @@ Add `[dev.meinside/clogram "0.0.1"]` to the dependency of your project.clj file.
 
 ### Interactively
 
-```
+```clojure
 (require '[meinside.clogram :as cg])
 
 ;; generate your bot token with this guide: https://core.telegram.org/bots#3-how-do-i-create-a-bot
@@ -34,7 +34,7 @@ Add `[dev.meinside/clogram "0.0.1"]` to the dependency of your project.clj file.
 
 #### Sample Application (Echo)
 
-```
+```clojure
 ;; clogram-sample/src/core.clj
 ;;
 ;; run with: $ lein run -m clogram-sample.core
