@@ -99,15 +99,18 @@
 (defn request
   "Send HTTP request with given method name and params"
   [bot method params]
-  (let [token (:token bot)
-        url (str api-baseurl token "/" method)
-        params (purge-nil-params params)]
-    (let [result (if (has-file? params)
-                   (request-multipart bot url params)
-                   (request-urlencoded bot url params))]
-      (cond
-        (= (:status result) 200) (json/read-str (:body result) :key-fn keyword)
-        :else (assoc result :ok false)))))
+  (try
+    (let [token (:token bot)
+          url (str api-baseurl token "/" method)
+          params (purge-nil-params params)]
+      (let [result (if (has-file? params)
+                     (request-multipart bot url params)
+                     (request-urlencoded bot url params))]
+        (cond
+          (= (:status result) 200) (json/read-str (:body result) :key-fn keyword)
+          :else (assoc result :ok false))))
+    (catch Exception e {:ok false
+                        :reason-phrase (.getMessage e)})))
 
 (defn url-for-filepath
   "Generate a URL from a fetched file info.

@@ -7,7 +7,10 @@
 ;; created on 2019.12.05.
 
 (ns clogram.bot
-  (:require [clogram.helper :as h])) ;; helper functions
+  (:require [clogram.helper :as h] ;; helper functions
+            [clojure.core.async
+             :as a
+             :refer [>! <! >!! <!! go chan buffer close! thread alts! alts!! timeout]]))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -26,6 +29,8 @@
    interval-seconds
    limit-count
    timeout-seconds
+   polling?
+   polling-wait-ch
    verbose?])
 
 ;; create a new bot with given params
@@ -46,6 +51,8 @@
                  :interval-seconds interval-seconds
                  :limit-count limit-count
                  :timeout-seconds timeout-seconds
+                 :polling? (atom false)
+                 :polling-wait-ch (atom nil)
                  :verbose? verbose?}))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -85,6 +92,88 @@
                                  "limit" limit
                                  "timeout" timeout
                                  "allowed_updates" allowed-updates})))
+
+(defn poll-updates
+  "Poll updates for this bot with given interval and send them through the handler function.
+
+  `options` include: :offset, :limit, :timeout, and :allowed-updates.
+
+  This function returns a channel of go block (for busy-waiting).
+
+  Start polling with:
+
+  (let [wait (poll-updates bot 1 (fn [bot update] ...))]
+    (<!! wait)) ;; busy-wait
+
+  and stop polling with:
+
+  (stop-polling bot)"
+  [bot interval-seconds fn-update-handler & options]
+  (let [polling? (:polling? bot)]
+    (if @polling?
+      ;; already polling, do nothing
+      (h/log "already polling")
+
+      ;; start polling
+      (let [{:keys [offset
+                    limit
+                    timeout
+                    allowed-updates]
+             :or {limit 100
+                  timeout (:timeout-seconds bot)}} options
+            interval-seconds (max default-interval-seconds interval-seconds)
+            update-offset (atom offset)
+            polling-wait-ch (:polling-wait-ch bot)
+            wait (go
+                   (h/log "starting polling with interval: " interval-seconds " second(s)")
+
+                   (reset! polling? true)
+
+                   ;; keep polling...
+                   (while @polling?
+                     (let [response (get-updates bot
+                                                 :offset @update-offset
+                                                 :limit limit
+                                                 :timeout timeout
+                                                 :allowed-updates allowed-updates)]
+                       (if (:ok response)
+                         (if (not-empty (:result response))
+                           (do
+                             ;; new update-offset = latest update-id + 1
+                             (reset! update-offset (inc (last (sort (map :update_id (:result response))))))
+
+                             ;; callback updates
+                             (doseq [update (:result response)]
+                               (go (fn-update-handler bot update))))
+                           (h/log "no updates..."))
+                         (h/log "failed to poll updates: " (:reason-phrase response)))
+
+                       ;; interval
+                       (<! (a/timeout (* 1000 interval-seconds)))))
+
+                   ;; out of while-loop
+                   (h/log "stopped polling."))]
+
+        ;; reset wait channel and return it
+        (reset! polling-wait-ch wait)))))
+
+(defn stop-polling
+  "Stop polling if the bot was polling."
+  [bot]
+  (let [polling? (:polling? bot)
+        wait (:polling-wait-ch bot)]
+    (if (and @polling? @wait)
+      (do
+        (h/log "stopping polling...")
+
+        ;; make it false
+        (reset! polling? false)
+
+        ;; close channel and make it nil
+        (a/close! @wait)
+        (reset! wait nil))
+
+      (h/log "not polling (anymore)"))))
 
 (defn send-message
   "Send a message.
