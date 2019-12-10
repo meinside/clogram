@@ -1,12 +1,11 @@
 ;; Helper functions for Clogram
 ;;
-;; clogram/helper
+;; meinside/clogram/helper.clj
 ;;
 ;; created on 2019.12.09.
 
-(ns clogram.helper
+(ns meinside.clogram.helper
   (:require [clj-http.client :as http]
-            [clogram.helper :refer :all] ;; helper functions
             [clojure.data.json :as json]
             [clojure.java.io :as io]))
 

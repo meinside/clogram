@@ -1,19 +1,17 @@
 # clogram
 
-[![Clojars](https://img.shields.io/clojars/v/clogram.svg)](https://clojars.org/clogram)
-
 A Clojure library for Telegram Bot API.
 
 ## Installation
 
-Add `[clogram "0.0.1"]` to the dependency of your project.clj file.
+Add `[dev.meinside/clogram "0.0.1"]` to the dependency of your project.clj file.
 
 ## Usage
 
 ### Interactively
 
 ```
-(require '[clogram.bot :as cg])
+(require '[meinside.clogram :as cg])
 
 ;; generate your bot token with this guide: https://core.telegram.org/bots#3-how-do-i-create-a-bot
 (def token "0123456789:abcdefghijklmnopqrstuvwxyz")
@@ -43,8 +41,8 @@ Add `[clogram "0.0.1"]` to the dependency of your project.clj file.
 
 (ns clogram-sample.core
   (:gen-class)
-  (:require [clogram.bot :as cg]
-            [clojure.core.async :as a]))
+  (:require [clojure.core.async :as a]
+            [meinside.clogram :as cg]))
 
 (def token "0123456789:abcdefghijklmnopqrstuvwxyz")
 (def interval 1)
@@ -94,7 +92,7 @@ Add `[clogram "0.0.1"]` to the dependency of your project.clj file.
                         (Thread. #(do
                                     (println ">>> terminating application...")
 
-                                    (cg/stop-polling my-bot))))
+                                    (cg/stop-polling my-bot)))) ;; stop polling
 
       ;; busy-wait
       (a/<!! wait))))

@@ -1,16 +1,16 @@
 ;; Telegram Bot Library for Clojure
 ;;
-;; clogram/bot
+;; meinside/clogram.clj
 ;;
 ;; (https://core.telegram.org/bots/api)
 ;;
 ;; created on 2019.12.05.
 
-(ns clogram.bot
-  (:require [clogram.helper :as h] ;; helper functions
-            [clojure.core.async
+(ns meinside.clogram
+  (:require [clojure.core.async
              :as a
-             :refer [>! <! >!! <!! go chan buffer close! thread alts! alts!! timeout]]))
+             :refer [>! <! >!! <!! go chan buffer close! thread alts! alts!! timeout]]
+            [meinside.clogram.helper :as h])) ;; helper functions
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
