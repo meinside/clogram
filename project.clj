@@ -7,4 +7,6 @@
                  [org.clojure/core.async "0.6.532"]
                  [org.clojure/data.json "0.2.7"]
                  [clj-http "3.10.0"]]
+  :deploy-repositories [["releases" :clojars]
+                        ["snapshots" :clojars]]
   :repl-options {:init-ns meinside.clogram})

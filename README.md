@@ -1,5 +1,7 @@
 # clogram
 
+[![Clojars Project](https://img.shields.io/clojars/v/dev.meinside/clogram.svg)](https://clojars.org/dev.meinside/clogram)
+
 A Clojure library for Telegram Bot API.
 
 ## Installation
