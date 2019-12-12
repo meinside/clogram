@@ -6,7 +6,7 @@ A Clojure library for Telegram Bot API.
 
 ## Installation
 
-Add `[dev.meinside/clogram "0.0.1"]` to the dependency of your project.clj file.
+Add `[dev.meinside/clogram "0.0.2"]` to the dependency of your project.clj file.
 
 ## Usage
 
@@ -43,8 +43,7 @@ Add `[dev.meinside/clogram "0.0.1"]` to the dependency of your project.clj file.
 
 (ns clogram-sample.core
   (:gen-class)
-  (:require [clojure.core.async :as a]
-            [meinside.clogram :as cg]))
+  (:require [meinside.clogram :as cg]))
 
 (def token "0123456789:abcdefghijklmnopqrstuvwxyz")
 (def interval 1)
@@ -83,21 +82,20 @@ Add `[dev.meinside/clogram "0.0.1"]` to the dependency of your project.clj file.
               (println "*** failed to send message:" (:reason-phrase result)))))))))
 
 (defn -main
-  "main function "
+  "main function"
   [& args]
   (do
     (println ">>> launching application...")
 
-    (let [wait (cg/poll-updates my-bot interval echo)]
-      ;; add shutdown hook
-      (.addShutdownHook (Runtime/getRuntime)
-                        (Thread. #(do
-                                    (println ">>> terminating application...")
+    ;; add shutdown hook
+    (.addShutdownHook (Runtime/getRuntime)
+                      (Thread. #(do
+                                  (println ">>> terminating application...")
 
-                                    (cg/stop-polling my-bot)))) ;; stop polling
+                                  (cg/stop-polling my-bot)))) ;; stop polling
 
-      ;; busy-wait
-      (a/<!! wait))))
+    ;; busy-wait for polling
+    (cg/poll-updates my-bot interval echo)))
 
 ```
 
