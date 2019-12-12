@@ -96,14 +96,14 @@
 (defn poll-updates
   "Poll updates for this bot with given interval and send them through the handler function.
 
-  `options` include: :offset, :limit, :timeout, and :allowed-updates.
+  It will block until get stopped with `stop-polling` function.
 
-  This function returns a channel of go block (for busy-waiting).
+  `options` include: :offset, :limit, :timeout, and :allowed-updates.
 
   Start polling with:
 
-  (let [wait (poll-updates bot 1 (fn [bot update] ...))]
-    (<!! wait)) ;; busy-wait
+  ;; will be blocked until stopped
+  (poll-updates bot 1 (fn [bot update] ...))
 
   and stop polling with:
 
@@ -154,8 +154,11 @@
                    ;; out of while-loop
                    (h/log "stopped polling."))]
 
-        ;; reset wait channel and return it
-        (reset! polling-wait-ch wait)))))
+        ;; reset wait channel,
+        (reset! polling-wait-ch wait)
+
+        ;; and wait for it
+        (<!! wait)))))
 
 (defn stop-polling
   "Stop polling if the bot was polling."
