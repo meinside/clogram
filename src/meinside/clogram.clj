@@ -879,7 +879,7 @@
                                          "parse_mode" parse-mode
                                          "reply_markup" reply-markup})))
 
-(defn edit-message-caption
+(defn edit-message-media
   "Edit a message's media.
 
   required `options`: :chat-id + :message-id (when :inline-message-id is not given)
