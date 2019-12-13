@@ -46,7 +46,6 @@
               timeout-seconds default-timeout-seconds
               verbose? false}} opts]
     (do
-      (h/log "creating a new bot with options: " opts)
       (map->Bot {:token token
                  :interval-seconds interval-seconds
                  :limit-count limit-count
@@ -161,11 +160,14 @@
         (<!! wait)))))
 
 (defn stop-polling
-  "Stop polling if the bot was polling."
+  "Stop polling if the bot was polling.
+
+  Returns true on success, false otherwise."
   [bot]
   (let [polling? (:polling? bot)
         wait (:polling-wait-ch bot)]
     (if (and @polling? @wait)
+      ;; if polling,
       (do
         (h/log "stopping polling...")
 
@@ -174,9 +176,17 @@
 
         ;; close channel and make it nil
         (a/close! @wait)
-        (reset! wait nil))
+        (reset! wait nil)
 
-      (h/log "not polling (anymore)"))))
+        ;; return true
+        true)
+
+      ;; if not polling,
+      (do
+        (h/log "not polling (anymore)")
+
+        ;; return false
+        false))))
 
 (defn send-message
   "Send a message.
