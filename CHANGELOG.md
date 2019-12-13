@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file. This change log follows the conventions of [keepachangelog.com](http://keepachangelog.com/).
 
+## [0.0.5] - 2019-12-13
+### Added
+- Add some more test codes. (WIP)
+
 ## [0.0.4] - 2019-12-13
 ### Added
 - Add some test codes. (WIP)
@@ -36,6 +40,7 @@ All notable changes to this project will be documented in this file. This change
 ### Added
 - Initial commit.
 
+[0.0.5]: https://github.com/meinside/clogram/compare/v0.0.4...v0.0.5
 [0.0.4]: https://github.com/meinside/clogram/compare/v0.0.3...v0.0.4
 [0.0.3]: https://github.com/meinside/clogram/compare/v0.0.2...v0.0.3
 [0.0.2]: https://github.com/meinside/clogram/compare/v0.0.1...v0.0.2
