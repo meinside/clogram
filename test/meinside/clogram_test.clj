@@ -1,140 +1,196 @@
+;; clogram_test.clj
+;;
+;; NOTE:
+;;
+;; Group privacy mode of both bots should be turned off (https://core.telegram.org/bots#privacy-mode)
+;; before adding to a group chat.
+;;
+;;
+;; Test with:
+;;
+;; $ BOT_TOKEN1=xxxxx BOT_TOKEN2=yyyyy CHAT_ID=zzzzz lein test
+
 (ns meinside.clogram-test
   (:require [clojure.test :refer :all]
             [meinside.clogram :refer :all]))
 
-(deftest a-test
-  (testing "FIXME, I fail."
-    (is (= 0 1))))
+;; fake tokens and chat id
+(def test-bot1-token "0123456789:abcdefghijklmnopqrstuvwxyz")
+(def test-bot2-token "9876543210:zyxwvutsrqponmlkjihgfedcba")
+(def test-chat-id -1)
+(def verbose? false) ;; set to true for printing verbose logs
 
-;; TODO - new-bot
+;; initialize bots from environment variables
+(def bot1 (new-bot (or (System/getenv "BOT_TOKEN1")
+                       test-bot1-token)
+                   :verbose? verbose?))
+(def bot2 (new-bot (or (System/getenv "BOT_TOKEN2")
+                       test-bot2-token)
+                   :verbose? verbose?))
+(def chat-id (or (System/getenv "CHAT_ID")
+                 test-chat-id))
 
-;; TODO - delete-webhook
+(deftest test-bot-creation
+  (testing "Testing bot creation"
+    (let [bot1-info (get-me bot1)
+          bot2-info (get-me bot2)]
+      (is (:ok bot1-info))
+      (is (:ok bot2-info)))))
 
-;; TODO - get-me
+(deftest test-sending-and-fetching-messages
+  (testing "Testing sending and fetching messages"
+    ;; delete webhooks
+    (is (:ok (delete-webhook bot1)))
+    (is (:ok (delete-webhook bot2)))
 
-;; TODO - get-updates
+    ;; send text messages
+    (is (:ok (send-message bot1 chat-id "test message from bot1")))
+    (is (:ok (send-message bot2 chat-id "test message from bot2")))
 
-;; TODO - poll-updates
+    ;; TODO - forward-message
 
-;; TODO - stop-polling
+    ;; TODO - send-photo
 
-;; TODO - send-message
+    ;; TODO - send-audio
 
-;; TODO - forward-message
+    ;; TODO - send-document
 
-;; TODO - send-photo
+    ;; TODO - send-sticker
 
-;; TODO - send-audio
+    ;; TODO - send-video
 
-;; TODO - send-document
+    ;; TODO - send-animation
 
-;; TODO - send-sticker
+    ;; TODO - send-voice
 
-;; TODO - get-sticker-set
+    ;; TODO - send-video-note
 
-;; TODO - upload-sticker-file
+    ;; TODO - send-media-group
 
-;; TODO - create-new-sticker-set
+    ;; TODO - send-location
 
-;; TODO - add-sticker-to-set
+    ;; TODO - send-venue
 
-;; TODO - set-sticker-position-in-set
+    ;; TODO - send-contact
 
-;; TODO - delete-sticker-from-set
+    ;; TODO - send-poll
 
-;; TODO - send-video
+    ;; TODO - stop-poll
 
-;; TODO - send-animation
+    ;; TODO - send-chat-action
 
-;; TODO - send-voice
+    ;; TODO - get-file-url
 
-;; TODO - send-video-note
+    ;; TODO - get-file
 
-;; TODO - send-media-group
+    ;; TODO - edit-message-text
 
-;; TODO - send-location
+    ;; TODO - edit-message-caption
 
-;; TODO - send-venue
+    ;; TODO - edit-message-media
 
-;; TODO - send-contact
+    ;; TODO - edit-message-reply-markup
 
-;; TODO - send-poll
+    ;; TODO - edit-message-live-location
 
-;; TODO - stop-poll
+    ;; TODO - stop-message-live-location
 
-;; TODO - send-chat-action
+    ;; TODO - delete-message
 
-;; TODO - get-user-profile-photos
+    ;; fetch messages
+    (is (:ok (get-updates bot1)))
+    (is (:ok (get-updates bot2)))))
 
-;; TODO - get-file-url
+(deftest test-polling
+  (testing "Testing polling updates"
+    ;; TODO - poll-updates
 
-;; TODO - get-file
+    ;; TODO - stop-polling
+    ))
 
-;; TODO - kick-chat-member
+(deftest test-stickers
+  (testing "Testing functions for stickers"
+    ;; TODO - get-sticker-set
 
-;; TODO - leave-chat
+    ;; TODO - upload-sticker-file
 
-;; TODO - unban-chat-member
+    ;; TODO - create-new-sticker-set
 
-;; TODO - restrict-chat-member
+    ;; TODO - add-sticker-to-set
 
-;; TODO - promote-chat-member
+    ;; TODO - set-sticker-position-in-set
 
-;; TODO - set-chat-permission
+    ;; TODO - delete-sticker-from-set
+    ))
 
-;; TODO - export-chat-invite-link
+(deftest test-games
+  (testing "Testing functions for games"
+    ;; TODO - send-game
 
-;; TODO - set-chat-photo
+    ;; TODO - set-game-score
 
-;; TODO - delete-chat-photo
+    ;; TODO - get-game-highscores
+    ))
 
-;; TODO - set-chat-title
+(deftest test-shopping
+  (testing "Testing functions for commerce"
+    ;; TODO - send-invoice
 
-;; TODO - set-chat-description
+    ;; TODO - answer-shipping-query
 
-;; TODO - pin-chat-message
+    ;; TODO - answer-pre-checkout-query
+    ))
 
-;; TODO - unpin-chat-message
+(deftest test-chat-administration
+  (testing "Testing functions for chat administration"
+    ;; TODO - kick-chat-member
 
-;; TODO - get-chat
+    ;; TODO - leave-chat
 
-;; TODO - get-chat-administrators
+    ;; TODO - unban-chat-member
 
-;; TODO - get-chat-members-count
+    ;; TODO - restrict-chat-member
 
-;; TODO - get-chat-member
+    ;; TODO - promote-chat-member
 
-;; TODO - set-chat-sticker-set
+    ;; TODO - set-chat-permission
 
-;; TODO - delete-chat-sticker-set
+    ;; TODO - export-chat-invite-link
 
-;; TODO - answer-callback-query
+    ;; TODO - set-chat-photo
 
-;; TODO - edit-message-text
+    ;; TODO - delete-chat-photo
 
-;; TODO - edit-message-caption
+    ;; TODO - set-chat-title
 
-;; TODO - edit-message-media
+    ;; TODO - set-chat-description
 
-;; TODO - edit-message-reply-markup
+    ;; TODO - pin-chat-message
 
-;; TODO - edit-message-live-location
+    ;; TODO - unpin-chat-message
 
-;; TODO - stop-message-live-location
+    ;; TODO - get-chat
 
-;; TODO - delete-message
+    ;; TODO - get-user-profile-photos
 
-;; TODO - answer-inline-query
+    ;; TODO - get-chat-administrators
 
-;; TODO - send-invoice
+    ;; TODO - get-chat-members-count
 
-;; TODO - answer-shipping-query
+    ;; TODO - get-chat-member
 
-;; TODO - answer-pre-checkout-query
+    ;; TODO - set-chat-sticker-set
 
-;; TODO - send-game
+    ;; TODO - delete-chat-sticker-set
+    ))
 
-;; TODO - set-game-score
+(deftest test-callback-query
+  (testing "Testing callback query"
+    ;; TODO - answer-callback-query
+    ))
 
-;; TODO - get-game-highscores
+(deftest test-inline-query
+  (testing "Testing inline query"
+    ;; TODO - answer-inline-query
+    ))
 
