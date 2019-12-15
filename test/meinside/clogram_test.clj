@@ -1,53 +1,50 @@
 ;; clogram_test.clj
 ;;
-;; NOTE:
-;;
-;; Group privacy mode of both bots should be turned off (https://core.telegram.org/bots#privacy-mode)
-;; before adding to a group chat.
-;;
-;;
 ;; Test with:
 ;;
-;; $ BOT_TOKEN1=xxxxx BOT_TOKEN2=yyyyy CHAT_ID=zzzzz lein test
+;; $ TOKEN=xxxxx CHAT_ID=yyyyy lein test
 
 (ns meinside.clogram-test
   (:require [clojure.test :refer :all]
             [meinside.clogram :refer :all]))
 
 ;; fake tokens and chat id
-(def test-bot1-token "0123456789:abcdefghijklmnopqrstuvwxyz")
-(def test-bot2-token "9876543210:zyxwvutsrqponmlkjihgfedcba")
+(def test-bot-token "0123456789:abcdefghijklmnopqrstuvwxyz")
 (def test-chat-id -1)
 (def verbose? false) ;; set to true for printing verbose logs
 
 ;; initialize bots from environment variables
-(def bot1 (new-bot (or (System/getenv "BOT_TOKEN1")
-                       test-bot1-token)
-                   :verbose? verbose?))
-(def bot2 (new-bot (or (System/getenv "BOT_TOKEN2")
-                       test-bot2-token)
-                   :verbose? verbose?))
+(def bot (new-bot (or (System/getenv "TOKEN")
+                      test-bot-token)
+                  :verbose? verbose?))
 (def chat-id (or (System/getenv "CHAT_ID")
                  test-chat-id))
 
 (deftest test-bot-creation
   (testing "Testing bot creation"
-    (let [bot1-info (get-me bot1)
-          bot2-info (get-me bot2)]
-      (is (:ok bot1-info))
-      (is (:ok bot2-info)))))
+    (let [bot-info (get-me bot)]
+      (is (:ok bot-info)))))
 
 (deftest test-sending-and-fetching-messages
   (testing "Testing sending and fetching messages"
-    ;; delete webhooks
-    (is (:ok (delete-webhook bot1)))
-    (is (:ok (delete-webhook bot2)))
+    ;; delete webhook,
+    (is (:ok (delete-webhook bot)))
 
-    ;; send text messages
-    (is (:ok (send-message bot1 chat-id "test message from bot1")))
-    (is (:ok (send-message bot2 chat-id "test message from bot2")))
+    ;; send a chat action,
+    (is (:ok (send-chat-action bot chat-id :typing)))
 
-    ;; TODO - forward-message
+    ;; send a text message,
+    (let [sent-message (send-message bot chat-id "test message")]
+      (do
+        (is (:ok sent-message))
+
+        ;; edit the message's text,
+        (is (:ok (edit-message-text bot "edited message"
+                                    :chat-id chat-id
+                                    :message-id (get-in sent-message [:result :message_id]))))
+
+        ;; and forward it
+        (is (:ok (forward-message bot chat-id chat-id (get-in sent-message [:result :message_id]))))))
 
     ;; TODO - send-photo
 
@@ -77,13 +74,9 @@
 
     ;; TODO - stop-poll
 
-    ;; TODO - send-chat-action
-
     ;; TODO - get-file-url
 
     ;; TODO - get-file
-
-    ;; TODO - edit-message-text
 
     ;; TODO - edit-message-caption
 
@@ -98,8 +91,7 @@
     ;; TODO - delete-message
 
     ;; fetch messages
-    (is (:ok (get-updates bot1)))
-    (is (:ok (get-updates bot2)))))
+    (is (:ok (get-updates bot)))))
 
 (deftest test-polling
   (testing "Testing polling updates"
