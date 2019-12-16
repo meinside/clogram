@@ -13,7 +13,7 @@
 (def test-chat-id -1)
 (def verbose? false) ;; set to true for printing verbose logs
 
-;; initialize bots from environment variables
+;; initialize values from environment variables
 (def bot (new-bot (or (System/getenv "TOKEN")
                       test-bot-token)
                   :verbose? verbose?))
@@ -46,11 +46,25 @@
         ;; and forward it
         (is (:ok (forward-message bot chat-id chat-id (get-in sent-message [:result :message_id]))))))
 
-    ;; TODO - send-photo
+    ;; send a photo,
+    (let [sent-photo (send-photo bot chat-id (clojure.java.io/file "resources/test/image.png"))]
+      (do
+        (is (:ok sent-photo))
+
+        ;; edit the photo's caption
+        (is (:ok (edit-message-caption bot "caption"
+                                       :chat-id chat-id
+                                       :message-id (get-in sent-photo [:result :message_id]))))))
 
     ;; TODO - send-audio
 
-    ;; TODO - send-document
+    ;; send a document,
+    (let [sent-document (send-document bot chat-id (clojure.java.io/file "test/meinside/clogram_test.clj"))]
+      (do
+        (is (:ok sent-document))
+
+        ;; delete a message,
+        (delete-message bot chat-id (get-in sent-document [:result :message_id]))))
 
     ;; TODO - send-sticker
 
@@ -64,21 +78,25 @@
 
     ;; TODO - send-media-group
 
-    ;; TODO - send-location
+    ;; send a loation,
+    (is (:ok (send-location bot chat-id 37.5665 126.9780)))
 
     ;; TODO - send-venue
 
-    ;; TODO - send-contact
+    ;; send a contact,
+    (is (:ok (send-contact bot chat-id "911" "Nine-One-One")))
 
-    ;; TODO - send-poll
+    ;; send a poll,
+    (let [sent-poll (send-poll bot chat-id "The earth is...?" ["flat" "round" "nothing"])]
+      (do
+        (is (:ok sent-poll))
 
-    ;; TODO - stop-poll
+        ;; stop a poll,
+        (stop-poll bot chat-id (get-in sent-poll [:result :message_id]))))
 
     ;; TODO - get-file-url
 
     ;; TODO - get-file
-
-    ;; TODO - edit-message-caption
 
     ;; TODO - edit-message-media
 
@@ -88,8 +106,6 @@
 
     ;; TODO - stop-message-live-location
 
-    ;; TODO - delete-message
-
     ;; fetch messages
     (is (:ok (get-updates bot)))))
 
@@ -97,7 +113,7 @@
   (testing "Testing polling updates"
     ;; TODO - poll-updates
 
-    ;; TODO - stop-polling
+    ;; TODO - stop-polling-updates
     ))
 
 (deftest test-stickers
