@@ -1,8 +1,8 @@
-;; Helper functions for Clogram
-;;
-;; meinside/clogram/helper.clj
-;;
-;; created on 2019.12.09.
+;;;; Helper functions for Clogram
+;;;;
+;;;; src/meinside/clogram/helper.clj
+;;;;
+;;;; created on 2019.12.09.
 
 (ns meinside.clogram.helper
   (:require [clj-http.client :as http]
@@ -10,15 +10,15 @@
             [clojure.java.io :as io]))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; constants
+;;;
+;;; constants
 
 (def api-baseurl "https://api.telegram.org/bot")
 (def file-baseurl "https://api.telegram.org/file/bot")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; helper functions
+;;;
+;;; helper functions
 
 ;; print verbose log messages
 (defn verbose
@@ -32,8 +32,8 @@
   (println (str (java.time.LocalDateTime/now)) "| LOG |" (clojure.string/join "" (map #(if (coll? %) (pr-str %) (str %)) args))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; http request helper functions
+;;;
+;;; http request helper functions
 
 (defn- is-file?
   "Check if given object is a file object"

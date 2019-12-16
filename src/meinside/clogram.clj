@@ -1,28 +1,28 @@
-;; Telegram Bot Library for Clojure
-;;
-;; meinside/clogram.clj
-;;
-;; (https://core.telegram.org/bots/api)
-;;
-;; created on 2019.12.05.
+;;;; Telegram Bot Library for Clojure
+;;;;
+;;;; src/meinside/clogram.clj
+;;;;
+;;;; (https://core.telegram.org/bots/api)
+;;;;
+;;;; created on 2019.12.05.
 
 (ns meinside.clogram
   (:require [clojure.core.async
              :as a
              :refer [>! <! >!! <!! go chan buffer close! thread alts! alts!! timeout]]
-            [meinside.clogram.helper :as h])) ;; helper functions
+            [meinside.clogram.helper :as h])) ; helper functions
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; constants
+;;;
+;;; constants
 
 (def default-interval-seconds 1)
 (def default-timeout-seconds 10)
 (def default-limit-count 100)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; Bot
+;;;
+;;; Bot
 
 (defrecord Bot
   [token
@@ -55,10 +55,10 @@
                  :verbose? verbose?}))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; bot API methods
-;;
-;; (https://core.telegram.org/bots/api#available-methods)
+;;;
+;;; bot API methods
+;;;
+;;; (https://core.telegram.org/bots/api#available-methods)
 
 (defn delete-webhook
   "Delete webhook for polling messages.

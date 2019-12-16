@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file. This change log follows the conventions of [keepachangelog.com](http://keepachangelog.com/).
 
+## [0.0.7] - 2019-12-16
+### Changed
+- Apply clojure style guide to some codes and comments (https://github.com/bbatsov/clojure-style-guide)
+
 ## [0.0.6] - 2019-12-16
 ### Added
 - Add more test codes. (WIP)
@@ -47,6 +51,7 @@ All notable changes to this project will be documented in this file. This change
 ### Added
 - Initial commit.
 
+[0.0.7]: https://github.com/meinside/clogram/compare/v0.0.6...v0.0.7
 [0.0.6]: https://github.com/meinside/clogram/compare/v0.0.5...v0.0.6
 [0.0.5]: https://github.com/meinside/clogram/compare/v0.0.4...v0.0.5
 [0.0.4]: https://github.com/meinside/clogram/compare/v0.0.3...v0.0.4
