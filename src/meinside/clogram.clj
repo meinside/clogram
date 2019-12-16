@@ -95,7 +95,7 @@
 (defn poll-updates
   "Poll updates for this bot with given interval and send them through the handler function.
 
-  It will block until get stopped with `stop-polling` function.
+  This function will block until it gets stopped with `stop-polling-updates` function.
 
   `options` include: :offset, :limit, :timeout, and :allowed-updates.
 
@@ -106,7 +106,7 @@
 
   and stop polling with:
 
-  (stop-polling bot)"
+  (stop-polling-updates bot)"
   [bot interval-seconds fn-update-handler & options]
   (let [polling? (:polling? bot)]
     (if @polling?
@@ -159,8 +159,8 @@
         ;; and wait for it
         (<!! wait)))))
 
-(defn stop-polling
-  "Stop polling if the bot was polling.
+(defn stop-polling-updates
+  "Stop polling updates if the bot was polling.
 
   Returns true on success, false otherwise."
   [bot]
@@ -169,7 +169,7 @@
     (if (and @polling? @wait)
       ;; if polling,
       (do
-        (h/log "stopping polling...")
+        (h/log "stopping polling updates...")
 
         ;; make it false
         (reset! polling? false)

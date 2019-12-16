@@ -1,6 +1,13 @@
 # Change Log
 All notable changes to this project will be documented in this file. This change log follows the conventions of [keepachangelog.com](http://keepachangelog.com/).
 
+## [0.0.6] - 2019-12-16
+### Added
+- Add more test codes. (WIP)
+
+### Changed
+- Rename `stop-polling` to `stop-polling-updates` for clarity.
+
 ## [0.0.5] - 2019-12-13
 ### Added
 - Add some more test codes. (WIP)
@@ -40,6 +47,7 @@ All notable changes to this project will be documented in this file. This change
 ### Added
 - Initial commit.
 
+[0.0.6]: https://github.com/meinside/clogram/compare/v0.0.5...v0.0.6
 [0.0.5]: https://github.com/meinside/clogram/compare/v0.0.4...v0.0.5
 [0.0.4]: https://github.com/meinside/clogram/compare/v0.0.3...v0.0.4
 [0.0.3]: https://github.com/meinside/clogram/compare/v0.0.2...v0.0.3
