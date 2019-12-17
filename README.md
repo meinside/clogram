@@ -6,7 +6,7 @@ A Clojure library for Telegram Bot API.
 
 ## Installation
 
-Add `[dev.meinside/clogram "0.0.8"]` to the dependency of your project.clj file.
+Add `[dev.meinside/clogram "0.0.9"]` to the dependency of your project.clj file.
 
 ## Usage
 
@@ -54,48 +54,45 @@ Add `[dev.meinside/clogram "0.0.8"]` to the dependency of your project.clj file.
 (defn echo
   "echo function"
   [bot update]
-  (do
-    (println ">>> received update:" update)
+  (println ">>> received update:" update)
 
-    (let [chat-id (get-in update [:message :chat :id])
-          reply-to (get-in update [:message :message-id])
-          text (get-in update [:message :text])]
-      ;; 'typing...'
-      (let [result (cg/send-chat-action bot chat-id :typing)]
-        (if (not (:ok result))
-          (println "*** failed to send chat action:" (:reason-pharse result))))
+  (let [chat-id (get-in update [:message :chat :id])
+        reply-to (get-in update [:message :message-id])
+        text (get-in update [:message :text])]
+    ;; 'typing...'
+    (let [result (cg/send-chat-action bot chat-id :typing)]
+      (when (not (:ok result))
+        (println "*** failed to send chat action:" (:reason-pharse result))))
 
-      (if (= text "/terminate")
-        ;; process /terminate command
-        (do
-          (println ">>> received: /terminate")
+    (if (= text "/terminate")
+      ;; process /terminate command
+      (do
+        (println ">>> received: /terminate")
 
-          (cg/stop-polling-updates bot)) ;; stop polling
+        (cg/stop-polling-updates bot)) ;; stop polling
 
-        ;; or other texts
-        (do
-          ;; and reply to the received message
-          (let [echoed-text (str "echo: " text)
-                result (cg/send-message bot chat-id echoed-text
-                         :reply-to-message-id reply-to)]
-            (if (not (:ok result))
-              (println "*** failed to send message:" (:reason-phrase result)))))))))
+      ;; or other texts
+      ;; and reply to the received message
+      (let [echoed-text (str "echo: " text)
+            result (cg/send-message bot chat-id echoed-text
+                     :reply-to-message-id reply-to)]
+        (when (not (:ok result))
+          (println "*** failed to send message:" (:reason-phrase result)))))))
 
 (defn -main
   "main function"
-  [& args]
-  (do
-    (println ">>> launching application...")
+  [& _]
+  (println ">>> launching application...")
 
-    ;; add shutdown hook
-    (.addShutdownHook (Runtime/getRuntime)
-                      (Thread. #(do
-                                  (println ">>> terminating application...")
+  ;; add shutdown hook
+  (.addShutdownHook (Runtime/getRuntime)
+                    (Thread. #(do
+                                (println ">>> terminating application...")
 
-                                  (cg/stop-polling-updates my-bot)))) ;; stop polling
+                                (cg/stop-polling-updates my-bot)))) ;; stop polling
 
-    ;; busy-wait for polling
-    (cg/poll-updates my-bot interval echo)))
+  ;; busy-wait for polling
+  (cg/poll-updates my-bot interval echo))
 
 ```
 
