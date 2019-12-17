@@ -9,7 +9,7 @@
 (ns meinside.clogram
   (:require [clojure.core.async
              :as a
-             :refer [>! <! >!! <!! go chan buffer close! thread alts! alts!! timeout]]
+             :refer [<! <!! go close! timeout]]
             [meinside.clogram.helper :as h])) ; helper functions
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -45,14 +45,13 @@
               limit-count default-limit-count
               timeout-seconds default-timeout-seconds
               verbose? false}} opts]
-    (do
-      (map->Bot {:token token
-                 :interval-seconds interval-seconds
-                 :limit-count limit-count
-                 :timeout-seconds timeout-seconds
-                 :polling? (atom false)
-                 :polling-wait-ch (atom nil)
-                 :verbose? verbose?}))))
+    (map->Bot {:token token
+               :interval-seconds interval-seconds
+               :limit-count limit-count
+               :timeout-seconds timeout-seconds
+               :polling? (atom false)
+               :polling-wait-ch (atom nil)
+               :verbose? verbose?})))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -123,7 +122,7 @@
             interval-seconds (max default-interval-seconds interval-seconds)
             update-offset (atom offset)
             polling-wait-ch (:polling-wait-ch bot)
-            wait (go
+            wait (a/go
                    (h/log "starting polling with interval: " interval-seconds " second(s)")
 
                    (reset! polling? true)
@@ -143,12 +142,12 @@
 
                              ;; callback updates
                              (doseq [update (:result response)]
-                               (go (fn-update-handler bot update))))
+                               (a/go (fn-update-handler bot update))))
                            (h/log "no updates..."))
                          (h/log "failed to poll updates: " (:reason-phrase response)))
 
                        ;; interval
-                       (<! (a/timeout (* 1000 interval-seconds)))))
+                       (a/<! (a/timeout (* 1000 interval-seconds)))))
 
                    ;; out of while-loop
                    (h/log "stopped polling."))]
@@ -157,7 +156,7 @@
         (reset! polling-wait-ch wait)
 
         ;; and wait for it
-        (<!! wait)))))
+        (a/<!! wait)))))
 
 (defn stop-polling-updates
   "Stop polling updates if the bot was polling.
@@ -467,8 +466,7 @@
   (https://core.telegram.org/bots/api#sendmediagroup)"
   [bot chat-id media & options]
   (let [{:keys [disable-notification
-                reply-to-message-id
-                reply-markup]} options]
+                reply-to-message-id]} options]
     (h/request bot "sendMediaGroup" {"chat_id" chat-id
                                      "media" media
                                      "disable_notification" disable-notification
@@ -1063,8 +1061,7 @@
 
   (https://core.telegram.org/bots/api#answerprecheckoutquery)"
   [bot pre-checkout-query-id ok & options]
-  (let [{:keys [shipping-options
-                error-message]} options]
+  (let [{:keys [error-message]} options]
     (h/request bot "answerPreCheckoutQuery" {"pre_checkout_query_id" pre-checkout-query-id
                                              "ok" ok
                                              "error_message" error-message})))

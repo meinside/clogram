@@ -6,8 +6,7 @@
 
 (ns meinside.clogram.helper
   (:require [clj-http.client :as http]
-            [clojure.data.json :as json]
-            [clojure.java.io :as io]))
+            [clojure.data.json :as json]))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -75,25 +74,25 @@
   "Send multipart form data."
   [bot url params]
   (let [timeout-msecs (* 1000 (:timeout-seconds bot))]
-    (do
-      (verbose bot "sending multipart form data to: " url ", params: " params)
-      (http/post url {:multipart (params-for-multipart params)
-                      :socket-timeout timeout-msecs
-                      :connection-timeout timeout-msecs
-                      :accept :json
-                      :throw-exceptions false}))))
+    (verbose bot "sending multipart form data to: " url ", params: " params)
+
+    (http/post url {:multipart (params-for-multipart params)
+                    :socket-timeout timeout-msecs
+                    :connection-timeout timeout-msecs
+                    :accept :json
+                    :throw-exceptions false})))
 
 (defn- request-urlencoded
   "Send urlencoded form data."
   [bot url params]
   (let [timeout-msecs (* 1000 (:timeout-seconds bot))]
-    (do
-      (verbose bot "sending urlencoded data to: " url ", params: " params)
-      (http/post url {:form-params (params-for-urlencoded params)
-                      :socket-timeout timeout-msecs
-                      :connection-timeout timeout-msecs
-                      :accept :json
-                      :throw-exceptions false}))))
+    (verbose bot "sending urlencoded data to: " url ", params: " params)
+
+    (http/post url {:form-params (params-for-urlencoded params)
+                    :socket-timeout timeout-msecs
+                    :connection-timeout timeout-msecs
+                    :accept :json
+                    :throw-exceptions false})))
 
 (defn- key->keyword
   "Convert json key to clojure keyword."
@@ -121,6 +120,5 @@
 
   (https://core.telegram.org/bots/api#getfile)"
   [bot filepath]
-  (let [token (:token bot)]
-    (str file-baseurl (:token bot) "/" filepath)))
+  (str file-baseurl (:token bot) "/" filepath))
 
