@@ -35,7 +35,7 @@
 
 ;; create a new bot with given params
 (defn new-bot
-  "Create a new bot with given token and options"
+  "Create a new bot with given token and options."
   [token & opts]
   (let [{:keys [interval-seconds
                 limit-count
@@ -139,7 +139,7 @@
                          (if (not-empty (:result response))
                            (do
                              ;; new update-offset = latest update-id + 1
-                             (reset! update-offset (inc (last (sort (map :update_id (:result response))))))
+                             (reset! update-offset (inc (last (sort (map :update-id (:result response))))))
 
                              ;; callback updates
                              (doseq [update (:result response)]
@@ -462,7 +462,7 @@
 (defn send-media-group
   "Send a media group of photos or videos.
 
-  `options` include: :disable-notification, and :reply-to_message-id.
+  `options` include: :disable-notification, and :reply-to-message-id.
 
   (https://core.telegram.org/bots/api#sendmediagroup)"
   [bot chat-id media & options]
@@ -555,7 +555,7 @@
 (defn stop-poll
   "Stop a poll.
 
-  `options` include: :reply_markup.
+  `options` include: :reply-markup.
 
   (https://core.telegram.org/bots/api#stoppoll)"
   [bot chat-id message-id & options]
@@ -588,7 +588,7 @@
                                            "limit" limit})))
 
 (defn get-file-url
-  "Generate a file's url from given :file_path."
+  "Generate a file's url from given :file-path."
   [bot file-path]
   (h/url-for-filepath bot file-path))
 
@@ -849,7 +849,7 @@
   required `options`: :chat-id + :message-id (when :inline-message-id is not given)
                       or :inline-message-id (when :chat-id & :message-id are not given)
 
-  other `options` include: :parse-mode, :disable-web-page_preview, and :reply-markup.
+  other `options` include: :parse-mode, :disable-web-page-preview, and :reply-markup.
 
   (https://core.telegram.org/bots/api#editmessagetext)"
   [bot text & options]

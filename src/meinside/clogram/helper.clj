@@ -36,12 +36,12 @@
 ;;; http request helper functions
 
 (defn- is-file?
-  "Check if given object is a file object"
+  "Check if given object is a file object."
   [obj]
   (= (class obj) java.io.File))
 
 (defn- has-file?
-  "Check if given params include any file object"
+  "Check if given params include any file object."
   [params]
   (not-empty (filter is-file? (vals params))))
 
@@ -51,7 +51,7 @@
   (filter (fn [[_ v]] (some? v)) params))
 
 (defn- convert-param
-  "Convert given param for proper http request"
+  "Convert given param for proper http request."
   [param]
   (cond
     (is-file? param) param
@@ -60,19 +60,19 @@
     :else (json/write-str param)))
 
 (defn- params-for-multipart
-  "Convert given params for multipart data"
+  "Convert given params for multipart data."
   [params]
   (map (fn [[k v]] {:name (str k)
                     :content (convert-param v)}) params))
 
 (defn- params-for-urlencoded
-  "Convert given params for urlencoded data"
+  "Convert given params for urlencoded data."
   [params]
   (reduce (fn [kv [k v]]
             (assoc kv k (convert-param v))) {} params))
 
 (defn- request-multipart
-  "Send multipart form data"
+  "Send multipart form data."
   [bot url params]
   (let [timeout-msecs (* 1000 (:timeout-seconds bot))]
     (do
@@ -84,7 +84,7 @@
                       :throw-exceptions false}))))
 
 (defn- request-urlencoded
-  "Send urlencoded form data"
+  "Send urlencoded form data."
   [bot url params]
   (let [timeout-msecs (* 1000 (:timeout-seconds bot))]
     (do
@@ -95,8 +95,13 @@
                       :accept :json
                       :throw-exceptions false}))))
 
+(defn- key->keyword
+  "Convert json key to clojure keyword."
+  [key]
+  (keyword (clojure.string/replace key "_" "-")))
+
 (defn request
-  "Send HTTP request with given method name and params"
+  "Send HTTP request with given method name and params."
   [bot method params]
   (try
     (let [token (:token bot)
@@ -106,7 +111,7 @@
                      (request-multipart bot url params)
                      (request-urlencoded bot url params))]
         (cond
-          (= (:status result) 200) (json/read-str (:body result) :key-fn keyword)
+          (= (:status result) 200) (json/read-str (:body result) :key-fn key->keyword)
           :else (assoc result :ok false))))
     (catch Exception e {:ok false
                         :reason-phrase (.getMessage e)})))

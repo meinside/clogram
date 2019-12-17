@@ -43,10 +43,10 @@
         ;; edit the message's text,
         (is (:ok (edit-message-text bot "edited message"
                                     :chat-id chat-id
-                                    :message-id (get-in sent-message [:result :message_id]))))
+                                    :message-id (get-in sent-message [:result :message-id]))))
 
         ;; and forward it
-        (is (:ok (forward-message bot chat-id chat-id (get-in sent-message [:result :message_id]))))))
+        (is (:ok (forward-message bot chat-id chat-id (get-in sent-message [:result :message-id]))))))
 
     ;; send a photo,
     (let [sent-photo (send-photo bot chat-id (clojure.java.io/file "resources/test/image.png"))]
@@ -56,7 +56,7 @@
         ;; edit the photo's caption
         (is (:ok (edit-message-caption bot "caption"
                                        :chat-id chat-id
-                                       :message-id (get-in sent-photo [:result :message_id]))))))
+                                       :message-id (get-in sent-photo [:result :message-id]))))))
 
     ;; TODO: send-audio
 
@@ -66,7 +66,7 @@
         (is (:ok sent-document))
 
         ;; delete a message,
-        (delete-message bot chat-id (get-in sent-document [:result :message_id]))))
+        (delete-message bot chat-id (get-in sent-document [:result :message-id]))))
 
     ;; TODO: send-sticker
 
@@ -94,7 +94,7 @@
         (is (:ok sent-poll))
 
         ;; stop a poll,
-        (stop-poll bot chat-id (get-in sent-poll [:result :message_id]))))
+        (stop-poll bot chat-id (get-in sent-poll [:result :message-id]))))
 
     ;; TODO: get-file-url
 
