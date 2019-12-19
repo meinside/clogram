@@ -1,5 +1,6 @@
 # clogram
 
+[![cljdoc badge](https://cljdoc.org/badge/dev.meinside/clogram)](https://cljdoc.org/d/dev.meinside/clogram/CURRENT)
 [![Clojars Project](https://img.shields.io/clojars/v/dev.meinside/clogram.svg)](https://clojars.org/dev.meinside/clogram)
 
 A Clojure library for Telegram Bot API.
