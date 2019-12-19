@@ -1,6 +1,16 @@
 # Change Log
 All notable changes to this project will be documented in this file. This change log follows the conventions of [keepachangelog.com](http://keepachangelog.com/).
 
+## [0.1.0] - 2019-12-19
+### Added
+- Add tests for long-polling functions.
+
+### Changed
+- Change long-polling functions to return boolean values.
+
+### Removed
+- Remove :jar-exclusions from project.clj.
+
 ## [0.0.10], [0.0.11], [0.0.12] - 2019-12-19
 ### Fixed
 - Fix for cljdoc and excluding files from jar.
@@ -59,13 +69,11 @@ All notable changes to this project will be documented in this file. This change
 - Add timestamp to log functions.
 - Edit guides in README.md.
 
-### Removed
-- 
-
 ## [0.0.0] - 2019-12-09
 ### Added
 - Initial commit.
 
+[0.1.0]: https://github.com/meinside/clogram/compare/v0.0.12...v0.1.0
 [0.0.12]: https://github.com/meinside/clogram/compare/v0.0.11...v0.0.12
 [0.0.11]: https://github.com/meinside/clogram/compare/v0.0.10...v0.0.11
 [0.0.10]: https://github.com/meinside/clogram/compare/v0.0.9...v0.0.10

@@ -78,7 +78,7 @@
 
     ;; TODO: send-media-group
 
-    ;; send a loation,
+    ;; send a location,
     (is (:ok (cg/send-location bot chat-id 37.5665 126.9780)))
 
     ;; TODO: send-venue
@@ -110,10 +110,23 @@
 
 (deftest polling-test
   (testing "Testing polling updates"
-    ;; TODO: poll-updates
+    ;; try stopping polling before starting
+    (is (not (cg/stop-polling-updates bot)))
 
-    ;; TODO: stop-polling-updates
-    ))
+    ;; start polling updates,
+    (-> (Thread. #(is (cg/poll-updates bot 1 (fn [_ _] nil)))) .start)
+
+    ;; sleep for a while,
+    (Thread/sleep 1000)
+
+    ;; try polling after it is started,
+    (is (not (cg/poll-updates bot 1 (fn [_ _] nil))))
+
+    ;; sleep for a while again,
+    (Thread/sleep 1000)
+
+    ;; then stop polling
+    (is (cg/stop-polling-updates bot))))
 
 (deftest stickers-test
   (testing "Testing functions for stickers"

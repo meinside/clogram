@@ -109,8 +109,12 @@
   [bot interval-seconds fn-update-handler & options]
   (let [polling? (:polling? bot)]
     (if @polling?
-      ;; already polling, do nothing
-      (h/log "already polling")
+      (do
+        ;; already polling, do nothing
+        (h/log "already polling")
+
+        ;; and return false
+        false)
 
       ;; start polling
       (let [{:keys [offset
@@ -152,11 +156,14 @@
                    ;; out of while-loop
                    (h/log "stopped polling."))]
 
-        ;; reset wait channel,
+        ;; save channel,
         (reset! polling-wait-ch wait)
 
-        ;; and wait for it
-        (a/<!! wait)))))
+        ;; wait for it,
+        (a/<!! wait)
+
+        ;; and return true when finished
+        true))))
 
 (defn stop-polling-updates
   "Stop polling updates if the bot was polling.
