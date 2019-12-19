@@ -9,4 +9,5 @@
                  [clj-http "3.10.0"]]
   :deploy-repositories [["releases" :clojars]
                         ["snapshots" :clojars]]
+  :scm {:name "git" :url "https://github.com/meinside/clogram"}
   :repl-options {:init-ns meinside.clogram})
