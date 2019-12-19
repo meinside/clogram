@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file. This change log follows the conventions of [keepachangelog.com](http://keepachangelog.com/).
 
+## [0.0.10], [0.0.11], [0.0.12] - 2019-12-19
+### Fixed
+- Fix for cljdoc and excluding files from jar.
+
 ## [0.0.9] - 2019-12-17
 ### Fixed
 - Lint codes.
@@ -62,6 +66,9 @@ All notable changes to this project will be documented in this file. This change
 ### Added
 - Initial commit.
 
+[0.0.12]: https://github.com/meinside/clogram/compare/v0.0.11...v0.0.12
+[0.0.11]: https://github.com/meinside/clogram/compare/v0.0.10...v0.0.11
+[0.0.10]: https://github.com/meinside/clogram/compare/v0.0.9...v0.0.10
 [0.0.9]: https://github.com/meinside/clogram/compare/v0.0.8...v0.0.9
 [0.0.8]: https://github.com/meinside/clogram/compare/v0.0.7...v0.0.8
 [0.0.7]: https://github.com/meinside/clogram/compare/v0.0.6...v0.0.7
