@@ -1,4 +1,4 @@
-(defproject dev.meinside/clogram "0.0.10"
+(defproject dev.meinside/clogram "0.0.11"
   :description "A Telegram Bot Library for Clojure"
   :url "https://github.com/meinside/clogram"
   :license {:name "The MIT License"
@@ -10,4 +10,5 @@
   :deploy-repositories [["releases" :clojars]
                         ["snapshots" :clojars]]
   :scm {:name "git" :url "https://github.com/meinside/clogram"}
+  :jar-exclusions [#"resources/*"]
   :repl-options {:init-ns meinside.clogram})
