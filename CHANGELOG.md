@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file. This change log follows the conventions of [keepachangelog.com](http://keepachangelog.com/).
 
+## [0.1.1] - 2020-01-02
+### Added
+- Add `set-chat-administrator-custom-title` function. (https://core.telegram.org/bots/api-changelog#december-31-2019)
+
 ## [0.1.0] - 2019-12-19
 ### Added
 - Add tests for long-polling functions.
@@ -73,6 +77,7 @@ All notable changes to this project will be documented in this file. This change
 ### Added
 - Initial commit.
 
+[0.1.1]: https://github.com/meinside/clogram/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/meinside/clogram/compare/v0.0.12...v0.1.0
 [0.0.12]: https://github.com/meinside/clogram/compare/v0.0.11...v0.0.12
 [0.0.11]: https://github.com/meinside/clogram/compare/v0.0.10...v0.0.11
