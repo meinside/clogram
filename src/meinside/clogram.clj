@@ -697,6 +697,15 @@
                                         "can_pin_messages" can-pin-messages
                                         "can_promote_members" can-promote-members})))
 
+(defn set-chat-administrator-custom-title
+  "Set chat administrator's custom title.
+
+  (https://core.telegram.org/bots/api#setchatadministratorcustomtitle)"
+  [bot chat-id user-id custom-title]
+  (h/request bot "setChatAdministratorCustomTitle" {"chat_id" chat-id
+                                                    "user_id" user-id
+                                                    "custom_title" custom-title}))
+
 (defn set-chat-permission
   "Set chat permissions.
 

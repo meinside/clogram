@@ -173,6 +173,8 @@
 
     ;; TODO: promote-chat-member
 
+    ;; TODO: set-chat-administrator-custom-title
+
     ;; TODO: set-chat-permission
 
     ;; TODO: export-chat-invite-link
