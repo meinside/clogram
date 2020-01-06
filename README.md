@@ -7,7 +7,7 @@ A Clojure library for Telegram Bot API.
 
 ## Installation
 
-Add `[dev.meinside/clogram "0.1.1"]` to the dependency of your project.clj file.
+Add `[dev.meinside/clogram "0.1.2"]` to the dependency of your project.clj file.
 
 ## Usage
 

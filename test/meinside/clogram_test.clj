@@ -4,6 +4,9 @@
 ;;;;
 ;;;; ```bash
 ;;;; $ TOKEN=xxxxx CHAT_ID=yyyyy lein test
+;;;;
+;;;; # for verbose messages:
+;;;; $ TOKEN=xxxxx CHAT_ID=yyyyy VERBOSE=true lein test
 ;;;; ```
 
 (ns meinside.clogram-test
@@ -14,7 +17,7 @@
 ;; fake tokens and chat id
 (def test-bot-token "0123456789:abcdefghijklmnopqrstuvwxyz")
 (def test-chat-id -1)
-(def verbose? false) ;; set to true for printing verbose logs
+(def verbose? (= (System/getenv "VERBOSE") "true"))
 
 ;; initialize values from environment variables
 (def bot (cg/new-bot (or (System/getenv "TOKEN")
