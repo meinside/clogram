@@ -6,7 +6,8 @@
 
 (ns meinside.clogram.helper
   (:require [clj-http.client :as http]
-            [clojure.data.json :as json]))
+            [clojure.data.json :as json]
+            clojure.string))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -22,7 +23,7 @@
 ;; print verbose log messages
 (defn verbose
   [bot & args]
-  (if (:verbose? bot)
+  (when (:verbose? bot)
     (println (str (java.time.LocalDateTime/now)) "| VERBOSE |" (clojure.string/join "" (map #(if (coll? %) (pr-str %) (str %)) args)))))
 
 ;; print log messages
@@ -105,13 +106,13 @@
   (try
     (let [token (:token bot)
           url (str api-baseurl token "/" method)
-          params (purge-nil-params params)]
-      (let [result (if (has-file? params)
-                     (request-multipart bot url params)
-                     (request-urlencoded bot url params))]
-        (cond
-          (= (:status result) 200) (json/read-str (:body result) :key-fn key->keyword)
-          :else (assoc result :ok false))))
+          params (purge-nil-params params)
+          result (if (has-file? params)
+                   (request-multipart bot url params)
+                   (request-urlencoded bot url params))]
+      (cond
+        (= (:status result) 200) (json/read-str (:body result) :key-fn key->keyword)
+        :else (assoc result :ok false)))
     (catch Exception e {:ok false
                         :reason-phrase (.getMessage e)})))
 

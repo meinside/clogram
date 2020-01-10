@@ -9,7 +9,7 @@
 (ns meinside.clogram
   (:require [clojure.core.async
              :as a
-             :refer [<! <!! go close! timeout]]
+             :refer [<! <!! go close!]]
             [meinside.clogram.helper :as h])) ; helper functions
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -126,7 +126,7 @@
             interval-seconds (max default-interval-seconds interval-seconds)
             update-offset (atom offset)
             polling-wait-ch (:polling-wait-ch bot)
-            wait (a/go
+            wait (go
                    (h/log "starting polling with interval: " interval-seconds " second(s)")
 
                    (reset! polling? true)
@@ -146,12 +146,12 @@
 
                              ;; callback updates
                              (doseq [update (:result response)]
-                               (a/go (fn-update-handler bot update))))
+                               (go (fn-update-handler bot update))))
                            (h/log "no updates..."))
                          (h/log "failed to poll updates: " (:reason-phrase response)))
 
                        ;; interval
-                       (a/<! (a/timeout (* 1000 interval-seconds)))))
+                       (<! (a/timeout (* 1000 interval-seconds)))))
 
                    ;; out of while-loop
                    (h/log "stopped polling."))]
@@ -160,7 +160,7 @@
         (reset! polling-wait-ch wait)
 
         ;; wait for it,
-        (a/<!! wait)
+        (<!! wait)
 
         ;; and return true when finished
         true))))
@@ -181,7 +181,7 @@
         (reset! polling? false)
 
         ;; close channel and make it nil
-        (a/close! @wait)
+        (close! @wait)
         (reset! wait nil)
 
         ;; return true
