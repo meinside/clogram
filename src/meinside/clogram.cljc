@@ -1,15 +1,15 @@
 ;;;; Telegram Bot Library for Clojure
 ;;;;
-;;;; src/meinside/clogram.clj
+;;;; src/meinside/clogram.cljc
 ;;;;
 ;;;; (https://core.telegram.org/bots/api)
 ;;;;
 ;;;; created on 2019.12.05.
 
 (ns meinside.clogram
-  (:require [clojure.core.async
-             :as a
-             :refer [<! <!! go close!]]
+  #?(:cljs (:require-macros [cljs.core.async.macros :as a :refer [go]]))
+  (:require #?(:clj [clojure.core.async :as a :refer [<! <!! go close!]]
+               :cljs [cljs.core.async :refer [<! close! chan]])
             [meinside.clogram.helper :as h])) ; helper functions
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -91,10 +91,18 @@
                                  "timeout" timeout
                                  "allowed_updates" allowed-updates})))
 
+;; timeout function for ClojureScript
+;; https://gist.github.com/swannodette/5882703
+#?(:cljs
+   (defn- cljs-timeout [ms]
+     (let [c (chan)]
+       (js/setTimeout (fn [] (close! c)) ms)
+       c)))
+
 (defn poll-updates
   "Poll updates for this bot with given interval and send them through the handler function.
 
-  This function will block until it gets stopped with `stop-polling-updates` function.
+  On Clojure, this function will block until it gets stopped with `stop-polling-updates` function.
 
   `options` include: :offset, :limit, :timeout, and :allowed-updates.
 
@@ -133,11 +141,16 @@
 
                    ;; keep polling...
                    (while @polling?
-                     (let [response (get-updates bot
-                                                 :offset @update-offset
-                                                 :limit limit
-                                                 :timeout timeout
-                                                 :allowed-updates allowed-updates)]
+                     (let [response #?(:clj (get-updates bot
+                                                         :offset @update-offset
+                                                         :limit limit
+                                                         :timeout timeout
+                                                         :allowed-updates allowed-updates)
+                                       :cljs (<! (get-updates bot
+                                                              :offset @update-offset
+                                                              :limit limit
+                                                              :timeout timeout
+                                                              :allowed-updates allowed-updates)))]
                        (if (:ok response)
                          (if (not-empty (:result response))
                            (do
@@ -151,7 +164,8 @@
                          (h/log "failed to poll updates: " (:reason-phrase response)))
 
                        ;; interval
-                       (<! (a/timeout (* 1000 interval-seconds)))))
+                       (<! (#?(:clj a/timeout
+                               :cljs cljs-timeout) (* 1000 interval-seconds)))))
 
                    ;; out of while-loop
                    (h/log "stopped polling."))]
@@ -159,10 +173,11 @@
         ;; save channel,
         (reset! polling-wait-ch wait)
 
-        ;; wait for it,
-        (<!! wait)
+        ;; wait for it, (busy-waits only for Clojure, not ClojureScript)
+        #?(:clj
+           (<!! wait))
 
-        ;; and return true when finished
+        ;; and return true (when finished on Clojure, or immediately on ClojureScript)
         true))))
 
 (defn stop-polling-updates

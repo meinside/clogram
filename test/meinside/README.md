@@ -45,7 +45,7 @@ You can see the chat id from the fetched results.
 
 (`-123456` in this example)
 
-## Run tests with the token and chat id
+## (Clojure) Run tests with the token and chat id
 
 Run `lein test` with following environment variables (put yours):
 
@@ -57,5 +57,19 @@ If you want to see verbose log messages, append `VERBOSE=true`:
 
 ```bash
 $ TOKEN=your-telegram-bot-token-here CHAT_ID=-123456 VERBOSE=true lein test
+```
+
+## (ClojureScript) Run tests with the token and chat id
+
+Run `lein test` with following environment variables (put yours):
+
+```bash
+$ TOKEN=your-telegram-bot-token-here CHAT_ID=-123456 lein cljsbuild test
+```
+
+If you want to see verbose log messages, append `VERBOSE=true`:
+
+```bash
+$ TOKEN=your-telegram-bot-token-here CHAT_ID=-123456 VERBOSE=true lein cljsbuild test
 ```
 
