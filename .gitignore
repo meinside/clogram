@@ -1,4 +1,5 @@
 /target
+/out
 /classes
 /checkouts
 profiles.clj
@@ -10,3 +11,5 @@ pom.xml.asc
 /.nrepl-port
 .hgignore
 .hg/
+node_modules/
+package-lock.json

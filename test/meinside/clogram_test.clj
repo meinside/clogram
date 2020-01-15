@@ -14,16 +14,21 @@
             [clojure.test :refer [deftest is testing]]
             [meinside.clogram :as cg]))
 
+(defn- read-env-var
+  "Read an environment variable with given key."
+  [key]
+  (System/getenv key))
+
 ;; fake tokens and chat id
 (def test-bot-token "0123456789:abcdefghijklmnopqrstuvwxyz")
 (def test-chat-id -1)
-(def verbose? (= (System/getenv "VERBOSE") "true"))
+(def verbose? (= (read-env-var "VERBOSE") "true"))
 
 ;; initialize values from environment variables
-(def bot (cg/new-bot (or (System/getenv "TOKEN")
+(def bot (cg/new-bot (or (read-env-var "TOKEN")
                          test-bot-token)
                      :verbose? verbose?))
-(def chat-id (or (System/getenv "CHAT_ID")
+(def chat-id (or (read-env-var "CHAT_ID")
                  test-chat-id))
 
 (deftest bot-creation-test
@@ -52,7 +57,8 @@
       (is (:ok (cg/forward-message bot chat-id chat-id (get-in sent-message [:result :message-id])))))
 
     ;; send a photo,
-    (let [sent-photo (cg/send-photo bot chat-id (io/file "resources/test/image.png"))]
+    (let [photo-file (io/file "resources/test/image.png")
+          sent-photo (cg/send-photo bot chat-id photo-file)]
       (is (:ok sent-photo))
 
       ;; edit the photo's caption
@@ -63,7 +69,8 @@
     ;; TODO: send-audio
 
     ;; send a document,
-    (let [sent-document (cg/send-document bot chat-id (io/file "test/meinside/clogram_test.clj"))]
+    (let [document-file (io/file "resources/test/image.png")
+          sent-document (cg/send-document bot chat-id document-file)]
       (is (:ok sent-document))
 
       ;; delete a message,
@@ -113,7 +120,7 @@
 
 (deftest polling-test
   (testing "Testing polling updates"
-    ;; try stopping polling before starting
+    ;; try stopping polling before starting, (will fail and return false)
     (is (not (cg/stop-polling-updates bot)))
 
     ;; start polling updates,
@@ -122,7 +129,7 @@
     ;; sleep for a while,
     (Thread/sleep 1000)
 
-    ;; try polling after it is started,
+    ;; try polling after it is started, (will fail and return false)
     (is (not (cg/poll-updates bot 1 (fn [_ _] nil))))
 
     ;; sleep for a while again,
