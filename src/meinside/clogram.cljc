@@ -558,16 +558,26 @@
 (defn send-poll
   "Send a poll.
 
-  `options` include: :disable-notification, :reply-to-message-id, and :reply-markup.
+  `options` include: :is-anonymous, :type, :allows-multiple-answers, :correct-option-id, :is-closed, :disable-notification, :reply-to-message-id, and :reply-markup.
 
   (https://core.telegram.org/bots/api#sendpoll)"
   [bot chat-id question poll-options & options]
   (let [{:keys [disable-notification
                 reply-to-message-id
-                reply-markup]} options]
+                reply-markup
+                is-anonymous
+                type
+                allows-multiple-answers
+                correct-option-id
+                is-closed]} options]
     (h/request bot "sendPoll" {"chat_id" chat-id
                                "question" question
                                "options" poll-options
+                               "is_anonymous" is-anonymous
+                               "type" type
+                               "allows_multiple_answers" allows-multiple-answers
+                               "correct_option_id" correct-option-id
+                               "is_closed" is-closed
                                "disable_notification" disable-notification
                                "reply_to_message_id" reply-to-message-id
                                "reply_markup" reply-markup})))
