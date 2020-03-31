@@ -342,16 +342,19 @@
 (defn create-new-sticker-set
   "Create a new sticker set.
 
-  `options` include: :contains-masks and :mask-position
+  `options` include: :png-sticker, :tgs-sticker, :contains-masks, and :mask-position
 
   (https://core.telegram.org/bots/api#createnewstickerset)"
-  [bot user-id name title sticker emojis & options]
-  (let [{:keys [contains-masks
+  [bot user-id name title emojis & options]
+  (let [{:keys [png-sticker
+                tgs-sticker
+                contains-masks
                 mask-position]} options]
     (h/request bot "createNewStickerSet" {"user_id" user-id
                                           "name" name
                                           "title" title
-                                          "png_sticker" sticker
+                                          "png_sticker" png-sticker
+                                          "tgs_sticker" tgs-sticker
                                           "emojis" emojis
                                           "contains_masks" contains-masks
                                           "mask_position" mask-position})))
@@ -359,14 +362,17 @@
 (defn add-sticker-to-set
   "Add a sticker to a set.
 
-  `options` include: :mask-position
+  `options` include: :png-sticker, :tgs-sticker, and :mask-position
 
   (https://core.telegram.org/bots/api#addstickertoset)"
-  [bot user-id name sticker emojis & options]
-  (let [{:keys [mask-position]} options]
+  [bot user-id name emojis & options]
+  (let [{:keys [png-sticker
+                tgs-sticker
+                mask-position]} options]
     (h/request bot "addStickerToSet" {"user_id" user-id
                                       "name" name
-                                      "png_sticker" sticker
+                                      "png_sticker" png-sticker
+                                      "tgs_sticker" tgs-sticker
                                       "emojis" emojis
                                       "mask_position" mask-position})))
 
@@ -384,6 +390,18 @@
   (https://core.telegram.org/bots/api#deletestickerfromset)"
   [bot sticker]
   (h/request bot "deleteStickerFromSet" {"sticker" sticker}))
+
+(defn set-sticker-set-thumb
+  "Set thumbnail of a sticker set.
+
+  `options` include: thumb.
+  
+  (https://core.telegram.org/bots/api#setstickersetthumb)"
+  [bot name user-id & options]
+  (let [{:keys [thumb]} options]
+    (h/request bot "setStickerSetThumb" {"name" name
+                                         "user_id" user-id
+                                         "thumb" thumb})))
 
 (defn send-video
   "Send a video.
@@ -603,6 +621,21 @@
   [bot chat-id action]
   (h/request bot "sendChatAction" {"chat_id" chat-id
                                    "action" action}))
+
+(defn send-dice
+  "Send a dice.
+
+  `options` include: :disable-notification, :reply-to-message-id, and :reply-markup.
+  
+  (https://core.telegram.org/bots/api#senddice)"
+  [bot chat-id & options]
+  (let [{:keys [disable-notification
+                reply-to-message-id
+                reply-markup]} options]
+   (h/request bot "sendDice" {"chat_id" chat-id
+                             "disable_notification" disable-notification
+                             "reply_to_message_id" reply-to-message-id
+                             "reply_markup" reply-markup})))
 
 (defn get-user-profile-photos
   "Fetch user profile photos.
@@ -881,6 +914,20 @@
                                           "show_alert" show-alert
                                           "url" url
                                           "cache_time" cache-time})))
+
+(defn get-my-commands
+  "Get this bot's commands.
+  
+  (https://core.telegram.org/bots/api#getmycommands)"
+  [bot]
+  (h/request bot "getMyCommands" {}))
+
+(defn set-my-commands
+  "Set this bot's commands.
+  
+  (https://core.telegram.org/bots/api#setmycommands)"
+  [bot commands]
+  (h/request bot "setMyCommands" {"commands" commands}))
 
 (defn edit-message-text
   "Edit a message's text.
