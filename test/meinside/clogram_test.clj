@@ -41,6 +41,12 @@
     ;; delete webhook,
     (is (:ok (cg/delete-webhook bot)))
 
+    ;; set bot commands
+    (is (:ok (cg/set-my-commands bot [{:command "/help" :description "show help messages"}])))
+
+    ;; get bot commands
+    (is (:ok (cg/get-my-commands bot)))
+
     ;; send a chat action,
     (is (:ok (cg/send-chat-action bot chat-id :typing)))
 
@@ -103,6 +109,9 @@
       ;; stop a poll,
       (cg/stop-poll bot chat-id (get-in sent-poll [:result :message-id])))
 
+    ;; send a dice,
+    (is (:ok (cg/send-dice bot chat-id)))
+
     ;; TODO: get-file-url
 
     ;; TODO: get-file
@@ -151,6 +160,8 @@
     ;; TODO: set-sticker-position-in-set
 
     ;; TODO: delete-sticker-from-set
+
+    ;; TODO: set-sticker-set-thumb
     ))
 
 (deftest games-test
