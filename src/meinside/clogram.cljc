@@ -576,7 +576,7 @@
 (defn send-poll
   "Send a poll.
 
-  `options` include: :is-anonymous, :type, :allows-multiple-answers, :correct-option-id, :is-closed, :disable-notification, :reply-to-message-id, and :reply-markup.
+  `options` include: :is-anonymous, :type, :allows-multiple-answers, :correct-option-id, :explanation, :explanation-parse-mode, :open-period, :close-date, :is-closed, :disable-notification, :reply-to-message-id, and :reply-markup.
 
   (https://core.telegram.org/bots/api#sendpoll)"
   [bot chat-id question poll-options & options]
@@ -587,6 +587,10 @@
                 type
                 allows-multiple-answers
                 correct-option-id
+                explanation
+                explanation-parse-mode
+                open-period
+                close-date
                 is-closed]} options]
     (h/request bot "sendPoll" {"chat_id" chat-id
                                "question" question
@@ -595,6 +599,10 @@
                                "type" type
                                "allows_multiple_answers" allows-multiple-answers
                                "correct_option_id" correct-option-id
+                               "explanation" explanation
+                               "explanation_parse_mode" explanation-parse-mode
+                               "open_period" open-period
+                               "close_date" close-date
                                "is_closed" is-closed
                                "disable_notification" disable-notification
                                "reply_to_message_id" reply-to-message-id
@@ -625,17 +633,19 @@
 (defn send-dice
   "Send a dice.
 
-  `options` include: :disable-notification, :reply-to-message-id, and :reply-markup.
+  `options` include: :emoji, :disable-notification, :reply-to-message-id, and :reply-markup.
   
   (https://core.telegram.org/bots/api#senddice)"
   [bot chat-id & options]
-  (let [{:keys [disable-notification
+  (let [{:keys [emoji
+                disable-notification
                 reply-to-message-id
                 reply-markup]} options]
    (h/request bot "sendDice" {"chat_id" chat-id
-                             "disable_notification" disable-notification
-                             "reply_to_message_id" reply-to-message-id
-                             "reply_markup" reply-markup})))
+                              "emoji" emoji
+                              "disable_notification" disable-notification
+                              "reply_to_message_id" reply-to-message-id
+                              "reply_markup" reply-markup})))
 
 (defn get-user-profile-photos
   "Fetch user profile photos.
