@@ -212,21 +212,25 @@
 (defn send-message
   "Send a message.
 
-  `options` include: :parse-mode, :disable-web-page-preview, :disable-notification, :reply-to-message-id, and :reply-markup.
+  `options` include: :parse-mode, :entities, :disable-web-page-preview, :disable-notification, :reply-to-message-id, :allow-sending-without-reply, and :reply-markup.
 
   (https://core.telegram.org/bots/api#sendmessage)"
   [bot chat-id text & options]
   (let [{:keys [parse-mode
+                entities
                 disable-web-page-preview
                 disable-notification
                 reply-to-message-id
+                allow-sending-without-reply
                 reply-markup]} options]
     (h/request bot "sendMessage" {"chat_id" chat-id
                                   "text" text
                                   "parse_mode" parse-mode
+                                  "entities" entities
                                   "disable_web_page_preview" disable-web-page-preview
                                   "disable_notification" disable-notification
                                   "reply_to_message_id" reply-to-message-id
+                                  "allow_sending_without_reply" allow-sending-without-reply
                                   "reply_markup" reply-markup})))
 
 (defn forward-message
@@ -242,86 +246,127 @@
                                      "message_id" message-id
                                      "disable_notification" disable-notification})))
 
+(defn copy-message
+  "Copy a message.
+
+  `options` include: :caption, :parse-mode, :caption-entities, :disable-notification, :reply-to-message-id, :allow-sending-without-reply, and :reply-markup.
+
+  (https://core.telegram.org/bots/api#copymessage)"
+  [bot chat-id from-chat-id message-id & options]
+  (let [{:keys [caption
+                parse-mode
+                caption-entities
+                disable-notification
+                reply-to-message-id
+                allow-sending-without-reply
+                reply-markup]} options]
+    (h/request bot "copyMessage" {"chat_id" chat-id
+                                  "from_chat_id" from-chat-id
+                                  "message_id" message-id
+                                  "caption" caption
+                                  "parse_mode" parse-mode
+                                  "caption_entities" caption-entities
+                                  "disable_notification" disable-notification
+                                  "reply_to_message_id" reply-to-message-id
+                                  "allow_sending_without_reply" allow-sending-without-reply
+                                  "reply_markup" reply-markup})))
+
 (defn send-photo
   "Send a photo.
 
-  `options` include: :caption, :parse-mode, :disable-notification, :reply-to-message-id, and :reply-markup.
+  `options` include: :caption, :parse-mode, :caption-entities, :disable-notification, :reply-to-message-id, :allow-sending-without-reply, and :reply-markup.
 
   (https://core.telegram.org/bots/api#sendphoto)"
   [bot chat-id photo & options]
   (let [{:keys [caption
                 parse-mode
+                caption-entities
                 disable-notification
                 reply-to-message-id
+                allow-sending-without-reply
                 reply-markup]} options]
     (h/request bot "sendPhoto" {"chat_id" chat-id
                                 "photo" photo
                                 "caption" caption
                                 "parse_mode" parse-mode
+                                "caption_entities" caption-entities
                                 "disable_notification" disable-notification
                                 "reply_to_message_id" reply-to-message-id
+                                "allow_sending_without_reply" allow-sending-without-reply
                                 "reply_markup" reply-markup})))
 
 (defn send-audio
   "Send an audio file.
 
-  `options` include: :caption, :parse-mode, :duration, :performer, :title, :disable-notification, :reply-to-message-id, and :reply-markup.
+  `options` include: :caption, :parse-mode, :caption-entities, :duration, :performer, :title, :disable-notification, :reply-to-message-id, :allow-sending-without-reply, and :reply-markup.
 
   (https://core.telegram.org/bots/api#sendaudio)"
   [bot chat-id audio & options]
   (let [{:keys [caption
                 parse-mode
+                caption-entities
                 duration
                 performer
                 title
                 disable-notification
                 reply-to-message-id
+                allow-sending-without-reply
                 reply-markup]} options]
     (h/request bot "sendAudio" {"chat_id" chat-id
                                 "audio" audio
                                 "caption" caption
                                 "parse_mode" parse-mode
+                                "caption_entities" caption-entities
                                 "duration" duration
                                 "performer" performer
                                 "title" title
                                 "disable_notification" disable-notification
                                 "reply_to_message_id" reply-to-message-id
+                                "allow_sending_without_reply" allow-sending-without-reply
                                 "reply_markup" reply-markup})))
 
 (defn send-document
   "Send a document file.
 
-  `options` include: :caption, :parse-mode, :disable-notification, :reply-to-message-id, and :reply-markup.
+  `options` include: :caption, :parse-mode, :caption-entities, :disable-content-type-detection, :disable-notification, :reply-to-message-id, :allow-sending-without-reply, and :reply-markup.
 
   (https://core.telegram.org/bots/api#senddocument)"
   [bot chat-id document & options]
   (let [{:keys [caption
                 parse-mode
+                caption-entities
+                disable-content-type-detection
                 disable-notification
                 reply-to-message-id
+                allow-sending-without-reply
                 reply-markup]} options]
     (h/request bot "sendDocument" {"chat_id" chat-id
                                    "document" document
                                    "caption" caption
                                    "parse_mode" parse-mode
+                                   "caption_entities" caption-entities
+                                   "disable_content_type_detection" disable-content-type-detection
                                    "disable_notification" disable-notification
                                    "reply_to_message_id" reply-to-message-id
+                                   "allow_sending_without_reply" allow-sending-without-reply
                                    "reply_markup" reply-markup})))
 
 (defn send-sticker
   "Send a sticker.
 
-  `options` include: disable_notification, reply_to_message_id, and reply_markup.
+  `options` include: :disable-notification, :reply-to-message-id, :allow-sending-without-reply, and :reply-markup.
 
   (https://core.telegram.org/bots/api#sendsticker)"
   [bot chat-id sticker & options]
   (let [{:keys [disable-notification
                 reply-to-message-id
+                allow-sending-without-reply
                 reply-markup]} options]
     (h/request bot "sendSticker" {"chat_id" chat-id
                                   "sticker" sticker
                                   "disable_notification" disable-notification
                                   "reply_to_message_id" reply-to-message-id
+                                  "allow_sending_without_reply" allow-sending-without-reply
                                   "reply_markup" reply-markup})))
 
 (defn get-sticker-set
@@ -406,31 +451,35 @@
 (defn send-video
   "Send a video.
 
-  `options` include: :duration, :caption, :parse-mode, :supports-streaming, :disable-notification, :reply-to-message-id, and :reply-markup.
+  `options` include: :duration, :caption, :parse-mode, :caption-entities, :supports-streaming, :disable-notification, :reply-to-message-id, :allow-sending-without-reply, and :reply-markup.
 
   (https://core.telegram.org/bots/api#sendvideo)"
   [bot chat-id video & options]
   (let [{:keys [duration
                 caption
                 parse-mode
+                caption-entities
                 supports-streaming
                 disable-notification
                 reply-to-message-id
+                allow-sending-without-reply
                 reply-markup]} options]
     (h/request bot "sendVideo" {"chat_id" chat-id
                                 "video" video
                                 "duration" duration
                                 "caption" caption
                                 "parse_mode" parse-mode
+                                "caption_entities" caption-entities
                                 "supports_streaming" supports-streaming
                                 "disable_notification" disable-notification
                                 "reply_to_message_id" reply-to-message-id
+                                "allow_sending_without_reply" allow-sending-without-reply
                                 "reply_markup" reply-markup})))
 
 (defn send-animation
   "Send an animation.
 
-  `options` include: :duration, :width, :height, :thumb, :caption, :parse-mode, :disable-notification, :reply-to-message-id, and :reply-markup.
+  `options` include: :duration, :width, :height, :thumb, :caption, :parse-mode, :caption-entities, :disable-notification, :reply-to-message-id, :allow-sending-without-reply, and :reply-markup.
 
   (https://core.telegram.org/bots/api#sendanimation)"
   [bot chat-id animation & options]
@@ -440,8 +489,10 @@
                 thumb
                 caption
                 parse-mode
+                caption-entities
                 disable-notification
                 reply-to-message-id
+                allow-sending-without-reply
                 reply-markup]} options]
     (h/request bot "sendAnimation" {"chat_id" chat-id
                                     "animation" animation
@@ -451,95 +502,120 @@
                                     "thumb" thumb
                                     "caption" caption
                                     "parse_mode" parse-mode
+                                    "caption_entities" caption-entities
                                     "disable_notification" disable-notification
                                     "reply_to_message_id" reply-to-message-id
+                                    "allow_sending_without_reply" allow-sending-without-reply
                                     "reply_markup" reply-markup})))
 
 (defn send-voice
   "Send a voice. (.ogg format only)
 
-  `options` include: :caption, :parse-mode, :duration, :disable-notification, :reply-to-message-id, and :reply-markup.
+  `options` include: :caption, :parse-mode, :caption-entities, :duration, :disable-notification, :reply-to-message-id, :allow-sending-without-reply, and :reply-markup.
 
   (https://core.telegram.org/bots/api#sendvoice)"
   [bot chat-id voice & options]
   (let [{:keys [caption
                 parse-mode
+                caption-entities
                 duration
                 disable-notification
                 reply-to-message-id
+                allow-sending-without-reply
                 reply-markup]} options]
     (h/request bot "sendVoice" {"chat_id" chat-id
                                 "voice" voice
                                 "caption" caption
                                 "parse_mode" parse-mode
+                                "caption_entities" caption-entities
                                 "duration" duration
                                 "disable_notification" disable-notification
                                 "reply_to_message_id" reply-to-message-id
+                                "allow_sending_without_reply" allow-sending-without-reply
                                 "reply_markup" reply-markup})))
 
 (defn send-video-note
   "Send a video note.
 
-  `options` include: :duration, :length, :disable-notification, :reply-to-message-id, and :reply-markup.
+  `options` include: :duration, :length, :thumb, :disable-notification, :reply-to-message-id, :allow-sending-without-reply, and :reply-markup.
   (XXX: API returns 'Bad Request: wrong video note length' when length is not given / 2017.05.19.)
 
   (https://core.telegram.org/bots/api#sendvideonote)"
   [bot chat-id video-note & options]
   (let [{:keys [duration
                 length
+                thumb
                 disable-notification
                 reply-to-message-id
+                allow-sending-without-reply
                 reply-markup]} options]
     (h/request bot "sendVideoNote" {"chat_id" chat-id
                                     "video_note" video-note
                                     "duration" duration
                                     "length" length
+                                    "thumb" thumb
                                     "disable_notification" disable-notification
                                     "reply_to_message_id" reply-to-message-id
+                                    "allow_sending_without_reply" allow-sending-without-reply
                                     "reply_markup" reply-markup})))
 
 (defn send-media-group
   "Send a media group of photos or videos.
 
-  `options` include: :disable-notification, and :reply-to-message-id.
+  `options` include: :disable-notification, :reply-to-message-id, and :allow-sending-without-reply.
 
   (https://core.telegram.org/bots/api#sendmediagroup)"
   [bot chat-id media & options]
   (let [{:keys [disable-notification
-                reply-to-message-id]} options]
+                reply-to-message-id
+                allow-sending-without-reply]} options]
     (h/request bot "sendMediaGroup" {"chat_id" chat-id
                                      "media" media
                                      "disable_notification" disable-notification
-                                     "reply_to_message_id" reply-to-message-id})))
+                                     "reply_to_message_id" reply-to-message-id
+                                     "allow_sending_without_reply" allow-sending-without-reply})))
 
 (defn send-location
   "Send a location.
 
-  `options` include: :disable-notification, :reply-to-message-id, and :reply-markup.
+  `options` include: :horizontal-accuracy, :live-period, :heading, :proximity-alert-radius, :disable-notification, :reply-to-message-id, :allow-sending-without-reply, and :reply-markup.
 
   (https://core.telegram.org/bots/api#sendlocation)"
   [bot chat-id latitude longitude & options]
-  (let [{:keys [disable-notification
+  (let [{:keys [horizontal-accuracy
+                live-period
+                heading
+                proximity-alert-radius
+                disable-notification
                 reply-to-message-id
+                allow-sending-without-reply
                 reply-markup]} options]
     (h/request bot "sendLocation" {"chat_id" chat-id
                                    "latitude" latitude
                                    "longitude" longitude
+                                   "horizontal_accuracy" horizontal-accuracy
+                                   "live_period" live-period
+                                   "heading" heading
+                                   "proximity_alert_radius" proximity-alert-radius
                                    "disable_notification" disable-notification
                                    "reply_to_message_id" reply-to-message-id
+                                   "allow_sending_without_reply" allow-sending-without-reply
                                    "reply_markup" reply-markup})))
 
 (defn send-venue
   "Send a venue.
 
-  `options` include: :foursquare-id, :foursquare-type, :disable-notification, :reply-to-message-id, and :reply-markup.
+  `options` include: :foursquare-id, :foursquare-type, :google-place-id, :google-place-type, :disable-notification, :reply-to-message-id, :allow-sending-without-reply, and :reply-markup.
 
   (https://core.telegram.org/bots/api#sendvenue)"
   [bot chat-id latitude longitude title address & options]
   (let [{:keys [foursquare-id
                 foursquare-type
+                google-place-id
+                google-place-type
                 disable-notification
                 reply-to-message-id
+                allow-sending-without-reply
                 reply-markup]} options]
     (h/request bot "sendVenue" {"chat_id" chat-id
                                 "latitude" latitude
@@ -548,14 +624,17 @@
                                 "address" address
                                 "foursquare_id" foursquare-id
                                 "foursquare_type" foursquare-type
+                                "google_place_id" google-place-id
+                                "google_place_type" google-place-type
                                 "disable_notification" disable-notification
                                 "reply_to_message_id" reply-to-message-id
+                                "allow_sending_without_reply" allow-sending-without-reply
                                 "reply_markup" reply-markup})))
 
 (defn send-contact
   "Send a contact.
 
-  `options` include: :last-name, :vcard, :disable-notification, :reply-to-message-id, and :reply-markup.
+  `options` include: :last-name, :vcard, :disable-notification, :reply-to-message-id, :allow-sending-without-reply, and :reply-markup.
 
   (https://core.telegram.org/bots/api#sendcontact)"
   [bot chat-id phone-number first-name & options]
@@ -563,6 +642,7 @@
                 vcard
                 disable-notification
                 reply-to-message-id
+                allow-sending-without-reply
                 reply-markup]} options]
     (h/request bot "sendContact" {"chat_id" chat-id
                                   "phone_number" phone-number
@@ -571,27 +651,30 @@
                                   "vcard" vcard
                                   "disable_notification" disable-notification
                                   "reply_to_message_id" reply-to-message-id
+                                  "allow_sending_without_reply" allow-sending-without-reply
                                   "reply_markup" reply-markup})))
 
 (defn send-poll
   "Send a poll.
 
-  `options` include: :is-anonymous, :type, :allows-multiple-answers, :correct-option-id, :explanation, :explanation-parse-mode, :open-period, :close-date, :is-closed, :disable-notification, :reply-to-message-id, and :reply-markup.
+  `options` include: :is-anonymous, :type, :allows-multiple-answers, :correct-option-id, :explanation, :explanation-parse-mode, :explanation-entities, :open-period, :close-date, :is-closed, :disable-notification, :reply-to-message-id, :allow-sending-without-reply, and :reply-markup.
 
   (https://core.telegram.org/bots/api#sendpoll)"
   [bot chat-id question poll-options & options]
-  (let [{:keys [disable-notification
-                reply-to-message-id
-                reply-markup
-                is-anonymous
+  (let [{:keys [is-anonymous
                 type
                 allows-multiple-answers
                 correct-option-id
                 explanation
                 explanation-parse-mode
+                explanation-entities
                 open-period
                 close-date
-                is-closed]} options]
+                is-closed
+                disable-notification
+                reply-to-message-id
+                allow-sending-without-reply
+                reply-markup]} options]
     (h/request bot "sendPoll" {"chat_id" chat-id
                                "question" question
                                "options" poll-options
@@ -601,11 +684,13 @@
                                "correct_option_id" correct-option-id
                                "explanation" explanation
                                "explanation_parse_mode" explanation-parse-mode
+                               "explanation_entities" explanation-entities
                                "open_period" open-period
                                "close_date" close-date
                                "is_closed" is-closed
                                "disable_notification" disable-notification
                                "reply_to_message_id" reply-to-message-id
+                               "allow_sending_without_reply" allow-sending-without-reply
                                "reply_markup" reply-markup})))
 
 (defn stop-poll
@@ -633,18 +718,22 @@
 (defn send-dice
   "Send a dice.
 
-  `options` include: :emoji, :disable-notification, :reply-to-message-id, and :reply-markup.
+  `emoji` can be one of: 🎲, 🎯, 🏀, ⚽, or 🎰. (default: 🎲)
+
+  `options` include: :emoji, :disable-notification, :reply-to-message-id, :allow-sending-without-reply, and :reply-markup.
   
   (https://core.telegram.org/bots/api#senddice)"
   [bot chat-id & options]
   (let [{:keys [emoji
                 disable-notification
                 reply-to-message-id
+                allow-sending-without-reply
                 reply-markup]} options]
    (h/request bot "sendDice" {"chat_id" chat-id
                               "emoji" emoji
                               "disable_notification" disable-notification
                               "reply_to_message_id" reply-to-message-id
+                              "allow_sending_without_reply" allow-sending-without-reply
                               "reply_markup" reply-markup})))
 
 (defn get-user-profile-photos
@@ -697,10 +786,14 @@
 (defn unban-chat-member
   "Unban a chat member.
 
+  `options` include: :only-if-banned
+
   (https://core.telegram.org/bots/api#unbanchatmember)"
-  [bot chat-id user-id]
-  (h/request bot "unbanChatMember" {"chat_id" chat-id
-                                    "user_id" user-id}))
+  [bot chat-id user-id & options]
+  (let [{:keys [only-if-banned]} options]
+    (h/request bot "unbanChatMember" {"chat_id" chat-id
+                                      "user_id" user-id
+                                      "only_if_banned" only-if-banned})))
 
 (defn restrict-chat-member
   "Restrict a chat member.
@@ -742,11 +835,12 @@
 (defn promote-chat-member
   "Promote a chat member.
 
-  `options` include: :can-change-info, :can-post-messages, :can-edit-messages, :can-delete-messages, :can-invite-users, :can-restrict-members, :can-pin-messages, and :can-promote-members.
+  `options` include: :is-anonymous, :can-change-info, :can-post-messages, :can-edit-messages, :can-delete-messages, :can-invite-users, :can-restrict-members, :can-pin-messages, and :can-promote-members.
 
   (https://core.telegram.org/bots/api#promotechatmember)"
   [bot chat-id user-id & options]
-  (let [{:keys [can-change-info
+  (let [{:keys [is-anonymous
+                can-change-info
                 can-post-messages
                 can-edit-messages
                 can-delete-messages
@@ -756,6 +850,7 @@
                 can-promote-members]} options]
     (h/request bot "promoteChatMember" {"chat_id" chat-id
                                         "user_id" user-id
+                                        "is_anonymous" is-anonymous
                                         "can_change_info" can-change-info
                                         "can_post_messages" can-post-messages
                                         "can_edit_messages" can-edit-messages
@@ -861,8 +956,17 @@
   "Unpin a chat message.
 
   (https://core.telegram.org/bots/api#unpinchatmessage)"
+  [bot chat-id & options]
+  (let [{:keys [message-id]} options]
+    (h/request bot "unpinChatMessage" {"chat_id" chat-id
+                                       "message_id" message-id})))
+
+(defn unpin-all-chat-messages
+  "Unpin all chat messages.
+
+  (https://core.telegram.org/bots/api#unpinallchatmessages)"
   [bot chat-id]
-  (h/request bot "unpinChatMessage" {"chat_id" chat-id}))
+  (h/request bot "unpinAllChatMessages" {"chat_id" chat-id}))
 
 (defn get-chat
   "Fetch a chat.
@@ -945,7 +1049,7 @@
   required `options`: :chat-id + :message-id (when :inline-message-id is not given)
                       or :inline-message-id (when :chat-id & :message-id are not given)
 
-  other `options` include: :parse-mode, :disable-web-page-preview, and :reply-markup.
+  other `options` include: :parse-mode, :entities, :disable-web-page-preview, and :reply-markup.
 
   (https://core.telegram.org/bots/api#editmessagetext)"
   [bot text & options]
@@ -953,6 +1057,7 @@
                 message-id
                 inline-message-id
                 parse-mode
+                entities
                 disable-web-page-preview
                 reply-markup]} options]
     (h/request bot "editMessageText" {"text" text
@@ -960,6 +1065,7 @@
                                       "message_id" message-id
                                       "inline_message_id" inline-message-id
                                       "parse_mode" parse-mode
+                                      "entities" entities
                                       "disable_web_page_preview" disable-web-page-preview
                                       "reply_markup" reply-markup})))
 
@@ -969,7 +1075,7 @@
   required `options`: :chat-id + :message-id (when :inline-message-id is not given)
                       or :inline-message-id (when :chat-id & :message-id are not given)
 
-  other `options` include: :parse-mode, and :reply-markup.
+  other `options` include: :parse-mode, :caption-entities, and :reply-markup.
 
   (https://core.telegram.org/bots/api#editmessagecaption)"
   [bot caption & options]
@@ -977,12 +1083,14 @@
                 message-id
                 inline-message-id
                 parse-mode
+                caption-entities
                 reply-markup]} options]
     (h/request bot "editMessageCaption" {"caption" caption
                                          "chat_id" chat-id
                                          "message_id" message-id
                                          "inline_message_id" inline-message-id
                                          "parse_mode" parse-mode
+                                         "caption_entities" caption-entities
                                          "reply_markup" reply-markup})))
 
 (defn edit-message-media
@@ -1030,19 +1138,25 @@
   required `options`: :chat-id + :message-id (when :inline-message-id is not given)
                       or :inline-message-id (when :chat-id & :message-id are not given)
 
-  other `options` include: :reply-markup.
+  other `options` include: :horizontal-accuracy, :heading, :proximity-alert-radius, and :reply-markup.
 
   (https://core.telegram.org/bots/api#editmessagelivelocation)"
   [bot latitude longitude & options]
   (let [{:keys [chat-id
                 message-id
                 inline-message-id
+                horizontal-accuracy
+                heading
+                proximity-alert-radius
                 reply-markup]} options]
-    (h/request bot "editMessageLiveLocation" {"latitude" latitude
-                                              "longitude" longitude
-                                              "chat_id" chat-id
+    (h/request bot "editMessageLiveLocation" {"chat_id" chat-id
                                               "message_id" message-id
                                               "inline_message_id" inline-message-id
+                                              "latitude" latitude
+                                              "longitude" longitude
+                                              "horizontal_accuracy" horizontal-accuracy
+                                              "heading" heading
+                                              "proximity_alert_radius" proximity-alert-radius
                                               "reply_markup" reply-markup})))
 
 (defn stop-message-live-location
@@ -1095,7 +1209,7 @@
 (defn send-invoice
   "Send an invoice.
 
-  `options` include: :provider-data, :photo-url, :photo-size, :photo-width, :photo-height, :need-name, :need-phone-number, :need-email, :need-shipping-address, :send-phone-number-to-provider, :send-email-to-provider, :is-flexible, :disable-notification, :reply-to-message-id and :reply-markup.
+  `options` include: :provider-data, :photo-url, :photo-size, :photo-width, :photo-height, :need-name, :need-phone-number, :need-email, :need-shipping-address, :send-phone-number-to-provider, :send-email-to-provider, :is-flexible, :disable-notification, :reply-to-message-id, :allow-sending-without-reply, and :reply-markup.
 
   (https://core.telegram.org/bots/api#sendinvoice)"
   [bot chat-id title description payload provider-token start-parameter currency prices & options]
@@ -1113,6 +1227,7 @@
                 is-flexible
                 disable-notification
                 reply-to-message-id
+                allow-sending-without-reply
                 reply-markup]} options]
     (h/request bot "sendInvoice" {"chat_id" chat-id
                                   "title" title
@@ -1136,6 +1251,7 @@
                                   "is_flexible" is-flexible
                                   "disable_notification" disable-notification
                                   "reply_to_message_id" reply-to-message-id
+                                  "allow_sending_without_reply" allow-sending-without-reply
                                   "reply_markup" reply-markup})))
 
 (defn answer-shipping-query
@@ -1167,17 +1283,19 @@
 (defn send-game
   "Send a game.
 
-  `options` include: :disable-notification, :reply-to-message-id, and :reply-markup.
+  `options` include: :disable-notification, :reply-to-message-id, :allow-sending-without-reply, and :reply-markup.
 
   (https://core.telegram.org/bots/api#sendgame)"
   [bot chat-id game-short-name & options]
   (let [{:keys [disable-notification
                 reply-to-message-id
+                allow-sending-without-reply
                 reply-markup]} options]
     (h/request bot "sendGame" {"chat_id" chat-id
                                "game_short_name" game-short-name
                                "disable_notification" disable-notification
                                "reply_to_message_id" reply-to-message-id
+                               "allow_sending_without_reply" allow-sending-without-reply
                                "reply_markup" reply-markup})))
 
 (defn set-game-score

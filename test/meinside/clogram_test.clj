@@ -59,6 +59,9 @@
                                      :chat-id chat-id
                                      :message-id (get-in sent-message [:result :message-id]))))
 
+      ;; copy it,
+      (is (:ok (cg/copy-message bot chat-id chat-id (get-in sent-message [:result :message-id]))))
+
       ;; and forward it
       (is (:ok (cg/forward-message bot chat-id chat-id (get-in sent-message [:result :message-id])))))
 
@@ -211,6 +214,8 @@
     ;; TODO: pin-chat-message
 
     ;; TODO: unpin-chat-message
+
+    ;; TODO: unpin-all-chat-messages
 
     ;; TODO: get-chat
 
