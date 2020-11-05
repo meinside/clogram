@@ -1,4 +1,4 @@
-(defproject dev.meinside/clogram "0.2.3"
+(defproject dev.meinside/clogram "0.3.0"
   :description "A Telegram Bot Library for Clojure"
   :url "https://github.com/meinside/clogram"
   :license {:name "The MIT License"
@@ -6,10 +6,10 @@
 
   ;; dependencies
   :dependencies [[org.clojure/clojure "1.10.1"]
-                 [org.clojure/clojurescript "1.10.597" :exclusions [org.apache.ant/ant]]
-                 [org.clojure/core.async "0.6.532"]
-                 [org.clojure/data.json "0.2.7"]
-                 [clj-http "3.10.0"]
+                 [org.clojure/clojurescript "1.10.764" :exclusions [org.apache.ant/ant]]
+                 [org.clojure/core.async "1.3.610"]
+                 [org.clojure/data.json "1.0.0"]
+                 [clj-http "3.10.3"]
                  [cljs-http "0.1.46"]]
 
   ;; paths
@@ -22,7 +22,7 @@
 
   ;; for testing cljs
   ;; https://medium.com/@jamesleonis/step-inside-cljsbuild-e38271b10415
-  :plugins [[lein-cljsbuild "1.1.7"]
+  :plugins [[lein-cljsbuild "1.1.8"]
             [lein-npm "0.6.2" :hooks false]]
   :cljsbuild {:builds {:production {:source-paths ["src"]
                                     :compiler {:output-to "target/production.js"

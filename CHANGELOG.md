@@ -1,6 +1,13 @@
 # Change Log
 All notable changes to this project will be documented in this file. This change log follows the conventions of [keepachangelog.com](http://keepachangelog.com/).
 
+## [0.3.0] - 2020-11-05
+### Added
+- Add `copy-message`, and `unpin-all-chat-messages` function. (https://core.telegram.org/bots/api#november-4-2020)
+
+### Changed
+- Change `send-message`, `send-photo`, `send-audio`, `send-document`, `send-sticker`, `send-video`, `send-animation`, `send-voice`, `send-video-note`, `send-media-group`, `send-location`, `send-venue`, `send-contact`, `send-poll`, `send-dice`, `unban-chat-member`, `promote-chat-member`, `unpin-chat-message`, `edit-message-text`, `edit-message-caption`, `edit-message-live-location`, `send-invoice`, and `send-game` function signatures.
+
 ## [0.2.3] - 2020-04-24
 ### Changed
 - Add params to `send-poll` and `send-dice` functions. (https://core.telegram.org/bots/api-changelog#april-24-2020)
@@ -102,6 +109,7 @@ All notable changes to this project will be documented in this file. This change
 ### Added
 - Initial commit.
 
+[0.3.0]: https://github.com/meinside/clogram/compare/v0.2.3...v0.3.0
 [0.2.3]: https://github.com/meinside/clogram/compare/v0.2.2...v0.2.3
 [0.2.2]: https://github.com/meinside/clogram/compare/v0.2.1...v0.2.2
 [0.2.1]: https://github.com/meinside/clogram/compare/v0.2.0...v0.2.1
