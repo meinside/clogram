@@ -203,6 +203,12 @@
 
     ;; TODO: export-chat-invite-link
 
+    ;; TODO: create-chat-invite-link
+
+    ;; TODO: edit-chat-invite-link
+
+    ;; TODO: revoke-chat-invite-link
+
     ;; TODO: set-chat-photo
 
     ;; TODO: delete-chat-photo
