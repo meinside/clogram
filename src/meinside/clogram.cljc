@@ -718,7 +718,7 @@
 (defn send-dice
   "Send a dice.
 
-  `emoji` can be one of: 🎲, 🎯, 🏀, ⚽, or 🎰. (default: 🎲)
+  `emoji` can be one of: 🎲, 🎯, 🏀, ⚽, 🎳, or 🎰. (default: 🎲)
 
   `options` include: :emoji, :disable-notification, :reply-to-message-id, :allow-sending-without-reply, and :reply-markup.
   
@@ -767,14 +767,16 @@
 (defn kick-chat-member
   "Kick a chat member.
 
-  `options` include: :until-date
+  `options` include: :until-date and :revoke-messages
 
   (https://core.telegram.org/bots/api#kickchatmember)"
   [bot chat-id user-id & options]
-  (let [{:keys [until-date]} options]
+  (let [{:keys [until-date
+                revoke-messages]} options]
     (h/request bot "kickChatMember" {"chat_id" chat-id
                                      "user_id" user-id
-                                     "until_date" until-date})))
+                                     "until_date" until-date
+                                     "revoke_messages" revoke-messages})))
 
 (defn leave-chat
   "Leave a chat.
@@ -835,15 +837,17 @@
 (defn promote-chat-member
   "Promote a chat member.
 
-  `options` include: :is-anonymous, :can-change-info, :can-post-messages, :can-edit-messages, :can-delete-messages, :can-invite-users, :can-restrict-members, :can-pin-messages, and :can-promote-members.
+  `options` include: :is-anonymous, :can-manage-chat, :can-change-info, :can-post-messages, :can-edit-messages, :can-delete-messages, :can-manage-voice-chats, :can-invite-users, :can-restrict-members, :can-pin-messages, and :can-promote-members.
 
   (https://core.telegram.org/bots/api#promotechatmember)"
   [bot chat-id user-id & options]
   (let [{:keys [is-anonymous
+                can-manage-chat
                 can-change-info
                 can-post-messages
                 can-edit-messages
                 can-delete-messages
+                can-manage-voice-chats
                 can-invite-users
                 can-restrict-members
                 can-pin-messages
@@ -851,10 +855,12 @@
     (h/request bot "promoteChatMember" {"chat_id" chat-id
                                         "user_id" user-id
                                         "is_anonymous" is-anonymous
+                                        "can_manage_chat" can-manage-chat
                                         "can_change_info" can-change-info
                                         "can_post_messages" can-post-messages
                                         "can_edit_messages" can-edit-messages
                                         "can_delete_messages" can-delete-messages
+                                        "can_manage_voice_chats" can-manage-voice-chats
                                         "can_invite_users" can-invite-users
                                         "can_restrict_members" can-restrict-members
                                         "can_pin_messages" can-pin-messages
@@ -908,6 +914,37 @@
   (https://core.telegram.org/bots/api#exportchatinvitelink)"
   [bot chat-id]
   (h/request bot "exportChatInviteLink" {"chat_id" chat-id}))
+
+(defn create-chat-invite-link
+  "Create a chat invite link.
+  
+  (https://core.telegram.org/bots/api#createchatinvitelink)"
+  [bot chat-id & options]
+  (let [{:keys [expire-date
+                member-limit]} options]
+    (h/request bot "createChatInviteLink" {"chat_id" chat-id
+                                           "expire_date" expire-date
+                                           "member_limit" member-limit})))
+
+(defn edit-chat-invite-link
+  "Edit a chat invite link.
+  
+  (https://core.telegram.org/bots/api#editchatinvitelink)"
+  [bot chat-id invite-link & options]
+  (let [{:keys [expire-date
+                member-limit]} options]
+    (h/request bot "editChatInviteLink" {"chat_id" chat-id
+                                         "invite_link" invite-link
+                                         "expire_date" expire-date
+                                         "member_limit" member-limit})))
+
+(defn revoke-chat-invite-link
+  "Revoke a chat invite link.
+  
+  (https://core.telegram.org/bots/api#revokechatinvitelink)"
+  [bot chat-id invite-link]
+  (h/request bot "revokeChatInviteLink" {"chat_id" chat-id
+                                         "invite_link" invite-link}))
 
 (defn set-chat-photo
   "Set a chat photo.
