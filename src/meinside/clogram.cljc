@@ -708,7 +708,7 @@
 (defn send-chat-action
   "Send a chat action.
 
-  `action` can be one of: :typing, :upload_photo, :record_video, :upload_video, :record_audio, :upload_audio, :upload_document, :find_location, :record_video_note, or :upload_video_note.
+  `action` can be one of: :typing, :upload_photo, :record_video, :upload_video, :record_voice, :upload_voice, :upload_document, :find_location, :record_video_note, or :upload_video_note.
 
   (https://core.telegram.org/bots/api#sendchataction)"
   [bot chat-id action]
@@ -1246,11 +1246,14 @@
 (defn send-invoice
   "Send an invoice.
 
-  `options` include: :provider-data, :photo-url, :photo-size, :photo-width, :photo-height, :need-name, :need-phone-number, :need-email, :need-shipping-address, :send-phone-number-to-provider, :send-email-to-provider, :is-flexible, :disable-notification, :reply-to-message-id, :allow-sending-without-reply, and :reply-markup.
+  `options` include: :max-tip-amount, :suggested-tip-amounts, :start-parameter, :provider-data, :photo-url, :photo-size, :photo-width, :photo-height, :need-name, :need-phone-number, :need-email, :need-shipping-address, :send-phone-number-to-provider, :send-email-to-provider, :is-flexible, :disable-notification, :reply-to-message-id, :allow-sending-without-reply, and :reply-markup.
 
   (https://core.telegram.org/bots/api#sendinvoice)"
-  [bot chat-id title description payload provider-token start-parameter currency prices & options]
-  (let [{:keys [provider-data
+  [bot chat-id title description payload provider-token currency prices & options]
+  (let [{:keys [max-tip-amount
+                suggested-tip-amounts
+                start-parameter
+                provider-data
                 photo-url
                 photo-size
                 photo-width
@@ -1271,9 +1274,11 @@
                                   "description" description
                                   "payload" payload
                                   "provider_token" provider-token
-                                  "start_parameter" start-parameter
                                   "currency" currency
                                   "prices" prices
+                                  "max_tip_amount" max-tip-amount
+                                  "suggested_tip_amounts" suggested-tip-amounts
+                                  "start_parameter" start-parameter
                                   "provider_data" provider-data
                                   "photo_url" photo-url
                                   "photo_size" photo-size
