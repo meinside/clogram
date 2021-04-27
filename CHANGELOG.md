@@ -1,6 +1,12 @@
 # Change Log
 All notable changes to this project will be documented in this file. This change log follows the conventions of [keepachangelog.com](http://keepachangelog.com/).
 
+## [0.5.0] - 2021-04-27
+### Changed
+- Apply API changes(https://core.telegram.org/bots/api#april-26-2021):
+  - Add/change parameters of `send-invoice` function.
+  - Fix parameters of `send-chat-action` function.
+
 ## [0.4.0] - 2021-03-10
 ### Added
 - Add `create-chat-invite-link`, `edit-chat-invite-link`, and `revoke-chat-invite-link` functions. (https://core.telegram.org/bots/api-changelog#march-9-2021)
@@ -116,6 +122,7 @@ All notable changes to this project will be documented in this file. This change
 ### Added
 - Initial commit.
 
+[0.5.0]: https://github.com/meinside/clogram/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/meinside/clogram/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/meinside/clogram/compare/v0.2.3...v0.3.0
 [0.2.3]: https://github.com/meinside/clogram/compare/v0.2.2...v0.2.3
