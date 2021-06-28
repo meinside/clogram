@@ -764,19 +764,19 @@
       (assoc-in result [:result :url] (get-file-url bot (get-in result [:result :file_path])))
       result)))
 
-(defn kick-chat-member
-  "Kick a chat member.
+(defn ban-chat-member
+  "Ban a chat member.
 
   `options` include: :until-date and :revoke-messages
 
-  (https://core.telegram.org/bots/api#kickchatmember)"
+  (https://core.telegram.org/bots/api#banchatmember)"
   [bot chat-id user-id & options]
   (let [{:keys [until-date
                 revoke-messages]} options]
-    (h/request bot "kickChatMember" {"chat_id" chat-id
-                                     "user_id" user-id
-                                     "until_date" until-date
-                                     "revoke_messages" revoke-messages})))
+    (h/request bot "banChatMember" {"chat_id" chat-id
+                                    "user_id" user-id
+                                    "until_date" until-date
+                                    "revoke_messages" revoke-messages})))
 
 (defn leave-chat
   "Leave a chat.
@@ -1019,12 +1019,12 @@
   [bot chat-id]
   (h/request bot "getChatAdministrators" {"chat_id" chat-id}))
 
-(defn get-chat-members-count
+(defn get-chat-member-count
   "Fetch the count of chat members.
 
-  (https://core.telegram.org/bots/api#getchatmemberscount)"
+  (https://core.telegram.org/bots/api#getchatmembercount)"
   [bot chat-id]
-  (h/request bot "getChatMembersCount" {"chat_id" chat-id}))
+  (h/request bot "getChatMemberCount" {"chat_id" chat-id}))
 
 (defn get-chat-member
   "Fetch a chat member.
@@ -1070,15 +1070,32 @@
   "Get this bot's commands.
   
   (https://core.telegram.org/bots/api#getmycommands)"
-  [bot]
-  (h/request bot "getMyCommands" {}))
+  [bot & options]
+  (let [{:keys [scope
+                language-code]} options]
+    (h/request bot "getMyCommands" {"scope" scope
+                                    "language_code" language-code})))
 
 (defn set-my-commands
   "Set this bot's commands.
   
   (https://core.telegram.org/bots/api#setmycommands)"
-  [bot commands]
-  (h/request bot "setMyCommands" {"commands" commands}))
+  [bot commands & options]
+  (let [{:keys [scope
+                language-code]} options]
+    (h/request bot "setMyCommands" {"commands" commands
+                                    "scope" scope
+                                    "language_code" language-code})))
+
+(defn delete-my-commands
+  "Delete this bot's commands.
+
+  (https://core.telegram.org/bots/api#deletemycommands)"
+  [bot & options]
+  (let [{:keys [scope
+                language-code]} options]
+    (h/request bot "deleteMyCommands" {"scope" scope
+                                       "language_code" language-code})))
 
 (defn edit-message-text
   "Edit a message's text.

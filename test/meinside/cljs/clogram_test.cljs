@@ -56,6 +56,15 @@
              ;; delete webhook,
              (is (:ok (<! (cg/delete-webhook bot))))
 
+             ;; delete bot commands
+             (is (:ok (<! (cg/delete-my-commands bot))))
+
+             ;; set bot commands
+             (is (:ok (<! (cg/set-my-commands bot [{:command "/help" :description "show help messages"}]))))
+
+             ;; get bot commands
+             (is (:ok (<! (cg/get-my-commands bot))))
+
              ;; send a chat action,
              (is (:ok (<! (cg/send-chat-action bot chat-id :typing))))
 
@@ -187,7 +196,7 @@
 
 (deftest chat-administration-test
   (testing "Testing functions for chat administration"
-    ;; TODO: kick-chat-member
+    ;; TODO: ban-chat-member
 
     ;; TODO: leave-chat
 
@@ -223,7 +232,7 @@
 
     ;; TODO: get-chat-administrators
 
-    ;; TODO: get-chat-members-count
+    ;; TODO: get-chat-member-count
 
     ;; TODO: get-chat-member
 
