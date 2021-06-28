@@ -1,6 +1,18 @@
 # Change Log
 All notable changes to this project will be documented in this file. This change log follows the conventions of [keepachangelog.com](http://keepachangelog.com/).
 
+## [0.6.0] - 2021-06-28
+### Added
+- Apply API changes(https://core.telegram.org/bots/api#june-25-2021).
+  - Add function `delete-my-commands`.
+
+### Changed
+- Apply API changes(https://core.telegram.org/bots/api#june-25-2021).
+  - Rename function `kick-chat-member` to `ban-chat-member`.
+  - Rename function `get-chat-members-count` to `get-chat-member-count`.
+  - Add optional parameters to function `get-my-commands`.
+  - Add optional parameters to function `set-my-commands`.
+
 ## [0.5.0] - 2021-04-27
 ### Changed
 - Apply API changes(https://core.telegram.org/bots/api#april-26-2021):
@@ -122,6 +134,7 @@ All notable changes to this project will be documented in this file. This change
 ### Added
 - Initial commit.
 
+[0.6.0]: https://github.com/meinside/clogram/compare/v0.5.0...v0.6.0
 [0.5.0]: https://github.com/meinside/clogram/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/meinside/clogram/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/meinside/clogram/compare/v0.2.3...v0.3.0
