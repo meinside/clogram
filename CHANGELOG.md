@@ -1,6 +1,15 @@
 # Change Log
 All notable changes to this project will be documented in this file. This change log follows the conventions of [keepachangelog.com](http://keepachangelog.com/).
 
+## [0.7.0] - 2021-11-08
+### Added
+- Apply API changes(https://core.telegram.org/bots/api#november-5-2021).
+  - Add functions `approve-chat-join-request` and `decline-chat-join-request`.
+
+### Changed
+- Apply API changes(https://core.telegram.org/bots/api#november-5-2021).
+  - Add params `name` and `creates-join-request` to functions `create-chat-invite-link` and `edit-chat-invite-link`.
+
 ## [0.6.0] - 2021-06-28
 ### Added
 - Apply API changes(https://core.telegram.org/bots/api#june-25-2021).
@@ -134,6 +143,7 @@ All notable changes to this project will be documented in this file. This change
 ### Added
 - Initial commit.
 
+[0.7.0]: https://github.com/meinside/clogram/compare/v0.6.0...v0.7.0
 [0.6.0]: https://github.com/meinside/clogram/compare/v0.5.0...v0.6.0
 [0.5.0]: https://github.com/meinside/clogram/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/meinside/clogram/compare/v0.3.0...v0.4.0
