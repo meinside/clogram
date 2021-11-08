@@ -708,7 +708,7 @@
 (defn send-chat-action
   "Send a chat action.
 
-  `action` can be one of: :typing, :upload_photo, :record_video, :upload_video, :record_voice, :upload_voice, :upload_document, :find_location, :record_video_note, or :upload_video_note.
+  `action` can be one of: :typing, :upload_photo, :record_video, :upload_video, :record_voice, :upload_voice, :upload_document, :choose_sticker, :find_location, :record_video_note, or :upload_video_note.
 
   (https://core.telegram.org/bots/api#sendchataction)"
   [bot chat-id action]
@@ -920,31 +920,55 @@
   
   (https://core.telegram.org/bots/api#createchatinvitelink)"
   [bot chat-id & options]
-  (let [{:keys [expire-date
-                member-limit]} options]
+  (let [{:keys [name
+                expire-date
+                member-limit
+                creates-join-request]} options]
     (h/request bot "createChatInviteLink" {"chat_id" chat-id
+                                           "name" name
                                            "expire_date" expire-date
-                                           "member_limit" member-limit})))
+                                           "member_limit" member-limit
+                                           "creates_join_request" creates-join-request})))
 
 (defn edit-chat-invite-link
   "Edit a chat invite link.
   
   (https://core.telegram.org/bots/api#editchatinvitelink)"
   [bot chat-id invite-link & options]
-  (let [{:keys [expire-date
-                member-limit]} options]
+  (let [{:keys [name
+                expire-date
+                member-limit
+                creates-join-request]} options]
     (h/request bot "editChatInviteLink" {"chat_id" chat-id
+                                         "name" name
                                          "invite_link" invite-link
                                          "expire_date" expire-date
-                                         "member_limit" member-limit})))
+                                         "member_limit" member-limit
+                                         "creates_join_request" creates-join-request})))
 
 (defn revoke-chat-invite-link
   "Revoke a chat invite link.
-  
+
   (https://core.telegram.org/bots/api#revokechatinvitelink)"
   [bot chat-id invite-link]
   (h/request bot "revokeChatInviteLink" {"chat_id" chat-id
                                          "invite_link" invite-link}))
+
+(defn approve-chat-join-request
+  "Approve chat join request.
+
+  (https://core.telegram.org/bots/api#approvechatjoinrequest)"
+  [bot chat-id user-id]
+  (h/request bot "approveChatJoinRequest" {"chat_id" chat-id
+                                           "user_id" user-id}))
+
+(defn decline-chat-join-request
+  "Decline chat join request.
+
+  (https://core.telegram.org/bots/api#declinechatjoinrequest)"
+  [bot chat-id user-id]
+  (h/request bot "declineChatJoinRequest" {"chat_id" chat-id
+                                           "user_id" user-id}))
 
 (defn set-chat-photo
   "Set a chat photo.
