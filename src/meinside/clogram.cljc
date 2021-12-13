@@ -24,14 +24,13 @@
 ;;;
 ;;; Bot
 
-(defrecord Bot
-  [token
-   interval-seconds
-   limit-count
-   timeout-seconds
-   polling?
-   polling-wait-ch
-   verbose?])
+(defrecord Bot [token
+                interval-seconds
+                limit-count
+                timeout-seconds
+                polling?
+                polling-wait-ch
+                verbose?])
 
 ;; create a new bot with given params
 (defn new-bot
@@ -729,12 +728,12 @@
                 reply-to-message-id
                 allow-sending-without-reply
                 reply-markup]} options]
-   (h/request bot "sendDice" {"chat_id" chat-id
-                              "emoji" emoji
-                              "disable_notification" disable-notification
-                              "reply_to_message_id" reply-to-message-id
-                              "allow_sending_without_reply" allow-sending-without-reply
-                              "reply_markup" reply-markup})))
+    (h/request bot "sendDice" {"chat_id" chat-id
+                               "emoji" emoji
+                               "disable_notification" disable-notification
+                               "reply_to_message_id" reply-to-message-id
+                               "allow_sending_without_reply" allow-sending-without-reply
+                               "reply_markup" reply-markup})))
 
 (defn get-user-profile-photos
   "Fetch user profile photos.
@@ -874,6 +873,22 @@
   (h/request bot "setChatAdministratorCustomTitle" {"chat_id" chat-id
                                                     "user_id" user-id
                                                     "custom_title" custom-title}))
+
+(defn ban-chat-sender-chat
+  "Ban a channel chat in a supergroup or a channel.
+
+  (https://core.telegram.org/bots/api#banchatsenderchat)"
+  [bot chat-id sender-chat-id]
+  (h/request bot "banChatSenderChat" {"chat_id" chat-id
+                                      "sender_chat_id" sender-chat-id}))
+
+(defn unban-chat-sender-chat
+  "Unban a previously banned channel in a supergroup or a channel.
+
+  (https://core.telegram.org/bots/api#unbanchatsenderchat)"
+  [bot chat-id sender-chat-id]
+  (h/request bot "unbanChatSenderChat" {"chat_id" chat-id
+                                        "sender_chat_id" sender-chat-id}))
 
 (defn set-chat-permission
   "Set chat permissions.
