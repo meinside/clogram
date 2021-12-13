@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file. This change log follows the conventions of [keepachangelog.com](http://keepachangelog.com/).
 
+## [0.8.0] - 2021-12-13
+### Added
+- Apply API changes(https://core.telegram.org/bots/api#december-7-2021).
+  - Add functions `ban-chat-sender-chat` and `unban-chat-sender-chat`.
+
 ## [0.7.0] - 2021-11-08
 ### Added
 - Apply API changes(https://core.telegram.org/bots/api#november-5-2021).
@@ -143,6 +148,7 @@ All notable changes to this project will be documented in this file. This change
 ### Added
 - Initial commit.
 
+[0.8.0]: https://github.com/meinside/clogram/compare/v0.7.0...v0.8.0
 [0.7.0]: https://github.com/meinside/clogram/compare/v0.6.0...v0.7.0
 [0.6.0]: https://github.com/meinside/clogram/compare/v0.5.0...v0.6.0
 [0.5.0]: https://github.com/meinside/clogram/compare/v0.4.0...v0.5.0
