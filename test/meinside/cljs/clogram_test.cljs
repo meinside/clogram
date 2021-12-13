@@ -12,10 +12,12 @@
 ;;;; ```
 
 (ns meinside.cljs.clogram-test
-  (:require-macros [cljs.core.async.macros :as a :refer [go]])
-  (:require [cljs.core.async :refer [<!]]
-            [cljs.test :refer-macros [deftest is testing async]]
-            [meinside.clogram :as cg]))
+  (:require-macros
+   [cljs.core.async.macros :as a :refer [go]])
+  (:require
+   [cljs.core.async :refer [<!]]
+   [cljs.test :refer-macros [deftest is testing async]]
+   [meinside.clogram :as cg]))
 
 (defn -js->clj+
   "For cases when built-in js->clj doesn't work. Source: https://stackoverflow.com/a/32583549/4839573"
@@ -208,9 +210,23 @@
 
     ;; TODO: set-chat-administrator-custom-title
 
+    ;; TODO: ban-chat-sender-chat
+
+    ;; TODO: unban-chat-sender-chat
+
     ;; TODO: set-chat-permission
 
     ;; TODO: export-chat-invite-link
+
+    ;; TODO: create-chat-invite-link
+
+    ;; TODO: edit-chat-invite-link
+
+    ;; TODO: revoke-chat-invite-link
+
+    ;; TODO: approve-chat-join-request
+
+    ;; TODO: decline-chat-join-request
 
     ;; TODO: set-chat-photo
 

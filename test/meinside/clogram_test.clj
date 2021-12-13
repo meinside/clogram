@@ -10,9 +10,10 @@
 ;;;; ```
 
 (ns meinside.clogram-test
-  (:require [clojure.java.io :as io]
-            [clojure.test :refer [deftest is testing]]
-            [meinside.clogram :as cg]))
+  (:require
+   [clojure.java.io :as io]
+   [clojure.test :refer [deftest is testing]]
+   [meinside.clogram :as cg]))
 
 (defn- read-env-var
   "Read an environment variable with given key."
@@ -202,6 +203,10 @@
 
     ;; TODO: set-chat-administrator-custom-title
 
+    ;; TODO: ban-chat-sender-chat
+
+    ;; TODO: unban-chat-sender-chat
+
     ;; TODO: set-chat-permission
 
     ;; TODO: export-chat-invite-link
@@ -211,6 +216,10 @@
     ;; TODO: edit-chat-invite-link
 
     ;; TODO: revoke-chat-invite-link
+
+    ;; TODO: approve-chat-join-request
+
+    ;; TODO: decline-chat-join-request
 
     ;; TODO: set-chat-photo
 
