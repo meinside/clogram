@@ -219,6 +219,7 @@
                 entities
                 disable-web-page-preview
                 disable-notification
+                protect-content
                 reply-to-message-id
                 allow-sending-without-reply
                 reply-markup]} options]
@@ -228,6 +229,7 @@
                                   "entities" entities
                                   "disable_web_page_preview" disable-web-page-preview
                                   "disable_notification" disable-notification
+                                  "protect_content" protect-content
                                   "reply_to_message_id" reply-to-message-id
                                   "allow_sending_without_reply" allow-sending-without-reply
                                   "reply_markup" reply-markup})))
@@ -239,11 +241,13 @@
 
   (https://core.telegram.org/bots/api#forwardmessage)"
   [bot chat-id from-chat-id message-id & options]
-  (let [{:keys [disable-notification]} options]
+  (let [{:keys [disable-notification
+                protect-content]} options]
     (h/request bot "forwardMessage" {"chat_id" chat-id
                                      "from_chat_id" from-chat-id
                                      "message_id" message-id
-                                     "disable_notification" disable-notification})))
+                                     "disable_notification" disable-notification
+                                     "protect_content" protect-content})))
 
 (defn copy-message
   "Copy a message.
@@ -256,6 +260,7 @@
                 parse-mode
                 caption-entities
                 disable-notification
+                protect-content
                 reply-to-message-id
                 allow-sending-without-reply
                 reply-markup]} options]
@@ -266,6 +271,7 @@
                                   "parse_mode" parse-mode
                                   "caption_entities" caption-entities
                                   "disable_notification" disable-notification
+                                  "protect_content" protect-content
                                   "reply_to_message_id" reply-to-message-id
                                   "allow_sending_without_reply" allow-sending-without-reply
                                   "reply_markup" reply-markup})))
@@ -281,6 +287,7 @@
                 parse-mode
                 caption-entities
                 disable-notification
+                protect-content
                 reply-to-message-id
                 allow-sending-without-reply
                 reply-markup]} options]
@@ -290,6 +297,7 @@
                                 "parse_mode" parse-mode
                                 "caption_entities" caption-entities
                                 "disable_notification" disable-notification
+                                "protect_content" protect-content
                                 "reply_to_message_id" reply-to-message-id
                                 "allow_sending_without_reply" allow-sending-without-reply
                                 "reply_markup" reply-markup})))
@@ -308,6 +316,7 @@
                 performer
                 title
                 disable-notification
+                protect-content
                 reply-to-message-id
                 allow-sending-without-reply
                 reply-markup]} options]
@@ -320,6 +329,7 @@
                                 "performer" performer
                                 "title" title
                                 "disable_notification" disable-notification
+                                "protect_content" protect-content
                                 "reply_to_message_id" reply-to-message-id
                                 "allow_sending_without_reply" allow-sending-without-reply
                                 "reply_markup" reply-markup})))
@@ -336,6 +346,7 @@
                 caption-entities
                 disable-content-type-detection
                 disable-notification
+                protect-content
                 reply-to-message-id
                 allow-sending-without-reply
                 reply-markup]} options]
@@ -346,6 +357,7 @@
                                    "caption_entities" caption-entities
                                    "disable_content_type_detection" disable-content-type-detection
                                    "disable_notification" disable-notification
+                                   "protect_content" protect-content
                                    "reply_to_message_id" reply-to-message-id
                                    "allow_sending_without_reply" allow-sending-without-reply
                                    "reply_markup" reply-markup})))
@@ -358,12 +370,14 @@
   (https://core.telegram.org/bots/api#sendsticker)"
   [bot chat-id sticker & options]
   (let [{:keys [disable-notification
+                protect-content
                 reply-to-message-id
                 allow-sending-without-reply
                 reply-markup]} options]
     (h/request bot "sendSticker" {"chat_id" chat-id
                                   "sticker" sticker
                                   "disable_notification" disable-notification
+                                  "protect_content" protect-content
                                   "reply_to_message_id" reply-to-message-id
                                   "allow_sending_without_reply" allow-sending-without-reply
                                   "reply_markup" reply-markup})))
@@ -460,6 +474,7 @@
                 caption-entities
                 supports-streaming
                 disable-notification
+                protect-content
                 reply-to-message-id
                 allow-sending-without-reply
                 reply-markup]} options]
@@ -471,6 +486,7 @@
                                 "caption_entities" caption-entities
                                 "supports_streaming" supports-streaming
                                 "disable_notification" disable-notification
+                                "protect_content" protect-content
                                 "reply_to_message_id" reply-to-message-id
                                 "allow_sending_without_reply" allow-sending-without-reply
                                 "reply_markup" reply-markup})))
@@ -490,6 +506,7 @@
                 parse-mode
                 caption-entities
                 disable-notification
+                protect-content
                 reply-to-message-id
                 allow-sending-without-reply
                 reply-markup]} options]
@@ -503,6 +520,7 @@
                                     "parse_mode" parse-mode
                                     "caption_entities" caption-entities
                                     "disable_notification" disable-notification
+                                    "protect_content" protect-content
                                     "reply_to_message_id" reply-to-message-id
                                     "allow_sending_without_reply" allow-sending-without-reply
                                     "reply_markup" reply-markup})))
@@ -519,6 +537,7 @@
                 caption-entities
                 duration
                 disable-notification
+                protect-content
                 reply-to-message-id
                 allow-sending-without-reply
                 reply-markup]} options]
@@ -529,6 +548,7 @@
                                 "caption_entities" caption-entities
                                 "duration" duration
                                 "disable_notification" disable-notification
+                                "protect_content" protect-content
                                 "reply_to_message_id" reply-to-message-id
                                 "allow_sending_without_reply" allow-sending-without-reply
                                 "reply_markup" reply-markup})))
@@ -545,6 +565,7 @@
                 length
                 thumb
                 disable-notification
+                protect-content
                 reply-to-message-id
                 allow-sending-without-reply
                 reply-markup]} options]
@@ -554,6 +575,7 @@
                                     "length" length
                                     "thumb" thumb
                                     "disable_notification" disable-notification
+                                    "protect_content" protect-content
                                     "reply_to_message_id" reply-to-message-id
                                     "allow_sending_without_reply" allow-sending-without-reply
                                     "reply_markup" reply-markup})))
@@ -566,11 +588,13 @@
   (https://core.telegram.org/bots/api#sendmediagroup)"
   [bot chat-id media & options]
   (let [{:keys [disable-notification
+                protect-content
                 reply-to-message-id
                 allow-sending-without-reply]} options]
     (h/request bot "sendMediaGroup" {"chat_id" chat-id
                                      "media" media
                                      "disable_notification" disable-notification
+                                     "protect_content" protect-content
                                      "reply_to_message_id" reply-to-message-id
                                      "allow_sending_without_reply" allow-sending-without-reply})))
 
@@ -586,6 +610,7 @@
                 heading
                 proximity-alert-radius
                 disable-notification
+                protect-content
                 reply-to-message-id
                 allow-sending-without-reply
                 reply-markup]} options]
@@ -597,6 +622,7 @@
                                    "heading" heading
                                    "proximity_alert_radius" proximity-alert-radius
                                    "disable_notification" disable-notification
+                                   "protect_content" protect-content
                                    "reply_to_message_id" reply-to-message-id
                                    "allow_sending_without_reply" allow-sending-without-reply
                                    "reply_markup" reply-markup})))
@@ -613,6 +639,7 @@
                 google-place-id
                 google-place-type
                 disable-notification
+                protect-content
                 reply-to-message-id
                 allow-sending-without-reply
                 reply-markup]} options]
@@ -626,6 +653,7 @@
                                 "google_place_id" google-place-id
                                 "google_place_type" google-place-type
                                 "disable_notification" disable-notification
+                                "protect_content" protect-content
                                 "reply_to_message_id" reply-to-message-id
                                 "allow_sending_without_reply" allow-sending-without-reply
                                 "reply_markup" reply-markup})))
@@ -640,6 +668,7 @@
   (let [{:keys [last-name
                 vcard
                 disable-notification
+                protect-content
                 reply-to-message-id
                 allow-sending-without-reply
                 reply-markup]} options]
@@ -649,6 +678,7 @@
                                   "last_name" last-name
                                   "vcard" vcard
                                   "disable_notification" disable-notification
+                                  "protect_content" protect-content
                                   "reply_to_message_id" reply-to-message-id
                                   "allow_sending_without_reply" allow-sending-without-reply
                                   "reply_markup" reply-markup})))
@@ -671,6 +701,7 @@
                 close-date
                 is-closed
                 disable-notification
+                protect-content
                 reply-to-message-id
                 allow-sending-without-reply
                 reply-markup]} options]
@@ -688,6 +719,7 @@
                                "close_date" close-date
                                "is_closed" is-closed
                                "disable_notification" disable-notification
+                               "protect_content" protect-content
                                "reply_to_message_id" reply-to-message-id
                                "allow_sending_without_reply" allow-sending-without-reply
                                "reply_markup" reply-markup})))
@@ -725,12 +757,14 @@
   [bot chat-id & options]
   (let [{:keys [emoji
                 disable-notification
+                protect-content
                 reply-to-message-id
                 allow-sending-without-reply
                 reply-markup]} options]
     (h/request bot "sendDice" {"chat_id" chat-id
                                "emoji" emoji
                                "disable_notification" disable-notification
+                               "protect_content" protect-content
                                "reply_to_message_id" reply-to-message-id
                                "allow_sending_without_reply" allow-sending-without-reply
                                "reply_markup" reply-markup})))
@@ -1322,6 +1356,7 @@
                 send-email-to-provider
                 is-flexible
                 disable-notification
+                protect-content
                 reply-to-message-id
                 allow-sending-without-reply
                 reply-markup]} options]
@@ -1348,6 +1383,7 @@
                                   "send_email_to_provider" send-email-to-provider
                                   "is_flexible" is-flexible
                                   "disable_notification" disable-notification
+                                  "protect_content" protect-content
                                   "reply_to_message_id" reply-to-message-id
                                   "allow_sending_without_reply" allow-sending-without-reply
                                   "reply_markup" reply-markup})))
@@ -1386,12 +1422,14 @@
   (https://core.telegram.org/bots/api#sendgame)"
   [bot chat-id game-short-name & options]
   (let [{:keys [disable-notification
+                protect-content
                 reply-to-message-id
                 allow-sending-without-reply
                 reply-markup]} options]
     (h/request bot "sendGame" {"chat_id" chat-id
                                "game_short_name" game-short-name
                                "disable_notification" disable-notification
+                               "protect_content" protect-content
                                "reply_to_message_id" reply-to-message-id
                                "allow_sending_without_reply" allow-sending-without-reply
                                "reply_markup" reply-markup})))

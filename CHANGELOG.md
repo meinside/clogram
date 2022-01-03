@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file. This change log follows the conventions of [keepachangelog.com](http://keepachangelog.com/).
 
+## [0.9.0] - 2022-01-03
+### Changed
+- Apply API changes(https://core.telegram.org/bots/api-changelog#december-30-2021).
+  - Add parameter `protect_content` to functions: `send-message`, `send-photo`, `send-video`, `send-animation`, `send-audio`, `send-document`, `send-sticker`, `send-video-note`, `send-voice`, `send-location`, `send-venue`, `send-contact`, `send-poll`, `send-dice`, `send-invoice`, `send-game`, `send-media-group`, `copy-message`, and `forward-message`.
+
 ## [0.8.0] - 2021-12-13
 ### Added
 - Apply API changes(https://core.telegram.org/bots/api#december-7-2021).
@@ -148,6 +153,7 @@ All notable changes to this project will be documented in this file. This change
 ### Added
 - Initial commit.
 
+[0.9.0]: https://github.com/meinside/clogram/compare/v0.8.0...v0.9.0
 [0.8.0]: https://github.com/meinside/clogram/compare/v0.7.0...v0.8.0
 [0.7.0]: https://github.com/meinside/clogram/compare/v0.6.0...v0.7.0
 [0.6.0]: https://github.com/meinside/clogram/compare/v0.5.0...v0.6.0
