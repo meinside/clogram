@@ -400,12 +400,13 @@
 (defn create-new-sticker-set
   "Create a new sticker set.
 
-  `options` include: :png-sticker, :tgs-sticker, :contains-masks, and :mask-position
+  `options` include: :png-sticker, :tgs-sticker, :webm-sticker, :contains-masks, and :mask-position
 
   (https://core.telegram.org/bots/api#createnewstickerset)"
   [bot user-id name title emojis & options]
   (let [{:keys [png-sticker
                 tgs-sticker
+                webm-sticker
                 contains-masks
                 mask-position]} options]
     (h/request bot "createNewStickerSet" {"user_id" user-id
@@ -413,6 +414,7 @@
                                           "title" title
                                           "png_sticker" png-sticker
                                           "tgs_sticker" tgs-sticker
+                                          "webm_sticker" webm-sticker
                                           "emojis" emojis
                                           "contains_masks" contains-masks
                                           "mask_position" mask-position})))
@@ -420,17 +422,19 @@
 (defn add-sticker-to-set
   "Add a sticker to a set.
 
-  `options` include: :png-sticker, :tgs-sticker, and :mask-position
+  `options` include: :png-sticker, :tgs-sticker, :webm-sticker, and :mask-position
 
   (https://core.telegram.org/bots/api#addstickertoset)"
   [bot user-id name emojis & options]
   (let [{:keys [png-sticker
                 tgs-sticker
+                webm-sticker
                 mask-position]} options]
     (h/request bot "addStickerToSet" {"user_id" user-id
                                       "name" name
                                       "png_sticker" png-sticker
                                       "tgs_sticker" tgs-sticker
+                                      "webm_sticker" webm-sticker
                                       "emojis" emojis
                                       "mask_position" mask-position})))
 
