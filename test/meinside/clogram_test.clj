@@ -248,6 +248,14 @@
     ;; TODO: set-chat-sticker-set
 
     ;; TODO: delete-chat-sticker-set
+
+    ;; TODO: set-chat-menu-button
+
+    ;; TODO: get-chat-menu-button
+
+    ;; TODO: set-my-default-administrator-rights
+
+    ;; TODO: get-my-default-administrator-rights
     ))
 
 (deftest callback-query-test
@@ -260,3 +268,7 @@
     ;; TODO: answer-inline-query
     ))
 
+(deftest web-app-query-test
+  (testing "Testing web app query"
+    ;; TODO: answer-web-app-query
+    ))

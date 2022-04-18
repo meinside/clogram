@@ -1,11 +1,11 @@
-(defproject dev.meinside/clogram "0.10.0"
+(defproject dev.meinside/clogram "0.11.0"
   :description "A Telegram Bot Library for Clojure"
   :url "https://github.com/meinside/clogram"
   :license {:name "The MIT License"
             :url "http://opensource.org/licenses/MIT"}
 
   ;; dependencies
-  :dependencies [[org.clojure/clojure "1.10.1"]
+  :dependencies [[org.clojure/clojure "1.10.3"]
                  [org.clojure/clojurescript "1.10.764" :exclusions [org.apache.ant/ant]]
                  [org.clojure/core.async "1.3.610"]
                  [org.clojure/data.json "1.0.0"]

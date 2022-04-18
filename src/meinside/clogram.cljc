@@ -4,7 +4,8 @@
 ;;;;
 ;;;; (https://core.telegram.org/bots/api)
 ;;;;
-;;;; created on 2019.12.05.
+;;;; created on : 2019.12.05.
+;;;; last update: 2022.04.18.
 
 (ns meinside.clogram
   #?(:cljs (:require-macros [cljs.core.async.macros :as a :refer [go]]))
@@ -874,7 +875,7 @@
 (defn promote-chat-member
   "Promote a chat member.
 
-  `options` include: :is-anonymous, :can-manage-chat, :can-change-info, :can-post-messages, :can-edit-messages, :can-delete-messages, :can-manage-voice-chats, :can-invite-users, :can-restrict-members, :can-pin-messages, and :can-promote-members.
+  `options` include: :is-anonymous, :can-manage-chat, :can-change-info, :can-post-messages, :can-edit-messages, :can-delete-messages, :can-manage-video-chats, :can-invite-users, :can-restrict-members, :can-pin-messages, and :can-promote-members.
 
   (https://core.telegram.org/bots/api#promotechatmember)"
   [bot chat-id user-id & options]
@@ -884,7 +885,7 @@
                 can-post-messages
                 can-edit-messages
                 can-delete-messages
-                can-manage-voice-chats
+                can-manage-video-chats
                 can-invite-users
                 can-restrict-members
                 can-pin-messages
@@ -897,7 +898,7 @@
                                         "can_post_messages" can-post-messages
                                         "can_edit_messages" can-edit-messages
                                         "can_delete_messages" can-delete-messages
-                                        "can_manage_voice_chats" can-manage-voice-chats
+                                        "can_manage_video_chats" can-manage-video-chats
                                         "can_invite_users" can-invite-users
                                         "can_restrict_members" can-restrict-members
                                         "can_pin_messages" can-pin-messages
@@ -1174,6 +1175,50 @@
     (h/request bot "deleteMyCommands" {"scope" scope
                                        "language_code" language-code})))
 
+(defn set-chat-menu-button
+  "Set the bot's menu button.
+
+  `options` include: :chat-id, and :menu-button.
+
+  (https://core.telegram.org/bots/api#setchatmenubutton)"
+  [bot & options]
+  (let [{:keys [chat-id
+                menu-button]} options]
+    (h/request bot "setChatMenuButton" {"chat_id" chat-id
+                                        "menu_button" menu-button})))
+
+(defn get-chat-menu-button
+  "Get the bot's menu button.
+
+  `options` include: :chat-id.
+
+  (https://core.telegram.org/bots/api#getchatmenubutton)"
+  [bot & options]
+  (let [{:keys [chat-id]} options]
+    (h/request bot "getChatMenuButton" {"chat_id" chat-id})))
+
+(defn set-my-default-administrator-rights
+  "Set my default administrator rights.
+
+  `options` include: :rights, and :for-channels.
+
+  (https://core.telegram.org/bots/api#setmydefaultadministratorrights)"
+  [bot & options]
+  (let [{:keys [rights
+                for-channels]} options]
+    (h/request bot "setMyDefaultAdministratorRights" {"rights" rights
+                                                      "for_channels" for-channels})))
+
+(defn get-my-default-administrator-rights
+  "Get my default administrator rights.
+
+  `options` include: :for-channels.
+
+  (https://core.telegram.org/bots/api#getmydefaultadministratorrights)"
+  [bot & options]
+  (let [{:keys [for-channels]} options]
+    (h/request bot "getMyDefaultAdministratorRights" {"for_channels" for-channels})))
+
 (defn edit-message-text
   "Edit a message's text.
 
@@ -1417,6 +1462,14 @@
     (h/request bot "answerPreCheckoutQuery" {"pre_checkout_query_id" pre-checkout-query-id
                                              "ok" ok
                                              "error_message" error-message})))
+
+(defn answer-web-app-query
+  "Answer a web app query.
+
+  (https://core.telegram.org/bots/api#answerwebappquery)"
+  [bot web-app-query-id result]
+  (h/request bot "answerWebAppQuery" {"web_app_query_id" web-app-query-id
+                                      "result" result}))
 
 (defn send-game
   "Send a game.
