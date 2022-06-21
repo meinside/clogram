@@ -1437,6 +1437,49 @@
                                   "allow_sending_without_reply" allow-sending-without-reply
                                   "reply_markup" reply-markup})))
 
+(defn create-invoice-link
+  "Create a link for an invoice.
+
+  `options` include: :max-tip-amount, :suggested-tip-amounts, :provider-data, :photo-url, :photo-size, :photo-width, :photo-height, :need-name, :need-phone-number, :need-email, :need-shipping-address, :send-phone-number-to-provider, :send-email-to-provider, and :is-flexible.
+
+  https://core.telegram.org/bots/api#createinvoicelink"
+  [bot chat-id title description payload provider-token currency prices & options]
+  (let [{:keys [max-tip-amount
+                suggested-tip-amounts
+                provider-data
+                photo-url
+                photo-size
+                photo-width
+                photo-height
+                need-name
+                need-phone-number
+                need-email
+                need-shipping-address
+                send-phone-number-to-provider
+                send-email-to-provider
+                is-flexible]} options]
+    (h/request bot "createInvoiceLink" {"chat_id" chat-id
+                                        "title" title
+                                        "description" description
+                                        "payload" payload
+                                        "provider_token" provider-token
+                                        "currency" currency
+                                        "prices" prices
+                                        "max_tip_amount" max-tip-amount
+                                        "suggested_tip_amounts" suggested-tip-amounts
+                                        "provider_data" provider-data
+                                        "photo_url" photo-url
+                                        "photo_size" photo-size
+                                        "photo_width" photo-width
+                                        "photo_height" photo-height
+                                        "need_name" need-name
+                                        "need_phone_number" need-phone-number
+                                        "need_email" need-email
+                                        "need_shipping_address" need-shipping-address
+                                        "send_phone_number_to_provider" send-phone-number-to-provider
+                                        "send_email_to_provider" send-email-to-provider
+                                        "is_flexible" is-flexible})))
+
 (defn answer-shipping-query
   "Answer a shipping query.
 
