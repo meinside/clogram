@@ -13,11 +13,11 @@
 
 (ns meinside.cljs.clogram-test
   (:require-macros
-   [cljs.core.async.macros :as a :refer [go]])
+    [cljs.core.async.macros :as a :refer [go]])
   (:require
-   [cljs.core.async :refer [<!]]
-   [cljs.test :refer-macros [deftest is testing async]]
-   [meinside.clogram :as cg]))
+    [cljs.core.async :refer [<!]]
+    [cljs.test :refer-macros [deftest is testing async]]
+    [meinside.clogram :as cg]))
 
 (defn -js->clj+
   "For cases when built-in js->clj doesn't work. Source: https://stackoverflow.com/a/32583549/4839573"
@@ -190,6 +190,8 @@
 (deftest shopping-test
   (testing "Testing functions for commerce"
     ;; TODO: send-invoice
+
+    ;; TODO: create-invoice-link
 
     ;; TODO: answer-shipping-query
 
