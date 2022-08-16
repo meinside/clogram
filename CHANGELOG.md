@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file. This change log follows the conventions of [keepachangelog.com](http://keepachangelog.com/).
 
+## [0.13.0] - 2022-08-16
+### Added
+- Apply API changes(https://core.telegram.org/bots/api#august-12-2022).
+  - Add function `get-custom-emoji-stickers`.
+
 ## [0.12.0] - 2022-06-21
 ### Added
 - Apply API changes(https://core.telegram.org/bots/api-changelog#june-20-2022).
@@ -167,6 +172,7 @@ All notable changes to this project will be documented in this file. This change
 ### Added
 - Initial commit.
 
+[0.13.0]: https://github.com/meinside/clogram/compare/v0.12.0...v0.13.0
 [0.12.0]: https://github.com/meinside/clogram/compare/v0.11.0...v0.12.0
 [0.11.0]: https://github.com/meinside/clogram/compare/v0.10.0...v0.11.0
 [0.10.0]: https://github.com/meinside/clogram/compare/v0.9.0...v0.10.0

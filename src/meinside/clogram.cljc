@@ -5,7 +5,7 @@
 ;;;; (https://core.telegram.org/bots/api)
 ;;;;
 ;;;; created on : 2019.12.05.
-;;;; last update: 2022.06.21.
+;;;; last update: 2022.08.16.
 
 (ns meinside.clogram
   #?(:cljs (:require-macros [cljs.core.async.macros :as a :refer [go]]))
@@ -390,6 +390,13 @@
   [bot name]
   (h/request bot "getStickerSet" {"name" name}))
 
+(defn get-custom-emoji-stickers
+  "Fetch custom emoji stickers.
+
+  (https://core.telegram.org/bots/api#getcustomemojistickers)"
+  [bot ids]
+  (h/request bot "getCustomEmojiStickers" {"custom_emoji_ids" ids}))
+
 (defn upload-sticker-file
   "Upload a sticker file.
 
@@ -401,14 +408,14 @@
 (defn create-new-sticker-set
   "Create a new sticker set.
 
-  `options` include: :png-sticker, :tgs-sticker, :webm-sticker, :contains-masks, and :mask-position
+  `options` include: :png-sticker, :tgs-sticker, :webm-sticker, :sticker-type, and :mask-position
 
   (https://core.telegram.org/bots/api#createnewstickerset)"
   [bot user-id name title emojis & options]
   (let [{:keys [png-sticker
                 tgs-sticker
                 webm-sticker
-                contains-masks
+                sticker-type
                 mask-position]} options]
     (h/request bot "createNewStickerSet" {"user_id" user-id
                                           "name" name
@@ -416,8 +423,8 @@
                                           "png_sticker" png-sticker
                                           "tgs_sticker" tgs-sticker
                                           "webm_sticker" webm-sticker
+                                          "sticker_type" sticker-type
                                           "emojis" emojis
-                                          "contains_masks" contains-masks
                                           "mask_position" mask-position})))
 
 (defn add-sticker-to-set

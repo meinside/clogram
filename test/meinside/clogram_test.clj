@@ -158,6 +158,8 @@
   (testing "Testing functions for stickers"
     ;; TODO: get-sticker-set
 
+    ;; TODO: get-custom-emoji-stickers
+
     ;; TODO: upload-sticker-file
 
     ;; TODO: create-new-sticker-set
