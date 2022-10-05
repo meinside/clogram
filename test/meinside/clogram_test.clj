@@ -12,6 +12,7 @@
 (ns meinside.clogram-test
   (:require
     [clojure.java.io :as io]
+    [clojure.string :as string]
     [clojure.test :refer [deftest is testing]]
     [meinside.clogram :as cg]))
 
@@ -35,7 +36,9 @@
 (deftest bot-creation-test
   (testing "Testing bot creation"
     (let [bot-info (cg/get-me bot)]
-      (is (:ok bot-info)))))
+      (is (:ok bot-info)))
+
+    (comment "----------------")))
 
 (deftest sending-and-fetching-messages-test
   (testing "Testing sending and fetching messages"
@@ -86,6 +89,14 @@
           sent-document (cg/send-document bot chat-id document-file)]
       (is (:ok sent-document))
 
+      ;; get-file
+      (let [file-id (get-in sent-document [:result :document :file-id])
+            file (cg/get-file bot file-id)
+            file-url (get-in file [:result :file-url])]
+        (is (:ok file))
+
+        (is (string/starts-with? file-url "https://")))
+
       ;; delete a message,
       (is (:ok (cg/delete-message bot chat-id (get-in sent-document [:result :message-id])))))
 
@@ -119,10 +130,6 @@
     ;; send a dice,
     (is (:ok (cg/send-dice bot chat-id)))
 
-    ;; TODO: get-file-url
-
-    ;; TODO: get-file
-
     ;; TODO: edit-message-media
 
     ;; TODO: edit-message-reply-markup
@@ -132,7 +139,9 @@
     ;; TODO: stop-message-live-location
 
     ;; fetch messages
-    (is (:ok (cg/get-updates bot)))))
+    (is (:ok (cg/get-updates bot)))
+
+    (comment "----------------")))
 
 (deftest polling-test
   (testing "Testing polling updates"
@@ -152,7 +161,9 @@
     (Thread/sleep 1000)
 
     ;; then stop polling
-    (is (cg/stop-polling-updates bot))))
+    (is (cg/stop-polling-updates bot))
+
+    (comment "----------------")))
 
 (deftest stickers-test
   (testing "Testing functions for stickers"
@@ -171,7 +182,8 @@
     ;; TODO: delete-sticker-from-set
 
     ;; TODO: set-sticker-set-thumb
-    ))
+
+    (comment "----------------")))
 
 (deftest games-test
   (testing "Testing functions for games"
@@ -180,7 +192,8 @@
     ;; TODO: set-game-score
 
     ;; TODO: get-game-highscores
-    ))
+
+    (comment "----------------")))
 
 (deftest shopping-test
   (testing "Testing functions for commerce"
@@ -191,7 +204,8 @@
     ;; TODO: answer-shipping-query
 
     ;; TODO: answer-pre-checkout-query
-    ))
+
+    (comment "----------------")))
 
 (deftest chat-administration-test
   (testing "Testing functions for chat administration"
@@ -260,19 +274,23 @@
     ;; TODO: set-my-default-administrator-rights
 
     ;; TODO: get-my-default-administrator-rights
-    ))
+
+    (comment "----------------")))
 
 (deftest callback-query-test
   (testing "Testing callback query"
     ;; TODO: answer-callback-query
-    ))
+
+    (comment "----------------")))
 
 (deftest inline-query-test
   (testing "Testing inline query"
     ;; TODO: answer-inline-query
-    ))
+
+    (comment "----------------")))
 
 (deftest web-app-query-test
   (testing "Testing web app query"
     ;; TODO: answer-web-app-query
-    ))
+
+    (comment "----------------")))

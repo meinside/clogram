@@ -3,7 +3,7 @@
 ;;;; src/meinside/clogram/helper.cljc
 ;;;;
 ;;;; created on : 2019.12.09.
-;;;; last update: 2022.04.18.
+;;;; last update: 2022.10.05.
 
 (ns meinside.clogram.helper
   #?(:cljs
@@ -32,20 +32,20 @@
   (when (:verbose? bot)
     (#?(:clj println
         :cljs js/console.log)
-             (str #?(:clj (java.time.LocalDateTime/now)
-                     :cljs (.getTime (js/Date.))))
-             "| VERBOSE |"
-             (clojure.string/join "" (map #(if (coll? %) (pr-str %) (str %)) args)))))
+       (str #?(:clj (java.time.LocalDateTime/now)
+               :cljs (.getTime (js/Date.))))
+       "| VERBOSE |"
+       (clojure.string/join "" (map #(if (coll? %) (pr-str %) (str %)) args)))))
 
 ;; print log messages
 (defn log
   [& args]
   (#?(:clj println
       :cljs js/console.log)
-           (str #?(:clj (java.time.LocalDateTime/now)
-                   :cljs (.getTime (js/Date.))))
-           "| LOG |"
-           (clojure.string/join "" (map #(if (coll? %) (pr-str %) (str %)) args))))
+     (str #?(:clj (java.time.LocalDateTime/now)
+             :cljs (.getTime (js/Date.))))
+     "| LOG |"
+     (clojure.string/join "" (map #(if (coll? %) (pr-str %) (str %)) args))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
