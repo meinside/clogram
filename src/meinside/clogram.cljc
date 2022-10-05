@@ -5,7 +5,7 @@
 ;;;; (https://core.telegram.org/bots/api)
 ;;;;
 ;;;; created on : 2019.12.05.
-;;;; last update: 2022.08.16.
+;;;; last update: 2022.10.05.
 
 (ns meinside.clogram
   #?(:cljs (:require-macros [cljs.core.async.macros :as a :refer [go]]))
@@ -794,7 +794,7 @@
                                            "offset" offset
                                            "limit" limit})))
 
-(defn get-file-url
+(defn- get-file-url
   "Generate a file's url from given :file-path."
   [bot file-path]
   (h/url-for-filepath bot file-path))
@@ -806,7 +806,7 @@
   [bot file-id]
   (let [result (h/request bot "getFile" {"file_id" file-id})]
     (if (:ok result)
-      (assoc-in result [:result :url] (get-file-url bot (get-in result [:result :file_path])))
+      (assoc-in result [:result :file-url] (get-file-url bot (get-in result [:result :file-path])))
       result)))
 
 (defn ban-chat-member

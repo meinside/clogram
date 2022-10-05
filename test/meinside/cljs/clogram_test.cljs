@@ -49,7 +49,9 @@
            (go (let [ch (cg/get-me bot)
                      res (<! ch)]
                  (is (:ok res))
-                 (done))))))
+                 (done))))
+
+    (comment "----------------")))
 
 (deftest sending-and-fetching-messages-test
   (testing "Testing sending and fetching messages"
@@ -120,8 +122,6 @@
                ;; stop a poll,
                (is (:ok (<! (cg/stop-poll bot chat-id (get-in sent-poll [:result :message-id]))))))
 
-             ;; TODO: get-file-url
-
              ;; TODO: get-file
 
              ;; TODO: delete-message
@@ -139,7 +139,9 @@
              ;; fetch messages
              (is (:ok (<! (cg/get-updates bot))))
 
-             (done)))))
+             (done)))
+
+    (comment "----------------")))
 
 (deftest polling-test
   (testing "Testing polling updates"
@@ -161,7 +163,9 @@
                                                ;; then stop polling
                                                (is (cg/stop-polling-updates bot))
 
-                                               (done))) 1000) 1000)))))
+                                               (done))) 1000) 1000)))
+
+    (comment "----------------")))
 
 (deftest stickers-test
   (testing "Testing functions for stickers"
@@ -178,7 +182,8 @@
     ;; TODO: set-sticker-position-in-set
 
     ;; TODO: delete-sticker-from-set
-    ))
+
+    (comment "----------------")))
 
 (deftest games-test
   (testing "Testing functions for games"
@@ -187,7 +192,8 @@
     ;; TODO: set-game-score
 
     ;; TODO: get-game-highscores
-    ))
+
+    (comment "----------------")))
 
 (deftest shopping-test
   (testing "Testing functions for commerce"
@@ -198,7 +204,8 @@
     ;; TODO: answer-shipping-query
 
     ;; TODO: answer-pre-checkout-query
-    ))
+
+    (comment "----------------")))
 
 (deftest chat-administration-test
   (testing "Testing functions for chat administration"
@@ -267,19 +274,24 @@
     ;; TODO: set-my-default-administrator-rights
 
     ;; TODO: get-my-default-administrator-rights
-    ))
+
+    (comment "----------------")))
 
 (deftest callback-query-test
   (testing "Testing callback query"
     ;; TODO: answer-callback-query
-    ))
+
+    (comment "----------------")))
 
 (deftest inline-query-test
   (testing "Testing inline query"
     ;; TODO: answer-inline-query
-    ))
+
+    (comment "----------------")))
 
 (deftest web-app-query-test
   (testing "Testing web app query"
     ;; TODO: answer-web-app-query
-    ))
+
+    (comment "----------------")))
+
