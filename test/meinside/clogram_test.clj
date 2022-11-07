@@ -275,6 +275,20 @@
 
     ;; TODO: get-my-default-administrator-rights
 
+    ;; TODO: create-forum-topic
+
+    ;; TODO: edit-forum-topic
+
+    ;; TODO: close-forum-topic
+
+    ;; TODO: reopen-forum-topic
+
+    ;; TODO: delete-forum-topic
+
+    ;; TODO: unpin-all-forum-topic-messages
+
+    ;; TODO: get-forum-topic-icon-stickers
+
     (comment "----------------")))
 
 (deftest callback-query-test
