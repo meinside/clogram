@@ -63,8 +63,9 @@
   "Delete webhook for polling messages.
 
   (https://core.telegram.org/bots/api#deletewebhook)"
-  [bot]
-  (h/request bot "deleteWebhook" {}))
+  [bot & options]
+  (let [{:keys [drop-pending-updates]} options]
+    (h/request bot "deleteWebhook" {"drop_pending_updates" drop-pending-updates})))
 
 (defn get-me
   "Fetch this bot's info.
