@@ -287,7 +287,7 @@
 (defn send-photo
   "Send a photo.
 
-  `options` include: :message-thread-id, :caption, :parse-mode, :caption-entities, :disable-notification, :reply-to-message-id, :allow-sending-without-reply, and :reply-markup.
+  `options` include: :message-thread-id, :caption, :parse-mode, :caption-entities, :has-spoiler, :disable-notification, :reply-to-message-id, :allow-sending-without-reply, and :reply-markup.
 
   (https://core.telegram.org/bots/api#sendphoto)"
   [bot chat-id photo & options]
@@ -295,6 +295,7 @@
                 caption
                 parse-mode
                 caption-entities
+                has-spoiler
                 disable-notification
                 protect-content
                 reply-to-message-id
@@ -306,6 +307,7 @@
                                 "caption" caption
                                 "parse_mode" parse-mode
                                 "caption_entities" caption-entities
+                                "has_spoiler" has-spoiler
                                 "disable_notification" disable-notification
                                 "protect_content" protect-content
                                 "reply_to_message_id" reply-to-message-id
@@ -480,7 +482,7 @@
   "Set thumbnail of a sticker set.
 
   `options` include: thumb.
-  
+
   (https://core.telegram.org/bots/api#setstickersetthumb)"
   [bot name user-id & options]
   (let [{:keys [thumb]} options]
@@ -491,7 +493,7 @@
 (defn send-video
   "Send a video.
 
-  `options` include: :message-thread-id, :duration, :caption, :parse-mode, :caption-entities, :supports-streaming, :disable-notification, :reply-to-message-id, :allow-sending-without-reply, and :reply-markup.
+  `options` include: :message-thread-id, :duration, :caption, :parse-mode, :caption-entities, :has-spoiler, :supports-streaming, :disable-notification, :reply-to-message-id, :allow-sending-without-reply, and :reply-markup.
 
   (https://core.telegram.org/bots/api#sendvideo)"
   [bot chat-id video & options]
@@ -500,6 +502,7 @@
                 caption
                 parse-mode
                 caption-entities
+                has-spoiler
                 supports-streaming
                 disable-notification
                 protect-content
@@ -513,6 +516,7 @@
                                 "caption" caption
                                 "parse_mode" parse-mode
                                 "caption_entities" caption-entities
+                                "has_spoiler" has-spoiler
                                 "supports_streaming" supports-streaming
                                 "disable_notification" disable-notification
                                 "protect_content" protect-content
@@ -523,7 +527,7 @@
 (defn send-animation
   "Send an animation.
 
-  `options` include: :message-thread-id, :duration, :width, :height, :thumb, :caption, :parse-mode, :caption-entities, :disable-notification, :reply-to-message-id, :allow-sending-without-reply, and :reply-markup.
+  `options` include: :message-thread-id, :duration, :width, :height, :thumb, :caption, :parse-mode, :caption-entities, :has-spoiler, :disable-notification, :reply-to-message-id, :allow-sending-without-reply, and :reply-markup.
 
   (https://core.telegram.org/bots/api#sendanimation)"
   [bot chat-id animation & options]
@@ -535,6 +539,7 @@
                 caption
                 parse-mode
                 caption-entities
+                has-spoiler
                 disable-notification
                 protect-content
                 reply-to-message-id
@@ -550,6 +555,7 @@
                                     "caption" caption
                                     "parse_mode" parse-mode
                                     "caption_entities" caption-entities
+                                    "has_spoiler" has-spoiler
                                     "disable_notification" disable-notification
                                     "protect_content" protect-content
                                     "reply_to_message_id" reply-to-message-id
@@ -784,12 +790,16 @@
 (defn send-chat-action
   "Send a chat action.
 
+  `options` include: :message-thread-id.
+
   `action` can be one of: :typing, :upload_photo, :record_video, :upload_video, :record_voice, :upload_voice, :upload_document, :choose_sticker, :find_location, :record_video_note, or :upload_video_note.
 
   (https://core.telegram.org/bots/api#sendchataction)"
-  [bot chat-id action]
-  (h/request bot "sendChatAction" {"chat_id" chat-id
-                                   "action" action}))
+  [bot chat-id action & options]
+  (let [{:keys [message-thread-id]} options]
+    (h/request bot "sendChatAction" {"chat_id" chat-id
+                                     "message_thread_id" message-thread-id
+                                     "action" action})))
 
 (defn send-dice
   "Send a dice.
@@ -797,7 +807,7 @@
   `emoji` can be one of: 🎲, 🎯, 🏀, ⚽, 🎳, or 🎰. (default: 🎲)
 
   `options` include: :message-thread-id, :emoji, :disable-notification, :reply-to-message-id, :allow-sending-without-reply, and :reply-markup.
-  
+
   (https://core.telegram.org/bots/api#senddice)"
   [bot chat-id & options]
   (let [{:keys [message-thread-id
@@ -1015,7 +1025,7 @@
 
 (defn create-chat-invite-link
   "Create a chat invite link.
-  
+
   (https://core.telegram.org/bots/api#createchatinvitelink)"
   [bot chat-id & options]
   (let [{:keys [name
@@ -1030,7 +1040,7 @@
 
 (defn edit-chat-invite-link
   "Edit a chat invite link.
-  
+
   (https://core.telegram.org/bots/api#editchatinvitelink)"
   [bot chat-id invite-link & options]
   (let [{:keys [name
@@ -1190,7 +1200,7 @@
 
 (defn get-my-commands
   "Get this bot's commands.
-  
+
   (https://core.telegram.org/bots/api#getmycommands)"
   [bot & options]
   (let [{:keys [scope
@@ -1200,7 +1210,7 @@
 
 (defn set-my-commands
   "Set this bot's commands.
-  
+
   (https://core.telegram.org/bots/api#setmycommands)"
   [bot commands & options]
   (let [{:keys [scope
@@ -1636,12 +1646,16 @@
 (defn edit-forum-topic
   "Edit name and icon of a topic in a forum supergroup chat.
 
+  `options` include: :name, and :icon-custom-emoji-id.
+
   (https://core.telegram.org/bots/api#editforumtopic)"
-  [bot chat-id message-thread-id name icon-custom-emoji-id]
-  (h/request bot "editForumTopic" {"chat_id" chat-id
-                                   "message_thread_id" message-thread-id
-                                   "name" name
-                                   "icon_custom_emoji_id" icon-custom-emoji-id}))
+  [bot chat-id message-thread-id & options]
+  (let [{:keys [name
+                icon-custom-emoji-id]} options]
+    (h/request bot "editForumTopic" {"chat_id" chat-id
+                                     "message_thread_id" message-thread-id
+                                     "name" name
+                                     "icon_custom_emoji_id" icon-custom-emoji-id})))
 
 (defn close-forum-topic
   "Close an open topic in a forum supergroup chat.
@@ -1674,6 +1688,42 @@
   [bot chat-id message-thread-id]
   (h/request bot "unpinAllForumTopicMessages" {"chat_id" chat-id
                                                "message_thread_id" message-thread-id}))
+
+(defn edit-general-forum-topic
+  "Edit the name of the 'General' topic in a forum supergroup chat.
+
+  (https://core.telegram.org/bots/api#editgeneralforumtopic)"
+  [bot chat-id name]
+  (h/request bot "editGeneralForumTopic" {"chat_id" chat-id
+                                          "name" name}))
+
+(defn close-general-forum-topic
+  "Close an open 'General' topic in a forum supergroup chat.
+
+  (https://core.telegram.org/bots/api#closegeneralforumtopic)"
+  [bot chat-id]
+  (h/request bot "closeGeneralForumTopic" {"chat_id" chat-id}))
+
+(defn reopen-general-forum-topic
+  "Reopen a closed 'General' topic in a forum supergroup chat.
+
+  (https://core.telegram.org/bots/api#reopengeneralforumtopic)"
+  [bot chat-id]
+  (h/request bot "reopenGeneralForumTopic" {"chat_id" chat-id}))
+
+(defn hide-general-forum-topic
+  "Hide the 'General' topic in a forum supergroup chat.
+
+  (https://core.telegram.org/bots/api#hidegeneralforumtopic)"
+  [bot chat-id]
+  (h/request bot "hideGeneralForumTopic" {"chat_id" chat-id}))
+
+(defn unhide-general-forum-topic
+  "Unhide the 'General' topic in a forum supergroup chat.
+
+  (https://core.telegram.org/bots/api#unhidegeneralforumtopic)"
+  [bot chat-id]
+  (h/request bot "unhideGeneralForumTopic" {"chat_id" chat-id}))
 
 (defn get-forum-topic-icon-stickers
   "Get custom emoji stickers.

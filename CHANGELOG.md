@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file. This change
 ## [0.15.0] - 2023-01-02
 ### Changed
 - Add parameter :drop-pending-updates to `delete-webhook` function.
+- Apply API changes(https://core.telegram.org/bots/api-changelog#december-30-2022).
 
 ## [0.14.0] - 2022-11-07
 ### Changed
