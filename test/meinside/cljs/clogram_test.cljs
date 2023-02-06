@@ -225,7 +225,7 @@
 
     ;; TODO: unban-chat-sender-chat
 
-    ;; TODO: set-chat-permission
+    ;; TODO: set-chat-permissions
 
     ;; TODO: export-chat-invite-link
 

@@ -5,7 +5,7 @@
 ;;;; (https://core.telegram.org/bots/api)
 ;;;;
 ;;;; created on : 2019.12.05.
-;;;; last update: 2022.11.07.
+;;;; last update: 2023.02.06.
 
 (ns meinside.clogram
   #?(:cljs (:require-macros [cljs.core.async.macros :as a :refer [go]]))
@@ -890,7 +890,7 @@
 (defn restrict-chat-member
   "Restrict a chat member.
 
-  `options` include: :can-send-messages, :can-send-media-messages, :can-send-polls, :can-send-other-messages, :can-add-web-page-previews, :can-change-info, :can-invite-users, :can-pin-messages, and :until-date.
+  `options` include: :can-send-messages, :can-send-media-messages, :can-send-polls, :can-send-other-messages, :can-add-web-page-previews, :can-change-info, :can-invite-users, :can-pin-messages, :use-independent-chat-permissions, and :until-date.
 
   (https://core.telegram.org/bots/api#chatpermissions)
   (https://core.telegram.org/bots/api#restrictchatmember)"
@@ -903,6 +903,7 @@
                 can-change-info
                 can-invite-users
                 can-pin-messages
+                use-independent-chat-permissions
                 until-date]
          :or {can-send-messages false
               can-send-media-messages false
@@ -911,7 +912,8 @@
               can-add-web-page-previews false
               can-change-info false
               can-invite-users false
-              can-pin-messages false}} options]
+              can-pin-messages false
+              use-independent-chat-permissions false}} options]
     (h/request bot "restrictChatMember" {"chat_id" chat-id
                                          "user_id" user-id
                                          "permissions" {"can_send_messages" can-send-messages
@@ -922,6 +924,7 @@
                                                         "can_change_info" can-change-info
                                                         "can_invite_users" can-invite-users
                                                         "can_pin_messages" can-pin-messages}
+                                         "use_independent_chat_permissions" use-independent-chat-permissions
                                          "until_date" until-date})))
 
 (defn promote-chat-member
@@ -983,10 +986,10 @@
   (h/request bot "unbanChatSenderChat" {"chat_id" chat-id
                                         "sender_chat_id" sender-chat-id}))
 
-(defn set-chat-permission
+(defn set-chat-permissions
   "Set chat permissions.
 
-  `options` include: :can-send-messages, :can-send-media-messages, :can-send-polls, :can-send-other-messages, :can-add-web-page-previews, :can-change-info, :can-invite-users, and :can-pin-messages.
+  `options` include: :can-send-messages, :can-send-media-messages, :can-send-polls, :can-send-other-messages, :can-add-web-page-previews, :can-change-info, :can-invite-users, :can-pin-messages, and :use-independent-chat-permissions.
 
   (https://core.telegram.org/bots/api#setchatpermissions)"
   [bot chat-id & options]
@@ -997,7 +1000,8 @@
                 can-add-web-page-previews
                 can-change-info
                 can-invite-users
-                can-pin-messages]
+                can-pin-messages
+                use-independent-chat-permissions]
          :or {can-send-messages false
               can-send-media-messages false
               can-send-polls false
@@ -1005,16 +1009,18 @@
               can-add-web-page-previews false
               can-change-info false
               can-invite-users false
-              can-pin-messages false}} options]
-    (h/request bot "setChatPermission" {"chat_id" chat-id
-                                        "permissions" {"can_send_messages" can-send-messages
-                                                       "can_send_media_messages" can-send-media-messages
-                                                       "can_send_polls" can-send-polls
-                                                       "can_send_other_messages" can-send-other-messages
-                                                       "can_add_web_page_previews" can-add-web-page-previews
-                                                       "can_change_info" can-change-info
-                                                       "can_invite_users" can-invite-users
-                                                       "can_pin_messages" can-pin-messages}})))
+              can-pin-messages false
+              use-independent-chat-permissions false}} options]
+    (h/request bot "setChatPermissions" {"chat_id" chat-id
+                                         "permissions" {"can_send_messages" can-send-messages
+                                                        "can_send_media_messages" can-send-media-messages
+                                                        "can_send_polls" can-send-polls
+                                                        "can_send_other_messages" can-send-other-messages
+                                                        "can_add_web_page_previews" can-add-web-page-previews
+                                                        "can_change_info" can-change-info
+                                                        "can_invite_users" can-invite-users
+                                                        "can_pin_messages" can-pin-messages
+                                                        "use_independent_chat_permissions" use-independent-chat-permissions}})))
 
 (defn export-chat-invite-link
   "Export a chat invite link.

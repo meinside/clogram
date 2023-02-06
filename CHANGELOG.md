@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file. This change log follows the conventions of [keepachangelog.com](http://keepachangelog.com/).
 
+## [0.16.0] - 2023-02-06
+### Changed
+- Apply API changes(https://core.telegram.org/bots/api-changelog#february-3-2023).
+
 ## [0.15.0] - 2023-01-02
 ### Changed
 - Add parameter :drop-pending-updates to `delete-webhook` function.
@@ -186,6 +190,7 @@ All notable changes to this project will be documented in this file. This change
 ### Added
 - Initial commit.
 
+[0.16.0]: https://github.com/meinside/clogram/compare/v0.15.0...v0.16.0
 [0.15.0]: https://github.com/meinside/clogram/compare/v0.14.0...v0.15.0
 [0.14.0]: https://github.com/meinside/clogram/compare/v0.13.1...v0.14.0
 [0.13.1]: https://github.com/meinside/clogram/compare/v0.13.0...v0.13.1
