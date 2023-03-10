@@ -69,6 +69,18 @@
              ;; get bot commands
              (is (:ok (<! (cg/get-my-commands bot))))
 
+             ;; set bot description
+             (is (:ok (<! (cg/set-my-description bot :description "bot for test"))))
+
+             ;; get bot description
+             (is (:ok (<! (cg/get-my-description bot))))
+
+             ;; set bot short description
+             (is (:ok (<! (cg/set-my-short-description bot :short-description "test"))))
+
+             ;; get bot short description
+             (is (:ok (<! (cg/get-my-short-description bot))))
+
              ;; send a chat action,
              (is (:ok (<! (cg/send-chat-action bot chat-id :typing))))
 
@@ -182,6 +194,20 @@
     ;; TODO: set-sticker-position-in-set
 
     ;; TODO: delete-sticker-from-set
+
+    ;; TODO: set-sticker-set-thumbnail
+
+    ;; TODO: set-custom-emoji-sticker-set-thumbnail
+
+    ;; TODO: set-sticker-set-title
+
+    ;; TODO: delete-sticker-set
+
+    ;; TODO: set-sticker-emoji-list
+
+    ;; TODO: set-sticker-keywords
+
+    ;; TODO: set-sticker-mask-position
 
     (comment "----------------")))
 

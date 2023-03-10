@@ -5,7 +5,7 @@
 ;;;; (https://core.telegram.org/bots/api)
 ;;;;
 ;;;; created on : 2019.12.05.
-;;;; last update: 2023.02.06.
+;;;; last update: 2023.03.10.
 
 (ns meinside.clogram
   #?(:cljs (:require-macros [cljs.core.async.macros :as a :refer [go]]))
@@ -386,6 +386,7 @@
   (https://core.telegram.org/bots/api#sendsticker)"
   [bot chat-id sticker & options]
   (let [{:keys [message-thread-id
+                emoji
                 disable-notification
                 protect-content
                 reply-to-message-id
@@ -394,6 +395,7 @@
     (h/request bot "sendSticker" {"chat_id" chat-id
                                   "message_thread_id" message-thread-id
                                   "sticker" sticker
+                                  "emoji" emoji
                                   "disable_notification" disable-notification
                                   "protect_content" protect-content
                                   "reply_to_message_id" reply-to-message-id
@@ -418,50 +420,36 @@
   "Upload a sticker file.
 
   (https://core.telegram.org/bots/api#uploadstickerfile)"
-  [bot user-id sticker]
+  [bot user-id sticker sticker-format]
   (h/request bot "uploadStickerFile" {"user_id" user-id
-                                      "png_sticker" sticker}))
+                                      "sticker" sticker
+                                      "sticker_format" sticker-format}))
 
 (defn create-new-sticker-set
   "Create a new sticker set.
 
-  `options` include: :png-sticker, :tgs-sticker, :webm-sticker, :sticker-type, and :mask-position
+  `options` include: :sticker-type, and :needs-repainting
 
   (https://core.telegram.org/bots/api#createnewstickerset)"
-  [bot user-id name title emojis & options]
-  (let [{:keys [png-sticker
-                tgs-sticker
-                webm-sticker
-                sticker-type
-                mask-position]} options]
+  [bot user-id name title stickers sticker-format & options]
+  (let [{:keys [sticker-type
+                needs-repainting]} options]
     (h/request bot "createNewStickerSet" {"user_id" user-id
                                           "name" name
                                           "title" title
-                                          "png_sticker" png-sticker
-                                          "tgs_sticker" tgs-sticker
-                                          "webm_sticker" webm-sticker
+                                          "stickers" stickers
+                                          "sticker_format" sticker-format
                                           "sticker_type" sticker-type
-                                          "emojis" emojis
-                                          "mask_position" mask-position})))
+                                          "needs_repainting" needs-repainting})))
 
 (defn add-sticker-to-set
   "Add a sticker to a set.
 
-  `options` include: :png-sticker, :tgs-sticker, :webm-sticker, and :mask-position
-
   (https://core.telegram.org/bots/api#addstickertoset)"
-  [bot user-id name emojis & options]
-  (let [{:keys [png-sticker
-                tgs-sticker
-                webm-sticker
-                mask-position]} options]
-    (h/request bot "addStickerToSet" {"user_id" user-id
-                                      "name" name
-                                      "png_sticker" png-sticker
-                                      "tgs_sticker" tgs-sticker
-                                      "webm_sticker" webm-sticker
-                                      "emojis" emojis
-                                      "mask_position" mask-position})))
+  [bot user-id name sticker]
+  (h/request bot "addStickerToSet" {"user_id" user-id
+                                    "name" name
+                                    "sticker" sticker}))
 
 (defn set-sticker-position-in-set
   "Set a sticker's position in its set.
@@ -478,17 +466,69 @@
   [bot sticker]
   (h/request bot "deleteStickerFromSet" {"sticker" sticker}))
 
-(defn set-sticker-set-thumb
+(defn set-sticker-set-thumbnail
   "Set thumbnail of a sticker set.
 
-  `options` include: thumb.
+  `options` include: thumbnail.
 
-  (https://core.telegram.org/bots/api#setstickersetthumb)"
+  (https://core.telegram.org/bots/api#setstickersetthumbnail)"
   [bot name user-id & options]
-  (let [{:keys [thumb]} options]
-    (h/request bot "setStickerSetThumb" {"name" name
-                                         "user_id" user-id
-                                         "thumb" thumb})))
+  (let [{:keys [thumbnail]} options]
+    (h/request bot "setStickerSetThumbnail" {"name" name
+                                             "user_id" user-id
+                                             "thumbnail" thumbnail})))
+
+(defn set-custom-emoji-sticker-set-thumbnail
+  "Set thumbnail of custom emoji sticker set.
+
+  `options` include: custom_emoji_id.
+
+  (https://core.telegram.org/bots/api#setcustomemojistickersetthumbnail)"
+  [bot name & options]
+  (let [{:keys [custom-emoji-id]} options]
+    (h/request bot "setCustomEmojiStickerSetThumbnail" {"name" name
+                                                        "custom_emoji_id" custom-emoji-id})))
+
+(defn set-sticker-set-title
+  "Set title of sticker set.
+
+  (https://core.telegram.org/bots/api#setstickersettitle)"
+  [bot name title]
+  (h/request bot "setStickerSetTitle" {"name" name
+                                       "title" title}))
+
+(defn delete-sticker-set
+  "Delete sticker set.
+
+  (https://core.telegram.org/bots/api#deletestickerset)"
+  [bot name]
+  (h/request bot "deleteStickerSet" {"name" name}))
+
+(defn set-sticker-emoji-list
+  "Set sticker's emoji list.
+
+  (https://core.telegram.org/bots/api#setstickeremojilist)"
+  [bot sticker emoji-list]
+  (h/request bot "setStickerEmojiList" {"sticker" sticker
+                                        "emoji_list" emoji-list}))
+
+(defn set-sticker-keywords
+  "Set sticker's keywords.
+
+  (https://core.telegram.org/bots/api#setstickerkeywords)"
+  [bot sticker & options]
+  (let [{:keys [keywords]} options]
+    (h/request bot "setStickerKeywords" {"sticker" sticker
+                                         "keywords" keywords})))
+
+(defn set-sticker-mask-position
+  "Set sticker's mask position.
+
+  (https://core.telegram.org/bots/api#setstickermaskposition)"
+  [bot sticker & options]
+  (let [{:keys [mask-position]} options]
+    (h/request bot "setStickerMaskPosition" {"sticker" sticker
+                                             "mask_position" mask-position})))
 
 (defn send-video
   "Send a video.
@@ -527,7 +567,7 @@
 (defn send-animation
   "Send an animation.
 
-  `options` include: :message-thread-id, :duration, :width, :height, :thumb, :caption, :parse-mode, :caption-entities, :has-spoiler, :disable-notification, :reply-to-message-id, :allow-sending-without-reply, and :reply-markup.
+  `options` include: :message-thread-id, :duration, :width, :height, :thumbnail, :caption, :parse-mode, :caption-entities, :has-spoiler, :disable-notification, :reply-to-message-id, :allow-sending-without-reply, and :reply-markup.
 
   (https://core.telegram.org/bots/api#sendanimation)"
   [bot chat-id animation & options]
@@ -535,7 +575,7 @@
                 duration
                 width
                 height
-                thumb
+                thumbnail
                 caption
                 parse-mode
                 caption-entities
@@ -551,7 +591,7 @@
                                     "duration" duration
                                     "width" width
                                     "height" height
-                                    "thumb" thumb
+                                    "thumbnail" thumbnail
                                     "caption" caption
                                     "parse_mode" parse-mode
                                     "caption_entities" caption-entities
@@ -595,7 +635,7 @@
 (defn send-video-note
   "Send a video note.
 
-  `options` include: :message-thread-id, :duration, :length, :thumb, :disable-notification, :reply-to-message-id, :allow-sending-without-reply, and :reply-markup.
+  `options` include: :message-thread-id, :duration, :length, :thumbnail, :disable-notification, :reply-to-message-id, :allow-sending-without-reply, and :reply-markup.
   (XXX: API returns 'Bad Request: wrong video note length' when length is not given / 2017.05.19.)
 
   (https://core.telegram.org/bots/api#sendvideonote)"
@@ -603,7 +643,7 @@
   (let [{:keys [message-thread-id
                 duration
                 length
-                thumb
+                thumbnail
                 disable-notification
                 protect-content
                 reply-to-message-id
@@ -614,7 +654,7 @@
                                     "video_note" video-note
                                     "duration" duration
                                     "length" length
-                                    "thumb" thumb
+                                    "thumbnail" thumbnail
                                     "disable_notification" disable-notification
                                     "protect_content" protect-content
                                     "reply_to_message_id" reply-to-message-id
@@ -1213,6 +1253,42 @@
                 language-code]} options]
     (h/request bot "getMyCommands" {"scope" scope
                                     "language_code" language-code})))
+
+(defn set-my-description
+  "Set this bot's description.
+
+  (https://core.telegram.org/bots/api#setmydescription)"
+  [bot & options]
+  (let [{:keys [description
+                language-code]} options]
+    (h/request bot "setMyDescription" {"description" description
+                                       "language_code" language-code})))
+
+(defn get-my-description
+  "Get this bot's description.
+
+  (https://core.telegram.org/bots/api#getmydescription)"
+  [bot & options]
+  (let [{:keys [language-code]} options]
+    (h/request bot "getMyDescription" {"language_code" language-code})))
+
+(defn set-my-short-description
+  "Set this bot's short description.
+
+  (https://core.telegram.org/bots/api#setmyshortdescription)"
+  [bot & options]
+  (let [{:keys [short-description
+                language-code]} options]
+    (h/request bot "setMyShortDescription" {"short_description" short-description
+                                            "language_code" language-code})))
+
+(defn get-my-short-description
+  "Get this bot's short description.
+
+  (https://core.telegram.org/bots/api#getmyshortdescription)"
+  [bot & options]
+  (let [{:keys [language-code]} options]
+    (h/request bot "getMyShortDescription" {"language_code" language-code})))
 
 (defn set-my-commands
   "Set this bot's commands.
