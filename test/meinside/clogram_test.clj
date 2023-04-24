@@ -54,6 +54,12 @@
     ;; get bot commands
     (is (:ok (cg/get-my-commands bot)))
 
+    ;; set bot name
+    (is (:ok (cg/set-my-name bot "clogram test bot")))
+
+    ;; get bot name
+    (is (:ok (cg/get-my-name bot)))
+
     ;; set bot description
     (is (:ok (cg/set-my-description bot :description "bot for test")))
 

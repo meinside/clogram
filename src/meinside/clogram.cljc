@@ -5,7 +5,7 @@
 ;;;; (https://core.telegram.org/bots/api)
 ;;;;
 ;;;; created on : 2019.12.05.
-;;;; last update: 2023.03.10.
+;;;; last update: 2023.04.24.
 
 (ns meinside.clogram
   #?(:cljs (:require-macros [cljs.core.async.macros :as a :refer [go]]))
@@ -1253,6 +1253,23 @@
                 language-code]} options]
     (h/request bot "getMyCommands" {"scope" scope
                                     "language_code" language-code})))
+
+(defn set-my-name
+  "Set this bot's name.
+
+  (https://core.telegram.org/bots/api#setmyname)"
+  [bot name & options]
+  (let [{:keys [language-code]} options]
+    (h/request bot "setMyName" {"name" name
+                                "language_code" language-code})))
+
+(defn get-my-name
+  "Get this bot's name.
+
+  (https://core.telegram.org/bots/api#getmyname)"
+  [bot & options]
+  (let [{:keys [language-code]} options]
+    (h/request bot "getMyName" {"language_code" language-code})))
 
 (defn set-my-description
   "Set this bot's description.
