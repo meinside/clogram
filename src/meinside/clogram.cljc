@@ -5,7 +5,7 @@
 ;;;; (https://core.telegram.org/bots/api)
 ;;;;
 ;;;; created on : 2019.12.05.
-;;;; last update: 2023.04.24.
+;;;; last update: 2023.08.21.
 
 (ns meinside.clogram
   #?(:cljs (:require-macros [cljs.core.async.macros :as a :refer [go]]))
@@ -1823,6 +1823,13 @@
   (https://core.telegram.org/bots/api#unhidegeneralforumtopic)"
   [bot chat-id]
   (h/request bot "unhideGeneralForumTopic" {"chat_id" chat-id}))
+
+(defn unpin-all-general-forum-topic-messages
+  "Unpin all pinned messages in a general forum topic.
+
+  (https://core.telegram.org/bots/api#unpinallgeneralforumtopicmessages)"
+  [bot chat-id]
+  (h/request bot "unpinAllGeneralForumTopicMessages" {"chat_id" chat-id}))
 
 (defn get-forum-topic-icon-stickers
   "Get custom emoji stickers.
