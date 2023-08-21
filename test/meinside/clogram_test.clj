@@ -297,6 +297,8 @@
 
     ;; TODO: delete-chat-sticker-set
 
+    ;; TODO: get-forum-topic-icon-stickers
+
     ;; TODO: set-chat-menu-button
 
     ;; TODO: get-chat-menu-button
@@ -317,7 +319,17 @@
 
     ;; TODO: unpin-all-forum-topic-messages
 
-    ;; TODO: get-forum-topic-icon-stickers
+    ;; TODO: edit-general-forum-topic
+
+    ;; TODO: close-general-forum-topic
+
+    ;; TODO: reopen-general-forum-topic
+
+    ;; TODO: hide-general-forum-topic
+
+    ;; TODO: unhide-general-forum-topic
+
+    ;; TODO: unpin-all-general-forum-topic-messages
 
     (comment "----------------")))
 
