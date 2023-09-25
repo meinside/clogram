@@ -1,12 +1,13 @@
 # Change Log
 All notable changes to this project will be documented in this file. This change log follows the conventions of [keepachangelog.com](http://keepachangelog.com/).
 
+## [0.20.0] - 2023-09-25
+- Apply API changes(https://core.telegram.org/bots/api-changelog#september-22-2023).
+
 ## [0.19.0] - 2023-08-21
-### Added
 - Apply API changes(https://core.telegram.org/bots/api-changelog#august-18-2023).
 
 ## [0.18.0] - 2023-04-24
-### Added
 - Apply API changes(https://core.telegram.org/bots/api-changelog#april-21-2023).
   - Add `get-my-name` and `set-my-name` functions.
 
@@ -14,7 +15,6 @@ All notable changes to this project will be documented in this file. This change
 - Apply API changes(https://core.telegram.org/bots/api-changelog#march-9-2023).
 
 ## [0.16.0] - 2023-02-06
-### Changed
 - Apply API changes(https://core.telegram.org/bots/api-changelog#february-3-2023).
 
 ## [0.15.0] - 2023-01-02
@@ -23,7 +23,6 @@ All notable changes to this project will be documented in this file. This change
 - Apply API changes(https://core.telegram.org/bots/api-changelog#december-30-2022).
 
 ## [0.14.0] - 2022-11-07
-### Changed
 - Apply API changes(https://core.telegram.org/bots/api-changelog#november-5-2022).
 
 ## [0.13.1] - 2022-10-05
@@ -42,7 +41,6 @@ All notable changes to this project will be documented in this file. This change
   - Add function `create-invoice-link`.
 
 ## [0.11.0] - 2022-04-18
-### Changed
 - Apply API changes(https://core.telegram.org/bots/api-changelog#april-16-2022).
 
 ## [0.10.0] - 2022-02-03
@@ -202,6 +200,7 @@ All notable changes to this project will be documented in this file. This change
 ### Added
 - Initial commit.
 
+[0.20.0]: https://github.com/meinside/clogram/compare/v0.19.0...v0.20.0
 [0.19.0]: https://github.com/meinside/clogram/compare/v0.18.0...v0.19.0
 [0.18.0]: https://github.com/meinside/clogram/compare/v0.17.0...v0.18.0
 [0.17.0]: https://github.com/meinside/clogram/compare/v0.16.0...v0.17.0
