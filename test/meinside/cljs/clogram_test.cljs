@@ -277,7 +277,10 @@
 
     ;; TODO: set-chat-title
 
-    ;; TODO: set-chat-description
+    (async done
+           (go
+             ;; set-chat-description
+             (is (:ok (cg/set-chat-description bot chat-id (str "(clogram/cljs) chat_id: " chat-id))))))
 
     ;; TODO: pin-chat-message
 

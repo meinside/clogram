@@ -275,7 +275,8 @@
 
     ;; TODO: set-chat-title
 
-    ;; TODO: set-chat-description
+    ;; set-chat-description
+    (is (:ok (cg/set-chat-description bot chat-id (format "(clogram) chat_id: %s" chat-id))))
 
     ;; TODO: pin-chat-message
 
