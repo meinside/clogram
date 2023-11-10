@@ -76,13 +76,13 @@
              (is (:ok (<! (cg/get-my-name bot))))
 
              ;; set bot description
-             (is (:ok (<! (cg/set-my-description bot :description "bot for test"))))
+             (is (:ok (<! (cg/set-my-description bot :description "A bot for testing library: clogram/cljs"))))
 
              ;; get bot description
              (is (:ok (<! (cg/get-my-description bot))))
 
              ;; set bot short description
-             (is (:ok (<! (cg/set-my-short-description bot :short-description "test"))))
+             (is (:ok (<! (cg/set-my-short-description bot :short-description "clogram/cljs"))))
 
              ;; get bot short description
              (is (:ok (<! (cg/get-my-short-description bot))))
@@ -241,100 +241,102 @@
 
 (deftest chat-administration-test
   (testing "Testing functions for chat administration"
-    ;; TODO: ban-chat-member
-
-    ;; TODO: leave-chat
-
-    ;; TODO: unban-chat-member
-
-    ;; TODO: restrict-chat-member
-
-    ;; TODO: promote-chat-member
-
-    ;; TODO: set-chat-administrator-custom-title
-
-    ;; TODO: ban-chat-sender-chat
-
-    ;; TODO: unban-chat-sender-chat
-
-    ;; TODO: set-chat-permissions
-
-    ;; TODO: export-chat-invite-link
-
-    ;; TODO: create-chat-invite-link
-
-    ;; TODO: edit-chat-invite-link
-
-    ;; TODO: revoke-chat-invite-link
-
-    ;; TODO: approve-chat-join-request
-
-    ;; TODO: decline-chat-join-request
-
-    ;; TODO: set-chat-photo
-
-    ;; TODO: delete-chat-photo
-
-    ;; TODO: set-chat-title
-
     (async done
            (go
+             ;; TODO: ban-chat-member
+
+             ;; TODO: leave-chat
+
+             ;; TODO: unban-chat-member
+
+             ;; TODO: restrict-chat-member
+
+             ;; TODO: promote-chat-member
+
+             ;; TODO: set-chat-administrator-custom-title
+
+             ;; TODO: ban-chat-sender-chat
+
+             ;; TODO: unban-chat-sender-chat
+
+             ;; TODO: set-chat-permissions
+
+             ;; TODO: export-chat-invite-link
+
+             ;; TODO: create-chat-invite-link
+
+             ;; TODO: edit-chat-invite-link
+
+             ;; TODO: revoke-chat-invite-link
+
+             ;; TODO: approve-chat-join-request
+
+             ;; TODO: decline-chat-join-request
+
+             ;; TODO: set-chat-photo
+
+             ;; TODO: delete-chat-photo
+
+             ;; TODO: set-chat-title
+
              ;; set-chat-description
-             (is (:ok (cg/set-chat-description bot chat-id (str "(clogram/cljs) chat_id: " chat-id))))))
+             (is (:ok (cg/set-chat-description bot chat-id (str "[clogram/cljs] chat_id: " chat-id " (last update: " (.getTime (js/Date.)) ")"))))
 
-    ;; TODO: pin-chat-message
+             ;; TODO: pin-chat-message
 
-    ;; TODO: unpin-chat-message
+             ;; TODO: unpin-chat-message
 
-    ;; TODO: unpin-all-chat-messages
+             ;; TODO: unpin-all-chat-messages
 
-    ;; TODO: get-chat
+             ;; TODO: get-chat
 
-    ;; TODO: get-user-profile-photos
+             ;; TODO: get-user-profile-photos
 
-    ;; TODO: get-chat-administrators
+             ;; TODO: get-chat-administrators
 
-    ;; TODO: get-chat-member-count
+             ;; TODO: get-chat-member-count
 
-    ;; TODO: get-chat-member
+             ;; TODO: get-chat-member
 
-    ;; TODO: set-chat-sticker-set
+             ;; TODO: set-chat-sticker-set
 
-    ;; TODO: delete-chat-sticker-set
+             ;; TODO: delete-chat-sticker-set
 
-    ;; TODO: get-forum-topic-icon-stickers
+             ;; TODO: get-forum-topic-icon-stickers
 
-    ;; TODO: set-chat-menu-button
+             ;; TODO: set-chat-menu-button
 
-    ;; TODO: get-chat-menu-button
+             ;; TODO: get-chat-menu-button
 
-    ;; TODO: set-my-default-administrator-rights
+             ;; TODO: set-my-default-administrator-rights
 
-    ;; TODO: get-my-default-administrator-rights
+             ;; TODO: get-my-default-administrator-rights
 
-    ;; TODO: create-forum-topic
+             ;; TODO: create-forum-topic
 
-    ;; TODO: edit-forum-topic
+             ;; TODO: edit-forum-topic
 
-    ;; TODO: close-forum-topic
+             ;; TODO: close-forum-topic
 
-    ;; TODO: reopen-forum-topic
+             ;; TODO: reopen-forum-topic
 
-    ;; TODO: delete-forum-topic
+             ;; TODO: delete-forum-topic
 
-    ;; TODO: unpin-all-forum-topic-messages
+             ;; TODO: unpin-all-forum-topic-messages
 
-    ;; TODO: edit-general-forum-topic
+             ;; TODO: edit-general-forum-topic
 
-    ;; TODO: close-general-forum-topic
+             ;; TODO: close-general-forum-topic
 
-    ;; TODO: reopen-general-forum-topic
+             ;; TODO: reopen-general-forum-topic
 
-    ;; TODO: hide-general-forum-topic
+             ;; TODO: hide-general-forum-topic
 
-    ;; TODO: unhide-general-forum-topic
+             ;; TODO: unhide-general-forum-topic
 
-    ;; TODO: unpin-all-general-forum-topic-messages
+             ;; TODO: unpin-all-general-forum-topic-messages
+
+             (done)))
 
     (comment "----------------")))
 

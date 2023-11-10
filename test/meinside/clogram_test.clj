@@ -61,13 +61,13 @@
     (is (:ok (cg/get-my-name bot)))
 
     ;; set bot description
-    (is (:ok (cg/set-my-description bot :description "bot for test")))
+    (is (:ok (cg/set-my-description bot :description "A bot for testing library: clogram")))
 
     ;; get bot description
     (is (:ok (cg/get-my-description bot)))
 
     ;; set bot short description
-    (is (:ok (cg/set-my-short-description bot :short-description "test")))
+    (is (:ok (cg/set-my-short-description bot :short-description "clogram")))
 
     ;; get bot short description
     (is (:ok (cg/get-my-short-description bot)))
@@ -276,7 +276,7 @@
     ;; TODO: set-chat-title
 
     ;; set-chat-description
-    (is (:ok (cg/set-chat-description bot chat-id (format "(clogram) chat_id: %s" chat-id))))
+    (is (:ok (cg/set-chat-description bot chat-id (format "[clogram] chat_id: %s (last update: %d)" chat-id (quot (System/currentTimeMillis) 1000)))))
 
     ;; TODO: pin-chat-message
 
