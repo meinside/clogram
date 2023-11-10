@@ -49,9 +49,7 @@
            (go (let [ch (cg/get-me bot)
                      res (<! ch)]
                  (is (:ok res))
-                 (done))))
-
-    (comment "----------------")))
+                 (done))))))
 
 (deftest sending-and-fetching-messages-test
   (testing "Testing sending and fetching messages"
@@ -157,9 +155,7 @@
              ;; fetch messages
              (is (:ok (<! (cg/get-updates bot))))
 
-             (done)))
-
-    (comment "----------------")))
+             (done)))))
 
 (deftest polling-test
   (testing "Testing polling updates"
@@ -181,63 +177,55 @@
                                                ;; then stop polling
                                                (is (cg/stop-polling-updates bot))
 
-                                               (done))) 1000) 1000)))
-
-    (comment "----------------")))
+                                               (done))) 1000) 1000)))))
 
 (deftest stickers-test
-  (testing "Testing functions for stickers"
-    ;; TODO: get-sticker-set
+  (testing "Testing functions for stickers"))
+;; TODO: get-sticker-set
 
-    ;; TODO: get-custom-emoji-stickers
+;; TODO: get-custom-emoji-stickers
 
-    ;; TODO: upload-sticker-file
+;; TODO: upload-sticker-file
 
-    ;; TODO: create-new-sticker-set
+;; TODO: create-new-sticker-set
 
-    ;; TODO: add-sticker-to-set
+;; TODO: add-sticker-to-set
 
-    ;; TODO: set-sticker-position-in-set
+;; TODO: set-sticker-position-in-set
 
-    ;; TODO: delete-sticker-from-set
+;; TODO: delete-sticker-from-set
 
-    ;; TODO: set-sticker-set-thumbnail
+;; TODO: set-sticker-set-thumbnail
 
-    ;; TODO: set-custom-emoji-sticker-set-thumbnail
+;; TODO: set-custom-emoji-sticker-set-thumbnail
 
-    ;; TODO: set-sticker-set-title
+;; TODO: set-sticker-set-title
 
-    ;; TODO: delete-sticker-set
+;; TODO: delete-sticker-set
 
-    ;; TODO: set-sticker-emoji-list
+;; TODO: set-sticker-emoji-list
 
-    ;; TODO: set-sticker-keywords
+;; TODO: set-sticker-keywords
 
-    ;; TODO: set-sticker-mask-position
-
-    (comment "----------------")))
+;; TODO: set-sticker-mask-position
 
 (deftest games-test
-  (testing "Testing functions for games"
-    ;; TODO: send-game
+  (testing "Testing functions for games"))
+;; TODO: send-game
 
-    ;; TODO: set-game-score
+;; TODO: set-game-score
 
-    ;; TODO: get-game-highscores
-
-    (comment "----------------")))
+;; TODO: get-game-highscores
 
 (deftest shopping-test
-  (testing "Testing functions for commerce"
-    ;; TODO: send-invoice
+  (testing "Testing functions for commerce"))
+;; TODO: send-invoice
 
-    ;; TODO: create-invoice-link
+;; TODO: create-invoice-link
 
-    ;; TODO: answer-shipping-query
+;; TODO: answer-shipping-query
 
-    ;; TODO: answer-pre-checkout-query
-
-    (comment "----------------")))
+;; TODO: answer-pre-checkout-query
 
 (deftest chat-administration-test
   (testing "Testing functions for chat administration"
@@ -280,7 +268,7 @@
              ;; TODO: set-chat-title
 
              ;; set-chat-description
-             (is (:ok (cg/set-chat-description bot chat-id (str "[clogram/cljs] chat_id: " chat-id " (last update: " (.getTime (js/Date.)) ")"))))
+             (is (:ok (<! (cg/set-chat-description bot chat-id (str "[clogram/cljs] chat_id: " chat-id " (last update: " (.getTime (js/Date.)) ")")))))
 
              ;; TODO: pin-chat-message
 
@@ -336,25 +324,17 @@
 
              ;; TODO: unpin-all-general-forum-topic-messages
 
-             (done)))
-
-    (comment "----------------")))
+             (done)))))
 
 (deftest callback-query-test
-  (testing "Testing callback query"
-    ;; TODO: answer-callback-query
-
-    (comment "----------------")))
+  (testing "Testing callback query"))
+;; TODO: answer-callback-query
 
 (deftest inline-query-test
-  (testing "Testing inline query"
-    ;; TODO: answer-inline-query
-
-    (comment "----------------")))
+  (testing "Testing inline query"))
+;; TODO: answer-inline-query
 
 (deftest web-app-query-test
-  (testing "Testing web app query"
-    ;; TODO: answer-web-app-query
-
-    (comment "----------------")))
+  (testing "Testing web app query"))
+;; TODO: answer-web-app-query
 
