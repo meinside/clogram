@@ -68,7 +68,7 @@
              (is (:ok (<! (cg/get-my-commands bot))))
 
              ;; set bot name
-             (is (:ok (<! (cg/set-my-name bot "clogram test bot"))))
+             (is (:ok (<! (cg/set-my-name bot "telegram api test bot"))))
 
              ;; get bot name
              (is (:ok (<! (cg/get-my-name bot))))
