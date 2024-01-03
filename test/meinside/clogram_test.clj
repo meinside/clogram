@@ -90,6 +90,10 @@
       ;; and forward it
       (is (:ok (cg/forward-message bot chat-id chat-id (get-in sent-message [:result :message-id])))))
 
+    ;; TODO: copy-messages
+
+    ;; TODO: forward-messages
+
     ;; send a photo,
     (let [photo-file (io/file "resources/test/image.png")
           sent-photo (cg/send-photo bot chat-id photo-file)]
@@ -117,6 +121,8 @@
 
       ;; delete a message,
       (is (:ok (cg/delete-message bot chat-id (get-in sent-document [:result :message-id])))))
+
+    ;; TODO: delete-messages
 
     ;; TODO: send-sticker
 
@@ -155,6 +161,8 @@
     ;; TODO: edit-message-live-location
 
     ;; TODO: stop-message-live-location
+
+    ;; TODO: set-message-reaction
 
     ;; fetch messages
     (is (:ok (cg/get-updates bot)))
@@ -287,6 +295,8 @@
     ;; TODO: get-chat
 
     ;; TODO: get-user-profile-photos
+
+    ;; TODO: get-user-chat-boosts
 
     ;; TODO: get-chat-administrators
 
