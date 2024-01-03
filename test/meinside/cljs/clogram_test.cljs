@@ -104,6 +104,10 @@
                ;; and forward it
                (is (:ok (<! (cg/forward-message bot chat-id chat-id (get-in sent-message [:result :message-id]))))))
 
+             ;; TODO: copy-messages
+
+             ;; TODO: forward-messages
+
              ;; TODO: send-photo (XXX - Blob is not supported in nodejs)
 
              ;; TODO: send-audio
@@ -142,6 +146,8 @@
 
              ;; TODO: delete-message
 
+             ;; TODO: delete-messages
+
              ;; TODO: edit-message-caption
 
              ;; TODO: edit-message-media
@@ -151,6 +157,8 @@
              ;; TODO: edit-message-live-location
 
              ;; TODO: stop-message-live-location
+
+             ;; TODO: set-message-reaction
 
              ;; fetch messages
              (is (:ok (<! (cg/get-updates bot))))
@@ -279,6 +287,8 @@
              ;; TODO: get-chat
 
              ;; TODO: get-user-profile-photos
+
+             ;; TODO: get-user-chat-boosts
 
              ;; TODO: get-chat-administrators
 
