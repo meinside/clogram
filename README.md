@@ -76,7 +76,7 @@ Add `[dev.meinside/clogram "0.21.0"]` to the dependency of your project.clj file
       ;; and reply to the received message
       (let [echoed-text (str "echo: " text)
             result (cg/send-message bot chat-id echoed-text
-                     :reply-parameters ["message_id" reply-to])]
+                     :reply-parameters {"message_id" reply-to})]
         (when (not (:ok result))
           (println "*** failed to send message:" (:reason-phrase result)))))))
 
