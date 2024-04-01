@@ -35,8 +35,13 @@
 
 (deftest bot-creation-test
   (testing "Testing bot creation"
+    ;; get my info
     (let [bot-info (cg/get-me bot)]
       (is (:ok bot-info)))
+
+    ;; TODO: log-out
+
+    ;; TODO: close-bot
 
     (comment "----------------")))
 
@@ -54,11 +59,15 @@
     ;; get bot commands
     (is (:ok (cg/get-my-commands bot)))
 
-    ;; set bot name
-    (is (:ok (cg/set-my-name bot "telegram api test bot")))
-
     ;; get bot name
-    (is (:ok (cg/get-my-name bot)))
+    (let [my-name (cg/get-my-name bot)]
+      (is (:ok my-name))
+
+      ;; if bot name can be set,
+      (if (not= (get-in my-name [:result :name]) "telegram api test bot")
+        ;; set bot name
+        (is (:ok (cg/set-my-name bot "telegram api test bot")))
+        nil)) ;; or do nothing
 
     ;; set bot description
     (is (:ok (cg/set-my-description bot :description "A bot for testing library: clogram")))
@@ -207,6 +216,8 @@
 
     ;; TODO: delete-sticker-from-set
 
+    ;; TODO: replace-sticker-in-set
+
     ;; TODO: set-sticker-set-thumbnail
 
     ;; TODO: set-custom-emoji-sticker-set-thumbnail
@@ -297,6 +308,8 @@
     ;; TODO: get-user-profile-photos
 
     ;; TODO: get-user-chat-boosts
+
+    ;; TODO: get-business-connection
 
     ;; TODO: get-chat-administrators
 
