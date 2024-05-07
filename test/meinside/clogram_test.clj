@@ -154,7 +154,7 @@
     (is (:ok (cg/send-contact bot chat-id "911" "Nine-One-One")))
 
     ;; send a poll,
-    (let [sent-poll (cg/send-poll bot chat-id "The earth is...?" ["flat" "round" "nothing"])]
+    (let [sent-poll (cg/send-poll bot chat-id "The earth is...?" [{:text "flat"} {:text "round"} {:text "nothing"}])]
       (is (:ok sent-poll))
 
       ;; stop a poll,
