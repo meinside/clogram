@@ -5,7 +5,7 @@
 ;;;; (https://core.telegram.org/bots/api)
 ;;;;
 ;;;; created on : 2019.12.05.
-;;;; last update: 2024.04.01.
+;;;; last update: 2024.05.07.
 
 (ns meinside.clogram
   #?(:cljs (:require-macros [cljs.core.async.macros :as a :refer [go]]))
@@ -834,12 +834,14 @@
 (defn send-poll
   "Send a poll.
 
-  `options` include: :business-connection-id, :message-thread-id, :is-anonymous, :type, :allows-multiple-answers, :correct-option-id, :explanation, :explanation-parse-mode, :explanation-entities, :open-period, :close-date, :is-closed, :disable-notification, :reply-parameters, and :reply-markup.
+  `options` include: :business-connection-id, :message-thread-id, :question-parse-mode, question-entities, :is-anonymous, :type, :allows-multiple-answers, :correct-option-id, :explanation, :explanation-parse-mode, :explanation-entities, :open-period, :close-date, :is-closed, :disable-notification, :reply-parameters, and :reply-markup.
 
   (https://core.telegram.org/bots/api#sendpoll)"
   [bot chat-id question poll-options & options]
   (let [{:keys [business-connection-id
                 message-thread-id
+                question-parse-mode
+                question-entities
                 is-anonymous
                 type
                 allows-multiple-answers
@@ -858,6 +860,8 @@
                                "business_connection_id" business-connection-id
                                "message_thread_id" message-thread-id
                                "question" question
+                               "question_parse_mode" question-parse-mode
+                               "question_entities" question-entities
                                "options" poll-options
                                "is_anonymous" is-anonymous
                                "type" type
@@ -1565,13 +1569,14 @@
   required `options`: :chat-id + :message-id (when :inline-message-id is not given)
                       or :inline-message-id (when :chat-id & :message-id are not given)
 
-  other `options` include: :horizontal-accuracy, :heading, :proximity-alert-radius, and :reply-markup.
+  other `options` include: :live-period, :horizontal-accuracy, :heading, :proximity-alert-radius, and :reply-markup.
 
   (https://core.telegram.org/bots/api#editmessagelivelocation)"
   [bot latitude longitude & options]
   (let [{:keys [chat-id
                 message-id
                 inline-message-id
+                live-period
                 horizontal-accuracy
                 heading
                 proximity-alert-radius
@@ -1581,6 +1586,7 @@
                                               "inline_message_id" inline-message-id
                                               "latitude" latitude
                                               "longitude" longitude
+                                              "live_period" live-period
                                               "horizontal_accuracy" horizontal-accuracy
                                               "heading" heading
                                               "proximity_alert_radius" proximity-alert-radius
