@@ -254,6 +254,8 @@
 
     ;; TODO: answer-pre-checkout-query
 
+    ;; TODO: refund-star-payment
+
     (comment "----------------")))
 
 (deftest chat-administration-test
