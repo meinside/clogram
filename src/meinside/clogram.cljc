@@ -5,7 +5,7 @@
 ;;;; (https://core.telegram.org/bots/api)
 ;;;;
 ;;;; created on : 2019.12.05.
-;;;; last update: 2024.05.07.
+;;;; last update: 2024.05.29.
 
 (ns meinside.clogram
   #?(:cljs (:require-macros [cljs.core.async.macros :as a :refer [go]]))
@@ -228,7 +228,7 @@
 (defn send-message
   "Send a message.
 
-  `options` include: :business-connection-id, :message-thread-id, :parse-mode, :entities, :link-preview-options, :disable-notification, :reply-parameters, and :reply-markup.
+  `options` include: :business-connection-id, :message-thread-id, :parse-mode, :entities, :link-preview-options, :disable-notification, :protect-content, :message-effect-id, :reply-parameters, and :reply-markup.
 
   (https://core.telegram.org/bots/api#sendmessage)"
   [bot chat-id text & options]
@@ -239,6 +239,7 @@
                 link-preview-options
                 disable-notification
                 protect-content
+                message-effect-id
                 reply-parameters
                 reply-markup]} options]
     (h/request bot "sendMessage" {"chat_id" chat-id
@@ -250,6 +251,7 @@
                                   "link_preview_options" link-preview-options
                                   "disable_notification" disable-notification
                                   "protect_content" protect-content
+                                  "message_effect_id" message-effect-id
                                   "reply_parameters" reply-parameters
                                   "reply_markup" reply-markup})))
 
@@ -290,7 +292,7 @@
 (defn copy-message
   "Copy a message.
 
-  `options` include: :message-thread-id, :caption, :parse-mode, :caption-entities, :disable-notification, :reply-parameters, and :reply-markup.
+  `options` include: :message-thread-id, :caption, :parse-mode, :caption-entities, :show-caption-above-media, :disable-notification, :reply-parameters, and :reply-markup.
 
   (https://core.telegram.org/bots/api#copymessage)"
   [bot chat-id from-chat-id message-id & options]
@@ -298,6 +300,7 @@
                 caption
                 parse-mode
                 caption-entities
+                show-caption-above-media
                 disable-notification
                 protect-content
                 reply-parameters
@@ -309,6 +312,7 @@
                                   "caption" caption
                                   "parse_mode" parse-mode
                                   "caption_entities" caption-entities
+                                  "show_caption_above_media" show-caption-above-media
                                   "disable_notification" disable-notification
                                   "protect_content" protect-content
                                   "reply_parameters" reply-parameters
@@ -336,7 +340,7 @@
 (defn send-photo
   "Send a photo.
 
-  `options` include: :business-connection-id, :message-thread-id, :caption, :parse-mode, :caption-entities, :has-spoiler, :disable-notification, :reply-parameters, and :reply-markup.
+  `options` include: :business-connection-id, :message-thread-id, :caption, :parse-mode, :caption-entities, :show-caption-above-media, :has-spoiler, :disable-notification, :protect-content, :message-effect-id, :reply-parameters, and :reply-markup.
 
   (https://core.telegram.org/bots/api#sendphoto)"
   [bot chat-id photo & options]
@@ -345,9 +349,11 @@
                 caption
                 parse-mode
                 caption-entities
+                show-caption-above-media
                 has-spoiler
                 disable-notification
                 protect-content
+                message-effect-id
                 reply-parameters
                 reply-markup]} options]
     (h/request bot "sendPhoto" {"chat_id" chat-id
@@ -357,16 +363,18 @@
                                 "caption" caption
                                 "parse_mode" parse-mode
                                 "caption_entities" caption-entities
+                                "show_caption_above_media" show-caption-above-media
                                 "has_spoiler" has-spoiler
                                 "disable_notification" disable-notification
                                 "protect_content" protect-content
+                                "message_effect_id" message-effect-id
                                 "reply_parameters" reply-parameters
                                 "reply_markup" reply-markup})))
 
 (defn send-audio
   "Send an audio file.
 
-  `options` include: :business-connection-id, :message-thread-id, :caption, :parse-mode, :caption-entities, :duration, :performer, :title, :disable-notification, :reply-parameters, and :reply-markup.
+  `options` include: :business-connection-id, :message-thread-id, :caption, :parse-mode, :caption-entities, :duration, :performer, :title, :disable-notification, :protect-content, :message-effect-id, :reply-parameters, and :reply-markup.
 
   (https://core.telegram.org/bots/api#sendaudio)"
   [bot chat-id audio & options]
@@ -380,6 +388,7 @@
                 title
                 disable-notification
                 protect-content
+                message-effect-id
                 reply-parameters
                 reply-markup]} options]
     (h/request bot "sendAudio" {"chat_id" chat-id
@@ -394,13 +403,14 @@
                                 "title" title
                                 "disable_notification" disable-notification
                                 "protect_content" protect-content
+                                "message_effect_id" message-effect-id
                                 "reply_parameters" reply-parameters
                                 "reply_markup" reply-markup})))
 
 (defn send-document
   "Send a document file.
 
-  `options` include: :business-connection-id, :message-thread-id, :caption, :parse-mode, :caption-entities, :disable-content-type-detection, :disable-notification, :reply-parameters, and :reply-markup.
+  `options` include: :business-connection-id, :message-thread-id, :caption, :parse-mode, :caption-entities, :disable-content-type-detection, :disable-notification, :protect-content, :message-effect-id, :reply-parameters, and :reply-markup.
 
   (https://core.telegram.org/bots/api#senddocument)"
   [bot chat-id document & options]
@@ -412,6 +422,7 @@
                 disable-content-type-detection
                 disable-notification
                 protect-content
+                message-effect-id
                 reply-parameters
                 reply-markup]} options]
     (h/request bot "sendDocument" {"chat_id" chat-id
@@ -424,13 +435,14 @@
                                    "disable_content_type_detection" disable-content-type-detection
                                    "disable_notification" disable-notification
                                    "protect_content" protect-content
+                                   "message_effect_id" message-effect-id
                                    "reply_parameters" reply-parameters
                                    "reply_markup" reply-markup})))
 
 (defn send-sticker
   "Send a sticker.
 
-  `options` include: :business-connection-id, :message-thread-id, :disable-notification, :reply-parameters, and :reply-markup.
+  `options` include: :business-connection-id, :message-thread-id, :disable-notification, :protect-content, :message-effect-id, :reply-parameters, and :reply-markup.
 
   (https://core.telegram.org/bots/api#sendsticker)"
   [bot chat-id sticker & options]
@@ -439,6 +451,7 @@
                 emoji
                 disable-notification
                 protect-content
+                message-effect-id
                 reply-parameters
                 reply-markup]} options]
     (h/request bot "sendSticker" {"chat_id" chat-id
@@ -448,6 +461,7 @@
                                   "emoji" emoji
                                   "disable_notification" disable-notification
                                   "protect_content" protect-content
+                                  "message_effect_id" message-effect-id
                                   "reply_parameters" reply-parameters
                                   "reply_markup" reply-markup})))
 
@@ -592,7 +606,7 @@
 (defn send-video
   "Send a video.
 
-  `options` include: :business-connection-id, :message-thread-id, :duration, :caption, :parse-mode, :caption-entities, :has-spoiler, :supports-streaming, :disable-notification, :reply-parameters, and :reply-markup.
+  `options` include: :business-connection-id, :message-thread-id, :duration, :caption, :parse-mode, :caption-entities, :show-caption-above-media, :has-spoiler, :supports-streaming, :disable-notification, :protect-content, :message-effect-id, :reply-parameters, and :reply-markup.
 
   (https://core.telegram.org/bots/api#sendvideo)"
   [bot chat-id video & options]
@@ -602,10 +616,12 @@
                 caption
                 parse-mode
                 caption-entities
+                show-caption-above-media
                 has-spoiler
                 supports-streaming
                 disable-notification
                 protect-content
+                message-effect-id
                 reply-parameters
                 reply-markup]} options]
     (h/request bot "sendVideo" {"chat_id" chat-id
@@ -616,17 +632,19 @@
                                 "caption" caption
                                 "parse_mode" parse-mode
                                 "caption_entities" caption-entities
+                                "show_caption_above_media" show-caption-above-media
                                 "has_spoiler" has-spoiler
                                 "supports_streaming" supports-streaming
                                 "disable_notification" disable-notification
                                 "protect_content" protect-content
+                                "message_effect_id" message-effect-id
                                 "reply_parameters" reply-parameters
                                 "reply_markup" reply-markup})))
 
 (defn send-animation
   "Send an animation.
 
-  `options` include: :business-connection-id, :message-thread-id, :duration, :width, :height, :thumbnail, :caption, :parse-mode, :caption-entities, :has-spoiler, :disable-notification, :reply-parameters, and :reply-markup.
+  `options` include: :business-connection-id, :message-thread-id, :duration, :width, :height, :thumbnail, :caption, :parse-mode, :caption-entities, :show-caption-above-media, :has-spoiler, :disable-notification, :protect-content, :message-effect-id, :reply-parameters, and :reply-markup.
 
   (https://core.telegram.org/bots/api#sendanimation)"
   [bot chat-id animation & options]
@@ -639,9 +657,11 @@
                 caption
                 parse-mode
                 caption-entities
+                show-caption-above-media
                 has-spoiler
                 disable-notification
                 protect-content
+                message-effect-id
                 reply-parameters
                 reply-markup]} options]
     (h/request bot "sendAnimation" {"chat_id" chat-id
@@ -655,16 +675,18 @@
                                     "caption" caption
                                     "parse_mode" parse-mode
                                     "caption_entities" caption-entities
+                                    "show_caption_above_media" show-caption-above-media
                                     "has_spoiler" has-spoiler
                                     "disable_notification" disable-notification
                                     "protect_content" protect-content
+                                    "message_effect_id" message-effect-id
                                     "reply_parameters" reply-parameters
                                     "reply_markup" reply-markup})))
 
 (defn send-voice
   "Send a voice. (.ogg format only)
 
-  `options` include: :business-connection-id, :message-thread-id, :caption, :parse-mode, :caption-entities, :duration, :disable-notification, :reply-parameters, and :reply-markup.
+  `options` include: :business-connection-id, :message-thread-id, :caption, :parse-mode, :caption-entities, :duration, :disable-notification, :protect-content, :message-effect-id, :reply-parameters, and :reply-markup.
 
   (https://core.telegram.org/bots/api#sendvoice)"
   [bot chat-id voice & options]
@@ -676,6 +698,7 @@
                 duration
                 disable-notification
                 protect-content
+                message-effect-id
                 reply-parameters
                 reply-markup]} options]
     (h/request bot "sendVoice" {"chat_id" chat-id
@@ -688,13 +711,14 @@
                                 "duration" duration
                                 "disable_notification" disable-notification
                                 "protect_content" protect-content
+                                "message_effect_id" message-effect-id
                                 "reply_parameters" reply-parameters
                                 "reply_markup" reply-markup})))
 
 (defn send-video-note
   "Send a video note.
 
-  `options` include: :business-connection-id, :message-thread-id, :duration, :length, :thumbnail, :disable-notification, :reply-parameters, and :reply-markup.
+  `options` include: :business-connection-id, :message-thread-id, :duration, :length, :thumbnail, :disable-notification, :protect-content, :message-effect-id, :reply-parameters, and :reply-markup.
   (XXX: API returns 'Bad Request: wrong video note length' when length is not given / 2017.05.19.)
 
   (https://core.telegram.org/bots/api#sendvideonote)"
@@ -706,6 +730,7 @@
                 thumbnail
                 disable-notification
                 protect-content
+                message-effect-id
                 reply-parameters
                 reply-markup]} options]
     (h/request bot "sendVideoNote" {"chat_id" chat-id
@@ -717,13 +742,14 @@
                                     "thumbnail" thumbnail
                                     "disable_notification" disable-notification
                                     "protect_content" protect-content
+                                    "message_effect_id" message-effect-id
                                     "reply_parameters" reply-parameters
                                     "reply_markup" reply-markup})))
 
 (defn send-media-group
   "Send a media group of photos or videos.
 
-  `options` include: :business-connection-id, :message-thread-id, :disable-notification, :protect-content, and :reply-parameters.
+  `options` include: :business-connection-id, :message-thread-id, :disable-notification, :protect-content, :message-effect-id, and :reply-parameters.
 
   (https://core.telegram.org/bots/api#sendmediagroup)"
   [bot chat-id media & options]
@@ -731,6 +757,7 @@
                 message-thread-id
                 disable-notification
                 protect-content
+                message-effect-id
                 reply-parameters]} options]
     (h/request bot "sendMediaGroup" {"chat_id" chat-id
                                      "business_connection_id" business-connection-id
@@ -738,12 +765,13 @@
                                      "media" media
                                      "disable_notification" disable-notification
                                      "protect_content" protect-content
+                                     "message_effect_id" message-effect-id
                                      "reply_parameters" reply-parameters})))
 
 (defn send-location
   "Send a location.
 
-  `options` include: :business-connection-id, :message-thread-id, :horizontal-accuracy, :live-period, :heading, :proximity-alert-radius, :disable-notification, :reply-parameters, and :reply-markup.
+  `options` include: :business-connection-id, :message-thread-id, :horizontal-accuracy, :live-period, :heading, :proximity-alert-radius, :disable-notification, :protect-content, :message-effect-id, :reply-parameters, and :reply-markup.
 
   (https://core.telegram.org/bots/api#sendlocation)"
   [bot chat-id latitude longitude & options]
@@ -755,6 +783,7 @@
                 proximity-alert-radius
                 disable-notification
                 protect-content
+                message-effect-id
                 reply-parameters
                 reply-markup]} options]
     (h/request bot "sendLocation" {"chat_id" chat-id
@@ -768,13 +797,14 @@
                                    "proximity_alert_radius" proximity-alert-radius
                                    "disable_notification" disable-notification
                                    "protect_content" protect-content
+                                   "message_effect_id" message-effect-id
                                    "reply_parameters" reply-parameters
                                    "reply_markup" reply-markup})))
 
 (defn send-venue
   "Send a venue.
 
-  `options` include: :business-connection-id, :message-thread-id, :foursquare-id, :foursquare-type, :google-place-id, :google-place-type, :disable-notification, :reply-parameters, and :reply-markup.
+  `options` include: :business-connection-id, :message-thread-id, :foursquare-id, :foursquare-type, :google-place-id, :google-place-type, :disable-notification, :protect-content, :message-effect-id, :reply-parameters, and :reply-markup.
 
   (https://core.telegram.org/bots/api#sendvenue)"
   [bot chat-id latitude longitude title address & options]
@@ -786,6 +816,7 @@
                 google-place-type
                 disable-notification
                 protect-content
+                message-effect-id
                 reply-parameters
                 reply-markup]} options]
     (h/request bot "sendVenue" {"chat_id" chat-id
@@ -801,13 +832,14 @@
                                 "google_place_type" google-place-type
                                 "disable_notification" disable-notification
                                 "protect_content" protect-content
+                                "message_effect_id" message-effect-id
                                 "reply_parameters" reply-parameters
                                 "reply_markup" reply-markup})))
 
 (defn send-contact
   "Send a contact.
 
-  `options` include: :business-connection-id, :message-thread-id, :last-name, :vcard, :disable-notification, :reply-parameters, and :reply-markup.
+  `options` include: :business-connection-id, :message-thread-id, :last-name, :vcard, :disable-notification, :protect-content, :message-effect-id, :reply-parameters, and :reply-markup.
 
   (https://core.telegram.org/bots/api#sendcontact)"
   [bot chat-id phone-number first-name & options]
@@ -817,6 +849,7 @@
                 vcard
                 disable-notification
                 protect-content
+                message-effect-id
                 reply-parameters
                 reply-markup]} options]
     (h/request bot "sendContact" {"chat_id" chat-id
@@ -828,13 +861,14 @@
                                   "vcard" vcard
                                   "disable_notification" disable-notification
                                   "protect_content" protect-content
+                                  "message_effect_id" message-effect-id
                                   "reply_parameters" reply-parameters
                                   "reply_markup" reply-markup})))
 
 (defn send-poll
   "Send a poll.
 
-  `options` include: :business-connection-id, :message-thread-id, :question-parse-mode, question-entities, :is-anonymous, :type, :allows-multiple-answers, :correct-option-id, :explanation, :explanation-parse-mode, :explanation-entities, :open-period, :close-date, :is-closed, :disable-notification, :reply-parameters, and :reply-markup.
+  `options` include: :business-connection-id, :message-thread-id, :question-parse-mode, question-entities, :is-anonymous, :type, :allows-multiple-answers, :correct-option-id, :explanation, :explanation-parse-mode, :explanation-entities, :open-period, :close-date, :is-closed, :disable-notification, :protect-content, :message-effect-id, :reply-parameters, and :reply-markup.
 
   (https://core.telegram.org/bots/api#sendpoll)"
   [bot chat-id question poll-options & options]
@@ -854,6 +888,7 @@
                 is-closed
                 disable-notification
                 protect-content
+                message-effect-id
                 reply-parameters
                 reply-markup]} options]
     (h/request bot "sendPoll" {"chat_id" chat-id
@@ -875,6 +910,7 @@
                                "is_closed" is-closed
                                "disable_notification" disable-notification
                                "protect_content" protect-content
+                               "message_effect_id" message-effect-id
                                "reply_parameters" reply-parameters
                                "reply_markup" reply-markup})))
 
@@ -927,7 +963,7 @@
 
   `emoji` can be one of: 🎲, 🎯, 🏀, ⚽, 🎳, or 🎰. (default: 🎲)
 
-  `options` include: :business-connection-id, :message-thread-id, :emoji, :disable-notification, :reply-parameters, and :reply-markup.
+  `options` include: :business-connection-id, :message-thread-id, :emoji, :disable-notification, :protect-content, :message-effect-id, :reply-parameters, and :reply-markup.
 
   (https://core.telegram.org/bots/api#senddice)"
   [bot chat-id & options]
@@ -936,6 +972,7 @@
                 emoji
                 disable-notification
                 protect-content
+                message-effect-id
                 reply-parameters
                 reply-markup]} options]
     (h/request bot "sendDice" {"chat_id" chat-id
@@ -944,6 +981,7 @@
                                "emoji" emoji
                                "disable_notification" disable-notification
                                "protect_content" protect-content
+                               "message_effect_id" message-effect-id
                                "reply_parameters" reply-parameters
                                "reply_markup" reply-markup})))
 
@@ -1506,7 +1544,7 @@
   required `options`: :chat-id + :message-id (when :inline-message-id is not given)
                       or :inline-message-id (when :chat-id & :message-id are not given)
 
-  other `options` include: :parse-mode, :caption-entities, and :reply-markup.
+  other `options` include: :parse-mode, :caption-entities, :show-caption-above-media, and :reply-markup.
 
   (https://core.telegram.org/bots/api#editmessagecaption)"
   [bot caption & options]
@@ -1515,6 +1553,7 @@
                 inline-message-id
                 parse-mode
                 caption-entities
+                show-caption-above-media
                 reply-markup]} options]
     (h/request bot "editMessageCaption" {"caption" caption
                                          "chat_id" chat-id
@@ -1522,6 +1561,7 @@
                                          "inline_message_id" inline-message-id
                                          "parse_mode" parse-mode
                                          "caption_entities" caption-entities
+                                         "show_caption_above_media" show-caption-above-media
                                          "reply_markup" reply-markup})))
 
 (defn edit-message-media
@@ -1650,7 +1690,7 @@
 (defn send-invoice
   "Send an invoice.
 
-  `options` include: :message-thread-id, :max-tip-amount, :suggested-tip-amounts, :start-parameter, :provider-data, :photo-url, :photo-size, :photo-width, :photo-height, :need-name, :need-phone-number, :need-email, :need-shipping-address, :send-phone-number-to-provider, :send-email-to-provider, :is-flexible, :disable-notification, :reply-parameters, and :reply-markup.
+  `options` include: :message-thread-id, :max-tip-amount, :suggested-tip-amounts, :start-parameter, :provider-data, :photo-url, :photo-size, :photo-width, :photo-height, :need-name, :need-phone-number, :need-email, :need-shipping-address, :send-phone-number-to-provider, :send-email-to-provider, :is-flexible, :disable-notification, :protect-content, :message-effect-id, :reply-parameters, and :reply-markup.
 
   (https://core.telegram.org/bots/api#sendinvoice)"
   [bot chat-id title description payload provider-token currency prices & options]
@@ -1672,6 +1712,7 @@
                 is-flexible
                 disable-notification
                 protect-content
+                message-effect-id
                 reply-parameters
                 reply-markup]} options]
     (h/request bot "sendInvoice" {"chat_id" chat-id
@@ -1699,6 +1740,7 @@
                                   "is_flexible" is-flexible
                                   "disable_notification" disable-notification
                                   "protect_content" protect-content
+                                  "message_effect_id" message-effect-id
                                   "reply_parameters" reply-parameters
                                   "reply_markup" reply-markup})))
 
@@ -1771,6 +1813,14 @@
                                              "ok" ok
                                              "error_message" error-message})))
 
+(defn refund-star-payment
+  "Refund a successful payment in Telegram Stars.
+
+  (https://core.telegram.org/bots/api#refundstarpayment)"
+  [bot user-id telegram-payment-charge-id]
+  (h/request bot "refundStarPayment" {"user_id" user-id
+                                      "telegram_payment_charge_id" telegram-payment-charge-id}))
+
 (defn answer-web-app-query
   "Answer a web app query.
 
@@ -1782,7 +1832,7 @@
 (defn send-game
   "Send a game.
 
-  `options` include: :business-connection-id, :message-thread-id, :disable-notification, :protect-content, :reply-parameters, and :reply-markup.
+  `options` include: :business-connection-id, :message-thread-id, :disable-notification, :protect-content, :message-effect-id, :reply-parameters, and :reply-markup.
 
   (https://core.telegram.org/bots/api#sendgame)"
   [bot chat-id game-short-name & options]
@@ -1790,6 +1840,7 @@
                 message-thread-id
                 disable-notification
                 protect-content
+                message-effect-id
                 reply-parameters
                 reply-markup]} options]
     (h/request bot "sendGame" {"chat_id" chat-id
@@ -1798,6 +1849,7 @@
                                "game_short_name" game-short-name
                                "disable_notification" disable-notification
                                "protect_content" protect-content
+                               "message_effect_id" message-effect-id
                                "reply_parameters" reply-parameters
                                "reply_markup" reply-markup})))
 

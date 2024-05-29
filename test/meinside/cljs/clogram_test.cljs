@@ -248,6 +248,8 @@
 
 ;; TODO: answer-pre-checkout-query
 
+;; TODO: refund-star-payment
+
 (deftest chat-administration-test
   (testing "Testing functions for chat administration"
     (async done
