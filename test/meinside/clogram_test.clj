@@ -254,6 +254,8 @@
 
     ;; TODO: answer-pre-checkout-query
 
+    ;; TODO: get-star-transactions
+
     ;; TODO: refund-star-payment
 
     (comment "----------------")))

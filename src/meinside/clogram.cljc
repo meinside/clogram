@@ -5,7 +5,7 @@
 ;;;; (https://core.telegram.org/bots/api)
 ;;;;
 ;;;; created on : 2019.12.05.
-;;;; last update: 2024.05.29.
+;;;; last update: 2024.06.20.
 
 (ns meinside.clogram
   #?(:cljs (:require-macros [cljs.core.async.macros :as a :refer [go]]))
@@ -917,12 +917,14 @@
 (defn stop-poll
   "Stop a poll.
 
-  `options` include: :reply-markup.
+  `options` include: :business-connection-id, and :reply-markup.
 
   (https://core.telegram.org/bots/api#stoppoll)"
   [bot chat-id message-id & options]
-  (let [{:keys [reply-markup]} options]
-    (h/request bot "stopPoll" {"chat_id" chat-id
+  (let [{:keys [business-connection-id
+                reply-markup]} options]
+    (h/request bot "stopPoll" {"business_connection_id" business-connection-id
+                               "chat_id" chat-id
                                "message_id" message-id
                                "reply_markup" reply-markup})))
 
@@ -1518,11 +1520,12 @@
   required `options`: :chat-id + :message-id (when :inline-message-id is not given)
                       or :inline-message-id (when :chat-id & :message-id are not given)
 
-  other `options` include: :parse-mode, :entities, :link-preview-options, and :reply-markup.
+  other `options` include: :business-connection-id, :parse-mode, :entities, :link-preview-options, and :reply-markup.
 
   (https://core.telegram.org/bots/api#editmessagetext)"
   [bot text & options]
-  (let [{:keys [chat-id
+  (let [{:keys [business-connection-id
+                chat-id
                 message-id
                 inline-message-id
                 parse-mode
@@ -1530,6 +1533,7 @@
                 link-preview-options
                 reply-markup]} options]
     (h/request bot "editMessageText" {"text" text
+                                      "business_connection_id" business-connection-id
                                       "chat_id" chat-id
                                       "message_id" message-id
                                       "inline_message_id" inline-message-id
@@ -1544,11 +1548,12 @@
   required `options`: :chat-id + :message-id (when :inline-message-id is not given)
                       or :inline-message-id (when :chat-id & :message-id are not given)
 
-  other `options` include: :parse-mode, :caption-entities, :show-caption-above-media, and :reply-markup.
+  other `options` include: :business-connection-id, :parse-mode, :caption-entities, :show-caption-above-media, and :reply-markup.
 
   (https://core.telegram.org/bots/api#editmessagecaption)"
   [bot caption & options]
-  (let [{:keys [chat-id
+  (let [{:keys [business-connection-id
+                chat-id
                 message-id
                 inline-message-id
                 parse-mode
@@ -1556,6 +1561,7 @@
                 show-caption-above-media
                 reply-markup]} options]
     (h/request bot "editMessageCaption" {"caption" caption
+                                         "business_connection_id" business-connection-id
                                          "chat_id" chat-id
                                          "message_id" message-id
                                          "inline_message_id" inline-message-id
@@ -1570,15 +1576,17 @@
   required `options`: :chat-id + :message-id (when :inline-message-id is not given)
                       or :inline-message-id (when :chat-id & :message-id are not given)
 
-  other `options` include: :reply-markup.
+  other `options` include: :business-connection-id, and :reply-markup.
 
   (https://core.telegram.org/bots/api#editmessagemedia)"
   [bot media & options]
-  (let [{:keys [chat-id
+  (let [{:keys [business-connection-id
+                chat-id
                 message-id
                 inline-message-id
                 reply-markup]} options]
     (h/request bot "editMessageMedia" {"media" media
+                                       "business_connection_id" business-connection-id
                                        "chat_id" chat-id
                                        "message_id" message-id
                                        "inline_message_id" inline-message-id
@@ -1590,15 +1598,17 @@
   required `options`: :chat-id + :message-id (when :inline-message-id is not given)
                       or :inline-message-id (when :chat-id & :message-id are not given)
 
-  other `options` include: :reply-markup.
+  other `options` include: :business-connection-id, and :reply-markup.
 
   (https://core.telegram.org/bots/api#editmessagereplymarkup)"
   [bot & options]
-  (let [{:keys [chat-id
+  (let [{:keys [business-connection-id
+                chat-id
                 message-id
                 inline-message-id
                 reply-markup]} options]
-    (h/request bot "editMessageReplyMarkup" {"chat_id" chat-id
+    (h/request bot "editMessageReplyMarkup" {"business_connection_id" business-connection-id
+                                             "chat_id" chat-id
                                              "message_id" message-id
                                              "inline_message_id" inline-message-id
                                              "reply_markup" reply-markup})))
@@ -1609,11 +1619,12 @@
   required `options`: :chat-id + :message-id (when :inline-message-id is not given)
                       or :inline-message-id (when :chat-id & :message-id are not given)
 
-  other `options` include: :live-period, :horizontal-accuracy, :heading, :proximity-alert-radius, and :reply-markup.
+  other `options` include: :business-connection-id, :live-period, :horizontal-accuracy, :heading, :proximity-alert-radius, and :reply-markup.
 
   (https://core.telegram.org/bots/api#editmessagelivelocation)"
   [bot latitude longitude & options]
-  (let [{:keys [chat-id
+  (let [{:keys [business-connection-id
+                chat-id
                 message-id
                 inline-message-id
                 live-period
@@ -1621,7 +1632,8 @@
                 heading
                 proximity-alert-radius
                 reply-markup]} options]
-    (h/request bot "editMessageLiveLocation" {"chat_id" chat-id
+    (h/request bot "editMessageLiveLocation" {"business_connection_id" business-connection-id
+                                              "chat_id" chat-id
                                               "message_id" message-id
                                               "inline_message_id" inline-message-id
                                               "latitude" latitude
@@ -1638,15 +1650,17 @@
   required `options`: :chat-id + :message-id (when :inline-message-id is not given)
                       or :inline-message-id (when :chat-id & :message-id are not given)
 
-  other `options` include: :reply-markup.
+  other `options` include: :business-connection-id, and :reply-markup.
 
   (https://core.telegram.org/bots/api#stopmessagelivelocation)"
   [bot & options]
-  (let [{:keys [chat-id
+  (let [{:keys [business-connection-id
+                chat-id
                 message-id
                 inline-message-id
                 reply-markup]} options]
-    (h/request bot "stopMessageLiveLocation" {"chat_id" chat-id
+    (h/request bot "stopMessageLiveLocation" {"business_connection_id" business-connection-id
+                                              "chat_id" chat-id
                                               "message_id" message-id
                                               "inline_message_id" inline-message-id
                                               "reply_markup" reply-markup})))
@@ -1812,6 +1826,16 @@
     (h/request bot "answerPreCheckoutQuery" {"pre_checkout_query_id" pre-checkout-query-id
                                              "ok" ok
                                              "error_message" error-message})))
+
+(defn get-star-transactions
+  "Get star transactions.
+
+  (https://core.telegram.org/bots/api#getstartransactions)"
+  [bot & options]
+  (let [{:keys [offset
+                limit]} options]
+    (h/request bot "getStarTransactions" {"offset" offset
+                                          "limit" limit})))
 
 (defn refund-star-payment
   "Refund a successful payment in Telegram Stars.
