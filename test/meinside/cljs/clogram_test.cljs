@@ -135,6 +135,8 @@
 
              ;; TODO: send-video-note
 
+             ;; TODO: send-paid-media
+
              ;; TODO: send-media-group
 
              ;; send a location,
