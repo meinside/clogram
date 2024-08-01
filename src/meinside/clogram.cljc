@@ -5,7 +5,7 @@
 ;;;; (https://core.telegram.org/bots/api)
 ;;;;
 ;;;; created on : 2019.12.05.
-;;;; last update: 2024.07.02.
+;;;; last update: 2024.08.01.
 
 (ns meinside.clogram
   #?(:cljs (:require-macros [cljs.core.async.macros :as a :refer [go]]))
@@ -1312,22 +1312,28 @@
 (defn pin-chat-message
   "Pin a chat message.
 
-  `options` include: :disable-notification.
+  `options` include: :business-connection-id, and :disable-notification.
 
   (https://core.telegram.org/bots/api#pinchatmessage)"
   [bot chat-id message-id & options]
-  (let [{:keys [disable-notification]} options]
-    (h/request bot "pinChatMessage" {"chat_id" chat-id
+  (let [{:keys [business-connection-id
+                disable-notification]} options]
+    (h/request bot "pinChatMessage" {"business_connection_id" business-connection-id
+                                     "chat_id" chat-id
                                      "message_id" message-id
                                      "disable_notification" disable-notification})))
 
 (defn unpin-chat-message
   "Unpin a chat message.
 
+  `options` include: :business-connection-id, and :message-id.
+
   (https://core.telegram.org/bots/api#unpinchatmessage)"
   [bot chat-id & options]
-  (let [{:keys [message-id]} options]
-    (h/request bot "unpinChatMessage" {"chat_id" chat-id
+  (let [{:keys [business-connection-id
+                message-id]} options]
+    (h/request bot "unpinChatMessage" {"business_connection_id" business-connection-id
+                                       "chat_id" chat-id
                                        "message_id" message-id})))
 
 (defn unpin-all-chat-messages
