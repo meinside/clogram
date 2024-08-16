@@ -5,7 +5,7 @@
 ;;;; (https://core.telegram.org/bots/api)
 ;;;;
 ;;;; created on : 2019.12.05.
-;;;; last update: 2024.08.01.
+;;;; last update: 2024.08.16.
 
 (ns meinside.clogram
   #?(:cljs (:require-macros [cljs.core.async.macros :as a :refer [go]]))
@@ -749,11 +749,12 @@
 (defn send-paid-media
   "Send paid media to channel chats.
 
-  `options` include: :caption, :parse-mode, :caption-entities, :show-caption-above-media, :disable-notification, :protect-content, :reply-parameters, and :reply-markup.
+  `options` include: :business-connection-id, :caption, :parse-mode, :caption-entities, :show-caption-above-media, :disable-notification, :protect-content, :reply-parameters, and :reply-markup.
 
   (https://core.telegram.org/bots/api#sendpaidmedia)"
   [bot chat-id star-count media & options]
-  (let [{:keys [caption
+  (let [{:keys [business-connection-id
+                caption
                 parse-mode
                 caption-entities
                 show-caption-above-media
@@ -761,7 +762,8 @@
                 protect-content
                 reply-parameters
                 reply-markup]} options]
-    (h/request bot "sendPaidMedia" {"chat_id" chat-id
+    (h/request bot "sendPaidMedia" {"business_connection_id" business-connection-id
+                                    "chat_id" chat-id
                                     "star_count" star-count
                                     "media" media
                                     "caption" caption
@@ -1253,6 +1255,27 @@
                                          "expire_date" expire-date
                                          "member_limit" member-limit
                                          "creates_join_request" creates-join-request})))
+
+(defn create-chat-subscription-invite-link
+  "Create a subscription invite link for a channel chat.
+
+  (https://core.telegram.org/bots/api#createchatsubscriptioninvitelink)"
+  [bot chat-id subscription-period subscription-price & options]
+  (let [{:keys [name]} options]
+    (h/request bot "createChatSubscriptionInviteLink" {"chat_id" chat-id
+                                                       "name" name
+                                                       "subscription_period" subscription-period
+                                                       "subscription_price" subscription-price})))
+
+(defn edit-chat-subscription-invite-link
+  "Edit a subscription invite link created by the bot.
+
+  (https://core.telegram.org/bots/api#editchatsubscriptioninvitelink)"
+  [bot chat-id invite-link & options]
+  (let [{:keys [name]} options]
+    (h/request bot "editChatSubscriptionInviteLink" {"chat_id" chat-id
+                                                     "invite_link" invite-link
+                                                     "name" name})))
 
 (defn revoke-chat-invite-link
   "Revoke a chat invite link.

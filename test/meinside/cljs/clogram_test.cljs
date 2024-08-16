@@ -282,6 +282,10 @@
 
              ;; TODO: edit-chat-invite-link
 
+             ;; TODO: create-chat-subscription-invite-link
+
+             ;; TODO: edit-chat-subscription-invite-link
+
              ;; TODO: revoke-chat-invite-link
 
              ;; TODO: approve-chat-join-request
