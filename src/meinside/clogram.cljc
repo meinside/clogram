@@ -5,7 +5,7 @@
 ;;;; (https://core.telegram.org/bots/api)
 ;;;;
 ;;;; created on : 2019.12.05.
-;;;; last update: 2024.08.16.
+;;;; last update: 2024.09.09.
 
 (ns meinside.clogram
   #?(:cljs (:require-macros [cljs.core.async.macros :as a :refer [go]]))
@@ -749,11 +749,12 @@
 (defn send-paid-media
   "Send paid media to channel chats.
 
-  `options` include: :business-connection-id, :caption, :parse-mode, :caption-entities, :show-caption-above-media, :disable-notification, :protect-content, :reply-parameters, and :reply-markup.
+  `options` include: :business-connection-id, :payload, :caption, :parse-mode, :caption-entities, :show-caption-above-media, :disable-notification, :protect-content, :reply-parameters, and :reply-markup.
 
   (https://core.telegram.org/bots/api#sendpaidmedia)"
   [bot chat-id star-count media & options]
   (let [{:keys [business-connection-id
+                payload
                 caption
                 parse-mode
                 caption-entities
@@ -766,6 +767,7 @@
                                     "chat_id" chat-id
                                     "star_count" star-count
                                     "media" media
+                                    "payload" payload
                                     "caption" caption
                                     "parse_mode" parse-mode
                                     "caption_entities" caption-entities
