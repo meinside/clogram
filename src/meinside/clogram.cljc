@@ -5,7 +5,7 @@
 ;;;; (https://core.telegram.org/bots/api)
 ;;;;
 ;;;; created on : 2019.12.05.
-;;;; last update: 2024.11.06.
+;;;; last update: 2024.11.07.
 
 (ns meinside.clogram
   #?(:cljs (:require-macros [cljs.core.async.macros :as a :refer [go]]))
@@ -92,7 +92,8 @@
 (defn get-updates
   "Fetch updates for this bot.
 
-  `options` include: :offset, :limit, :timeout, and :allowed-updates.
+  `options` include:
+    :offset, :limit, :timeout, and :allowed-updates.
 
   (https://core.telegram.org/bots/api#getupdates)"
   [bot & options]
@@ -120,7 +121,8 @@
 
   On Clojure, this function will block until it gets stopped with `stop-polling-updates` function.
 
-  `options` include: :offset, :limit, :timeout, and :allowed-updates.
+  `options` include:
+    :offset, :limit, :timeout, and :allowed-updates.
 
   Start polling with:
 
@@ -228,7 +230,10 @@
 (defn send-message
   "Send a message.
 
-  `options` include: :business-connection-id, :message-thread-id, :parse-mode, :entities, :link-preview-options, :disable-notification, :protect-content, :allow-paid-broadcast, :message-effect-id, :reply-parameters, and :reply-markup.
+  `options` include:
+    :business-connection-id, :message-thread-id, :parse-mode, :entities,
+    :link-preview-options, :disable-notification, :protect-content,
+    :allow-paid-broadcast, :message-effect-id, :reply-parameters, and :reply-markup.
 
   (https://core.telegram.org/bots/api#sendmessage)"
   [bot chat-id text & options]
@@ -260,7 +265,8 @@
 (defn forward-message
   "Forward a message.
 
-  `options` include: :message-thread-id, :disable-notification, and :protect-content.
+  `options` include:
+    :message-thread-id, :disable-notification, and :protect-content.
 
   (https://core.telegram.org/bots/api#forwardmessage)"
   [bot chat-id from-chat-id message-id & options]
@@ -277,7 +283,8 @@
 (defn forward-messages
   "Forward messages.
 
-  `options` include: :message-thread-id, :disable-notification, and :protect-content.
+  `options` include:
+    :message-thread-id, :disable-notification, and :protect-content.
 
   (https://core.telegram.org/bots/api#forwardmessages)"
   [bot chat-id from-chat-id message-ids & options]
@@ -294,7 +301,10 @@
 (defn copy-message
   "Copy a message.
 
-  `options` include: :message-thread-id, :caption, :parse-mode, :caption-entities, :show-caption-above-media, :disable-notification, :protect-content, :allow-paid-broadcast, :reply-parameters, and :reply-markup.
+  `options` include:
+    :message-thread-id, :caption, :parse-mode, :caption-entities,
+    :show-caption-above-media, :disable-notification, :protect-content,
+    :allow-paid-broadcast, :reply-parameters, and :reply-markup.
 
   (https://core.telegram.org/bots/api#copymessage)"
   [bot chat-id from-chat-id message-id & options]
@@ -325,7 +335,8 @@
 (defn copy-messages
   "Copy messages.
 
-  `options` include: :message-thread-id, :disable-notification, :protect-content, and :remove-caption.
+  `options` include:
+    :message-thread-id, :disable-notification, :protect-content, and :remove-caption.
 
   (https://core.telegram.org/bots/api#copymessages)"
   [bot chat-id from-chat-id message-ids & options]
@@ -344,7 +355,10 @@
 (defn send-photo
   "Send a photo.
 
-  `options` include: :business-connection-id, :message-thread-id, :caption, :parse-mode, :caption-entities, :show-caption-above-media, :has-spoiler, :disable-notification, :protect-content, :allow-paid-broadcast, :message-effect-id, :reply-parameters, and :reply-markup.
+  `options` include:
+    :business-connection-id, :message-thread-id, :caption, :parse-mode,
+    :caption-entities, :show-caption-above-media, :has-spoiler,
+    :disable-notification, :protect-content, :allow-paid-broadcast, :message-effect-id, :reply-parameters, and :reply-markup.
 
   (https://core.telegram.org/bots/api#sendphoto)"
   [bot chat-id photo & options]
@@ -380,7 +394,10 @@
 (defn send-audio
   "Send an audio file.
 
-  `options` include: :business-connection-id, :message-thread-id, :caption, :parse-mode, :caption-entities, :duration, :performer, :title, :disable-notification, :protect-content, :allow-paid-broadcast, :message-effect-id, :reply-parameters, and :reply-markup.
+  `options` include:
+    :business-connection-id, :message-thread-id, :caption, :parse-mode,
+    :caption-entities, :duration, :performer, :title, :disable-notification,
+    :protect-content, :allow-paid-broadcast, :message-effect-id, :reply-parameters, and :reply-markup.
 
   (https://core.telegram.org/bots/api#sendaudio)"
   [bot chat-id audio & options]
@@ -418,7 +435,10 @@
 (defn send-document
   "Send a document file.
 
-  `options` include: :business-connection-id, :message-thread-id, :caption, :parse-mode, :caption-entities, :disable-content-type-detection, :disable-notification, :protect-content, :allow-paid-broadcast, :message-effect-id, :reply-parameters, and :reply-markup.
+  `options` include:
+    :business-connection-id, :message-thread-id, :caption, :parse-mode,
+    :caption-entities, :disable-content-type-detection, :disable-notification,
+    :protect-content, :allow-paid-broadcast, :message-effect-id, :reply-parameters, and :reply-markup.
 
   (https://core.telegram.org/bots/api#senddocument)"
   [bot chat-id document & options]
@@ -452,7 +472,9 @@
 (defn send-sticker
   "Send a sticker.
 
-  `options` include: :business-connection-id, :message-thread-id, :disable-notification, :protect-content, :allow-paid-broadcast, :message-effect-id, :reply-parameters, and :reply-markup.
+  `options` include:
+    :business-connection-id, :message-thread-id, :disable-notification,
+    :protect-content, :allow-paid-broadcast, :message-effect-id, :reply-parameters, and :reply-markup.
 
   (https://core.telegram.org/bots/api#sendsticker)"
   [bot chat-id sticker & options]
@@ -503,7 +525,8 @@
 (defn create-new-sticker-set
   "Create a new sticker set.
 
-  `options` include: :sticker-type, and :needs-repainting
+  `options` include:
+    :sticker-type, and :needs-repainting.
 
   (https://core.telegram.org/bots/api#createnewstickerset)"
   [bot user-id name title stickers & options]
@@ -543,7 +566,8 @@
 (defn set-sticker-set-thumbnail
   "Set thumbnail of a sticker set.
 
-  `options` include: thumbnail.
+  `options` include:
+    :thumbnail.
 
   (https://core.telegram.org/bots/api#setstickersetthumbnail)"
   [bot name user-id format & options]
@@ -556,7 +580,8 @@
 (defn set-custom-emoji-sticker-set-thumbnail
   "Set thumbnail of custom emoji sticker set.
 
-  `options` include: custom_emoji_id.
+  `options` include:
+    :custom_emoji_id.
 
   (https://core.telegram.org/bots/api#setcustomemojistickersetthumbnail)"
   [bot name & options]
@@ -618,7 +643,11 @@
 (defn send-video
   "Send a video.
 
-  `options` include: :business-connection-id, :message-thread-id, :duration, :caption, :parse-mode, :caption-entities, :show-caption-above-media, :has-spoiler, :supports-streaming, :disable-notification, :protect-content, :allow-paid-broadcast, :message-effect-id, :reply-parameters, and :reply-markup.
+  `options` include:
+    :business-connection-id, :message-thread-id, :duration, :caption,
+    :parse-mode, :caption-entities, :show-caption-above-media, :has-spoiler,
+    :supports-streaming, :disable-notification, :protect-content,
+    :allow-paid-broadcast, :message-effect-id, :reply-parameters, and :reply-markup.
 
   (https://core.telegram.org/bots/api#sendvideo)"
   [bot chat-id video & options]
@@ -658,7 +687,11 @@
 (defn send-animation
   "Send an animation.
 
-  `options` include: :business-connection-id, :message-thread-id, :duration, :width, :height, :thumbnail, :caption, :parse-mode, :caption-entities, :show-caption-above-media, :has-spoiler, :disable-notification, :protect-content, :allow-paid-broadcast, :message-effect-id, :reply-parameters, and :reply-markup.
+  `options` include:
+    :business-connection-id, :message-thread-id, :duration, :width, :height,
+    :thumbnail, :caption, :parse-mode, :caption-entities,
+    :show-caption-above-media, :has-spoiler, :disable-notification,
+    :protect-content, :allow-paid-broadcast, :message-effect-id, :reply-parameters, and :reply-markup.
 
   (https://core.telegram.org/bots/api#sendanimation)"
   [bot chat-id animation & options]
@@ -702,7 +735,10 @@
 (defn send-voice
   "Send a voice. (.ogg format only)
 
-  `options` include: :business-connection-id, :message-thread-id, :caption, :parse-mode, :caption-entities, :duration, :disable-notification, :protect-content, :allow-paid-broadcast, :message-effect-id, :reply-parameters, and :reply-markup.
+  `options` include:
+    :business-connection-id, :message-thread-id, :caption, :parse-mode,
+    :caption-entities, :duration, :disable-notification, :protect-content,
+    :allow-paid-broadcast, :message-effect-id, :reply-parameters, and :reply-markup.
 
   (https://core.telegram.org/bots/api#sendvoice)"
   [bot chat-id voice & options]
@@ -736,7 +772,11 @@
 (defn send-video-note
   "Send a video note.
 
-  `options` include: :business-connection-id, :message-thread-id, :duration, :length, :thumbnail, :disable-notification, :protect-content, :allow-paid-broadcast, :message-effect-id, :reply-parameters, and :reply-markup.
+  `options` include:
+    :business-connection-id, :message-thread-id, :duration, :length,
+    :thumbnail, :disable-notification, :protect-content, :allow-paid-broadcast,
+    :message-effect-id, :reply-parameters, and :reply-markup.
+
   (XXX: API returns 'Bad Request: wrong video note length' when length is not given / 2017.05.19.)
 
   (https://core.telegram.org/bots/api#sendvideonote)"
@@ -769,7 +809,10 @@
 (defn send-paid-media
   "Send paid media to channel chats.
 
-  `options` include: :business-connection-id, :payload, :caption, :parse-mode, :caption-entities, :show-caption-above-media, :disable-notification, :protect-content, :allow-paid-broadcast, :reply-parameters, and :reply-markup.
+  `options` include:
+    :business-connection-id, :payload, :caption, :parse-mode,
+    :caption-entities, :show-caption-above-media, :disable-notification,
+    :protect-content, :allow-paid-broadcast, :reply-parameters, and :reply-markup.
 
   (https://core.telegram.org/bots/api#sendpaidmedia)"
   [bot chat-id star-count media & options]
@@ -802,7 +845,9 @@
 (defn send-media-group
   "Send a media group of photos or videos.
 
-  `options` include: :business-connection-id, :message-thread-id, :disable-notification, :protect-content, :allow-paid-broadcast, :message-effect-id, and :reply-parameters.
+  `options` include:
+    :business-connection-id, :message-thread-id, :disable-notification,
+    :protect-content, :allow-paid-broadcast, :message-effect-id, and :reply-parameters.
 
   (https://core.telegram.org/bots/api#sendmediagroup)"
   [bot chat-id media & options]
@@ -826,7 +871,10 @@
 (defn send-location
   "Send a location.
 
-  `options` include: :business-connection-id, :message-thread-id, :horizontal-accuracy, :live-period, :heading, :proximity-alert-radius, :disable-notification, :protect-content, :allow-paid-broadcast, :message-effect-id, :reply-parameters, and :reply-markup.
+  `options` include:
+    :business-connection-id, :message-thread-id, :horizontal-accuracy,
+    :live-period, :heading, :proximity-alert-radius, :disable-notification,
+    :protect-content, :allow-paid-broadcast, :message-effect-id, :reply-parameters, and :reply-markup.
 
   (https://core.telegram.org/bots/api#sendlocation)"
   [bot chat-id latitude longitude & options]
@@ -861,7 +909,10 @@
 (defn send-venue
   "Send a venue.
 
-  `options` include: :business-connection-id, :message-thread-id, :foursquare-id, :foursquare-type, :google-place-id, :google-place-type, :disable-notification, :protect-content, :allow-paid-broadcast, :message-effect-id, :reply-parameters, and :reply-markup.
+  `options` include:
+    :business-connection-id, :message-thread-id, :foursquare-id,
+    :foursquare-type, :google-place-id, :google-place-type,
+    :disable-notification, :protect-content, :allow-paid-broadcast, :message-effect-id, :reply-parameters, and :reply-markup.
 
   (https://core.telegram.org/bots/api#sendvenue)"
   [bot chat-id latitude longitude title address & options]
@@ -898,7 +949,10 @@
 (defn send-contact
   "Send a contact.
 
-  `options` include: :business-connection-id, :message-thread-id, :last-name, :vcard, :disable-notification, :protect-content, :allow-paid-broadcast, :message-effect-id, :reply-parameters, and :reply-markup.
+  `options` include:
+    :business-connection-id, :message-thread-id, :last-name, :vcard,
+    :disable-notification, :protect-content, :allow-paid-broadcast,
+    :message-effect-id, :reply-parameters, and :reply-markup.
 
   (https://core.telegram.org/bots/api#sendcontact)"
   [bot chat-id phone-number first-name & options]
@@ -929,7 +983,13 @@
 (defn send-poll
   "Send a poll.
 
-  `options` include: :business-connection-id, :message-thread-id, :question-parse-mode, question-entities, :is-anonymous, :type, :allows-multiple-answers, :correct-option-id, :explanation, :explanation-parse-mode, :explanation-entities, :open-period, :close-date, :is-closed, :disable-notification, :protect-content, :allow-paid-broadcast, :message-effect-id, :reply-parameters, and :reply-markup.
+  `options` include:
+    :business-connection-id, :message-thread-id, :question-parse-mode,
+    question-entities, :is-anonymous, :type, :allows-multiple-answers,
+    :correct-option-id, :explanation, :explanation-parse-mode,
+    :explanation-entities, :open-period, :close-date, :is-closed,
+    :disable-notification, :protect-content, :allow-paid-broadcast,
+    :message-effect-id, :reply-parameters, and :reply-markup.
 
   (https://core.telegram.org/bots/api#sendpoll)"
   [bot chat-id question poll-options & options]
@@ -980,7 +1040,8 @@
 (defn stop-poll
   "Stop a poll.
 
-  `options` include: :business-connection-id, and :reply-markup.
+  `options` include:
+    :business-connection-id, and :reply-markup.
 
   (https://core.telegram.org/bots/api#stoppoll)"
   [bot chat-id message-id & options]
@@ -994,7 +1055,8 @@
 (defn send-chat-action
   "Send a chat action.
 
-  `options` include: :business-connection-id, and :message-thread-id.
+  `options` include:
+    :business-connection-id, and :message-thread-id.
 
   `action` can be one of: :typing, :upload_photo, :record_video, :upload_video, :record_voice, :upload_voice, :upload_document, :choose_sticker, :find_location, :record_video_note, or :upload_video_note.
 
@@ -1010,7 +1072,8 @@
 (defn set-message-reaction
   "Set reactions on a message.
 
-  `options` include: :reaction, and :is-big.
+  `options` include:
+    :reaction, and :is-big.
 
   `reaction` is an array of reaction types(https://core.telegram.org/bots/api)#reactiontype).
 
@@ -1028,7 +1091,9 @@
 
   `emoji` can be one of: 🎲, 🎯, 🏀, ⚽, 🎳, or 🎰. (default: 🎲)
 
-  `options` include: :business-connection-id, :message-thread-id, :emoji, :disable-notification, :protect-content, :allow-paid-broadcast, :message-effect-id, :reply-parameters, and :reply-markup.
+  `options` include:
+    :business-connection-id, :message-thread-id, :emoji, :disable-notification,
+    :protect-content, :allow-paid-broadcast, :message-effect-id, :reply-parameters, and :reply-markup.
 
   (https://core.telegram.org/bots/api#senddice)"
   [bot chat-id & options]
@@ -1055,7 +1120,8 @@
 (defn get-user-profile-photos
   "Fetch user profile photos.
 
-  `options` include: :offset and :limit.
+  `options` include:
+    :offset, and :limit.
 
   (https://core.telegram.org/bots/api#getuserprofilephotos)"
   [bot user-id & options]
@@ -1083,7 +1149,8 @@
 (defn ban-chat-member
   "Ban a chat member.
 
-  `options` include: :until-date and :revoke-messages
+  `options` include:
+    :until-date, and :revoke-messages.
 
   (https://core.telegram.org/bots/api#banchatmember)"
   [bot chat-id user-id & options]
@@ -1104,7 +1171,8 @@
 (defn unban-chat-member
   "Unban a chat member.
 
-  `options` include: :only-if-banned
+  `options` include:
+    :only-if-banned.
 
   (https://core.telegram.org/bots/api#unbanchatmember)"
   [bot chat-id user-id & options]
@@ -1116,7 +1184,10 @@
 (defn restrict-chat-member
   "Restrict a chat member.
 
-  `options` include: :can-send-messages, :can-send-media-messages, :can-send-polls, :can-send-other-messages, :can-add-web-page-previews, :can-change-info, :can-invite-users, :can-pin-messages, :use-independent-chat-permissions, and :until-date.
+  `options` include:
+    :can-send-messages, :can-send-media-messages, :can-send-polls,
+    :can-send-other-messages, :can-add-web-page-previews, :can-change-info,
+    :can-invite-users, :can-pin-messages, :use-independent-chat-permissions, and :until-date.
 
   (https://core.telegram.org/bots/api#chatpermissions)
   (https://core.telegram.org/bots/api#restrictchatmember)"
@@ -1156,7 +1227,11 @@
 (defn promote-chat-member
   "Promote a chat member.
 
-  `options` include: :is-anonymous, :can-manage-chat, :can-change-info, :can-post-messages, :can-edit-messages, :can-delete-messages, :can-post-stories, :can-edit-stories, :can-delete-stories, :can-manage-video-chats, :can-invite-users, :can-restrict-members, :can-pin-messages, :can-promote-members, and :can-manage-topics.
+  `options` include:
+    :is-anonymous, :can-manage-chat, :can-change-info, :can-post-messages,
+    :can-edit-messages, :can-delete-messages, :can-post-stories,
+    :can-edit-stories, :can-delete-stories, :can-manage-video-chats,
+    :can-invite-users, :can-restrict-members, :can-pin-messages, :can-promote-members, and :can-manage-topics.
 
   (https://core.telegram.org/bots/api#promotechatmember)"
   [bot chat-id user-id & options]
@@ -1221,7 +1296,10 @@
 (defn set-chat-permissions
   "Set chat permissions.
 
-  `options` include: :can-send-messages, :can-send-media-messages, :can-send-polls, :can-send-other-messages, :can-add-web-page-previews, :can-change-info, :can-invite-users, :can-pin-messages, and :use-independent-chat-permissions.
+  `options` include:
+    :can-send-messages, :can-send-media-messages, :can-send-polls,
+    :can-send-other-messages, :can-add-web-page-previews, :can-change-info,
+    :can-invite-users, :can-pin-messages, and :use-independent-chat-permissions.
 
   (https://core.telegram.org/bots/api#setchatpermissions)"
   [bot chat-id & options]
@@ -1371,7 +1449,8 @@
 (defn pin-chat-message
   "Pin a chat message.
 
-  `options` include: :business-connection-id, and :disable-notification.
+  `options` include:
+    :business-connection-id, and :disable-notification.
 
   (https://core.telegram.org/bots/api#pinchatmessage)"
   [bot chat-id message-id & options]
@@ -1385,7 +1464,8 @@
 (defn unpin-chat-message
   "Unpin a chat message.
 
-  `options` include: :business-connection-id, and :message-id.
+  `options` include:
+    :business-connection-id, and :message-id.
 
   (https://core.telegram.org/bots/api#unpinchatmessage)"
   [bot chat-id & options]
@@ -1449,7 +1529,8 @@
 (defn answer-callback-query
   "Answer a callback query.
 
-  `options` include: :text, :show-alert, :url, and :cache-time.
+  `options` include:
+    :text, :show-alert, :url, and :cache-time.
 
   (https://core.telegram.org/bots/api#answercallbackquery)"
   [bot callback-query-id & options]
@@ -1565,7 +1646,8 @@
 (defn set-chat-menu-button
   "Set the bot's menu button.
 
-  `options` include: :chat-id, and :menu-button.
+  `options` include:
+    :chat-id, and :menu-button.
 
   (https://core.telegram.org/bots/api#setchatmenubutton)"
   [bot & options]
@@ -1577,7 +1659,8 @@
 (defn get-chat-menu-button
   "Get the bot's menu button.
 
-  `options` include: :chat-id.
+  `options` include:
+    :chat-id.
 
   (https://core.telegram.org/bots/api#getchatmenubutton)"
   [bot & options]
@@ -1587,7 +1670,8 @@
 (defn set-my-default-administrator-rights
   "Set my default administrator rights.
 
-  `options` include: :rights, and :for-channels.
+  `options` include:
+    :rights, and :for-channels.
 
   (https://core.telegram.org/bots/api#setmydefaultadministratorrights)"
   [bot & options]
@@ -1599,7 +1683,8 @@
 (defn get-my-default-administrator-rights
   "Get my default administrator rights.
 
-  `options` include: :for-channels.
+  `options` include:
+    :for-channels.
 
   (https://core.telegram.org/bots/api#getmydefaultadministratorrights)"
   [bot & options]
@@ -1612,7 +1697,8 @@
   required `options`: :chat-id + :message-id (when :inline-message-id is not given)
                       or :inline-message-id (when :chat-id & :message-id are not given)
 
-  other `options` include: :business-connection-id, :parse-mode, :entities, :link-preview-options, and :reply-markup.
+  other `options` include:
+    :business-connection-id, :parse-mode, :entities, :link-preview-options, and :reply-markup.
 
   (https://core.telegram.org/bots/api#editmessagetext)"
   [bot text & options]
@@ -1640,7 +1726,8 @@
   required `options`: :chat-id + :message-id (when :inline-message-id is not given)
                       or :inline-message-id (when :chat-id & :message-id are not given)
 
-  other `options` include: :business-connection-id, :parse-mode, :caption-entities, :show-caption-above-media, and :reply-markup.
+  other `options` include:
+    :business-connection-id, :parse-mode, :caption-entities, :show-caption-above-media, and :reply-markup.
 
   (https://core.telegram.org/bots/api#editmessagecaption)"
   [bot caption & options]
@@ -1668,7 +1755,8 @@
   required `options`: :chat-id + :message-id (when :inline-message-id is not given)
                       or :inline-message-id (when :chat-id & :message-id are not given)
 
-  other `options` include: :business-connection-id, and :reply-markup.
+  other `options` include:
+    :business-connection-id, and :reply-markup.
 
   (https://core.telegram.org/bots/api#editmessagemedia)"
   [bot media & options]
@@ -1690,7 +1778,8 @@
   required `options`: :chat-id + :message-id (when :inline-message-id is not given)
                       or :inline-message-id (when :chat-id & :message-id are not given)
 
-  other `options` include: :business-connection-id, and :reply-markup.
+  other `options` include:
+    :business-connection-id, and :reply-markup.
 
   (https://core.telegram.org/bots/api#editmessagereplymarkup)"
   [bot & options]
@@ -1711,7 +1800,8 @@
   required `options`: :chat-id + :message-id (when :inline-message-id is not given)
                       or :inline-message-id (when :chat-id & :message-id are not given)
 
-  other `options` include: :business-connection-id, :live-period, :horizontal-accuracy, :heading, :proximity-alert-radius, and :reply-markup.
+  other `options` include:
+    :business-connection-id, :live-period, :horizontal-accuracy, :heading, :proximity-alert-radius, and :reply-markup.
 
   (https://core.telegram.org/bots/api#editmessagelivelocation)"
   [bot latitude longitude & options]
@@ -1742,7 +1832,8 @@
   required `options`: :chat-id + :message-id (when :inline-message-id is not given)
                       or :inline-message-id (when :chat-id & :message-id are not given)
 
-  other `options` include: :business-connection-id, and :reply-markup.
+  other `options` include:
+    :business-connection-id, and :reply-markup.
 
   (https://core.telegram.org/bots/api#stopmessagelivelocation)"
   [bot & options]
@@ -1776,7 +1867,8 @@
 (defn answer-inline-query
   "Answer an inline query.
 
-  `options` include: :cache-time, :is-personal, :next-offset, :switch-pm-text, and :switch-pm-parameter.
+  `options` include:
+    :cache-time, :is-personal, :next-offset, :switch-pm-text, and :switch-pm-parameter.
 
   (https://core.telegram.org/bots/api#answerinlinequery)"
   [bot inline-query-id results & options]
@@ -1796,7 +1888,13 @@
 (defn send-invoice
   "Send an invoice.
 
-  `options` include: :message-thread-id, :max-tip-amount, :suggested-tip-amounts, :start-parameter, :provider-data, :photo-url, :photo-size, :photo-width, :photo-height, :need-name, :need-phone-number, :need-email, :need-shipping-address, :send-phone-number-to-provider, :send-email-to-provider, :is-flexible, :disable-notification, :protect-content, :allow-paid-broadcast, :message-effect-id, :reply-parameters, and :reply-markup.
+  `options` include:
+    :message-thread-id, :max-tip-amount, :suggested-tip-amounts,
+    :start-parameter, :provider-data, :photo-url, :photo-size, :photo-width,
+    :photo-height, :need-name, :need-phone-number, :need-email,
+    :need-shipping-address, :send-phone-number-to-provider,
+    :send-email-to-provider, :is-flexible, :disable-notification,
+    :protect-content, :allow-paid-broadcast, :message-effect-id, :reply-parameters, and :reply-markup.
 
   (https://core.telegram.org/bots/api#sendinvoice)"
   [bot chat-id title description payload provider-token currency prices & options]
@@ -1855,7 +1953,10 @@
 (defn create-invoice-link
   "Create a link for an invoice.
 
-  `options` include: :max-tip-amount, :suggested-tip-amounts, :provider-data, :photo-url, :photo-size, :photo-width, :photo-height, :need-name, :need-phone-number, :need-email, :need-shipping-address, :send-phone-number-to-provider, :send-email-to-provider, and :is-flexible.
+  `options` include:
+    :max-tip-amount, :suggested-tip-amounts, :provider-data, :photo-url,
+    :photo-size, :photo-width, :photo-height, :need-name, :need-phone-number,
+    :need-email, :need-shipping-address, :send-phone-number-to-provider, :send-email-to-provider, and :is-flexible.
 
   https://core.telegram.org/bots/api#createinvoicelink"
   [bot chat-id title description payload provider-token currency prices & options]
@@ -1950,7 +2051,9 @@
 (defn send-game
   "Send a game.
 
-  `options` include: :business-connection-id, :message-thread-id, :disable-notification, :protect-content, :allow-paid-broadcast, :message-effect-id, :reply-parameters, and :reply-markup.
+  `options` include:
+    :business-connection-id, :message-thread-id, :disable-notification,
+    :protect-content, :allow-paid-broadcast, :message-effect-id, :reply-parameters, and :reply-markup.
 
   (https://core.telegram.org/bots/api#sendgame)"
   [bot chat-id game-short-name & options]
@@ -1979,7 +2082,8 @@
   required `options`: :chat-id + :message-id (when :inline-message-id is not given)
                       or :inline-message-id (when :chat-id & :message-id are not given)
 
-  other `options` include: :force, and :disable-edit-message.
+  other `options` include:
+    :force, and :disable-edit-message.
 
   (https://core.telegram.org/bots/api#setgamescore)"
   [bot user-id score & options]
@@ -2027,7 +2131,8 @@
 (defn edit-forum-topic
   "Edit name and icon of a topic in a forum supergroup chat.
 
-  `options` include: :name, and :icon-custom-emoji-id.
+  `options` include:
+    :name, and :icon-custom-emoji-id.
 
   (https://core.telegram.org/bots/api#editforumtopic)"
   [bot chat-id message-thread-id & options]
