@@ -260,6 +260,12 @@
 
     ;; TODO: refund-star-payment
 
+    ;; TODO: edit-user-star-subscription
+
+    ;; TODO: get-available-gifts
+
+    ;; TODO: send-gift
+
     (comment "----------------")))
 
 (deftest chat-administration-test
@@ -382,5 +388,9 @@
 (deftest web-app-query-test
   (testing "Testing web app query"
     ;; TODO: answer-web-app-query
+
+    ;; TODO: set-user-emoji-status
+
+    ;; TODO: save-prepared-inline-message
 
     (comment "----------------")))

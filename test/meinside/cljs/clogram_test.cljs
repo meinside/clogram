@@ -254,6 +254,12 @@
 
 ;; TODO: refund-star-payment
 
+;; TODO: edit-user-star-subscription
+
+;; TODO: get-available-gifts
+
+;; TODO: send-gift
+
 (deftest chat-administration-test
   (testing "Testing functions for chat administration"
     (async done
@@ -372,4 +378,8 @@
 (deftest web-app-query-test
   (testing "Testing web app query"))
 ;; TODO: answer-web-app-query
+
+;; TODO: set-user-emoji-status
+
+;; TODO: save-prepared-inline-message
 
