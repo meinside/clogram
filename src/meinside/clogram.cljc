@@ -5,7 +5,7 @@
 ;;;; (https://core.telegram.org/bots/api)
 ;;;;
 ;;;; created on : 2019.12.05.
-;;;; last update: 2024.11.07.
+;;;; last update: 2024.11.18.
 
 (ns meinside.clogram
   #?(:cljs (:require-macros [cljs.core.async.macros :as a :refer [go]]))
@@ -1131,6 +1131,20 @@
                                            "offset" offset
                                            "limit" limit})))
 
+(defn set-user-emoji-status
+  "Set user emoji status.
+
+  `options` include:
+    :emoji-status-custom-emoji-id, and :emoji-status-expiration-date.
+
+  (https://core.telegram.org/bots/api#setuseremojistatus)"
+  [bot user-id & options]
+  (let [{:keys [emoji-status-custom-emoji-id
+                emoji-status-expiration-date]} options]
+    (h/request bot "setUserEmojiStatus" {"user_id" user-id
+                                         "emoji_status_custom_emoji_id" emoji-status-custom-emoji-id
+                                         "emoji_status_expiration_date" emoji-status-expiration-date})))
+
 (defn- get-file-url
   "Generate a file's url from given :file-path."
   [bot file-path]
@@ -1954,13 +1968,17 @@
   "Create a link for an invoice.
 
   `options` include:
+    :business-connection-id, :provider-token, :subscription-period,
     :max-tip-amount, :suggested-tip-amounts, :provider-data, :photo-url,
     :photo-size, :photo-width, :photo-height, :need-name, :need-phone-number,
     :need-email, :need-shipping-address, :send-phone-number-to-provider, :send-email-to-provider, and :is-flexible.
 
   https://core.telegram.org/bots/api#createinvoicelink"
-  [bot chat-id title description payload provider-token currency prices & options]
-  (let [{:keys [max-tip-amount
+  [bot title description payload currency prices & options]
+  (let [{:keys [business-connection-id
+                provider-token
+                subscription-period
+                max-tip-amount
                 suggested-tip-amounts
                 provider-data
                 photo-url
@@ -1974,13 +1992,14 @@
                 send-phone-number-to-provider
                 send-email-to-provider
                 is-flexible]} options]
-    (h/request bot "createInvoiceLink" {"chat_id" chat-id
+    (h/request bot "createInvoiceLink" {"business_connection_id" business-connection-id
                                         "title" title
                                         "description" description
                                         "payload" payload
                                         "provider_token" provider-token
                                         "currency" currency
                                         "prices" prices
+                                        "subscription_period" subscription-period
                                         "max_tip_amount" max-tip-amount
                                         "suggested_tip_amounts" suggested-tip-amounts
                                         "provider_data" provider-data
@@ -2040,6 +2059,15 @@
   (h/request bot "refundStarPayment" {"user_id" user-id
                                       "telegram_payment_charge_id" telegram-payment-charge-id}))
 
+(defn edit-user-star-subscription
+  "Edit a user's star subscription.
+
+  (https://core.telegram.org/bots/api#edituserstarsubscription)"
+  [bot user-id telegram-payment-charge-id is-canceled]
+  (h/request bot "editUserStarSubscription" {"user_id" user-id
+                                             "telegram_payment_charge_id" telegram-payment-charge-id
+                                             "is_canceled" is-canceled}))
+
 (defn answer-web-app-query
   "Answer a web app query.
 
@@ -2047,6 +2075,25 @@
   [bot web-app-query-id result]
   (h/request bot "answerWebAppQuery" {"web_app_query_id" web-app-query-id
                                       "result" result}))
+
+(defn save-prepared-inline-message
+  "Save a prepared inline message.
+
+  `options` include:
+    :allow-user-chats, :allow-bot-chats, :allow-group-chats, and :allow-channel-chats.
+
+  (https://core.telegram.org/bots/api#savepreparedinlinemessage)"
+  [bot user-id result & options]
+  (let [{:keys [allow-user-chats
+                allow-bot-chats
+                allow-group-chats
+                allow-channel-chats]} options]
+    (h/request bot "savePreparedInlineMessage" {"user_id" user-id
+                                                "result" result
+                                                "allow_user_chats" allow-user-chats
+                                                "allow_bot_chats" allow-bot-chats
+                                                "allow_group_chats" allow-group-chats
+                                                "allow_channel_chats" allow-channel-chats})))
 
 (defn send-game
   "Send a game.
@@ -2224,4 +2271,28 @@
   (https://core.telegram.org/bots/api#getforumtopiciconstickers)"
   [bot]
   (h/request bot "getForumTopicIconStickers" {}))
+
+(defn get-available-gifts
+  "Get availabe gifts.
+
+  (https://core.telegram.org/bots/api#getavailablegifts)"
+  [bot]
+  (h/request bot "getAvailableGifts" {}))
+
+(defn send-gift
+  "Send a gift.
+
+  `options` include:
+    :text, :text-parse-mode, and :text-entities.
+
+  (https://core.telegram.org/bots/api#sendgift)"
+  [bot user-id gift-id & options]
+  (let [{:keys [text
+                text-parse-mode
+                text-entities]} options]
+    (h/request bot "sendGift" {"user_id" user-id
+                               "gift_id" gift-id
+                               "text" text
+                               "text_parse_mode" text-parse-mode
+                               "text_entities" text-entities})))
 
