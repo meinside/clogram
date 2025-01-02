@@ -13,11 +13,11 @@
 
 (ns meinside.cljs.clogram-test
   (:require-macros
-    [cljs.core.async.macros :as a :refer [go]])
+   [cljs.core.async.macros :as a :refer [go]])
   (:require
-    [cljs.core.async :refer [<!]]
-    [cljs.test :refer-macros [deftest is testing async]]
-    [meinside.clogram :as cg]))
+   [cljs.core.async :refer [<!]]
+   [cljs.test :refer-macros [deftest is testing async]]
+   [meinside.clogram :as cg]))
 
 (defn -js->clj+
   "For cases when built-in js->clj doesn't work. Source: https://stackoverflow.com/a/32583549/4839573"
@@ -382,4 +382,14 @@
 ;; TODO: set-user-emoji-status
 
 ;; TODO: save-prepared-inline-message
+
+(deftest verification-test
+  (testing "Testing verifications"))
+;; TODO: verify-user
+
+;; TODO: verify-chat
+
+;; TODO: remove-user-verification
+
+;; TODO: remove-chat-verification
 

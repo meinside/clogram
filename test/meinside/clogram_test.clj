@@ -11,10 +11,10 @@
 
 (ns meinside.clogram-test
   (:require
-    [clojure.java.io :as io]
-    [clojure.string :as string]
-    [clojure.test :refer [deftest is testing]]
-    [meinside.clogram :as cg]))
+   [clojure.java.io :as io]
+   [clojure.string :as string]
+   [clojure.test :refer [deftest is testing]]
+   [meinside.clogram :as cg]))
 
 (defn- read-env-var
   "Read an environment variable with given key."
@@ -392,5 +392,17 @@
     ;; TODO: set-user-emoji-status
 
     ;; TODO: save-prepared-inline-message
+
+    (comment "----------------")))
+
+(deftest verification-test
+  (testing "Testing verifications"
+    ;; TODO: verify-user
+
+    ;; TODO: verify-chat
+
+    ;; TODO: remove-user-verification
+
+    ;; TODO: remove-chat-verification
 
     (comment "----------------")))

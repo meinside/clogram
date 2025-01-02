@@ -5,14 +5,14 @@
 ;;;; (https://core.telegram.org/bots/api)
 ;;;;
 ;;;; created on : 2019.12.05.
-;;;; last update: 2024.11.18.
+;;;; last update: 2025.01.02.
 
 (ns meinside.clogram
   #?(:cljs (:require-macros [cljs.core.async.macros :as a :refer [go]]))
   (:require
-    [meinside.clogram.helper :as h]
-    #?(:clj [clojure.core.async :as a :refer [<! <!! go close!]]
-       :cljs [cljs.core.async :refer [<! close! chan]]))) ; helper functions
+   [meinside.clogram.helper :as h]
+   #?(:clj [clojure.core.async :as a :refer [<! <!! go close!]]
+      :cljs [cljs.core.async :refer [<! close! chan]]))) ; helper functions
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -111,10 +111,10 @@
 ;; timeout function for ClojureScript
 ;; https://gist.github.com/swannodette/5882703
 #?(:cljs
-     (defn- cljs-timeout [ms]
-       (let [c (chan)]
-         (js/setTimeout (fn [] (close! c)) ms)
-         c)))
+   (defn- cljs-timeout [ms]
+     (let [c (chan)]
+       (js/setTimeout (fn [] (close! c)) ms)
+       c)))
 
 (defn poll-updates
   "Poll updates for this bot with given interval and send them through the handler function.
@@ -193,7 +193,7 @@
 
         ;; wait for it, (busy-waits only for Clojure, not ClojureScript)
         #?(:clj
-             (<!! wait))
+           (<!! wait))
 
         ;; and return true (when finished on Clojure, or immediately on ClojureScript)
         true))))
@@ -2283,16 +2283,56 @@
   "Send a gift.
 
   `options` include:
-    :text, :text-parse-mode, and :text-entities.
+    :pay-for-upgrade, :text, :text-parse-mode, and :text-entities.
 
   (https://core.telegram.org/bots/api#sendgift)"
   [bot user-id gift-id & options]
-  (let [{:keys [text
+  (let [{:keys [pay-for-upgrade
+                text
                 text-parse-mode
                 text-entities]} options]
     (h/request bot "sendGift" {"user_id" user-id
                                "gift_id" gift-id
+                               "pay_for_upgrade" pay-for-upgrade
                                "text" text
                                "text_parse_mode" text-parse-mode
                                "text_entities" text-entities})))
+
+(defn verify-user
+  "Verify a user.
+
+  `options` include:
+    :custom_description.
+
+  (https://core.telegram.org/bots/api#verifyuser)"
+  [bot user-id & options]
+  (let [{:keys [custom-description]} options]
+    (h/request bot "verifyUser" {"user_id" user-id
+                                 "custom_description" custom-description})))
+
+(defn verify-chat
+  "Verify a chat.
+
+  `options` include:
+    :custom_description.
+
+  (https://core.telegram.org/bots/api#verifychat)"
+  [bot chat-id & options]
+  (let [{:keys [custom-description]} options]
+    (h/request bot "verifyChat" {"chat_id" chat-id
+                                 "custom_description" custom-description})))
+
+(defn remove-user-verification
+  "Remove a user verification.
+
+  (https://core.telegram.org/bots/api#removeuserverification)"
+  [bot user-id]
+  (h/request bot "removeUserVerification" {"user_id" user-id}))
+
+(defn remove-chat-verification
+  "Remove a chat verification.
+
+  (https://core.telegram.org/bots/api#removechatverification)"
+  [bot chat-id]
+  (h/request bot "removeChatVerification" {"chat_id" chat-id}))
 
