@@ -5,7 +5,7 @@
 ;;;; (https://core.telegram.org/bots/api)
 ;;;;
 ;;;; created on : 2019.12.05.
-;;;; last update: 2025.01.02.
+;;;; last update: 2025.02.13.
 
 (ns meinside.clogram
   #?(:cljs (:require-macros [cljs.core.async.macros :as a :refer [go]]))
@@ -266,15 +266,17 @@
   "Forward a message.
 
   `options` include:
-    :message-thread-id, :disable-notification, and :protect-content.
+    :message-thread-id, :video-start-timestamp, :disable-notification, and :protect-content.
 
   (https://core.telegram.org/bots/api#forwardmessage)"
   [bot chat-id from-chat-id message-id & options]
   (let [{:keys [message-thread-id
+                video-start-timestamp
                 disable-notification
                 protect-content]} options]
     (h/request bot "forwardMessage" {"chat_id" chat-id
                                      "message_thread_id" message-thread-id
+                                     "video_start_timestamp" video-start-timestamp
                                      "from_chat_id" from-chat-id
                                      "message_id" message-id
                                      "disable_notification" disable-notification
@@ -302,13 +304,14 @@
   "Copy a message.
 
   `options` include:
-    :message-thread-id, :caption, :parse-mode, :caption-entities,
+    :message-thread-id, :video-start-timestamp, :caption, :parse-mode, :caption-entities,
     :show-caption-above-media, :disable-notification, :protect-content,
     :allow-paid-broadcast, :reply-parameters, and :reply-markup.
 
   (https://core.telegram.org/bots/api#copymessage)"
   [bot chat-id from-chat-id message-id & options]
   (let [{:keys [message-thread-id
+                video-start-timestamp
                 caption
                 parse-mode
                 caption-entities
@@ -320,6 +323,7 @@
                 reply-markup]} options]
     (h/request bot "copyMessage" {"chat_id" chat-id
                                   "message_thread_id" message-thread-id
+                                  "video_start_timestamp" video-start-timestamp
                                   "from_chat_id" from-chat-id
                                   "message_id" message-id
                                   "caption" caption
@@ -644,7 +648,8 @@
   "Send a video.
 
   `options` include:
-    :business-connection-id, :message-thread-id, :duration, :caption,
+    :business-connection-id, :message-thread-id, :duration, :width, :height,
+    :thumbnail, :cover, :start-timestamp, :caption,
     :parse-mode, :caption-entities, :show-caption-above-media, :has-spoiler,
     :supports-streaming, :disable-notification, :protect-content,
     :allow-paid-broadcast, :message-effect-id, :reply-parameters, and :reply-markup.
@@ -654,6 +659,11 @@
   (let [{:keys [business-connection-id
                 message-thread-id
                 duration
+                width
+                height
+                thumbnail
+                cover
+                start-timestamp
                 caption
                 parse-mode
                 caption-entities
@@ -671,6 +681,11 @@
                                 "message_thread_id" message-thread-id
                                 "video" video
                                 "duration" duration
+                                "width" width
+                                "height" height
+                                "thumbnail" thumbnail
+                                "cover" cover
+                                "start_timestamp" start-timestamp
                                 "caption" caption
                                 "parse_mode" parse-mode
                                 "caption_entities" caption-entities
@@ -2283,15 +2298,18 @@
   "Send a gift.
 
   `options` include:
-    :pay-for-upgrade, :text, :text-parse-mode, and :text-entities.
+    :user-id, :chat-id, :pay-for-upgrade, :text, :text-parse-mode, and :text-entities.
 
   (https://core.telegram.org/bots/api#sendgift)"
-  [bot user-id gift-id & options]
-  (let [{:keys [pay-for-upgrade
+  [bot gift-id & options]
+  (let [{:keys [user-id
+                chat-id
+                pay-for-upgrade
                 text
                 text-parse-mode
                 text-entities]} options]
     (h/request bot "sendGift" {"user_id" user-id
+                               "chat_id" chat-id
                                "gift_id" gift-id
                                "pay_for_upgrade" pay-for-upgrade
                                "text" text
