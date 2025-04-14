@@ -5,7 +5,7 @@
 ;;;; (https://core.telegram.org/bots/api)
 ;;;;
 ;;;; created on : 2019.12.05.
-;;;; last update: 2025.02.13.
+;;;; last update: 2025.04.14.
 
 (ns meinside.clogram
   #?(:cljs (:require-macros [cljs.core.async.macros :as a :refer [go]]))
@@ -2316,6 +2316,24 @@
                                "text_parse_mode" text-parse-mode
                                "text_entities" text-entities})))
 
+(defn gift-premium-subscription
+  "Gift a Telegram Premium subscription to the given user.
+
+  `options` include:
+    :text, :text-parse-mode, and :text-entities.
+
+  (https://core.telegram.org/bots/api#giftpremiumsubscription)"
+  [bot user-id month-count star-count & options]
+  (let [{:keys [text
+                text-parse-mode
+                text-entities]} options]
+    (h/request bot "giftPremiumSubscription" {"user_id" user-id
+                                              "month_count" month-count
+                                              "star_count" star-count
+                                              "text" text
+                                              "text_parse_mode" text-parse-mode
+                                              "text_entities" text-entities})))
+
 (defn verify-user
   "Verify a user.
 
@@ -2353,4 +2371,224 @@
   (https://core.telegram.org/bots/api#removechatverification)"
   [bot chat-id]
   (h/request bot "removeChatVerification" {"chat_id" chat-id}))
+
+(defn read-business-message
+  "Mark incoming message as read on behalf of a business account.
+
+  (https://core.telegram.org/bots/api#readbusinessmessage)"
+  [bot business-connection-id chat-id message-id]
+  (h/request bot "readBusinessMessage" {"business_connection_id" business-connection-id
+                                        "chat_id" chat-id
+                                        "message_id" message-id}))
+
+(defn delete-business-messages
+  "Delete messages on behalf of a business account.
+
+  (https://core.telegram.org/bots/api#deletebusinessmessages)"
+  [bot business-connection-id message-ids]
+  (h/request bot "deleteBusinessMessages" {"business_connection_id" business-connection-id
+                                           "message_ids" message-ids}))
+
+(defn set-business-account-name
+  "Change the first and last name of a managed business account.
+
+  `options` include:
+    :last-name
+
+  (https://core.telegram.org/bots/api#setbusinessaccountname)"
+  [bot business-connection-id first-name & options]
+  (let [{:keys [last-name]} options]
+    (h/request bot "setBusinessAccountName" {"business_connection_id" business-connection-id
+                                             "first_name" first-name
+                                             "last_name" last-name})))
+
+(defn set-business-account-username
+  "Change the username of a managed business account.
+
+  `options` include:
+    :username
+
+  (https://core.telegram.org/bots/api#setbusinessaccountusername)"
+  [bot business-connection-id & options]
+  (let [{:keys [username]} options]
+    (h/request bot "setBusinessAccountUsername" {"business_connection_id" business-connection-id
+                                                 "username" username})))
+
+(defn set-business-account-bio
+  "Change the bio of a managed business account.
+
+  `options` include:
+    :bio
+
+  (https://core.telegram.org/bots/api#setbusinessaccountbio)"
+  [bot business-connection-id & options]
+  (let [{:keys [bio]} options]
+    (h/request bot "setBusinessAccountBio" {"business_connection_id" business-connection-id
+                                            "bio" bio})))
+
+(defn set-business-account-profile-photo
+  "Change the profile photo of a managed business account.
+
+  `options` include:
+    :is-public
+
+  (https://core.telegram.org/bots/api#setbusinessaccountprofilephoto)"
+  [bot business-connection-id photo & options]
+  (let [{:keys [is-public]} options]
+    (h/request bot "setBusinessAccountProfilePhoto" {"business_connection_id" business-connection-id
+                                                     "photo" photo
+                                                     "is_public" is-public})))
+
+(defn remove-business-account-profile-photo
+  "Remove the current profile photo of a managed business account.
+
+  `options` include:
+    :is-public
+
+  (https://core.telegram.org/bots/api#removebusinessaccountprofilephoto)"
+  [bot business-connection-id & options]
+  (let [{:keys [is-public]} options]
+    (h/request bot "removeBusinessAccountProfilePhoto" {"business_connection_id" business-connection-id
+                                                        "is_public" is-public})))
+
+(defn set-business-account-gift-settings
+  "Change the privacy settings pertaining to incoming gifts in a managed business account.
+
+  (https://core.telegram.org/bots/api#setbusinessaccountgiftsettings)"
+  [bot business-connection-id show-gift-button accepted-gift-types]
+  (h/request bot "setBusinessAccountGiftSettings" {"business_connection_id" business-connection-id
+                                                   "show_gift_button" show-gift-button
+                                                   "accepted_gift_types" accepted-gift-types}))
+
+(defn get-business-account-star-balance
+  "Return the amount of Telegram Stars owned by a managed business account.
+
+  (https://core.telegram.org/bots/api#getbusinessaccountstarbalance)"
+  [bot business-connection-id]
+  (h/request bot "getBusinessAccountStarBalance" {"business_connection_id" business-connection-id}))
+
+(defn transfer-business-account-stars
+  "Transfer Telegram Stars from the business account balance to the bot's balance.
+
+  (https://core.telegram.org/bots/api#transferbusinessaccountstars)"
+  [bot business-connection-id star-count]
+  (h/request bot "transferBusinessAccountStars" {"business_connection_id" business-connection-id
+                                                 "star_count" star-count}))
+
+(defn get-business-account-gifts
+  "Return the gifts received and owned by a managed business account.
+
+  `options` include:
+    :exclude-unsaved, :exclude-saved, :exclude-unlimited, :exclude-limited
+    :exclude-unique, :sort-by-price, :offset, and :limit.
+
+  (https://core.telegram.org/bots/api#getbusinessaccountgifts)"
+  [bot business-connection-id & options]
+  (let [{:keys [exclude-unsaved
+                exclude-saved
+                exclude-unlimited
+                exclude-limited
+                exclude-unique
+                sort-by-price
+                offset
+                limit]} options]
+    (h/request bot "getBusinessAccountGifts" {"business_connection_id" business-connection-id
+                                              "exclude_unsaved" exclude-unsaved
+                                              "exclude_saved" exclude-saved
+                                              "exclude_unlimited" exclude-unlimited
+                                              "exclude_limited" exclude-limited
+                                              "exclude_unique" exclude-unique
+                                              "sort_by_price" sort-by-price
+                                              "offset" offset
+                                              "limit" limit})))
+
+(defn convert-gift-to-stars
+  "Convert a given regular gift to Telegram Stars.
+
+  (https://core.telegram.org/bots/api#convertgifttostars)"
+  [bot business-connection-id owned-gift-id]
+  (h/request bot "convertGiftToStars" {"business_connection_id" business-connection-id
+                                       "owned_gift_id" owned-gift-id}))
+
+(defn upgrade-gift
+  "Upgrade a given regular gift to a unique gift.
+
+  `options` include:
+    :keep-original-details, and :star-count
+
+  (https://core.telegram.org/bots/api#upgradegift)"
+  [bot business-connection-id owned-gift-id & options]
+  (let [{:keys [keep-original-details
+                star-count]} options]
+    (h/request bot "upgradeGift" {"business_connection_id" business-connection-id
+                                  "owned_gift_id" owned-gift-id
+                                  "keep_original_details" keep-original-details
+                                  "star_count" star-count})))
+
+(defn transfer-gift
+  "Transfer an owned unique gift to another user.
+
+  `options` include:
+    :star-count
+
+  (https://core.telegram.org/bots/api#transfergift)"
+  [bot business-connection-id owned-gift-id new-owner-chat-id & options]
+  (let [{:keys [star-count]} options]
+    (h/request bot "transferGift" {"business_connection_id" business-connection-id
+                                   "owned_gift_id" owned-gift-id
+                                   "new_owner_chat_id" new-owner-chat-id
+                                   "star_count" star-count})))
+
+(defn post-story
+  "Post a story on behalf of a managed business account.
+
+  `options` include:
+    :caption, :parse-mode, :caption-entities, :areas,
+    :post-to-chat-page, and :protect-content.
+
+  (https://core.telegram.org/bots/api#poststory)"
+  [bot business-connection-id content active-period & options]
+  (let [{:keys [caption
+                parse-mode
+                caption-entities
+                areas
+                post-to-chat-page
+                protect-content]} options]
+    (h/request bot "postStory" {"business_connection_id" business-connection-id
+                                "content" content
+                                "active_period" active-period
+                                "caption" caption
+                                "parse_mode" parse-mode
+                                "caption_entities" caption-entities
+                                "areas" areas
+                                "post_to_chat_page" post-to-chat-page
+                                "protect_content" protect-content})))
+
+(defn edit-story
+  "Edit a story previously posted by the bot on behalf of a managed business account.
+
+  `options` include:
+    :caption, :parse-mode, :caption-entities, and :areas.
+
+  (https://core.telegram.org/bots/api#editstory)"
+  [bot business-connection-id story-id content & options]
+  (let [{:keys [caption
+                parse-mode
+                caption-entities
+                areas]} options]
+    (h/request bot "editStory" {"business_connection_id" business-connection-id
+                                "story_id" story-id
+                                "content" content
+                                "caption" caption
+                                "parse_mode" parse-mode
+                                "caption_entities" caption-entities
+                                "areas" areas})))
+
+(defn delete-story
+  "Delete a story previously posted by the bot on behalf of a managed business account.
+
+  (https://core.telegram.org/bots/api#deletestory)"
+  [bot business-connection-id story-id]
+  (h/request bot "deleteStory" {"business_connection_id" business-connection-id
+                                "story_id" story-id}))
 

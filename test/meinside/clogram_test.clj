@@ -266,6 +266,8 @@
 
     ;; TODO: send-gift
 
+    ;; TODO: gift-premium-subscription
+
     (comment "----------------")))
 
 (deftest chat-administration-test
@@ -325,8 +327,6 @@
 
     ;; TODO: get-user-chat-boosts
 
-    ;; TODO: get-business-connection
-
     ;; TODO: get-chat-administrators
 
     ;; TODO: get-chat-member-count
@@ -370,6 +370,46 @@
     ;; TODO: unhide-general-forum-topic
 
     ;; TODO: unpin-all-general-forum-topic-messages
+
+    (comment "----------------")))
+
+(deftest business-connection-test
+  (testing "Testing business connection"
+    ;; TODO: get-business-connection
+
+    ;; TODO: read-business-message
+
+    ;; TODO: delete-business-message
+
+    ;; TODO: set-business-account-name
+
+    ;; TODO: set-business-account-username
+
+    ;; TODO: set-business-account-bio
+
+    ;; TODO: set-business-account-profile-photo
+
+    ;; TODO: remove-business-account-profile-photo
+
+    ;; TODO: set-business-account-gift-settings
+
+    ;; TODO: get-business-account-star-balance
+
+    ;; TODO: transfer-business-account-stars
+
+    ;; TODO: get-business-account-gifts
+
+    ;; TODO: convert-gift-to-stars
+
+    ;; TODO: upgrade-gift
+
+    ;; TODO: transfer-gift
+
+    ;; TODO: post-story
+
+    ;; TODO: edit-story
+
+    ;; TODO: delete-story
 
     (comment "----------------")))
 
