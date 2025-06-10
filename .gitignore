@@ -1,3 +1,9 @@
+# .gitignore
+
+# dotenv file for testing
+.env
+
+# temporary or built files
 /target
 /out
 /classes
