@@ -5,7 +5,7 @@
 ;;;; (https://core.telegram.org/bots/api)
 ;;;;
 ;;;; created on : 2019.12.05.
-;;;; last update: 2025.04.14.
+;;;; last update: 2025.07.04.
 
 (ns meinside.clogram
   #?(:cljs (:require-macros [cljs.core.async.macros :as a :refer [go]]))
@@ -1101,6 +1101,27 @@
                                          "reaction" reaction
                                          "is_big" is-big})))
 
+(defn send-checklist
+  "Send a checklist.
+
+  `options` include: :disable-notification, :protect-content, :message-effect-id, :reply-parameters, and :reply-markup.
+
+  (https://core.telegram.org/bots/api#sendchecklist)"
+  [bot business-connection-id chat-id checklist & options]
+  (let [{:keys [disable-notification
+                protect-content
+                message-effect-id
+                reply-parameters
+                reply-markup]} options]
+    (h/request bot "sendCheckList" {"business_connection_id" business-connection-id
+                                    "chat_id" chat-id
+                                    "checklist" checklist
+                                    "disable_notification" disable-notification
+                                    "protect_content" protect-content
+                                    "message_effect_id" message-effect-id
+                                    "reply_parameters" reply-parameters
+                                    "reply_markup" reply-markup})))
+
 (defn send-dice
   "Send a dice.
 
@@ -1801,6 +1822,20 @@
                                        "inline_message_id" inline-message-id
                                        "reply_markup" reply-markup})))
 
+(defn edit-message-checklist
+  "Edit a message's checklist.
+
+  `options` include: :reply-markup.
+
+  (https://core.telegram.org/bots/api#editmessagechecklist)"
+  [bot business-connection-id chat-id message-id checklist & options]
+  (let [{:keys [reply-markup]} options]
+    (h/request bot "editMessageChecklist" {"business_connection_id" business-connection-id
+                                           "chat_id" chat-id
+                                           "message_id" message-id
+                                           "checklist" checklist
+                                           "reply_markup" reply-markup})))
+
 (defn edit-message-reply-markup
   "Edit a message's reply markup.
 
@@ -2055,6 +2090,13 @@
     (h/request bot "answerPreCheckoutQuery" {"pre_checkout_query_id" pre-checkout-query-id
                                              "ok" ok
                                              "error_message" error-message})))
+
+(defn get-my-star-balance
+  "Get the bot's star balance.
+
+  (https://core.telegram.org/bots/api#getmystarbalance)"
+  [bot]
+  (h/request bot "getMyStarBalance" {}))
 
 (defn get-star-transactions
   "Get star transactions.

@@ -155,6 +155,13 @@
                ;; stop a poll,
                (is (:ok (<! (cg/stop-poll bot chat-id (get-in sent-poll [:result :message-id]))))))
 
+             ;; send a dice,
+             (is (:ok (<! (cg/send-dice bot chat-id))))
+
+             ;; TODO: send-checklist
+
+             ;; TODO: edit-message-checklist
+
              ;; TODO: get-file
 
              ;; TODO: delete-message
@@ -241,26 +248,33 @@
 ;; TODO: get-game-highscores
 
 (deftest shopping-test
-  (testing "Testing functions for commerce"))
-;; TODO: send-invoice
+  (testing "Testing functions for commerce"
+    (async done
+           (go
+             ;; TODO: send-invoice
 
-;; TODO: create-invoice-link
+             ;; TODO: create-invoice-link
 
-;; TODO: answer-shipping-query
+             ;; TODO: answer-shipping-query
 
-;; TODO: answer-pre-checkout-query
+             ;; TODO: answer-pre-checkout-query
 
-;; TODO: get-star-transactions
+             ;; get-my-star-balance
+             (is (:ok (<! (cg/get-my-star-balance bot))))
 
-;; TODO: refund-star-payment
+             ;; TODO: get-star-transactions
 
-;; TODO: edit-user-star-subscription
+             ;; TODO: refund-star-payment
 
-;; TODO: get-available-gifts
+             ;; TODO: edit-user-star-subscription
 
-;; TODO: send-gift
+             ;; TODO: get-available-gifts
 
-;; TODO: gift-premium-subscription
+             ;; TODO: send-gift
+
+             ;; TODO: gift-premium-subscription
+
+             (done)))))
 
 (deftest chat-administration-test
   (testing "Testing functions for chat administration"
