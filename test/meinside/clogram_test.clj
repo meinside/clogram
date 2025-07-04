@@ -162,6 +162,10 @@
       ;; stop a poll,
       (cg/stop-poll bot chat-id (get-in sent-poll [:result :message-id])))
 
+    ;; TODO: send-checklist
+
+    ;; TODO: edit-message-checklist
+
     ;; send a dice,
     (is (:ok (cg/send-dice bot chat-id)))
 
@@ -255,6 +259,9 @@
     ;; TODO: answer-shipping-query
 
     ;; TODO: answer-pre-checkout-query
+
+    ;; get-my-star-balance
+    (is (:ok (cg/get-my-star-balance bot)))
 
     ;; TODO: get-star-transactions
 
