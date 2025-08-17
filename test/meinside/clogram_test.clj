@@ -166,6 +166,10 @@
 
     ;; TODO: edit-message-checklist
 
+    ;; TODO: approve-suggested-post
+
+    ;; TODO: decline-suggested-post
+
     ;; send a dice,
     (is (:ok (cg/send-dice bot chat-id)))
 

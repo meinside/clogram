@@ -162,6 +162,10 @@
 
              ;; TODO: edit-message-checklist
 
+             ;; TODO: approve-suggested-post
+
+             ;; TODO: decline-suggested-post
+
              ;; TODO: get-file
 
              ;; TODO: delete-message
