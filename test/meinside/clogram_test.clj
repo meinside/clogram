@@ -81,6 +81,8 @@
     ;; get bot short description
     (is (:ok (cg/get-my-short-description bot)))
 
+    ;; TODO: send-message-draft
+
     ;; send a chat action,
     (is (:ok (cg/send-chat-action bot chat-id :typing)))
 
@@ -410,6 +412,10 @@
 
     ;; TODO: get-business-account-gifts
 
+    ;; TODO: get-user-gifts
+
+    ;; TODO: get-chat-gifts
+
     ;; TODO: convert-gift-to-stars
 
     ;; TODO: upgrade-gift
@@ -417,6 +423,8 @@
     ;; TODO: transfer-gift
 
     ;; TODO: post-story
+
+    ;; TODO: repost-story
 
     ;; TODO: edit-story
 

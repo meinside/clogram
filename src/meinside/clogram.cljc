@@ -5,7 +5,7 @@
 ;;;; (https://core.telegram.org/bots/api)
 ;;;;
 ;;;; created on : 2019.12.05.
-;;;; last update: 2025.08.17.
+;;;; last update: 2026.01.02.
 
 (ns meinside.clogram
   #?(:cljs (:require-macros [cljs.core.async.macros :as a :refer [go]]))
@@ -1174,6 +1174,24 @@
     (h/request bot "declineSuggestedPost" {"chat_id" chat-id
                                            "message_id" message-id
                                            "comment" comment})))
+
+(defn send-message-draft
+  "Send a message draft.
+
+  `options` include:
+    :message-thread-id, :parse-mode, and :entities.
+
+  (https://core.telegram.org/bots/api#sendmessagedraft)"
+  [bot chat-id draft-id text & options]
+  (let [{:keys [message-thread-id
+                parse-mode
+                entities]} options]
+    (h/request bot "sendMessageDraft" {"chat_id" chat-id
+                                       "message_thread_id" message-thread-id
+                                       "draft_id" draft-id
+                                       "text" text
+                                       "parse_mode" parse-mode
+                                       "entities" entities})))
 
 (defn send-chat-action
   "Send a chat action.
@@ -2665,6 +2683,65 @@
                                               "offset" offset
                                               "limit" limit})))
 
+(defn get-user-gifts
+  "Return the gifts owned and hosted by a user.
+
+  `options` include:
+    :exclude-unlimited, :exclude-limited-upgradable, :exclude-limited-non-upgradable,
+    :exclude-from-blockchain, :exclude-unique, :sort-by-price, :offset, and :limit.
+
+  (https://core.telegram.org/bots/api#getusergifts)"
+  [bot user-id & options]
+  (let [{:keys [exclude-unlimited
+                exclude-limited-upgradable
+                exclude-limited-non-upgradable
+                exclude-from-blockchain
+                exclude-unique
+                sort-by-price
+                offset
+                limit]} options]
+    (h/request bot "getUserGifts" {"user_id" user-id
+                                   "exclude_unlimited" exclude-unlimited
+                                   "exclude_limited_upgradable" exclude-limited-upgradable
+                                   "exclude_limited_non_upgradable" exclude-limited-non-upgradable
+                                   "exclude_from_blockchain" exclude-from-blockchain
+                                   "exclude_unique" exclude-unique
+                                   "sort_by_price" sort-by-price
+                                   "offset" offset
+                                   "limit" limit})))
+
+(defn get-chat-gifts
+  "Return the gifts owned by a chat.
+
+  `options` include:
+    :exclude-unsaved, :exclude-saved, :exclude-unlimited, :exclude-limited-upgradable,
+    :exclude-limited-non-upgradable, :exclude-from-blockchain, :exclude-unique,
+    :sort-by-price, :offset, and :limit.
+
+  (https://core.telegram.org/bots/api#getchatgifts)"
+  [bot chat-id & options]
+  (let [{:keys [exclude-unsaved
+                exclude-saved
+                exclude-unlimited
+                exclude-limited-upgradable
+                exclude-limited-non-upgradable
+                exclude-from-blockchain
+                exclude-unique
+                sort-by-price
+                offset
+                limit]} options]
+    (h/request bot "getChatGifts" {"chat_id" chat-id
+                                   "exclude_unsaved" exclude-unsaved
+                                   "exclude_saved" exclude-saved
+                                   "exclude_unlimited" exclude-unlimited
+                                   "exclude_limited_upgradable" exclude-limited-upgradable
+                                   "exclude_limited_non_upgradable" exclude-limited-non-upgradable
+                                   "exclude_from_blockchain" exclude-from-blockchain
+                                   "exclude_unique" exclude-unique
+                                   "sort_by_price" sort-by-price
+                                   "offset" offset
+                                   "limit" limit})))
+
 (defn convert-gift-to-stars
   "Convert a given regular gift to Telegram Stars.
 
@@ -2726,6 +2803,23 @@
                                 "areas" areas
                                 "post_to_chat_page" post-to-chat-page
                                 "protect_content" protect-content})))
+
+(defn repost-story
+  "Repost a story on behalf of a business account from another business account. 
+
+  `options` include:
+    :post-to-chat-page, and :protect-content.
+
+  (https://core.telegram.org/bots/api#repoststory)"
+  [bot business-connection-id from-chat-id from-story-id active-period & options]
+  (let [{:keys [post-to-chat-page
+                protect-content]} options]
+    (h/request bot "repostStory" {"business_connection_id" business-connection-id
+                                  "from_chat_id" from-chat-id
+                                  "from_story_id" from-story-id
+                                  "active_period" active-period
+                                  "post_to_chat_page" post-to-chat-page
+                                  "protect_content" protect-content})))
 
 (defn edit-story
   "Edit a story previously posted by the bot on behalf of a managed business account.
