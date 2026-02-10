@@ -5,7 +5,7 @@
 ;;;; (https://core.telegram.org/bots/api)
 ;;;;
 ;;;; created on : 2019.12.05.
-;;;; last update: 2026.01.02.
+;;;; last update: 2026.02.10.
 
 (ns meinside.clogram
   #?(:cljs (:require-macros [cljs.core.async.macros :as a :refer [go]]))
@@ -1298,6 +1298,20 @@
                                            "offset" offset
                                            "limit" limit})))
 
+(defn get-user-profile-audios
+  "Fetch a list of profile audios for a user.
+
+  `options` include:
+    :offset, and :limit.
+  
+  (https://core.telegram.org/bots/api#getuserprofileaudios)"
+  [bot user-id & options]
+  (let [{:keys [offset
+                limit]} options]
+    (h/request bot "getUserProfileAudios" {"user_id" user-id
+                                           "offset" offset
+                                           "limit" limit})))
+
 (defn set-user-emoji-status
   "Set user emoji status.
 
@@ -1795,6 +1809,25 @@
   [bot & options]
   (let [{:keys [language-code]} options]
     (h/request bot "getMyShortDescription" {"language_code" language-code})))
+
+(defn set-my-profile-photo
+  "Change the profile photo of this bot.
+
+  (Currently supports static photos (.jpeg) only.)
+  
+  (https://core.telegram.org/bots/api#setmyprofilephoto)"
+  [bot photo]
+  (let [filename (str "uploaded:" (random-uuid))]
+    (h/request bot "setMyProfilePhoto" {"photo" {:type "static"
+                                                 :photo (str "attach://" filename)}
+                                        filename photo})))
+
+(defn remove-my-profile-photo
+  "Remove the profile photo of this bot.
+  
+  (https://core.telegram.org/bots/api#removemyprofilephoto)"
+  [bot]
+  (h/request bot "removeMyProfilePhoto" {}))
 
 (defn set-my-commands
   "Set this bot's commands.
@@ -2360,7 +2393,7 @@
                                         "inline_message_id" inline-message-id})))
 
 (defn create-forum-topic
-  "Create a topic in a forum supergroup chat.
+  "Create a topic in a forum supergroup chat or a private chat with a user.
 
   (https://core.telegram.org/bots/api#createforumtopic)"
   [bot chat-id name & options]
@@ -2372,7 +2405,7 @@
                                        "icon_custom_emoji_id" icon-custom-emoji-id})))
 
 (defn edit-forum-topic
-  "Edit name and icon of a topic in a forum supergroup chat.
+  "Edit name and icon of a topic in a forum supergroup chat or a private chat with a user.
 
   `options` include:
     :name, and :icon-custom-emoji-id.
@@ -2403,7 +2436,7 @@
                                      "message_thread_id" message-thread-id}))
 
 (defn delete-forum-topic
-  "Delete a forum topic along with all its messages in a forum supergroup chat.
+  "Delete a forum topic along with all its messages in a forum supergroup chat or a private chat with a user.
 
   (https://core.telegram.org/bots/api#deleteforumtopic)"
   [bot chat-id message-thread-id]

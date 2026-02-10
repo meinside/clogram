@@ -339,7 +339,14 @@
 
              ;; TODO: get-user-profile-photos
 
+             ;; TODO: get-user-profile-audios
+
              ;; TODO: get-user-chat-boosts
+
+             ;; remove-my-profile-photo
+             (is (:ok (<! (cg/remove-my-profile-photo bot))))
+
+             ;; TODO: set-my-profile-photo (XXX - Blob is not supported in nodejs)
 
              ;; TODO: get-chat-administrators
 
@@ -361,15 +368,20 @@
 
              ;; TODO: get-my-default-administrator-rights
 
-             ;; TODO: create-forum-topic
+             ;; create-forum-topic
+             (let [created (<! (cg/create-forum-topic bot chat-id (str "[clogram] forum topic with chat_id: " chat-id)))]
+               (is (:ok created))
 
-             ;; TODO: edit-forum-topic
+               ;; edit-forum-topic
+               (is (:ok (<! (cg/edit-forum-topic bot chat-id (get-in created [:result :message-thread-id])
+                                                 :name (str "[clogram] edited forum topic with chat_id: " chat-id)))))
+
+               ;; delete-forum-topic
+               (is (:ok (<! (cg/delete-forum-topic bot chat-id (get-in created [:result :message-thread-id]))))))
 
              ;; TODO: close-forum-topic
 
              ;; TODO: reopen-forum-topic
-
-             ;; TODO: delete-forum-topic
 
              ;; TODO: unpin-all-forum-topic-messages
 
