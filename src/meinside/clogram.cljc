@@ -5,7 +5,7 @@
 ;;;; (https://core.telegram.org/bots/api)
 ;;;;
 ;;;; created on : 2019.12.05.
-;;;; last update: 2026.02.10.
+;;;; last update: 2026.02.11.
 
 (ns meinside.clogram
   #?(:cljs (:require-macros [cljs.core.async.macros :as a :refer [go]]))
@@ -2444,7 +2444,7 @@
                                      "message_thread_id" message-thread-id}))
 
 (defn unpin-all-forum-topic-messages
-  "Clear the list of pinned messages in a forum topic.
+  "Clear the list of pinned messages in a forum topic in a forum supergroup chat or a private chat with a user.
 
   (https://core.telegram.org/bots/api#unpinallforumtopicmessages)"
   [bot chat-id message-thread-id]

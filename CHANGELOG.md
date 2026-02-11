@@ -1,260 +1,264 @@
-# Change Log
+# Changed Log
 All notable changes to this project will be documented in this file. This change log follows the conventions of [keepachangelog.com](http://keepachangelog.com/).
 
+## 0.38.1 - 2026-02-11
+- Updated tests and documents.
+
 ## [0.38.0] - 2026-02-10
-- Apply API changes(https://core.telegram.org/bots/api#february-9-2026).
+- Applied API changes(https://core.telegram.org/bots/api#february-9-2026).
 
 ## [0.37.0] - 2026-01-02
-- Apply API changes(https://core.telegram.org/bots/api#december-31-2025).
+- Applied API changes(https://core.telegram.org/bots/api#december-31-2025).
 
 ## [0.36.0] - 2025-08-17
-- Apply API changes(https://core.telegram.org/bots/api#august-15-2025).
+- Applied API changes(https://core.telegram.org/bots/api#august-15-2025).
 
 ## [0.35.0] - 2025-07-04
-- Apply API changes(https://core.telegram.org/bots/api-changelog#july-3-2025).
+- Applied API changes(https://core.telegram.org/bots/api-changelog#july-3-2025).
 
 ## [0.34.0] - 2025-04-14
-- Apply API changes(https://core.telegram.org/bots/api-changelog#april-11-2025).
+- Applied API changes(https://core.telegram.org/bots/api-changelog#april-11-2025).
 
 ## [0.33.0] - 2025-02-13
-- Apply API changes(https://core.telegram.org/bots/api-changelog#february-12-2025).
+- Applied API changes(https://core.telegram.org/bots/api-changelog#february-12-2025).
 
 ## [0.32.0] - 2025-01-02
-- Apply API changes(https://core.telegram.org/bots/api-changelog#january-1-2025).
+- Applied API changes(https://core.telegram.org/bots/api-changelog#january-1-2025).
 
 ## [0.31.0] - 2024-11-18
-- Apply API changes(https://core.telegram.org/bots/api#november-17-2024).
+- Applied API changes(https://core.telegram.org/bots/api#november-17-2024).
 
 ## [0.30.0] - 2024-11-06
-- Apply API changes(https://core.telegram.org/bots/api-changelog#october-31-2024).
-- Update versions of dependencies.
+- Applied API changes(https://core.telegram.org/bots/api-changelog#october-31-2024).
+- Updated versions of dependencies.
 
 ## [0.29.0] - 2024-09-09
-- Apply API changes(https://core.telegram.org/bots/api-changelog#september-6-2024).
+- Applied API changes(https://core.telegram.org/bots/api-changelog#september-6-2024).
 
 ## [0.28.0] - 2024-08-16
-- Apply API changes(https://core.telegram.org/bots/api-changelog#august-14-2024).
+- Applied API changes(https://core.telegram.org/bots/api-changelog#august-14-2024).
 
 ## [0.27.0] - 2024-08-01
-- Apply API changes(https://core.telegram.org/bots/api-changelog#july-31-2024).
+- Applied API changes(https://core.telegram.org/bots/api-changelog#july-31-2024).
 
 ## [0.26.0] - 2024-07-02
-- Apply API changes(https://core.telegram.org/bots/api#july-1-2024).
+- Applied API changes(https://core.telegram.org/bots/api#july-1-2024).
 
 ## [0.25.0] - 2024-06-20
-- Apply API changes(https://core.telegram.org/bots/api#june-18-2024).
+- Applied API changes(https://core.telegram.org/bots/api#june-18-2024).
 
 ## [0.24.0] - 2024-05-29
-- Apply API changes(https://core.telegram.org/bots/api#may-28-2024).
+- Applied API changes(https://core.telegram.org/bots/api#may-28-2024).
 
 ## [0.23.0] - 2024-05-07
-- Apply API changes(https://core.telegram.org/bots/api#may-6-2024).
+- Applied API changes(https://core.telegram.org/bots/api#may-6-2024).
 
 ## [0.22.0] - 2024-04-01
-- Apply API changes(https://core.telegram.org/bots/api#march-31-2024).
+- Applied API changes(https://core.telegram.org/bots/api#march-31-2024).
 
 ## [0.21.0] - 2024-01-03
-- Apply API changes(https://core.telegram.org/bots/api#december-29-2023).
+- Applied API changes(https://core.telegram.org/bots/api#december-29-2023).
 
 ## [0.20.0] - 2023-09-25
-- Apply API changes(https://core.telegram.org/bots/api-changelog#september-22-2023).
+- Applied API changes(https://core.telegram.org/bots/api-changelog#september-22-2023).
 
 ## [0.19.0] - 2023-08-21
-- Apply API changes(https://core.telegram.org/bots/api-changelog#august-18-2023).
+- Applied API changes(https://core.telegram.org/bots/api-changelog#august-18-2023).
 
 ## [0.18.0] - 2023-04-24
-- Apply API changes(https://core.telegram.org/bots/api-changelog#april-21-2023).
-  - Add `get-my-name` and `set-my-name` functions.
+- Applied API changes(https://core.telegram.org/bots/api-changelog#april-21-2023).
+  - Added `get-my-name` and `set-my-name` functions.
 
 ## [0.17.0] - 2023-03-10
-- Apply API changes(https://core.telegram.org/bots/api-changelog#march-9-2023).
+- Applied API changes(https://core.telegram.org/bots/api-changelog#march-9-2023).
 
 ## [0.16.0] - 2023-02-06
-- Apply API changes(https://core.telegram.org/bots/api-changelog#february-3-2023).
+- Applied API changes(https://core.telegram.org/bots/api-changelog#february-3-2023).
 
 ## [0.15.0] - 2023-01-02
 ### Changed
-- Add parameter :drop-pending-updates to `delete-webhook` function.
-- Apply API changes(https://core.telegram.org/bots/api-changelog#december-30-2022).
+- Added parameter :drop-pending-updates to `delete-webhook` function.
+- Applied API changes(https://core.telegram.org/bots/api-changelog#december-30-2022).
 
 ## [0.14.0] - 2022-11-07
-- Apply API changes(https://core.telegram.org/bots/api-changelog#november-5-2022).
+- Applied API changes(https://core.telegram.org/bots/api-changelog#november-5-2022).
 
 ## [0.13.1] - 2022-10-05
 ### Changed
-- Edit tests.
+- Edited tests.
 - Hide `get-file-url` function.
 
 ## [0.13.0] - 2022-08-16
 ### Added
-- Apply API changes(https://core.telegram.org/bots/api#august-12-2022).
-  - Add function `get-custom-emoji-stickers`.
+- Applied API changes(https://core.telegram.org/bots/api#august-12-2022).
+  - Added function `get-custom-emoji-stickers`.
 
 ## [0.12.0] - 2022-06-21
 ### Added
-- Apply API changes(https://core.telegram.org/bots/api-changelog#june-20-2022).
-  - Add function `create-invoice-link`.
+- Applied API changes(https://core.telegram.org/bots/api-changelog#june-20-2022).
+  - Added function `create-invoice-link`.
 
 ## [0.11.0] - 2022-04-18
-- Apply API changes(https://core.telegram.org/bots/api-changelog#april-16-2022).
+- Applied API changes(https://core.telegram.org/bots/api-changelog#april-16-2022).
 
 ## [0.10.0] - 2022-02-03
 ### Changed
-- Apply API changes(https://core.telegram.org/bots/api-changelog#january-31-2022).
-  - Add parameter `webm_sticker` to functions: `create-new-sticker-set` and `add-sticker-to-set`.
+- Applied API changes(https://core.telegram.org/bots/api-changelog#january-31-2022).
+  - Added parameter `webm_sticker` to functions: `create-new-sticker-set` and `add-sticker-to-set`.
 
 ## [0.9.0] - 2022-01-03
 ### Changed
-- Apply API changes(https://core.telegram.org/bots/api-changelog#december-30-2021).
-  - Add parameter `protect_content` to functions: `send-message`, `send-photo`, `send-video`, `send-animation`, `send-audio`, `send-document`, `send-sticker`, `send-video-note`, `send-voice`, `send-location`, `send-venue`, `send-contact`, `send-poll`, `send-dice`, `send-invoice`, `send-game`, `send-media-group`, `copy-message`, and `forward-message`.
+- Applied API changes(https://core.telegram.org/bots/api-changelog#december-30-2021).
+  - Added parameter `protect_content` to functions: `send-message`, `send-photo`, `send-video`, `send-animation`, `send-audio`, `send-document`, `send-sticker`, `send-video-note`, `send-voice`, `send-location`, `send-venue`, `send-contact`, `send-poll`, `send-dice`, `send-invoice`, `send-game`, `send-media-group`, `copy-message`, and `forward-message`.
 
 ## [0.8.0] - 2021-12-13
 ### Added
-- Apply API changes(https://core.telegram.org/bots/api#december-7-2021).
-  - Add functions `ban-chat-sender-chat` and `unban-chat-sender-chat`.
+- Applied API changes(https://core.telegram.org/bots/api#december-7-2021).
+  - Added functions `ban-chat-sender-chat` and `unban-chat-sender-chat`.
 
 ## [0.7.0] - 2021-11-08
 ### Added
-- Apply API changes(https://core.telegram.org/bots/api#november-5-2021).
-  - Add functions `approve-chat-join-request` and `decline-chat-join-request`.
+- Applied API changes(https://core.telegram.org/bots/api#november-5-2021).
+  - Added functions `approve-chat-join-request` and `decline-chat-join-request`.
 
 ### Changed
-- Apply API changes(https://core.telegram.org/bots/api#november-5-2021).
-  - Add params `name` and `creates-join-request` to functions `create-chat-invite-link` and `edit-chat-invite-link`.
+- Applied API changes(https://core.telegram.org/bots/api#november-5-2021).
+  - Added params `name` and `creates-join-request` to functions `create-chat-invite-link` and `edit-chat-invite-link`.
 
 ## [0.6.0] - 2021-06-28
 ### Added
-- Apply API changes(https://core.telegram.org/bots/api#june-25-2021).
-  - Add function `delete-my-commands`.
+- Applied API changes(https://core.telegram.org/bots/api#june-25-2021).
+  - Added function `delete-my-commands`.
 
 ### Changed
-- Apply API changes(https://core.telegram.org/bots/api#june-25-2021).
-  - Rename function `kick-chat-member` to `ban-chat-member`.
-  - Rename function `get-chat-members-count` to `get-chat-member-count`.
-  - Add optional parameters to function `get-my-commands`.
-  - Add optional parameters to function `set-my-commands`.
+- Applied API changes(https://core.telegram.org/bots/api#june-25-2021).
+  - Renamed function `kick-chat-member` to `ban-chat-member`.
+  - Renamed function `get-chat-members-count` to `get-chat-member-count`.
+  - Added optional parameters to function `get-my-commands`.
+  - Added optional parameters to function `set-my-commands`.
 
 ## [0.5.0] - 2021-04-27
 ### Changed
-- Apply API changes(https://core.telegram.org/bots/api#april-26-2021):
-  - Add/change parameters of `send-invoice` function.
-  - Fix parameters of `send-chat-action` function.
+- Applied API changes(https://core.telegram.org/bots/api#april-26-2021):
+  - Added/changed parameters of `send-invoice` function.
+  - Fixed parameters of `send-chat-action` function.
 
 ## [0.4.0] - 2021-03-10
 ### Added
-- Add `create-chat-invite-link`, `edit-chat-invite-link`, and `revoke-chat-invite-link` functions. (https://core.telegram.org/bots/api-changelog#march-9-2021)
+- Added `create-chat-invite-link`, `edit-chat-invite-link`, and `revoke-chat-invite-link` functions. (https://core.telegram.org/bots/api-changelog#march-9-2021)
 
 ### Changed
-- Change parameters for `kick-chat-member` and `promote-chat-member`. (https://core.telegram.org/bots/api-changelog#march-9-2021)
+- Changed parameters for `kick-chat-member` and `promote-chat-member`. (https://core.telegram.org/bots/api-changelog#march-9-2021)
 
 ## [0.3.0] - 2020-11-05
 ### Added
-- Add `copy-message`, and `unpin-all-chat-messages` function. (https://core.telegram.org/bots/api#november-4-2020)
+- Added `copy-message`, and `unpin-all-chat-messages` function. (https://core.telegram.org/bots/api#november-4-2020)
 
 ### Changed
-- Change `send-message`, `send-photo`, `send-audio`, `send-document`, `send-sticker`, `send-video`, `send-animation`, `send-voice`, `send-video-note`, `send-media-group`, `send-location`, `send-venue`, `send-contact`, `send-poll`, `send-dice`, `unban-chat-member`, `promote-chat-member`, `unpin-chat-message`, `edit-message-text`, `edit-message-caption`, `edit-message-live-location`, `send-invoice`, and `send-game` function signatures.
+- Changed `send-message`, `send-photo`, `send-audio`, `send-document`, `send-sticker`, `send-video`, `send-animation`, `send-voice`, `send-video-note`, `send-media-group`, `send-location`, `send-venue`, `send-contact`, `send-poll`, `send-dice`, `unban-chat-member`, `promote-chat-member`, `unpin-chat-message`, `edit-message-text`, `edit-message-caption`, `edit-message-live-location`, `send-invoice`, and `send-game` function signatures.
 
 ## [0.2.3] - 2020-04-24
 ### Changed
-- Add params to `send-poll` and `send-dice` functions. (https://core.telegram.org/bots/api-changelog#april-24-2020)
+- Added params to `send-poll` and `send-dice` functions. (https://core.telegram.org/bots/api-changelog#april-24-2020)
 
 ## [0.2.2] - 2020-03-31
 ### Added
-- Add `send-dice`, `get-my-commands`, `set-my-commands`, and `set-sticker-set-thumb` functions. (https://core.telegram.org/bots/api#march-30-2020)
+- Added `send-dice`, `get-my-commands`, `set-my-commands`, and `set-sticker-set-thumb` functions. (https://core.telegram.org/bots/api#march-30-2020)
 
 ### Changed
-- Change `create-new-sticker-set`, `add-sticker-to-set` function signatures.
+- Changed `create-new-sticker-set`, `add-sticker-to-set` function signatures.
 
 ## [0.2.1] - 2020-01-29
 ### Changed
-- Add params to `send-poll` function. (https://core.telegram.org/bots/api-changelog#january-23-2020)
+- Added params to `send-poll` function. (https://core.telegram.org/bots/api-changelog#january-23-2020)
 
 ## [0.2.0] - 2020-01-15
 ### Added
-- Add support for ClojureScript.
-- Add some test cases for ClojureScript.
+- Added support for ClojureScript.
+- Added some test cases for ClojureScript.
 
 ## [0.1.2] - 2020-01-06
 ### Added
-- Add an environment variable (VERBOSE) for testing.
-- Add a guide file (README.md) for testing.
+- Added an environment variable (VERBOSE) for testing.
+- Added a guide file (README.md) for testing.
 
 ## [0.1.1] - 2020-01-02
 ### Added
-- Add `set-chat-administrator-custom-title` function. (https://core.telegram.org/bots/api-changelog#december-31-2019)
+- Added `set-chat-administrator-custom-title` function. (https://core.telegram.org/bots/api-changelog#december-31-2019)
 
 ## [0.1.0] - 2019-12-19
 ### Added
-- Add tests for long-polling functions.
+- Added tests for long-polling functions.
 
 ### Changed
-- Change long-polling functions to return boolean values.
+- Changed long-polling functions to return boolean values.
 
 ### Removed
-- Remove :jar-exclusions from project.clj.
+- Removed :jar-exclusions from project.clj.
 
 ## [0.0.10], [0.0.11], [0.0.12] - 2019-12-19
 ### Fixed
-- Fix for cljdoc and excluding files from jar.
+- Fixed for cljdoc and excluding files from jar.
 
 ## [0.0.9] - 2019-12-17
 ### Fixed
-- Lint codes.
+- Fixed lint warnings in codes.
 
 ## [0.0.8] - 2019-12-17
 ### Changed
-- Convert returning jsons' keys from snake to kebab case.
+- Converted returning jsons' keys from snake to kebab case.
 
 ### Fixed
-- Fix typos in comments.
+- Fixed typos in comments.
 
 ## [0.0.7] - 2019-12-16
 ### Changed
-- Apply clojure style guide to some codes and comments (https://github.com/bbatsov/clojure-style-guide)
+- Applied clojure style guide to some codes and comments (https://github.com/bbatsov/clojure-style-guide)
 
 ## [0.0.6] - 2019-12-16
 ### Added
-- Add more test codes. (WIP)
+- Added more test codes. (WIP)
 
 ### Changed
-- Rename `stop-polling` to `stop-polling-updates` for clarity.
+- Renamed `stop-polling` to `stop-polling-updates` for clarity.
 
 ## [0.0.5] - 2019-12-13
 ### Added
-- Add some more test codes. (WIP)
+- Added some more test codes. (WIP)
 
 ## [0.0.4] - 2019-12-13
 ### Added
-- Add some test codes. (WIP)
+- Added some test codes. (WIP)
 
 ### Changed
-- Change `stop-polling` function to return a boolean value.
+- Changed `stop-polling` function to return a boolean value.
 
 ## [0.0.3] - 2019-12-13
 ### Fixed
-- Fix typo: `edit-message-caption` to `edit-message-media`.
+- Fixed typo: `edit-message-caption` to `edit-message-media`.
 
 ### Changed
-- Reorganize files for tests. (WIP)
+- Reorganized files for tests. (WIP)
 
 ## [0.0.2] - 2019-12-12
 ### Changed
-- Fix not to wait for returned channel when polling updates.
-- Edit guides in README.md.
+- Fixed not to wait for returned channel when polling updates.
+- Edited guides in README.md.
 
 ## [0.0.1] - 2019-12-09
 ### Added
-- Add functions for long-polling updates.
+- Added functions for long-polling updates.
 
 ### Changed
-- Reorganize files.
-- Add timestamp to log functions.
-- Edit guides in README.md.
+- Reorganized files.
+- Added timestamp to log functions.
+- Edited guides in README.md.
 
 ## [0.0.0] - 2019-12-09
 ### Added
 - Initial commit.
 
+[0.38.1]: https://github.com/meinside/clogram/compare/v0.38.0...v0.38.1
 [0.38.0]: https://github.com/meinside/clogram/compare/v0.37.0...v0.38.0
 [0.37.0]: https://github.com/meinside/clogram/compare/v0.36.0...v0.37.0
 [0.36.0]: https://github.com/meinside/clogram/compare/v0.35.0...v0.36.0

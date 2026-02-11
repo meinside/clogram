@@ -343,8 +343,8 @@
 
              ;; TODO: get-user-chat-boosts
 
-             ;; remove-my-profile-photo
-             (is (:ok (<! (cg/remove-my-profile-photo bot))))
+             ;; TODO: remove-my-profile-photo
+             ;;(is (:ok (<! (cg/remove-my-profile-photo bot)))) ;; FIXME: Bad Request: BOT_FALLBACK_UNSUPPORTED
 
              ;; TODO: set-my-profile-photo (XXX - Blob is not supported in nodejs)
 
@@ -376,14 +376,15 @@
                (is (:ok (<! (cg/edit-forum-topic bot chat-id (get-in created [:result :message-thread-id])
                                                  :name (str "[clogram] edited forum topic with chat_id: " chat-id)))))
 
+               ;; unpin-all-forum-topic-messages
+               (is (:ok (<! (cg/unpin-all-forum-topic-messages bot chat-id (get-in created [:result :message-thread-id])))))
+
                ;; delete-forum-topic
                (is (:ok (<! (cg/delete-forum-topic bot chat-id (get-in created [:result :message-thread-id]))))))
 
              ;; TODO: close-forum-topic
 
              ;; TODO: reopen-forum-topic
-
-             ;; TODO: unpin-all-forum-topic-messages
 
              ;; TODO: edit-general-forum-topic
 
