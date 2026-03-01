@@ -297,6 +297,8 @@
 
     ;; TODO: set-chat-administrator-custom-title
 
+    ;; TODO: set-chat-member-tag
+
     ;; TODO: ban-chat-sender-chat
 
     ;; TODO: unban-chat-sender-chat
