@@ -5,7 +5,7 @@
 ;;;; (https://core.telegram.org/bots/api)
 ;;;;
 ;;;; created on : 2019.12.05.
-;;;; last update: 2026.02.11.
+;;;; last update: 2026.03.01.
 
 (ns meinside.clogram
   #?(:cljs (:require-macros [cljs.core.async.macros :as a :refer [go]]))
@@ -1427,7 +1427,7 @@
     :can-edit-messages, :can-delete-messages, :can-post-stories,
     :can-edit-stories, :can-delete-stories, :can-manage-video-chats,
     :can-invite-users, :can-restrict-members, :can-pin-messages, :can-promote-members,
-    :can-manage-topics, and :can-manage-direct-messages.
+    :can-manage-topics, :can-manage-direct-messages, and :can-manage-tags.
 
   (https://core.telegram.org/bots/api#promotechatmember)"
   [bot chat-id user-id & options]
@@ -1446,7 +1446,8 @@
                 can-pin-messages
                 can-promote-members
                 can-manage-topics
-                can-manage-direct-messages]} options]
+                can-manage-direct-messages
+                can-manage-tags]} options]
     (h/request bot "promoteChatMember" {"chat_id" chat-id
                                         "user_id" user-id
                                         "is_anonymous" is-anonymous
@@ -1464,7 +1465,8 @@
                                         "can_pin_messages" can-pin-messages
                                         "can_promote_members" can-promote-members
                                         "can_manage_topics" can-manage-topics
-                                        "can_manage_direct_messages" can-manage-direct-messages})))
+                                        "can_manage_direct_messages" can-manage-direct-messages
+                                        "can_manage_tags" can-manage-tags})))
 
 (defn set-chat-administrator-custom-title
   "Set chat administrator's custom title.
@@ -1474,6 +1476,16 @@
   (h/request bot "setChatAdministratorCustomTitle" {"chat_id" chat-id
                                                     "user_id" user-id
                                                     "custom_title" custom-title}))
+
+(defn set-chat-member-tag
+  "Set a tag for a regular member in a group or a supergroup.
+
+  (https://core.telegram.org/bots/api#setchatmembertag)"
+  [bot chat-id user-id & options]
+  (let [{:keys [tag]} options]
+    (h/request bot "setChatMemberTag" {"chat_id" chat-id
+                                       "user_id" user-id
+                                       "tag" tag})))
 
 (defn ban-chat-sender-chat
   "Ban a channel chat in a supergroup or a channel.
