@@ -5,7 +5,7 @@
 ;;;; (https://core.telegram.org/bots/api)
 ;;;;
 ;;;; created on : 2019.12.05.
-;;;; last update: 2026.03.01.
+;;;; last update: 2026.04.06.
 
 (ns meinside.clogram
   #?(:cljs (:require-macros [cljs.core.async.macros :as a :refer [go]]))
@@ -1083,8 +1083,10 @@
   `options` include:
     :business-connection-id, :message-thread-id, :question-parse-mode,
     question-entities, :is-anonymous, :type, :allows-multiple-answers,
-    :correct-option-id, :explanation, :explanation-parse-mode,
+    :allows-revoting, :shuffle-options, :allow-adding-options, :hide-results-until-closes,
+    :correct-option-ids, :explanation, :explanation-parse-mode,
     :explanation-entities, :open-period, :close-date, :is-closed,
+    :description, :description-parse-mode, :description-entities,
     :disable-notification, :protect-content, :allow-paid-broadcast,
     :message-effect-id, :reply-parameters, and :reply-markup.
 
@@ -1097,13 +1099,20 @@
                 is-anonymous
                 type
                 allows-multiple-answers
-                correct-option-id
+                allows-revoting
+                shuffle-options
+                allow-adding-options
+                hide-results-until-closes
+                correct-option-ids
                 explanation
                 explanation-parse-mode
                 explanation-entities
                 open-period
                 close-date
                 is-closed
+                description
+                description-parse-mode
+                description-entities
                 disable-notification
                 protect-content
                 allow-paid-broadcast
@@ -1120,13 +1129,20 @@
                                "is_anonymous" is-anonymous
                                "type" type
                                "allows_multiple_answers" allows-multiple-answers
-                               "correct_option_id" correct-option-id
+                               "allows_revoting" allows-revoting
+                               "shuffle_options" shuffle-options
+                               "allow_adding_options" allow-adding-options
+                               "hide_results_until_closes" hide-results-until-closes
+                               "correct_option_ids" correct-option-ids
                                "explanation" explanation
                                "explanation_parse_mode" explanation-parse-mode
                                "explanation_entities" explanation-entities
                                "open_period" open-period
                                "close_date" close-date
                                "is_closed" is-closed
+                               "description" description
+                               "description_parse_mode" description-parse-mode
+                               "description_entities" description-entities
                                "disable_notification" disable-notification
                                "protect_content" protect-content
                                "allow_paid_broadcast" allow-paid-broadcast
@@ -1769,6 +1785,20 @@
   [bot business-connection-id]
   (h/request bot "getBusinessConnection" {"business_connection_id" business-connection-id}))
 
+(defn get-managed-bot-token
+  "Get the token of a managed bot.
+
+  (https://core.telegram.org/bots/api#getmanagedbottoken)"
+  [bot user-id]
+  (h/request bot "getManagedBotToken" {"user_id" user-id}))
+
+(defn replace-managed-bot-token
+  "Revoke the current token of a managed bot and regenerate a new one.
+
+  (https://core.telegram.org/bots/api#replacemanagedbottoken)"
+  [bot user-id]
+  (h/request bot "replaceManagedBotToken" {"user_id" user-id}))
+
 (defn set-my-name
   "Set this bot's name.
 
@@ -2335,6 +2365,14 @@
                                                 "allow_bot_chats" allow-bot-chats
                                                 "allow_group_chats" allow-group-chats
                                                 "allow_channel_chats" allow-channel-chats})))
+
+(defn save-prepared-keyboard-button
+  "Store a keyboard button that can be used by a user within a Mini App.
+
+  (https://core.telegram.org/bots/api#savepreparedkeyboardbutton)"
+  [bot user-id button]
+  (h/request bot "savePreparedKeyboardButton" {"user_id" user-id
+                                               "button" button}))
 
 (defn send-game
   "Send a game.

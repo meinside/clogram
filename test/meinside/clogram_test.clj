@@ -468,6 +468,8 @@
 
     ;; TODO: save-prepared-inline-message
 
+    ;; TODO: save-prepared-keyboard-button
+
     (comment "----------------")))
 
 (deftest verification-test
@@ -479,5 +481,13 @@
     ;; TODO: remove-user-verification
 
     ;; TODO: remove-chat-verification
+
+    (comment "----------------")))
+
+(deftest managed-bot-test
+  (testing "Testing managed bots"
+    ;; TODO: get-managed-bot-token
+
+    ;; TODO: replace-managed-bot-token
 
     (comment "----------------")))
