@@ -462,6 +462,8 @@
 
 ;; TODO: save-prepared-inline-message
 
+;; TODO: save-prepared-keyboard-button
+
 (deftest verification-test
   (testing "Testing verifications"))
 ;; TODO: verify-user
@@ -472,3 +474,8 @@
 
 ;; TODO: remove-chat-verification
 
+(deftest managed-bot-test
+  (testing "Testing managed bots"))
+;; TODO: get-managed-bot-token
+
+;; TODO: replace-managed-bot-token
