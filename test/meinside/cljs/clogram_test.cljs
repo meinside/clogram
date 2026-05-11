@@ -123,6 +123,8 @@
 
              ;; TODO: send-photo (XXX - Blob is not supported in nodejs)
 
+             ;; TODO: send-live-photo (XXX - Blob is not supported in nodejs)
+
              ;; TODO: send-audio
 
              ;; TODO: send-document (XXX - Blob is not supported in nodejs)
@@ -186,8 +188,14 @@
 
              ;; TODO: set-message-reaction
 
+             ;; TODO: delete-all-message-reactions
+
+             ;; TODO: delete-message-reaction
+
              ;; fetch messages
              (is (:ok (<! (cg/get-updates bot))))
+
+             ;; TODO: get-user-personal-chat-messages
 
              (done)))))
 
@@ -450,6 +458,10 @@
   (testing "Testing callback query"))
 ;; TODO: answer-callback-query
 
+(deftest guest-query-test
+  (testing "Testing guest query"))
+;; TODO: answer-guest-query
+
 (deftest inline-query-test
   (testing "Testing inline query"))
 ;; TODO: answer-inline-query
@@ -479,3 +491,7 @@
 ;; TODO: get-managed-bot-token
 
 ;; TODO: replace-managed-bot-token
+
+;; TODO: get-managed-bot-access-settings
+
+;; TODO: set-managed-bot-access-settings
