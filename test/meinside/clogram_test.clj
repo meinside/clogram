@@ -115,6 +115,8 @@
                                         :chat-id chat-id
                                         :message-id (get-in sent-photo [:result :message-id])))))
 
+    ;; TODO: send-live-photo
+
     ;; TODO: send-audio
 
     ;; send a document,
@@ -185,8 +187,14 @@
 
     ;; TODO: set-message-reaction
 
+    ;; TODO: delete-all-message-reactions
+
+    ;; TODO: delete-message-reaction
+
     ;; fetch messages
     (is (:ok (cg/get-updates bot)))
+
+    ;; TODO: get-user-personal-chat-messages
 
     (comment "----------------")))
 
@@ -454,6 +462,12 @@
 
     (comment "----------------")))
 
+(deftest guest-query-test
+  (testing "Testing guest query"
+    ;; TODO: answer-guest-query
+
+    (comment "----------------")))
+
 (deftest inline-query-test
   (testing "Testing inline query"
     ;; TODO: answer-inline-query
@@ -489,5 +503,9 @@
     ;; TODO: get-managed-bot-token
 
     ;; TODO: replace-managed-bot-token
+
+    ;; TODO: get-managed-bot-access-settings
+
+    ;; TODO: set-managed-bot-access-settings
 
     (comment "----------------")))

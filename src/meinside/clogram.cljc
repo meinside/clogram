@@ -5,7 +5,7 @@
 ;;;; (https://core.telegram.org/bots/api)
 ;;;;
 ;;;; created on : 2019.12.05.
-;;;; last update: 2026.04.06.
+;;;; last update: 2026.05.11.
 
 (ns meinside.clogram
   #?(:cljs (:require-macros [cljs.core.async.macros :as a :refer [go]]))
@@ -419,6 +419,52 @@
                                 "suggested_post_parameters" suggested-post-parameters
                                 "reply_parameters" reply-parameters
                                 "reply_markup" reply-markup})))
+
+(defn send-live-photo
+  "Send live photos.
+
+  `options` include:
+    :business-connection-id, :message-thread-id, :direct-messages-topic-id,
+    :caption, :parse-mode, :caption-entities, :show-caption-above-media,
+    :has-spoiler, :disable-notification, :protect-content, :allow-paid-broadcast,
+    :message-effect-id, :suggested-post-parameters, :reply-parameters, and
+    :reply-markup.
+
+  (https://core.telegram.org/bots/api#sendlivephoto)"
+  [bot chat-id live-photo photo & options]
+  (let [{:keys [business-connection-id
+                message-thread-id
+                direct-messages-topic-id
+                caption
+                parse-mode
+                caption-entities
+                show-caption-above-media
+                has-spoiler
+                disable-notification
+                protect-content
+                allow-paid-broadcast
+                message-effect-id
+                suggested-post-parameters
+                reply-parameters
+                reply-markup]} options]
+    (h/request bot "sendLivePhoto" {"chat_id" chat-id
+                                    "live_photo" live-photo
+                                    "photo" photo
+                                    "business_connection_id" business-connection-id
+                                    "message_thread_id" message-thread-id
+                                    "direct_messages_topic_id" direct-messages-topic-id
+                                    "caption" caption
+                                    "parse_mode" parse-mode
+                                    "caption_entities" caption-entities
+                                    "show_caption_above_media" show-caption-above-media
+                                    "has_spoiler" has-spoiler
+                                    "disable_notification" disable-notification
+                                    "protect_content" protect-content
+                                    "allow_paid_broadcast" allow-paid-broadcast
+                                    "message_effect_id" message-effect-id
+                                    "suggested_post_parameters" suggested-post-parameters
+                                    "reply_parameters" reply-parameters
+                                    "reply_markup" reply-markup})))
 
 (defn send-audio
   "Send an audio file.
@@ -1082,12 +1128,12 @@
 
   `options` include:
     :business-connection-id, :message-thread-id, :question-parse-mode,
-    question-entities, :is-anonymous, :type, :allows-multiple-answers,
+    :question-entities, :is-anonymous, :type, :allows-multiple-answers,
     :allows-revoting, :shuffle-options, :allow-adding-options, :hide-results-until-closes,
-    :correct-option-ids, :explanation, :explanation-parse-mode,
-    :explanation-entities, :open-period, :close-date, :is-closed,
+    :members-only, :country-codes, :correct-option-ids, :explanation, :explanation-parse-mode,
+    :explanation-entities, :explanation-media, :open-period, :close-date, :is-closed,
     :description, :description-parse-mode, :description-entities,
-    :disable-notification, :protect-content, :allow-paid-broadcast,
+    :media, :disable-notification, :protect-content, :allow-paid-broadcast,
     :message-effect-id, :reply-parameters, and :reply-markup.
 
   (https://core.telegram.org/bots/api#sendpoll)"
@@ -1103,16 +1149,20 @@
                 shuffle-options
                 allow-adding-options
                 hide-results-until-closes
+                members-only
+                country-codes
                 correct-option-ids
                 explanation
                 explanation-parse-mode
                 explanation-entities
+                explanation-media
                 open-period
                 close-date
                 is-closed
                 description
                 description-parse-mode
                 description-entities
+                media
                 disable-notification
                 protect-content
                 allow-paid-broadcast
@@ -1133,16 +1183,20 @@
                                "shuffle_options" shuffle-options
                                "allow_adding_options" allow-adding-options
                                "hide_results_until_closes" hide-results-until-closes
+                               "members_only" members-only
+                               "country_codes" country-codes
                                "correct_option_ids" correct-option-ids
                                "explanation" explanation
                                "explanation_parse_mode" explanation-parse-mode
                                "explanation_entities" explanation-entities
+                               "explanation_media" explanation-media
                                "open_period" open-period
                                "close_date" close-date
                                "is_closed" is-closed
                                "description" description
                                "description_parse_mode" description-parse-mode
                                "description_entities" description-entities
+                               "media" media
                                "disable_notification" disable-notification
                                "protect_content" protect-content
                                "allow_paid_broadcast" allow-paid-broadcast
@@ -1170,7 +1224,7 @@
 
   `options` include:
     :send_date.
-  
+
   (https://core.telegram.org/bots/api#approvesuggestedpost)"
   [bot chat-id message-id & options]
   (let [{:keys [send-date]} options]
@@ -1180,10 +1234,10 @@
 
 (defn decline-suggested-post
   "Decline a suggested post.
-  
+
   `options` include:
     :comment.
-    
+
   (https://core.telegram.org/bots/api#declinesuggestedpost)"
   [bot chat-id message-id & options]
   (let [{:keys [comment]} options]
@@ -1319,7 +1373,7 @@
 
   `options` include:
     :offset, and :limit.
-  
+
   (https://core.telegram.org/bots/api#getuserprofileaudios)"
   [bot user-id & options]
   (let [{:keys [offset
@@ -1718,9 +1772,14 @@
 (defn get-chat-administrators
   "Fetch chat administrators.
 
+  `options` include:
+    :return-bots.
+
   (https://core.telegram.org/bots/api#getchatadministrators)"
-  [bot chat-id]
-  (h/request bot "getChatAdministrators" {"chat_id" chat-id}))
+  [bot chat-id & options]
+  (let [{:keys [return-bots]} options]
+    (h/request bot "getChatAdministrators" {"chat_id" chat-id
+                                            "return_bots" return-bots})))
 
 (defn get-chat-member-count
   "Fetch the count of chat members.
@@ -1736,6 +1795,14 @@
   [bot chat-id user-id]
   (h/request bot "getChatMember" {"chat_id" chat-id
                                   "user_id" user-id}))
+
+(defn get-user-personal-chat-messages
+  "Get the last messages from the personal chat of a given user.
+
+  (https://core.telegram.org/bots/api#getuserpersonalchatmessages)"
+  [bot user-id limit]
+  (h/request bot "getUserPersonalChatMessages" {"user_id" user-id
+                                                "limit" limit}))
 
 (defn set-chat-sticker-set
   "Set a chat sticker set.
@@ -1770,6 +1837,14 @@
                                           "url" url
                                           "cache_time" cache-time})))
 
+(defn answer-guest-query
+  "Answer a guest query.
+
+  (https://core.telegram.org/bots/api#answerguestquery)"
+  [bot guest-query-id result]
+  (h/request bot "answerGuestQuery" {"guest_query_id" guest-query-id
+                                     "result" result}))
+
 (defn get-user-chat-boosts
   "Get chat boosts of a user.
 
@@ -1798,6 +1873,23 @@
   (https://core.telegram.org/bots/api#replacemanagedbottoken)"
   [bot user-id]
   (h/request bot "replaceManagedBotToken" {"user_id" user-id}))
+
+(defn get-managed-bot-access-settings
+  "Get the access settings of a managed bot.
+
+  (https://core.telegram.org/bots/api#getmanagedbotaccesssettings)"
+  [bot user-id]
+  (h/request bot "getManagedBotAccessSettings" {"user_id" user-id}))
+
+(defn set-managed-bot-access-settings
+  "Change the access settings of a managed bot.
+
+  (https://core.telegram.org/bots/api#setmanagedbotaccesssettings)"
+  [bot user-id is-access-restricted & options]
+  (let [{:keys [added-user-ids]} options]
+    (h/request bot "setManagedBotAccessSettings" {"user_id" user-id
+                                                  "is_access_restricted" is-access-restricted
+                                                  "added_user_ids" added-user-ids})))
 
 (defn set-my-name
   "Set this bot's name.
@@ -1856,7 +1948,7 @@
   "Change the profile photo of this bot.
 
   (Currently supports static photos (.jpeg) only.)
-  
+
   (https://core.telegram.org/bots/api#setmyprofilephoto)"
   [bot photo]
   (let [filename (str "uploaded:" (random-uuid))]
@@ -1866,7 +1958,7 @@
 
 (defn remove-my-profile-photo
   "Remove the profile photo of this bot.
-  
+
   (https://core.telegram.org/bots/api#removemyprofilephoto)"
   [bot]
   (h/request bot "removeMyProfilePhoto" {}))
@@ -2136,6 +2228,35 @@
   [bot chat-id message-ids]
   (h/request bot "deleteMessages" {"chat_id" chat-id
                                    "message_ids" message-ids}))
+
+(defn delete-all-message-reactions
+  "Remove up to 10,000 recent reactions in a group or a supergroup chat added by a given user or chat.
+
+  `options` include:
+    :user-id, and :actor-chat-id.
+
+  (https://core.telegram.org/bots/api#deleteallmessagereactions)"
+  [bot chat-id & options]
+  (let [{:keys [user-id
+                actor-chat-id]} options]
+    (h/request bot "deleteAllMessageReactions" {"chat_id" chat-id
+                                                "user_id" user-id
+                                                "actor_chat_id" actor-chat-id})))
+
+(defn delete-message-reaction
+  "Remove a reaction from a message in a group or a supergroup chat.
+
+  `options` include:
+    :user-id, and :actor-chat-id.
+
+  (https://core.telegram.org/bots/api#deletemessagereaction)"
+  [bot chat-id message-id & options]
+  (let [{:keys [user-id
+                actor-chat-id]} options]
+    (h/request bot "deleteMessageReaction" {"chat_id" chat-id
+                                            "message_id" message-id
+                                            "user_id" user-id
+                                            "actor_chat_id" actor-chat-id})))
 
 (defn answer-inline-query
   "Answer an inline query.
