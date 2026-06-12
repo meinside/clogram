@@ -1,4 +1,6 @@
 # .gitignore
+#
+# last update: 2026.06.12.
 
 # dotenv file for testing
 .env
@@ -11,6 +13,7 @@
 profiles.clj
 pom.xml
 pom.xml.asc
+pom.xml.sig
 *.jar
 *.class
 /.lein-*
