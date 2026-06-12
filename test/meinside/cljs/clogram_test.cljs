@@ -192,6 +192,11 @@
 
              ;; TODO: delete-message-reaction
 
+             ;; send a rich message,
+             (is (:ok (<! (cg/send-rich-message bot chat-id {:markdown "# rich text\n## test\n- is it working?\n- is it ok?\n"}))))
+
+             ;; TODO: send-rich-message-draft
+
              ;; fetch messages
              (is (:ok (<! (cg/get-updates bot))))
 
@@ -329,6 +334,10 @@
              ;; TODO: approve-chat-join-request
 
              ;; TODO: decline-chat-join-request
+
+             ;; TODO: answer-chat-join-request-query
+
+             ;; TODO: send-chat-join-request-web-app
 
              ;; TODO: set-chat-photo
 

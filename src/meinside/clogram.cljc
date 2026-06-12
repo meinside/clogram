@@ -5,7 +5,7 @@
 ;;;; (https://core.telegram.org/bots/api)
 ;;;;
 ;;;; created on : 2019.12.05.
-;;;; last update: 2026.05.11.
+;;;; last update: 2026.06.12.
 
 (ns meinside.clogram
   #?(:cljs (:require-macros [cljs.core.async.macros :as a :refer [go]]))
@@ -588,6 +588,54 @@
                                   "suggested_post_parameters" suggested-post-parameters
                                   "reply_parameters" reply-parameters
                                   "reply_markup" reply-markup})))
+
+(defn send-rich-message
+  "Send a rich message.
+
+  `options` include:
+    :business-connection-id, :message-thread-id, :direct-messages-topic-id, :disable-notification,
+    :protect-content, :allow-paid-broadcast, :message-effect-id, :suggested-post-parameters,
+    :reply-parameters, and :reply-markup.
+
+  (https://core.telegram.org/bots/api#sendrichmessage)"
+  [bot chat-id rich-message & options]
+  (let [{:keys [business-connection-id
+                message-thread-id
+                direct-messages-topic-id
+                disable-notification
+                protect-content
+                allow-paid-broadcast
+                message-effect-id
+                suggested-post-parameters
+                reply-parameters
+                reply-markup]} options]
+   (h/request bot "sendRichMessage" {"chat_id" chat-id
+                                     "business_connection_id" business-connection-id
+                                     "message_thread_id" message-thread-id
+                                     "direct_messages_topic_id" direct-messages-topic-id
+                                     "rich_message" rich-message
+                                     "disable_notification" disable-notification
+                                     "protect_content" protect-content
+                                     "allow_paid_broadcast" allow-paid-broadcast
+                                     "message_effect_id" message-effect-id
+                                     "suggested_post_parameters" suggested-post-parameters
+                                     "reply_parameters" reply-parameters
+                                     "reply_markup" reply-markup})))
+
+(defn send-rich-message-draft
+  "Stream a partial rich message to a user while the message is being generated.
+
+  `options` include:
+    :message-thread-id.
+
+  (https://core.telegram.org/bots/api#sendrichmessagedraft)"
+  [bot chat-id draft-id rich-message & options]
+  (let [{:keys [message-thread-id]} options]
+    (h/request bot "sendRichMessageDraft" {"chat_id" chat-id
+                                           "message_thread_id" message-thread-id
+                                           "draft_id" draft-id
+                                           "rich_message" rich-message})))
+
 
 (defn get-sticker-set
   "Fetch a sticker set.
@@ -1695,6 +1743,22 @@
   (h/request bot "declineChatJoinRequest" {"chat_id" chat-id
                                            "user_id" user-id}))
 
+(defn answer-chat-join-request-query
+  "Process a received chat join request query.
+
+  (https://core.telegram.org/bots/api#answerchatjoinrequestquery)"
+  [bot chat-join-request-query-id result]
+  (h/request bot "answerChatJoinRequestQuery" {"chat_join_request_query_id" chat-join-request-query-id
+                                               "result" result}))
+
+(defn send-chat-join-request-web-app
+  "Process a received chat join request query by showing a Mini App to the user before deciding the outcome.
+
+  (https://core.telegram.org/bots/api#sendchatjoinrequestwebapp)"
+  [bot chat-join-request-query-id web-app-url]
+  (h/request bot "sendChatJoinRequestWebApp" {"chat_join_request_query_id" chat-join-request-query-id
+                                              "web_app_url" web-app-url}))
+
 (defn set-chat-photo
   "Set a chat photo.
 
@@ -2049,7 +2113,8 @@
                       or :inline-message-id (when :chat-id & :message-id are not given)
 
   other `options` include:
-    :business-connection-id, :parse-mode, :entities, :link-preview-options, and :reply-markup.
+    :business-connection-id, :parse-mode, :entities, :link-preview-options,
+    :rich-message, and :reply-markup.
 
   (https://core.telegram.org/bots/api#editmessagetext)"
   [bot text & options]
@@ -2060,6 +2125,7 @@
                 parse-mode
                 entities
                 link-preview-options
+                rich-message
                 reply-markup]} options]
     (h/request bot "editMessageText" {"text" text
                                       "business_connection_id" business-connection-id
@@ -2069,6 +2135,7 @@
                                       "parse_mode" parse-mode
                                       "entities" entities
                                       "link_preview_options" link-preview-options
+                                      "rich_message" rich-message
                                       "reply_markup" reply-markup})))
 
 (defn edit-message-caption
