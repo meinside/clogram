@@ -1,6 +1,9 @@
 # Changed Log
 All notable changes to this project will be documented in this file. This change log follows the conventions of [keepachangelog.com](http://keepachangelog.com/).
 
+## [0.42.0] - 2026-07-15
+- Applied API changes(https://core.telegram.org/bots/api-changelog#july-14-2026).
+
 ## [0.41.0] - 2026-06-12
 - Applied API changes(https://core.telegram.org/bots/api-changelog#june-11-2026).
 
@@ -270,6 +273,7 @@ All notable changes to this project will be documented in this file. This change
 ### Added
 - Initial commit.
 
+[0.42.0]: https://github.com/meinside/clogram/compare/v0.41.0...v0.42.0
 [0.41.0]: https://github.com/meinside/clogram/compare/v0.40.0...v0.41.0
 [0.40.0]: https://github.com/meinside/clogram/compare/v0.39.0...v0.40.0
 [0.39.0]: https://github.com/meinside/clogram/compare/v0.38.2...v0.39.0
