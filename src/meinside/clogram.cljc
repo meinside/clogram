@@ -5,7 +5,7 @@
 ;;;; (https://core.telegram.org/bots/api)
 ;;;;
 ;;;; created on : 2019.12.05.
-;;;; last update: 2026.06.12.
+;;;; last update: 2026.07.15.
 
 (ns meinside.clogram
   #?(:cljs (:require-macros [cljs.core.async.macros :as a :refer [go]]))
@@ -234,7 +234,7 @@
     :business-connection-id, :message-thread-id, :direct-messages-topic-id, :parse-mode,
     :entities, :link-preview-options, :disable-notification, :protect-content,
     :allow-paid-broadcast, :message-effect-id, :suggested-post-parameters,
-    :reply-parameters, and :reply-markup.
+    :reply-parameters, :reply-markup, :receiver-user-id, and :callback-query-id.
 
   (https://core.telegram.org/bots/api#sendmessage)"
   [bot chat-id text & options]
@@ -250,7 +250,9 @@
                 message-effect-id
                 suggested-post-parameters
                 reply-parameters
-                reply-markup]} options]
+                reply-markup
+                receiver-user-id
+                callback-query-id]} options]
     (h/request bot "sendMessage" {"chat_id" chat-id
                                   "business_connection_id" business-connection-id
                                   "message_thread_id" message-thread-id
@@ -265,7 +267,9 @@
                                   "message_effect_id" message-effect-id
                                   "suggested_post_parameters" suggested-post-parameters
                                   "reply_parameters" reply-parameters
-                                  "reply_markup" reply-markup})))
+                                  "reply_markup" reply-markup
+                                  "receiver_user_id" receiver-user-id
+                                  "callback_query_id" callback-query-id})))
 
 (defn forward-message
   "Forward a message.
@@ -383,7 +387,8 @@
     :business-connection-id, :message-thread-id, :direct-messages-topic-id, :caption,
     :parse-mode, :caption-entities, :show-caption-above-media, :has-spoiler,
     :disable-notification, :protect-content, :allow-paid-broadcast, :message-effect-id,
-    :suggested-post-parameters, :reply-parameters, and :reply-markup.
+    :suggested-post-parameters, :reply-parameters, :reply-markup,
+    :receiver-user-id, and :callback-query-id.
 
   (https://core.telegram.org/bots/api#sendphoto)"
   [bot chat-id photo & options]
@@ -401,7 +406,9 @@
                 message-effect-id
                 suggested-post-parameters
                 reply-parameters
-                reply-markup]} options]
+                reply-markup
+                receiver-user-id
+                callback-query-id]} options]
     (h/request bot "sendPhoto" {"chat_id" chat-id
                                 "business_connection_id" business-connection-id
                                 "message_thread_id" message-thread-id
@@ -418,7 +425,9 @@
                                 "message_effect_id" message-effect-id
                                 "suggested_post_parameters" suggested-post-parameters
                                 "reply_parameters" reply-parameters
-                                "reply_markup" reply-markup})))
+                                "reply_markup" reply-markup
+                                "receiver_user_id" receiver-user-id
+                                "callback_query_id" callback-query-id})))
 
 (defn send-live-photo
   "Send live photos.
@@ -473,7 +482,7 @@
     :business-connection-id, :message-thread-id, :direct-messages-topic-id, :caption,
     :parse-mode, :caption-entities, :duration, :performer, :title, :disable-notification,
     :protect-content, :allow-paid-broadcast, :message-effect-id, :suggested-post-parameters,
-    :reply-parameters, and :reply-markup.
+    :reply-parameters, :reply-markup, :receiver-user-id, and :callback-query-id.
 
   (https://core.telegram.org/bots/api#sendaudio)"
   [bot chat-id audio & options]
@@ -492,7 +501,9 @@
                 message-effect-id
                 suggested-post-parameters
                 reply-parameters
-                reply-markup]} options]
+                reply-markup
+                receiver-user-id
+                callback-query-id]} options]
     (h/request bot "sendAudio" {"chat_id" chat-id
                                 "business_connection_id" business-connection-id
                                 "message_thread_id" message-thread-id
@@ -510,7 +521,9 @@
                                 "message_effect_id" message-effect-id
                                 "suggested_post_parameters" suggested-post-parameters
                                 "reply_parameters" reply-parameters
-                                "reply_markup" reply-markup})))
+                                "reply_markup" reply-markup
+                                "receiver_user_id" receiver-user-id
+                                "callback_query_id" callback-query-id})))
 
 (defn send-document
   "Send a document file.
@@ -519,7 +532,7 @@
     :business-connection-id, :message-thread-id, :direct-messages-topic-id, :caption,
     :parse-mode, :caption-entities, :disable-content-type-detection, :disable-notification,
     :protect-content, :allow-paid-broadcast, :message-effect-id, :suggested-post-parameters,
-    :reply-parameters, and :reply-markup.
+    :reply-parameters, :reply-markup, :receiver-user-id, and :callback-query-id.
 
   (https://core.telegram.org/bots/api#senddocument)"
   [bot chat-id document & options]
@@ -536,7 +549,9 @@
                 message-effect-id
                 suggested-post-parameters
                 reply-parameters
-                reply-markup]} options]
+                reply-markup
+                receiver-user-id
+                callback-query-id]} options]
     (h/request bot "sendDocument" {"chat_id" chat-id
                                    "business_connection_id" business-connection-id
                                    "message_thread_id" message-thread-id
@@ -552,7 +567,9 @@
                                    "message_effect_id" message-effect-id
                                    "suggested_post_parameters" suggested-post-parameters
                                    "reply_parameters" reply-parameters
-                                   "reply_markup" reply-markup})))
+                                   "reply_markup" reply-markup
+                                   "receiver_user_id" receiver-user-id
+                                   "callback_query_id" callback-query-id})))
 
 (defn send-sticker
   "Send a sticker.
@@ -560,7 +577,7 @@
   `options` include:
     :business-connection-id, :message-thread-id, :direct-messages-topic-id, :disable-notification,
     :protect-content, :allow-paid-broadcast, :message-effect-id, :suggested-post-parameters,
-    :reply-parameters, and :reply-markup.
+    :reply-parameters, :reply-markup, :receiver-user-id, and :callback-query-id.
 
   (https://core.telegram.org/bots/api#sendsticker)"
   [bot chat-id sticker & options]
@@ -574,7 +591,9 @@
                 message-effect-id
                 suggested-post-parameters
                 reply-parameters
-                reply-markup]} options]
+                reply-markup
+                receiver-user-id
+                callback-query-id]} options]
     (h/request bot "sendSticker" {"chat_id" chat-id
                                   "business_connection_id" business-connection-id
                                   "message_thread_id" message-thread-id
@@ -587,7 +606,9 @@
                                   "message_effect_id" message-effect-id
                                   "suggested_post_parameters" suggested-post-parameters
                                   "reply_parameters" reply-parameters
-                                  "reply_markup" reply-markup})))
+                                  "reply_markup" reply-markup
+                                  "receiver_user_id" receiver-user-id
+                                  "callback_query_id" callback-query-id})))
 
 (defn send-rich-message
   "Send a rich message.
@@ -787,7 +808,7 @@
     :parse-mode, :caption-entities, :show-caption-above-media, :has-spoiler,
     :supports-streaming, :disable-notification, :protect-content,
     :allow-paid-broadcast, :message-effect-id, :suggested-post-parameters,
-    :reply-parameters, and :reply-markup.
+    :reply-parameters, :reply-markup, :receiver-user-id, and :callback-query-id.
 
   (https://core.telegram.org/bots/api#sendvideo)"
   [bot chat-id video & options]
@@ -812,7 +833,9 @@
                 message-effect-id
                 suggested-post-parameters
                 reply-parameters
-                reply-markup]} options]
+                reply-markup
+                receiver-user-id
+                callback-query-id]} options]
     (h/request bot "sendVideo" {"chat_id" chat-id
                                 "business_connection_id" business-connection-id
                                 "message_thread_id" message-thread-id
@@ -836,7 +859,9 @@
                                 "message_effect_id" message-effect-id
                                 "suggested_post_parameters" suggested-post-parameters
                                 "reply_parameters" reply-parameters
-                                "reply_markup" reply-markup})))
+                                "reply_markup" reply-markup
+                                "receiver_user_id" receiver-user-id
+                                "callback_query_id" callback-query-id})))
 
 (defn send-animation
   "Send an animation.
@@ -846,7 +871,7 @@
     :width, :height, :thumbnail, :caption, :parse-mode, :caption-entities,
     :show-caption-above-media, :has-spoiler, :disable-notification,
     :protect-content, :allow-paid-broadcast, :message-effect-id, :suggested-post-parameters,
-    :reply-parameters, and :reply-markup.
+    :reply-parameters, :reply-markup, :receiver-user-id, and :callback-query-id.
 
   (https://core.telegram.org/bots/api#sendanimation)"
   [bot chat-id animation & options]
@@ -868,7 +893,9 @@
                 message-effect-id
                 suggested-post-parameters
                 reply-parameters
-                reply-markup]} options]
+                reply-markup
+                receiver-user-id
+                callback-query-id]} options]
     (h/request bot "sendAnimation" {"chat_id" chat-id
                                     "business_connection_id" business-connection-id
                                     "message_thread_id" message-thread-id
@@ -889,7 +916,9 @@
                                     "message_effect_id" message-effect-id
                                     "suggested_post_parameters" suggested-post-parameters
                                     "reply_parameters" reply-parameters
-                                    "reply_markup" reply-markup})))
+                                    "reply_markup" reply-markup
+                                    "receiver_user_id" receiver-user-id
+                                    "callback_query_id" callback-query-id})))
 
 (defn send-voice
   "Send a voice. (.ogg format only)
@@ -898,7 +927,7 @@
     :business-connection-id, :message-thread-id, :direct-messages-topic-id, :caption,
     :parse-mode, :caption-entities, :duration, :disable-notification, :protect-content,
     :allow-paid-broadcast, :message-effect-id, :suggested-post-parameters,
-    :reply-parameters, and :reply-markup.
+    :reply-parameters, :reply-markup, :receiver-user-id, and :callback-query-id.
 
   (https://core.telegram.org/bots/api#sendvoice)"
   [bot chat-id voice & options]
@@ -915,7 +944,9 @@
                 message-effect-id
                 suggested-post-parameters
                 reply-parameters
-                reply-markup]} options]
+                reply-markup
+                receiver-user-id
+                callback-query-id]} options]
     (h/request bot "sendVoice" {"chat_id" chat-id
                                 "business_connection_id" business-connection-id
                                 "message_thread_id" message-thread-id
@@ -931,7 +962,9 @@
                                 "message_effect_id" message-effect-id
                                 "suggested_post_parameters" suggested-post-parameters
                                 "reply_parameters" reply-parameters
-                                "reply_markup" reply-markup})))
+                                "reply_markup" reply-markup
+                                "receiver_user_id" receiver-user-id
+                                "callback_query_id" callback-query-id})))
 
 (defn send-video-note
   "Send a video note.
@@ -939,7 +972,8 @@
   `options` include:
     :business-connection-id, :message-thread-id, :direct-messages-topic-id, :duration,
     :length, :thumbnail, :disable-notification, :protect-content, :allow-paid-broadcast,
-    :message-effect-id, :suggested-post-parameters, :reply-parameters, and :reply-markup.
+    :message-effect-id, :suggested-post-parameters, :reply-parameters, :reply-markup,
+    :receiver-user-id, and :callback-query-id.
 
   (XXX: API returns 'Bad Request: wrong video note length' when length is not given / 2017.05.19.)
 
@@ -957,7 +991,9 @@
                 message-effect-id
                 suggested-post-parameters
                 reply-parameters
-                reply-markup]} options]
+                reply-markup
+                receiver-user-id
+                callback-query-id]} options]
     (h/request bot "sendVideoNote" {"chat_id" chat-id
                                     "business_connection_id" business-connection-id
                                     "message_thread_id" message-thread-id
@@ -972,7 +1008,9 @@
                                     "message_effect_id" message-effect-id
                                     "suggested_post_parameters" suggested-post-parameters
                                     "reply_parameters" reply-parameters
-                                    "reply_markup" reply-markup})))
+                                    "reply_markup" reply-markup
+                                    "receiver_user_id" receiver-user-id
+                                    "callback_query_id" callback-query-id})))
 
 (defn send-paid-media
   "Send paid media to channel chats.
@@ -1052,7 +1090,8 @@
     :business-connection-id, :message-thread-id, :direct-messages-topic-id,
     :horizontal-accuracy, :live-period, :heading, :proximity-alert-radius,
     :disable-notification, :protect-content, :allow-paid-broadcast, :message-effect-id,
-    :suggested-post-parameters, :reply-parameters, and :reply-markup.
+    :suggested-post-parameters, :reply-parameters, :reply-markup,
+    :receiver-user-id, and :callback-query-id.
 
   (https://core.telegram.org/bots/api#sendlocation)"
   [bot chat-id latitude longitude & options]
@@ -1069,7 +1108,9 @@
                 message-effect-id
                 suggested-post-parameters
                 reply-parameters
-                reply-markup]} options]
+                reply-markup
+                receiver-user-id
+                callback-query-id]} options]
     (h/request bot "sendLocation" {"chat_id" chat-id
                                    "business_connection_id" business-connection-id
                                    "message_thread_id" message-thread-id
@@ -1086,7 +1127,9 @@
                                    "message_effect_id" message-effect-id
                                    "suggested_post_parameters" suggested-post-parameters
                                    "reply_parameters" reply-parameters
-                                   "reply_markup" reply-markup})))
+                                   "reply_markup" reply-markup
+                                   "receiver_user_id" receiver-user-id
+                                   "callback_query_id" callback-query-id})))
 
 (defn send-venue
   "Send a venue.
@@ -1095,7 +1138,8 @@
     :business-connection-id, :message-thread-id, :direct-messages-topic-id,
     :foursquare-id, :foursquare-type, :google-place-id, :google-place-type,
     :disable-notification, :protect-content, :allow-paid-broadcast, :message-effect-id,
-    :suggested-post-parameters, :reply-parameters, and :reply-markup.
+    :suggested-post-parameters, :reply-parameters, :reply-markup,
+    :receiver-user-id, and :callback-query-id.
 
   (https://core.telegram.org/bots/api#sendvenue)"
   [bot chat-id latitude longitude title address & options]
@@ -1112,7 +1156,9 @@
                 message-effect-id
                 suggested-post-parameters
                 reply-parameters
-                reply-markup]} options]
+                reply-markup
+                receiver-user-id
+                callback-query-id]} options]
     (h/request bot "sendVenue" {"chat_id" chat-id
                                 "business_connection_id" business-connection-id
                                 "message_thread_id" message-thread-id
@@ -1131,7 +1177,9 @@
                                 "message_effect_id" message-effect-id
                                 "suggested_post_parameters" suggested-post-parameters
                                 "reply_parameters" reply-parameters
-                                "reply_markup" reply-markup})))
+                                "reply_markup" reply-markup
+                                "receiver_user_id" receiver-user-id
+                                "callback_query_id" callback-query-id})))
 
 (defn send-contact
   "Send a contact.
@@ -1139,7 +1187,8 @@
   `options` include:
     :business-connection-id, :message-thread-id, :direct-messages-topic-id, :last-name,
     :vcard, :disable-notification, :protect-content, :allow-paid-broadcast,
-    :message-effect-id, :suggested-post-parameters, :reply-parameters, and :reply-markup.
+    :message-effect-id, :suggested-post-parameters, :reply-parameters, :reply-markup,
+    :receiver-user-id, and :callback-query-id.
 
   (https://core.telegram.org/bots/api#sendcontact)"
   [bot chat-id phone-number first-name & options]
@@ -1154,7 +1203,9 @@
                 message-effect-id
                 suggested-post-parameters
                 reply-parameters
-                reply-markup]} options]
+                reply-markup
+                receiver-user-id
+                callback-query-id]} options]
     (h/request bot "sendContact" {"chat_id" chat-id
                                   "business_connection_id" business-connection-id
                                   "message_thread_id" message-thread-id
@@ -1169,7 +1220,9 @@
                                   "message_effect_id" message-effect-id
                                   "suggested_post_parameters" suggested-post-parameters
                                   "reply_parameters" reply-parameters
-                                  "reply_markup" reply-markup})))
+                                  "reply_markup" reply-markup
+                                  "receiver_user_id" receiver-user-id
+                                  "callback_query_id" callback-query-id})))
 
 (defn send-poll
   "Send a poll.
@@ -1266,6 +1319,85 @@
                                "chat_id" chat-id
                                "message_id" message-id
                                "reply_markup" reply-markup})))
+
+(defn edit-ephemeral-message-text
+  "Edit an ephemeral text message.
+
+  `options` include:
+    :parse-mode, :entities, :link-preview-options, and :reply-markup.
+
+  (https://core.telegram.org/bots/api#editephemeralmessagetext)"
+  [bot chat-id receiver-user-id ephemeral-message-id text & options]
+  (let [{:keys [parse-mode
+                entities
+                link-preview-options
+                reply-markup]} options]
+    (h/request bot "editEphemeralMessageText" {"chat_id" chat-id
+                                               "receiver_user_id" receiver-user-id
+                                               "ephemeral_message_id" ephemeral-message-id
+                                               "text" text
+                                               "parse_mode" parse-mode
+                                               "entities" entities
+                                               "link_preview_options" link-preview-options
+                                               "reply_markup" reply-markup})))
+
+(defn edit-ephemeral-message-media
+  "Edit the media of an ephemeral message.
+
+  `options` include:
+    :reply-markup.
+
+  (https://core.telegram.org/bots/api#editephemeralmessagemedia)"
+  [bot chat-id receiver-user-id ephemeral-message-id media & options]
+  (let [{:keys [reply-markup]} options]
+    (h/request bot "editEphemeralMessageMedia" {"chat_id" chat-id
+                                                "receiver_user_id" receiver-user-id
+                                                "ephemeral_message_id" ephemeral-message-id
+                                                "media" media
+                                                "reply_markup" reply-markup})))
+
+(defn edit-ephemeral-message-caption
+  "Edit the caption of an ephemeral message.
+
+  `options` include:
+    :caption, :parse-mode, :caption-entities, and :reply-markup.
+
+  (https://core.telegram.org/bots/api#editephemeralmessagecaption)"
+  [bot chat-id receiver-user-id ephemeral-message-id & options]
+  (let [{:keys [caption
+                parse-mode
+                caption-entities
+                reply-markup]} options]
+    (h/request bot "editEphemeralMessageCaption" {"chat_id" chat-id
+                                                  "receiver_user_id" receiver-user-id
+                                                  "ephemeral_message_id" ephemeral-message-id
+                                                  "caption" caption
+                                                  "parse_mode" parse-mode
+                                                  "caption_entities" caption-entities
+                                                  "reply_markup" reply-markup})))
+
+(defn edit-ephemeral-message-reply-markup
+  "Edit the reply markup of an ephemeral message.
+
+  `options` include:
+    :reply-markup.
+
+  (https://core.telegram.org/bots/api#editephemeralmessagereplymarkup)"
+  [bot chat-id receiver-user-id ephemeral-message-id & options]
+  (let [{:keys [reply-markup]} options]
+    (h/request bot "editEphemeralMessageReplyMarkup" {"chat_id" chat-id
+                                                      "receiver_user_id" receiver-user-id
+                                                      "ephemeral_message_id" ephemeral-message-id
+                                                      "reply_markup" reply-markup})))
+
+(defn delete-ephemeral-message
+  "Delete an ephemeral message.
+
+  (https://core.telegram.org/bots/api#deleteephemeralmessage)"
+  [bot chat-id receiver-user-id ephemeral-message-id]
+  (h/request bot "deleteEphemeralMessage" {"chat_id" chat-id
+                                           "receiver_user_id" receiver-user-id
+                                           "ephemeral_message_id" ephemeral-message-id}))
 
 (defn approve-suggested-post
   "Approve a suggested post.

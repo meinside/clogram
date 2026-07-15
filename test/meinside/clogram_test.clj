@@ -196,6 +196,16 @@
 
     ;; TODO: send-rich-message-draft
 
+    ;; TODO: edit-ephemeral-message-text
+
+    ;; TODO: edit-ephemeral-message-media
+
+    ;; TODO: edit-ephemeral-message-caption
+
+    ;; TODO: edit-ephemeral-message-reply-markup
+
+    ;; TODO: delete-ephemeral-message
+
     ;; fetch messages
     (is (:ok (cg/get-updates bot)))
 
