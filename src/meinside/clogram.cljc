@@ -231,16 +231,19 @@
   "Send a message.
 
   `options` include:
-    :business-connection-id, :message-thread-id, :direct-messages-topic-id, :parse-mode,
+    :business-connection-id, :message-thread-id, :direct-messages-topic-id,
+    :receiver-user-id, :callback-query-id, :parse-mode,
     :entities, :link-preview-options, :disable-notification, :protect-content,
     :allow-paid-broadcast, :message-effect-id, :suggested-post-parameters,
-    :reply-parameters, :reply-markup, :receiver-user-id, and :callback-query-id.
+    :reply-parameters, and :reply-markup.
 
   (https://core.telegram.org/bots/api#sendmessage)"
   [bot chat-id text & options]
   (let [{:keys [business-connection-id
                 message-thread-id
                 direct-messages-topic-id
+                receiver-user-id
+                callback-query-id
                 parse-mode
                 entities
                 link-preview-options
@@ -250,13 +253,13 @@
                 message-effect-id
                 suggested-post-parameters
                 reply-parameters
-                reply-markup
-                receiver-user-id
-                callback-query-id]} options]
+                reply-markup]} options]
     (h/request bot "sendMessage" {"chat_id" chat-id
                                   "business_connection_id" business-connection-id
                                   "message_thread_id" message-thread-id
                                   "direct_messages_topic_id" direct-messages-topic-id
+                                  "receiver_user_id" receiver-user-id
+                                  "callback_query_id" callback-query-id
                                   "text" text
                                   "parse_mode" parse-mode
                                   "entities" entities
@@ -267,9 +270,7 @@
                                   "message_effect_id" message-effect-id
                                   "suggested_post_parameters" suggested-post-parameters
                                   "reply_parameters" reply-parameters
-                                  "reply_markup" reply-markup
-                                  "receiver_user_id" receiver-user-id
-                                  "callback_query_id" callback-query-id})))
+                                  "reply_markup" reply-markup})))
 
 (defn forward-message
   "Forward a message.
@@ -384,17 +385,19 @@
   "Send a photo.
 
   `options` include:
-    :business-connection-id, :message-thread-id, :direct-messages-topic-id, :caption,
-    :parse-mode, :caption-entities, :show-caption-above-media, :has-spoiler,
-    :disable-notification, :protect-content, :allow-paid-broadcast, :message-effect-id,
-    :suggested-post-parameters, :reply-parameters, :reply-markup,
-    :receiver-user-id, and :callback-query-id.
+    :business-connection-id, :message-thread-id, :direct-messages-topic-id,
+    :receiver-user-id, :callback-query-id, :caption, :parse-mode,
+    :caption-entities, :show-caption-above-media, :has-spoiler, :disable-notification,
+    :protect-content, :allow-paid-broadcast, :message-effect-id,
+    :suggested-post-parameters, :reply-parameters, and :reply-markup.
 
   (https://core.telegram.org/bots/api#sendphoto)"
   [bot chat-id photo & options]
   (let [{:keys [business-connection-id
                 message-thread-id
                 direct-messages-topic-id
+                receiver-user-id
+                callback-query-id
                 caption
                 parse-mode
                 caption-entities
@@ -406,13 +409,13 @@
                 message-effect-id
                 suggested-post-parameters
                 reply-parameters
-                reply-markup
-                receiver-user-id
-                callback-query-id]} options]
+                reply-markup]} options]
     (h/request bot "sendPhoto" {"chat_id" chat-id
                                 "business_connection_id" business-connection-id
                                 "message_thread_id" message-thread-id
                                 "direct_messages_topic_id" direct-messages-topic-id
+                                "receiver_user_id" receiver-user-id
+                                "callback_query_id" callback-query-id
                                 "photo" photo
                                 "caption" caption
                                 "parse_mode" parse-mode
@@ -425,9 +428,7 @@
                                 "message_effect_id" message-effect-id
                                 "suggested_post_parameters" suggested-post-parameters
                                 "reply_parameters" reply-parameters
-                                "reply_markup" reply-markup
-                                "receiver_user_id" receiver-user-id
-                                "callback_query_id" callback-query-id})))
+                                "reply_markup" reply-markup})))
 
 (defn send-live-photo
   "Send live photos.
@@ -479,16 +480,19 @@
   "Send an audio file.
 
   `options` include:
-    :business-connection-id, :message-thread-id, :direct-messages-topic-id, :caption,
-    :parse-mode, :caption-entities, :duration, :performer, :title, :disable-notification,
+    :business-connection-id, :message-thread-id, :direct-messages-topic-id,
+    :receiver-user-id, :callback-query-id, :caption, :parse-mode,
+    :caption-entities, :duration, :performer, :title, :disable-notification,
     :protect-content, :allow-paid-broadcast, :message-effect-id, :suggested-post-parameters,
-    :reply-parameters, :reply-markup, :receiver-user-id, and :callback-query-id.
+    :reply-parameters, and :reply-markup.
 
   (https://core.telegram.org/bots/api#sendaudio)"
   [bot chat-id audio & options]
   (let [{:keys [business-connection-id
                 message-thread-id
                 direct-messages-topic-id
+                receiver-user-id
+                callback-query-id
                 caption
                 parse-mode
                 caption-entities
@@ -501,13 +505,13 @@
                 message-effect-id
                 suggested-post-parameters
                 reply-parameters
-                reply-markup
-                receiver-user-id
-                callback-query-id]} options]
+                reply-markup]} options]
     (h/request bot "sendAudio" {"chat_id" chat-id
                                 "business_connection_id" business-connection-id
                                 "message_thread_id" message-thread-id
                                 "direct_messages_topic_id" direct-messages-topic-id
+                                "receiver_user_id" receiver-user-id
+                                "callback_query_id" callback-query-id
                                 "audio" audio
                                 "caption" caption
                                 "parse_mode" parse-mode
@@ -521,24 +525,25 @@
                                 "message_effect_id" message-effect-id
                                 "suggested_post_parameters" suggested-post-parameters
                                 "reply_parameters" reply-parameters
-                                "reply_markup" reply-markup
-                                "receiver_user_id" receiver-user-id
-                                "callback_query_id" callback-query-id})))
+                                "reply_markup" reply-markup})))
 
 (defn send-document
   "Send a document file.
 
   `options` include:
-    :business-connection-id, :message-thread-id, :direct-messages-topic-id, :caption,
-    :parse-mode, :caption-entities, :disable-content-type-detection, :disable-notification,
-    :protect-content, :allow-paid-broadcast, :message-effect-id, :suggested-post-parameters,
-    :reply-parameters, :reply-markup, :receiver-user-id, and :callback-query-id.
+    :business-connection-id, :message-thread-id, :direct-messages-topic-id,
+    :receiver-user-id, :callback-query-id, :caption, :parse-mode, :caption-entities,
+    :disable-content-type-detection, :disable-notification, :protect-content,
+    :allow-paid-broadcast, :message-effect-id, :suggested-post-parameters,
+    :reply-parameters, and :reply-markup.
 
   (https://core.telegram.org/bots/api#senddocument)"
   [bot chat-id document & options]
   (let [{:keys [business-connection-id
                 message-thread-id
                 direct-messages-topic-id
+                receiver-user-id
+                callback-query-id
                 caption
                 parse-mode
                 caption-entities
@@ -549,13 +554,13 @@
                 message-effect-id
                 suggested-post-parameters
                 reply-parameters
-                reply-markup
-                receiver-user-id
-                callback-query-id]} options]
+                reply-markup]} options]
     (h/request bot "sendDocument" {"chat_id" chat-id
                                    "business_connection_id" business-connection-id
                                    "message_thread_id" message-thread-id
                                    "direct_messages_topic_id" direct-messages-topic-id
+                                   "receiver_user_id" receiver-user-id
+                                   "callback_query_id" callback-query-id
                                    "document" document
                                    "caption" caption
                                    "parse_mode" parse-mode
@@ -567,23 +572,24 @@
                                    "message_effect_id" message-effect-id
                                    "suggested_post_parameters" suggested-post-parameters
                                    "reply_parameters" reply-parameters
-                                   "reply_markup" reply-markup
-                                   "receiver_user_id" receiver-user-id
-                                   "callback_query_id" callback-query-id})))
+                                   "reply_markup" reply-markup})))
 
 (defn send-sticker
   "Send a sticker.
 
   `options` include:
-    :business-connection-id, :message-thread-id, :direct-messages-topic-id, :disable-notification,
-    :protect-content, :allow-paid-broadcast, :message-effect-id, :suggested-post-parameters,
-    :reply-parameters, :reply-markup, :receiver-user-id, and :callback-query-id.
+    :business-connection-id, :message-thread-id, :direct-messages-topic-id,
+    :receiver-user-id, :callback-query-id, :emoji, :disable-notification,
+    :protect-content, :allow-paid-broadcast, :message-effect-id,
+    :suggested-post-parameters, :reply-parameters, and :reply-markup.
 
   (https://core.telegram.org/bots/api#sendsticker)"
   [bot chat-id sticker & options]
   (let [{:keys [business-connection-id
                 message-thread-id
                 direct-messages-topic-id
+                receiver-user-id
+                callback-query-id
                 emoji
                 disable-notification
                 protect-content
@@ -591,13 +597,13 @@
                 message-effect-id
                 suggested-post-parameters
                 reply-parameters
-                reply-markup
-                receiver-user-id
-                callback-query-id]} options]
+                reply-markup]} options]
     (h/request bot "sendSticker" {"chat_id" chat-id
                                   "business_connection_id" business-connection-id
                                   "message_thread_id" message-thread-id
                                   "direct_messages_topic_id" direct-messages-topic-id
+                                  "receiver_user_id" receiver-user-id
+                                  "callback_query_id" callback-query-id
                                   "sticker" sticker
                                   "emoji" emoji
                                   "disable_notification" disable-notification
@@ -606,9 +612,7 @@
                                   "message_effect_id" message-effect-id
                                   "suggested_post_parameters" suggested-post-parameters
                                   "reply_parameters" reply-parameters
-                                  "reply_markup" reply-markup
-                                  "receiver_user_id" receiver-user-id
-                                  "callback_query_id" callback-query-id})))
+                                  "reply_markup" reply-markup})))
 
 (defn send-rich-message
   "Send a rich message.
@@ -803,18 +807,21 @@
   "Send a video.
 
   `options` include:
-    :business-connection-id, :message-thread-id, :direct-messages-topic-id, :duration,
-    :width, :height, :thumbnail, :cover, :start-timestamp, :caption,
-    :parse-mode, :caption-entities, :show-caption-above-media, :has-spoiler,
+    :business-connection-id, :message-thread-id, :direct-messages-topic-id,
+    :receiver-user-id, :callback-query-id, :duration, :width, :height,
+    :thumbnail, :cover, :start-timestamp, :caption, :parse-mode,
+    :caption-entities, :show-caption-above-media, :has-spoiler,
     :supports-streaming, :disable-notification, :protect-content,
     :allow-paid-broadcast, :message-effect-id, :suggested-post-parameters,
-    :reply-parameters, :reply-markup, :receiver-user-id, and :callback-query-id.
+    :reply-parameters, and :reply-markup.
 
   (https://core.telegram.org/bots/api#sendvideo)"
   [bot chat-id video & options]
   (let [{:keys [business-connection-id
                 message-thread-id
                 direct-messages-topic-id
+                receiver-user-id
+                callback-query-id
                 duration
                 width
                 height
@@ -833,13 +840,13 @@
                 message-effect-id
                 suggested-post-parameters
                 reply-parameters
-                reply-markup
-                receiver-user-id
-                callback-query-id]} options]
+                reply-markup]} options]
     (h/request bot "sendVideo" {"chat_id" chat-id
                                 "business_connection_id" business-connection-id
                                 "message_thread_id" message-thread-id
                                 "direct_messages_topic_id" direct-messages-topic-id
+                                "receiver_user_id" receiver-user-id
+                                "callback_query_id" callback-query-id
                                 "video" video
                                 "duration" duration
                                 "width" width
@@ -859,25 +866,25 @@
                                 "message_effect_id" message-effect-id
                                 "suggested_post_parameters" suggested-post-parameters
                                 "reply_parameters" reply-parameters
-                                "reply_markup" reply-markup
-                                "receiver_user_id" receiver-user-id
-                                "callback_query_id" callback-query-id})))
+                                "reply_markup" reply-markup})))
 
 (defn send-animation
   "Send an animation.
 
   `options` include:
-    :business-connection-id, :message-thread-id, :direct-messages-topic-id, :duration,
-    :width, :height, :thumbnail, :caption, :parse-mode, :caption-entities,
-    :show-caption-above-media, :has-spoiler, :disable-notification,
-    :protect-content, :allow-paid-broadcast, :message-effect-id, :suggested-post-parameters,
-    :reply-parameters, :reply-markup, :receiver-user-id, and :callback-query-id.
+    :business-connection-id, :message-thread-id, :direct-messages-topic-id,
+    :receiver-user-id, :callback-query-id, :duration, :width, :height,
+    :thumbnail, :caption, :parse-mode, :caption-entities, :show-caption-above-media,
+    :has-spoiler, :disable-notification, :protect-content, :allow-paid-broadcast,
+    :message-effect-id, :suggested-post-parameters, :reply-parameters, and :reply-markup.
 
   (https://core.telegram.org/bots/api#sendanimation)"
   [bot chat-id animation & options]
   (let [{:keys [business-connection-id
                 message-thread-id
                 direct-messages-topic-id
+                receiver-user-id
+                callback-query-id
                 duration
                 width
                 height
@@ -893,13 +900,13 @@
                 message-effect-id
                 suggested-post-parameters
                 reply-parameters
-                reply-markup
-                receiver-user-id
-                callback-query-id]} options]
+                reply-markup]} options]
     (h/request bot "sendAnimation" {"chat_id" chat-id
                                     "business_connection_id" business-connection-id
                                     "message_thread_id" message-thread-id
                                     "direct_messages_topic_id" direct-messages-topic-id
+                                    "receiver_user_id" receiver-user-id
+                                    "callback_query_id" callback-query-id
                                     "animation" animation
                                     "duration" duration
                                     "width" width
@@ -916,24 +923,25 @@
                                     "message_effect_id" message-effect-id
                                     "suggested_post_parameters" suggested-post-parameters
                                     "reply_parameters" reply-parameters
-                                    "reply_markup" reply-markup
-                                    "receiver_user_id" receiver-user-id
-                                    "callback_query_id" callback-query-id})))
+                                    "reply_markup" reply-markup})))
 
 (defn send-voice
   "Send a voice. (.ogg format only)
 
   `options` include:
-    :business-connection-id, :message-thread-id, :direct-messages-topic-id, :caption,
-    :parse-mode, :caption-entities, :duration, :disable-notification, :protect-content,
+    :business-connection-id, :message-thread-id, :direct-messages-topic-id,
+    :receiver-user-id, :callback-query-id, :caption, :parse-mode,
+    :caption-entities, :duration, :disable-notification, :protect-content,
     :allow-paid-broadcast, :message-effect-id, :suggested-post-parameters,
-    :reply-parameters, :reply-markup, :receiver-user-id, and :callback-query-id.
+    :reply-parameters, and :reply-markup.
 
   (https://core.telegram.org/bots/api#sendvoice)"
   [bot chat-id voice & options]
   (let [{:keys [business-connection-id
                 message-thread-id
                 direct-messages-topic-id
+                receiver-user-id
+                callback-query-id
                 caption
                 parse-mode
                 caption-entities
@@ -944,13 +952,13 @@
                 message-effect-id
                 suggested-post-parameters
                 reply-parameters
-                reply-markup
-                receiver-user-id
-                callback-query-id]} options]
+                reply-markup]} options]
     (h/request bot "sendVoice" {"chat_id" chat-id
                                 "business_connection_id" business-connection-id
                                 "message_thread_id" message-thread-id
                                 "direct_messages_topic_id" direct-messages-topic-id
+                                "receiver_user_id" receiver-user-id
+                                "callback_query_id" callback-query-id
                                 "voice" voice
                                 "caption" caption
                                 "parse_mode" parse-mode
@@ -962,18 +970,16 @@
                                 "message_effect_id" message-effect-id
                                 "suggested_post_parameters" suggested-post-parameters
                                 "reply_parameters" reply-parameters
-                                "reply_markup" reply-markup
-                                "receiver_user_id" receiver-user-id
-                                "callback_query_id" callback-query-id})))
+                                "reply_markup" reply-markup})))
 
 (defn send-video-note
   "Send a video note.
 
   `options` include:
-    :business-connection-id, :message-thread-id, :direct-messages-topic-id, :duration,
-    :length, :thumbnail, :disable-notification, :protect-content, :allow-paid-broadcast,
-    :message-effect-id, :suggested-post-parameters, :reply-parameters, :reply-markup,
-    :receiver-user-id, and :callback-query-id.
+    :business-connection-id, :message-thread-id, :direct-messages-topic-id,
+    :receiver-user-id, :callback-query-id, :duration, :length, :thumbnail,
+    :disable-notification, :protect-content, :allow-paid-broadcast,
+    :message-effect-id, :suggested-post-parameters, :reply-parameters, and :reply-markup.
 
   (XXX: API returns 'Bad Request: wrong video note length' when length is not given / 2017.05.19.)
 
@@ -982,6 +988,8 @@
   (let [{:keys [business-connection-id
                 message-thread-id
                 direct-messages-topic-id
+                receiver-user-id
+                callback-query-id
                 duration
                 length
                 thumbnail
@@ -991,13 +999,13 @@
                 message-effect-id
                 suggested-post-parameters
                 reply-parameters
-                reply-markup
-                receiver-user-id
-                callback-query-id]} options]
+                reply-markup]} options]
     (h/request bot "sendVideoNote" {"chat_id" chat-id
                                     "business_connection_id" business-connection-id
                                     "message_thread_id" message-thread-id
                                     "direct_messages_topic_id" direct-messages-topic-id
+                                    "receiver_user_id" receiver-user-id
+                                    "callback_query_id" callback-query-id
                                     "video_note" video-note
                                     "duration" duration
                                     "length" length
@@ -1008,9 +1016,7 @@
                                     "message_effect_id" message-effect-id
                                     "suggested_post_parameters" suggested-post-parameters
                                     "reply_parameters" reply-parameters
-                                    "reply_markup" reply-markup
-                                    "receiver_user_id" receiver-user-id
-                                    "callback_query_id" callback-query-id})))
+                                    "reply_markup" reply-markup})))
 
 (defn send-paid-media
   "Send paid media to channel chats.
@@ -1088,16 +1094,18 @@
 
   `options` include:
     :business-connection-id, :message-thread-id, :direct-messages-topic-id,
-    :horizontal-accuracy, :live-period, :heading, :proximity-alert-radius,
-    :disable-notification, :protect-content, :allow-paid-broadcast, :message-effect-id,
-    :suggested-post-parameters, :reply-parameters, :reply-markup,
-    :receiver-user-id, and :callback-query-id.
+    :receiver-user-id, :callback-query-id, :horizontal-accuracy, :live-period,
+    :heading, :proximity-alert-radius, :disable-notification, :protect-content,
+    :allow-paid-broadcast, :message-effect-id, :suggested-post-parameters,
+    :reply-parameters, and :reply-markup.
 
   (https://core.telegram.org/bots/api#sendlocation)"
   [bot chat-id latitude longitude & options]
   (let [{:keys [business-connection-id
                 message-thread-id
                 direct-messages-topic-id
+                receiver-user-id
+                callback-query-id
                 horizontal-accuracy
                 live-period
                 heading
@@ -1108,13 +1116,13 @@
                 message-effect-id
                 suggested-post-parameters
                 reply-parameters
-                reply-markup
-                receiver-user-id
-                callback-query-id]} options]
+                reply-markup]} options]
     (h/request bot "sendLocation" {"chat_id" chat-id
                                    "business_connection_id" business-connection-id
                                    "message_thread_id" message-thread-id
                                    "direct_messages_topic_id" direct-messages-topic-id
+                                   "receiver_user_id" receiver-user-id
+                                   "callback_query_id" callback-query-id
                                    "latitude" latitude
                                    "longitude" longitude
                                    "horizontal_accuracy" horizontal-accuracy
@@ -1127,25 +1135,25 @@
                                    "message_effect_id" message-effect-id
                                    "suggested_post_parameters" suggested-post-parameters
                                    "reply_parameters" reply-parameters
-                                   "reply_markup" reply-markup
-                                   "receiver_user_id" receiver-user-id
-                                   "callback_query_id" callback-query-id})))
+                                   "reply_markup" reply-markup})))
 
 (defn send-venue
   "Send a venue.
 
   `options` include:
     :business-connection-id, :message-thread-id, :direct-messages-topic-id,
-    :foursquare-id, :foursquare-type, :google-place-id, :google-place-type,
-    :disable-notification, :protect-content, :allow-paid-broadcast, :message-effect-id,
-    :suggested-post-parameters, :reply-parameters, :reply-markup,
-    :receiver-user-id, and :callback-query-id.
+    :receiver-user-id, :callback-query-id, :foursquare-id, :foursquare-type,
+    :google-place-id, :google-place-type, :disable-notification, :protect-content,
+    :allow-paid-broadcast, :message-effect-id, :suggested-post-parameters,
+    :reply-parameters, and :reply-markup.
 
   (https://core.telegram.org/bots/api#sendvenue)"
   [bot chat-id latitude longitude title address & options]
   (let [{:keys [business-connection-id
                 message-thread-id
                 direct-messages-topic-id
+                receiver-user-id
+                callback-query-id
                 foursquare-id
                 foursquare-type
                 google-place-id
@@ -1156,13 +1164,13 @@
                 message-effect-id
                 suggested-post-parameters
                 reply-parameters
-                reply-markup
-                receiver-user-id
-                callback-query-id]} options]
+                reply-markup]} options]
     (h/request bot "sendVenue" {"chat_id" chat-id
                                 "business_connection_id" business-connection-id
                                 "message_thread_id" message-thread-id
                                 "direct_messages_topic_id" direct-messages-topic-id
+                                "receiver_user_id" receiver-user-id
+                                "callback_query_id" callback-query-id
                                 "latitude" latitude
                                 "longitude" longitude
                                 "title" title
@@ -1177,24 +1185,24 @@
                                 "message_effect_id" message-effect-id
                                 "suggested_post_parameters" suggested-post-parameters
                                 "reply_parameters" reply-parameters
-                                "reply_markup" reply-markup
-                                "receiver_user_id" receiver-user-id
-                                "callback_query_id" callback-query-id})))
+                                "reply_markup" reply-markup})))
 
 (defn send-contact
   "Send a contact.
 
   `options` include:
-    :business-connection-id, :message-thread-id, :direct-messages-topic-id, :last-name,
-    :vcard, :disable-notification, :protect-content, :allow-paid-broadcast,
-    :message-effect-id, :suggested-post-parameters, :reply-parameters, :reply-markup,
-    :receiver-user-id, and :callback-query-id.
+    :business-connection-id, :message-thread-id, :direct-messages-topic-id,
+    :receiver-user-id, :callback-query-id, :last-name, :vcard, :disable-notification,
+    :protect-content, :allow-paid-broadcast, :message-effect-id, :suggested-post-parameters,
+    :reply-parameters, and :reply-markup.
 
   (https://core.telegram.org/bots/api#sendcontact)"
   [bot chat-id phone-number first-name & options]
   (let [{:keys [business-connection-id
                 message-thread-id
                 direct-messages-topic-id
+                receiver-user-id
+                callback-query-id
                 last-name
                 vcard
                 disable-notification
@@ -1203,13 +1211,13 @@
                 message-effect-id
                 suggested-post-parameters
                 reply-parameters
-                reply-markup
-                receiver-user-id
-                callback-query-id]} options]
+                reply-markup]} options]
     (h/request bot "sendContact" {"chat_id" chat-id
                                   "business_connection_id" business-connection-id
                                   "message_thread_id" message-thread-id
                                   "direct_messages_topic_id" direct-messages-topic-id
+                                  "receiver_user_id" receiver-user-id
+                                  "callback_query_id" callback-query-id
                                   "phone_number" phone-number
                                   "first_name" first-name
                                   "last_name" last-name
@@ -1220,9 +1228,7 @@
                                   "message_effect_id" message-effect-id
                                   "suggested_post_parameters" suggested-post-parameters
                                   "reply_parameters" reply-parameters
-                                  "reply_markup" reply-markup
-                                  "receiver_user_id" receiver-user-id
-                                  "callback_query_id" callback-query-id})))
+                                  "reply_markup" reply-markup})))
 
 (defn send-poll
   "Send a poll.
@@ -3208,7 +3214,7 @@
                                 "protect_content" protect-content})))
 
 (defn repost-story
-  "Repost a story on behalf of a business account from another business account. 
+  "Repost a story on behalf of a business account from another business account.
 
   `options` include:
     :post-to-chat-page, and :protect-content.
