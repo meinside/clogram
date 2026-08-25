@@ -1316,11 +1316,13 @@
   "Edit an ephemeral text message.
 
   `options` include:
-    :parse-mode, :entities, :rich-message, :link-preview-options, and :reply-markup.
+    :text, :parse-mode, :entities, :rich-message, :link-preview-options,
+    and :reply-markup.
 
   (https://core.telegram.org/bots/api#editephemeralmessagetext)"
-  [bot chat-id receiver-user-id ephemeral-message-id text & options]
-  (let [{:keys [parse-mode
+  [bot chat-id receiver-user-id ephemeral-message-id & options]
+  (let [{:keys [text
+                parse-mode
                 entities
                 rich-message
                 link-preview-options
@@ -1426,11 +1428,12 @@
   "Send a message draft.
 
   `options` include:
-    :message-thread-id, :parse-mode, :entities, :can-stop, and :keep-on-stop.
+    :message-thread-id, :text, :parse-mode, :entities, :can-stop, and :keep-on-stop.
 
   (https://core.telegram.org/bots/api#sendmessagedraft)"
-  [bot chat-id draft-id text & options]
+  [bot chat-id draft-id & options]
   (let [{:keys [message-thread-id
+                text
                 parse-mode
                 entities
                 can-stop
