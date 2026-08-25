@@ -5,7 +5,7 @@
 ;;;; (https://core.telegram.org/bots/api)
 ;;;;
 ;;;; created on : 2019.12.05.
-;;;; last update: 2026.07.15.
+;;;; last update: 2026.08.25.
 
 (ns meinside.clogram
   #?(:cljs (:require-macros [cljs.core.async.macros :as a :refer [go]]))
@@ -232,8 +232,8 @@
 
   `options` include:
     :business-connection-id, :message-thread-id, :direct-messages-topic-id,
-    :receiver-user-id, :callback-query-id, :parse-mode,
-    :entities, :link-preview-options, :disable-notification, :protect-content,
+    :ephemeral-message-parameters, :parse-mode, :entities,
+    :link-preview-options, :disable-notification, :protect-content,
     :allow-paid-broadcast, :message-effect-id, :suggested-post-parameters,
     :reply-parameters, and :reply-markup.
 
@@ -242,8 +242,7 @@
   (let [{:keys [business-connection-id
                 message-thread-id
                 direct-messages-topic-id
-                receiver-user-id
-                callback-query-id
+                ephemeral-message-parameters
                 parse-mode
                 entities
                 link-preview-options
@@ -258,8 +257,7 @@
                                   "business_connection_id" business-connection-id
                                   "message_thread_id" message-thread-id
                                   "direct_messages_topic_id" direct-messages-topic-id
-                                  "receiver_user_id" receiver-user-id
-                                  "callback_query_id" callback-query-id
+                                  "ephemeral_message_parameters" ephemeral-message-parameters
                                   "text" text
                                   "parse_mode" parse-mode
                                   "entities" entities
@@ -386,7 +384,7 @@
 
   `options` include:
     :business-connection-id, :message-thread-id, :direct-messages-topic-id,
-    :receiver-user-id, :callback-query-id, :caption, :parse-mode,
+    :ephemeral-message-parameters, :caption, :parse-mode,
     :caption-entities, :show-caption-above-media, :has-spoiler, :disable-notification,
     :protect-content, :allow-paid-broadcast, :message-effect-id,
     :suggested-post-parameters, :reply-parameters, and :reply-markup.
@@ -396,8 +394,7 @@
   (let [{:keys [business-connection-id
                 message-thread-id
                 direct-messages-topic-id
-                receiver-user-id
-                callback-query-id
+                ephemeral-message-parameters
                 caption
                 parse-mode
                 caption-entities
@@ -414,8 +411,7 @@
                                 "business_connection_id" business-connection-id
                                 "message_thread_id" message-thread-id
                                 "direct_messages_topic_id" direct-messages-topic-id
-                                "receiver_user_id" receiver-user-id
-                                "callback_query_id" callback-query-id
+                                "ephemeral_message_parameters" ephemeral-message-parameters
                                 "photo" photo
                                 "caption" caption
                                 "parse_mode" parse-mode
@@ -435,16 +431,17 @@
 
   `options` include:
     :business-connection-id, :message-thread-id, :direct-messages-topic-id,
-    :caption, :parse-mode, :caption-entities, :show-caption-above-media,
-    :has-spoiler, :disable-notification, :protect-content, :allow-paid-broadcast,
-    :message-effect-id, :suggested-post-parameters, :reply-parameters, and
-    :reply-markup.
+    :ephemeral-message-parameters, :caption, :parse-mode, :caption-entities,
+    :show-caption-above-media, :has-spoiler, :disable-notification,
+    :protect-content, :allow-paid-broadcast, :message-effect-id,
+    :suggested-post-parameters, :reply-parameters, and :reply-markup.
 
   (https://core.telegram.org/bots/api#sendlivephoto)"
   [bot chat-id live-photo photo & options]
   (let [{:keys [business-connection-id
                 message-thread-id
                 direct-messages-topic-id
+                ephemeral-message-parameters
                 caption
                 parse-mode
                 caption-entities
@@ -463,6 +460,7 @@
                                     "business_connection_id" business-connection-id
                                     "message_thread_id" message-thread-id
                                     "direct_messages_topic_id" direct-messages-topic-id
+                                    "ephemeral_message_parameters" ephemeral-message-parameters
                                     "caption" caption
                                     "parse_mode" parse-mode
                                     "caption_entities" caption-entities
@@ -481,7 +479,7 @@
 
   `options` include:
     :business-connection-id, :message-thread-id, :direct-messages-topic-id,
-    :receiver-user-id, :callback-query-id, :caption, :parse-mode,
+    :ephemeral-message-parameters, :caption, :parse-mode,
     :caption-entities, :duration, :performer, :title, :disable-notification,
     :protect-content, :allow-paid-broadcast, :message-effect-id, :suggested-post-parameters,
     :reply-parameters, and :reply-markup.
@@ -491,8 +489,7 @@
   (let [{:keys [business-connection-id
                 message-thread-id
                 direct-messages-topic-id
-                receiver-user-id
-                callback-query-id
+                ephemeral-message-parameters
                 caption
                 parse-mode
                 caption-entities
@@ -510,8 +507,7 @@
                                 "business_connection_id" business-connection-id
                                 "message_thread_id" message-thread-id
                                 "direct_messages_topic_id" direct-messages-topic-id
-                                "receiver_user_id" receiver-user-id
-                                "callback_query_id" callback-query-id
+                                "ephemeral_message_parameters" ephemeral-message-parameters
                                 "audio" audio
                                 "caption" caption
                                 "parse_mode" parse-mode
@@ -532,7 +528,7 @@
 
   `options` include:
     :business-connection-id, :message-thread-id, :direct-messages-topic-id,
-    :receiver-user-id, :callback-query-id, :caption, :parse-mode, :caption-entities,
+    :ephemeral-message-parameters, :caption, :parse-mode, :caption-entities,
     :disable-content-type-detection, :disable-notification, :protect-content,
     :allow-paid-broadcast, :message-effect-id, :suggested-post-parameters,
     :reply-parameters, and :reply-markup.
@@ -542,8 +538,8 @@
   (let [{:keys [business-connection-id
                 message-thread-id
                 direct-messages-topic-id
-                receiver-user-id
-                callback-query-id
+                ephemeral-message-parameters
+                thumbnail
                 caption
                 parse-mode
                 caption-entities
@@ -559,9 +555,9 @@
                                    "business_connection_id" business-connection-id
                                    "message_thread_id" message-thread-id
                                    "direct_messages_topic_id" direct-messages-topic-id
-                                   "receiver_user_id" receiver-user-id
-                                   "callback_query_id" callback-query-id
+                                   "ephemeral_message_parameters" ephemeral-message-parameters
                                    "document" document
+                                   "thumbnail" thumbnail
                                    "caption" caption
                                    "parse_mode" parse-mode
                                    "caption_entities" caption-entities
@@ -579,8 +575,8 @@
 
   `options` include:
     :business-connection-id, :message-thread-id, :direct-messages-topic-id,
-    :receiver-user-id, :callback-query-id, :emoji, :disable-notification,
     :protect-content, :allow-paid-broadcast, :message-effect-id,
+    :ephemeral-message-parameters, :emoji, :disable-notification,
     :suggested-post-parameters, :reply-parameters, and :reply-markup.
 
   (https://core.telegram.org/bots/api#sendsticker)"
@@ -588,8 +584,7 @@
   (let [{:keys [business-connection-id
                 message-thread-id
                 direct-messages-topic-id
-                receiver-user-id
-                callback-query-id
+                ephemeral-message-parameters
                 emoji
                 disable-notification
                 protect-content
@@ -602,8 +597,7 @@
                                   "business_connection_id" business-connection-id
                                   "message_thread_id" message-thread-id
                                   "direct_messages_topic_id" direct-messages-topic-id
-                                  "receiver_user_id" receiver-user-id
-                                  "callback_query_id" callback-query-id
+                                  "ephemeral_message_parameters" ephemeral-message-parameters
                                   "sticker" sticker
                                   "emoji" emoji
                                   "disable_notification" disable-notification
@@ -618,8 +612,9 @@
   "Send a rich message.
 
   `options` include:
-    :business-connection-id, :message-thread-id, :direct-messages-topic-id, :disable-notification,
-    :protect-content, :allow-paid-broadcast, :message-effect-id, :suggested-post-parameters,
+    :business-connection-id, :message-thread-id, :direct-messages-topic-id,
+    :ephemeral-message-parameters, :disable-notification, :protect-content,
+    :allow-paid-broadcast, :message-effect-id, :suggested-post-parameters,
     :reply-parameters, and :reply-markup.
 
   (https://core.telegram.org/bots/api#sendrichmessage)"
@@ -627,6 +622,7 @@
   (let [{:keys [business-connection-id
                 message-thread-id
                 direct-messages-topic-id
+                ephemeral-message-parameters
                 disable-notification
                 protect-content
                 allow-paid-broadcast
@@ -634,33 +630,37 @@
                 suggested-post-parameters
                 reply-parameters
                 reply-markup]} options]
-   (h/request bot "sendRichMessage" {"chat_id" chat-id
-                                     "business_connection_id" business-connection-id
-                                     "message_thread_id" message-thread-id
-                                     "direct_messages_topic_id" direct-messages-topic-id
-                                     "rich_message" rich-message
-                                     "disable_notification" disable-notification
-                                     "protect_content" protect-content
-                                     "allow_paid_broadcast" allow-paid-broadcast
-                                     "message_effect_id" message-effect-id
-                                     "suggested_post_parameters" suggested-post-parameters
-                                     "reply_parameters" reply-parameters
-                                     "reply_markup" reply-markup})))
+    (h/request bot "sendRichMessage" {"chat_id" chat-id
+                                      "business_connection_id" business-connection-id
+                                      "message_thread_id" message-thread-id
+                                      "direct_messages_topic_id" direct-messages-topic-id
+                                      "ephemeral_message_parameters" ephemeral-message-parameters
+                                      "rich_message" rich-message
+                                      "disable_notification" disable-notification
+                                      "protect_content" protect-content
+                                      "allow_paid_broadcast" allow-paid-broadcast
+                                      "message_effect_id" message-effect-id
+                                      "suggested_post_parameters" suggested-post-parameters
+                                      "reply_parameters" reply-parameters
+                                      "reply_markup" reply-markup})))
 
 (defn send-rich-message-draft
   "Stream a partial rich message to a user while the message is being generated.
 
   `options` include:
-    :message-thread-id.
+    :message-thread-id, :can-stop, and :keep-on-stop.
 
   (https://core.telegram.org/bots/api#sendrichmessagedraft)"
   [bot chat-id draft-id rich-message & options]
-  (let [{:keys [message-thread-id]} options]
+  (let [{:keys [message-thread-id
+                can-stop
+                keep-on-stop]} options]
     (h/request bot "sendRichMessageDraft" {"chat_id" chat-id
                                            "message_thread_id" message-thread-id
                                            "draft_id" draft-id
-                                           "rich_message" rich-message})))
-
+                                           "rich_message" rich-message
+                                           "can_stop" can-stop
+                                           "keep_on_stop" keep-on-stop})))
 
 (defn get-sticker-set
   "Fetch a sticker set.
@@ -808,8 +808,8 @@
 
   `options` include:
     :business-connection-id, :message-thread-id, :direct-messages-topic-id,
-    :receiver-user-id, :callback-query-id, :duration, :width, :height,
     :thumbnail, :cover, :start-timestamp, :caption, :parse-mode,
+    :ephemeral-message-parameters, :duration, :width, :height,
     :caption-entities, :show-caption-above-media, :has-spoiler,
     :supports-streaming, :disable-notification, :protect-content,
     :allow-paid-broadcast, :message-effect-id, :suggested-post-parameters,
@@ -820,8 +820,7 @@
   (let [{:keys [business-connection-id
                 message-thread-id
                 direct-messages-topic-id
-                receiver-user-id
-                callback-query-id
+                ephemeral-message-parameters
                 duration
                 width
                 height
@@ -845,8 +844,7 @@
                                 "business_connection_id" business-connection-id
                                 "message_thread_id" message-thread-id
                                 "direct_messages_topic_id" direct-messages-topic-id
-                                "receiver_user_id" receiver-user-id
-                                "callback_query_id" callback-query-id
+                                "ephemeral_message_parameters" ephemeral-message-parameters
                                 "video" video
                                 "duration" duration
                                 "width" width
@@ -873,7 +871,7 @@
 
   `options` include:
     :business-connection-id, :message-thread-id, :direct-messages-topic-id,
-    :receiver-user-id, :callback-query-id, :duration, :width, :height,
+    :ephemeral-message-parameters, :duration, :width, :height,
     :thumbnail, :caption, :parse-mode, :caption-entities, :show-caption-above-media,
     :has-spoiler, :disable-notification, :protect-content, :allow-paid-broadcast,
     :message-effect-id, :suggested-post-parameters, :reply-parameters, and :reply-markup.
@@ -883,8 +881,7 @@
   (let [{:keys [business-connection-id
                 message-thread-id
                 direct-messages-topic-id
-                receiver-user-id
-                callback-query-id
+                ephemeral-message-parameters
                 duration
                 width
                 height
@@ -905,8 +902,7 @@
                                     "business_connection_id" business-connection-id
                                     "message_thread_id" message-thread-id
                                     "direct_messages_topic_id" direct-messages-topic-id
-                                    "receiver_user_id" receiver-user-id
-                                    "callback_query_id" callback-query-id
+                                    "ephemeral_message_parameters" ephemeral-message-parameters
                                     "animation" animation
                                     "duration" duration
                                     "width" width
@@ -930,18 +926,17 @@
 
   `options` include:
     :business-connection-id, :message-thread-id, :direct-messages-topic-id,
-    :receiver-user-id, :callback-query-id, :caption, :parse-mode,
     :caption-entities, :duration, :disable-notification, :protect-content,
+    :ephemeral-message-parameters, :caption, :parse-mode,
     :allow-paid-broadcast, :message-effect-id, :suggested-post-parameters,
     :reply-parameters, and :reply-markup.
+    (https://core.telegram.org/bots/api#sendvoice)"
 
-  (https://core.telegram.org/bots/api#sendvoice)"
   [bot chat-id voice & options]
   (let [{:keys [business-connection-id
                 message-thread-id
                 direct-messages-topic-id
-                receiver-user-id
-                callback-query-id
+                ephemeral-message-parameters
                 caption
                 parse-mode
                 caption-entities
@@ -957,8 +952,7 @@
                                 "business_connection_id" business-connection-id
                                 "message_thread_id" message-thread-id
                                 "direct_messages_topic_id" direct-messages-topic-id
-                                "receiver_user_id" receiver-user-id
-                                "callback_query_id" callback-query-id
+                                "ephemeral_message_parameters" ephemeral-message-parameters
                                 "voice" voice
                                 "caption" caption
                                 "parse_mode" parse-mode
@@ -977,7 +971,7 @@
 
   `options` include:
     :business-connection-id, :message-thread-id, :direct-messages-topic-id,
-    :receiver-user-id, :callback-query-id, :duration, :length, :thumbnail,
+    :ephemeral-message-parameters, :duration, :length, :thumbnail,
     :disable-notification, :protect-content, :allow-paid-broadcast,
     :message-effect-id, :suggested-post-parameters, :reply-parameters, and :reply-markup.
 
@@ -988,8 +982,7 @@
   (let [{:keys [business-connection-id
                 message-thread-id
                 direct-messages-topic-id
-                receiver-user-id
-                callback-query-id
+                ephemeral-message-parameters
                 duration
                 length
                 thumbnail
@@ -1004,8 +997,7 @@
                                     "business_connection_id" business-connection-id
                                     "message_thread_id" message-thread-id
                                     "direct_messages_topic_id" direct-messages-topic-id
-                                    "receiver_user_id" receiver-user-id
-                                    "callback_query_id" callback-query-id
+                                    "ephemeral_message_parameters" ephemeral-message-parameters
                                     "video_note" video-note
                                     "duration" duration
                                     "length" length
@@ -1094,8 +1086,8 @@
 
   `options` include:
     :business-connection-id, :message-thread-id, :direct-messages-topic-id,
-    :receiver-user-id, :callback-query-id, :horizontal-accuracy, :live-period,
     :heading, :proximity-alert-radius, :disable-notification, :protect-content,
+    :ephemeral-message-parameters, :horizontal-accuracy, :live-period,
     :allow-paid-broadcast, :message-effect-id, :suggested-post-parameters,
     :reply-parameters, and :reply-markup.
 
@@ -1104,9 +1096,8 @@
   (let [{:keys [business-connection-id
                 message-thread-id
                 direct-messages-topic-id
-                receiver-user-id
-                callback-query-id
                 horizontal-accuracy
+                ephemeral-message-parameters
                 live-period
                 heading
                 proximity-alert-radius
@@ -1121,8 +1112,7 @@
                                    "business_connection_id" business-connection-id
                                    "message_thread_id" message-thread-id
                                    "direct_messages_topic_id" direct-messages-topic-id
-                                   "receiver_user_id" receiver-user-id
-                                   "callback_query_id" callback-query-id
+                                   "ephemeral_message_parameters" ephemeral-message-parameters
                                    "latitude" latitude
                                    "longitude" longitude
                                    "horizontal_accuracy" horizontal-accuracy
@@ -1142,8 +1132,8 @@
 
   `options` include:
     :business-connection-id, :message-thread-id, :direct-messages-topic-id,
-    :receiver-user-id, :callback-query-id, :foursquare-id, :foursquare-type,
     :google-place-id, :google-place-type, :disable-notification, :protect-content,
+    :ephemeral-message-parameters, :foursquare-id, :foursquare-type,
     :allow-paid-broadcast, :message-effect-id, :suggested-post-parameters,
     :reply-parameters, and :reply-markup.
 
@@ -1152,9 +1142,8 @@
   (let [{:keys [business-connection-id
                 message-thread-id
                 direct-messages-topic-id
-                receiver-user-id
-                callback-query-id
                 foursquare-id
+                ephemeral-message-parameters
                 foursquare-type
                 google-place-id
                 google-place-type
@@ -1169,8 +1158,7 @@
                                 "business_connection_id" business-connection-id
                                 "message_thread_id" message-thread-id
                                 "direct_messages_topic_id" direct-messages-topic-id
-                                "receiver_user_id" receiver-user-id
-                                "callback_query_id" callback-query-id
+                                "ephemeral_message_parameters" ephemeral-message-parameters
                                 "latitude" latitude
                                 "longitude" longitude
                                 "title" title
@@ -1192,8 +1180,8 @@
 
   `options` include:
     :business-connection-id, :message-thread-id, :direct-messages-topic-id,
-    :receiver-user-id, :callback-query-id, :last-name, :vcard, :disable-notification,
     :protect-content, :allow-paid-broadcast, :message-effect-id, :suggested-post-parameters,
+    :ephemeral-message-parameters, :last-name, :vcard, :disable-notification,
     :reply-parameters, and :reply-markup.
 
   (https://core.telegram.org/bots/api#sendcontact)"
@@ -1201,8 +1189,7 @@
   (let [{:keys [business-connection-id
                 message-thread-id
                 direct-messages-topic-id
-                receiver-user-id
-                callback-query-id
+                ephemeral-message-parameters
                 last-name
                 vcard
                 disable-notification
@@ -1216,8 +1203,7 @@
                                   "business_connection_id" business-connection-id
                                   "message_thread_id" message-thread-id
                                   "direct_messages_topic_id" direct-messages-topic-id
-                                  "receiver_user_id" receiver-user-id
-                                  "callback_query_id" callback-query-id
+                                  "ephemeral_message_parameters" ephemeral-message-parameters
                                   "phone_number" phone-number
                                   "first_name" first-name
                                   "last_name" last-name
@@ -1330,12 +1316,13 @@
   "Edit an ephemeral text message.
 
   `options` include:
-    :parse-mode, :entities, :link-preview-options, and :reply-markup.
+    :parse-mode, :entities, :rich-message, :link-preview-options, and :reply-markup.
 
   (https://core.telegram.org/bots/api#editephemeralmessagetext)"
   [bot chat-id receiver-user-id ephemeral-message-id text & options]
   (let [{:keys [parse-mode
                 entities
+                rich-message
                 link-preview-options
                 reply-markup]} options]
     (h/request bot "editEphemeralMessageText" {"chat_id" chat-id
@@ -1344,6 +1331,7 @@
                                                "text" text
                                                "parse_mode" parse-mode
                                                "entities" entities
+                                               "rich_message" rich-message
                                                "link_preview_options" link-preview-options
                                                "reply_markup" reply-markup})))
 
@@ -1366,13 +1354,15 @@
   "Edit the caption of an ephemeral message.
 
   `options` include:
-    :caption, :parse-mode, :caption-entities, and :reply-markup.
+    :caption, :parse-mode, :caption-entities, :show-caption-above-media,
+    and :reply-markup.
 
   (https://core.telegram.org/bots/api#editephemeralmessagecaption)"
   [bot chat-id receiver-user-id ephemeral-message-id & options]
   (let [{:keys [caption
                 parse-mode
                 caption-entities
+                show-caption-above-media
                 reply-markup]} options]
     (h/request bot "editEphemeralMessageCaption" {"chat_id" chat-id
                                                   "receiver_user_id" receiver-user-id
@@ -1380,6 +1370,7 @@
                                                   "caption" caption
                                                   "parse_mode" parse-mode
                                                   "caption_entities" caption-entities
+                                                  "show_caption_above_media" show-caption-above-media
                                                   "reply_markup" reply-markup})))
 
 (defn edit-ephemeral-message-reply-markup
@@ -1435,19 +1426,23 @@
   "Send a message draft.
 
   `options` include:
-    :message-thread-id, :parse-mode, and :entities.
+    :message-thread-id, :parse-mode, :entities, :can-stop, and :keep-on-stop.
 
   (https://core.telegram.org/bots/api#sendmessagedraft)"
   [bot chat-id draft-id text & options]
   (let [{:keys [message-thread-id
                 parse-mode
-                entities]} options]
+                entities
+                can-stop
+                keep-on-stop]} options]
     (h/request bot "sendMessageDraft" {"chat_id" chat-id
                                        "message_thread_id" message-thread-id
                                        "draft_id" draft-id
                                        "text" text
                                        "parse_mode" parse-mode
-                                       "entities" entities})))
+                                       "entities" entities
+                                       "can_stop" can-stop
+                                       "keep_on_stop" keep-on-stop})))
 
 (defn send-chat-action
   "Send a chat action.
@@ -1683,7 +1678,8 @@
     :can-edit-messages, :can-delete-messages, :can-post-stories,
     :can-edit-stories, :can-delete-stories, :can-manage-video-chats,
     :can-invite-users, :can-restrict-members, :can-pin-messages, :can-promote-members,
-    :can-manage-topics, :can-manage-direct-messages, and :can-manage-tags.
+    :can-manage-topics, :can-manage-direct-messages, :can-manage-tags,
+    and :can-send-welcome-messages.
 
   (https://core.telegram.org/bots/api#promotechatmember)"
   [bot chat-id user-id & options]
@@ -1703,7 +1699,8 @@
                 can-promote-members
                 can-manage-topics
                 can-manage-direct-messages
-                can-manage-tags]} options]
+                can-manage-tags
+                can-send-welcome-messages]} options]
     (h/request bot "promoteChatMember" {"chat_id" chat-id
                                         "user_id" user-id
                                         "is_anonymous" is-anonymous
@@ -1722,7 +1719,8 @@
                                         "can_promote_members" can-promote-members
                                         "can_manage_topics" can-manage-topics
                                         "can_manage_direct_messages" can-manage-direct-messages
-                                        "can_manage_tags" can-manage-tags})))
+                                        "can_manage_tags" can-manage-tags
+                                        "can_send_welcome_messages" can-send-welcome-messages})))
 
 (defn set-chat-administrator-custom-title
   "Set chat administrator's custom title.
