@@ -206,6 +206,14 @@
 
     ;; TODO: delete-ephemeral-message
 
+    ;; TODO: send-widget
+
+    ;; TODO: send-shared-widget
+
+    ;; TODO: edit-message-widget-data
+
+    ;; TODO: edit-shared-widget-data
+
     ;; fetch messages
     (is (:ok (cg/get-updates bot)))
 
@@ -383,6 +391,8 @@
 
     ;; TODO: get-chat-member
 
+    ;; TODO: get-chat-share-theme-backdrops
+
     ;; TODO: set-chat-sticker-set
 
     ;; TODO: delete-chat-sticker-set
@@ -459,11 +469,15 @@
 
     ;; TODO: get-chat-gifts
 
+    ;; TODO: get-unique-gift
+
     ;; TODO: convert-gift-to-stars
 
     ;; TODO: upgrade-gift
 
     ;; TODO: transfer-gift
+
+    ;; TODO: delete-business-account-gift
 
     ;; TODO: post-story
 
@@ -484,6 +498,12 @@
 (deftest guest-query-test
   (testing "Testing guest query"
     ;; TODO: answer-guest-query
+
+    (comment "----------------")))
+
+(deftest widget-query-test
+  (testing "Testing widget query"
+    ;; TODO: answer-widget-query
 
     (comment "----------------")))
 
