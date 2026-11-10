@@ -1,6 +1,15 @@
 # Changed Log
 All notable changes to this project will be documented in this file. This change log follows the conventions of [keepachangelog.com](http://keepachangelog.com/).
 
+## [0.44.0] - 2026-11-10
+- Applied API changes(https://core.telegram.org/bots/api-changelog#november-9-2026).
+- (breaking) `restrict-chat-member` and `set-chat-permissions` now take a `permissions` map (ChatPermissions) instead of `:can-xxx` options.
+- (breaking) `answer-inline-query`: replaced removed `:switch-pm-text` and `:switch-pm-parameter` with `:button`.
+- (breaking) `get-business-account-gifts`: replaced removed `:exclude-limited` with `:exclude-limited-upgradable` and `:exclude-limited-non-upgradable`, and added `:exclude-from-blockchain`.
+- Added missing `:message-effect-id` to `forward-message` and `copy-message`, and `:thumbnail` to `send-audio`.
+- `get-updates` and `poll-updates` now use the bot's `:limit-count` and `:interval-seconds`.
+- Fixed docs.
+
 ## 0.43.1 - 2026-08-25
 - Fixed parameters for some functions.
 
@@ -282,6 +291,7 @@ All notable changes to this project will be documented in this file. This change
 ### Added
 - Initial commit.
 
+[0.44.0]: https://github.com/meinside/clogram/compare/v0.43.1...v0.44.0
 [0.43.1]: https://github.com/meinside/clogram/compare/v0.43.0...v0.43.1
 [0.43.0]: https://github.com/meinside/clogram/compare/v0.42.1...v0.43.0
 [0.42.1]: https://github.com/meinside/clogram/compare/v0.42.0...v0.42.1

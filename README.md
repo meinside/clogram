@@ -7,7 +7,7 @@ A Clojure(Script) library for Telegram Bot API.
 
 ## Installation
 
-Add `[dev.meinside/clogram "0.43.1"]` to the dependency of your project.clj file.
+Add `[dev.meinside/clogram "0.44.0"]` to the dependency of your project.clj file.
 
 ## Usage
 
@@ -63,7 +63,7 @@ Add `[dev.meinside/clogram "0.43.1"]` to the dependency of your project.clj file
     ;; 'typing...'
     (let [result (cg/send-chat-action bot chat-id :typing)]
       (when (not (:ok result))
-        (println "*** failed to send chat action:" (:reason-pharse result))))
+        (println "*** failed to send chat action:" (:reason-phrase result))))
 
     (if (= text "/terminate")
       ;; process /terminate command
