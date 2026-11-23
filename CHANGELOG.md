@@ -1,6 +1,13 @@
 # Changed Log
 All notable changes to this project will be documented in this file. This change log follows the conventions of [keepachangelog.com](http://keepachangelog.com/).
 
+## [0.45.0] - 2026-11-23
+- Applied API changes(https://core.telegram.org/bots/api-changelog#november-22-2026).
+- Added `set-my-settings`.
+- `get-me` now returns a BotFullInfo object instead of a User object.
+- Depending on `:callback-query-mode` of `set-my-settings`, callback queries from messages sent by the bot may contain `:inline-message-id` instead of `:message`.
+- (breaking, API) `:text` of `RichBlockExpandableBlockQuotation` and `InputRichBlockExpandableBlockQuotation` was replaced with `:blocks`.
+
 ## [0.44.0] - 2026-11-10
 - Applied API changes(https://core.telegram.org/bots/api-changelog#november-9-2026).
 - (breaking) `restrict-chat-member` and `set-chat-permissions` now take a `permissions` map (ChatPermissions) instead of `:can-xxx` options.
@@ -291,6 +298,7 @@ All notable changes to this project will be documented in this file. This change
 ### Added
 - Initial commit.
 
+[0.45.0]: https://github.com/meinside/clogram/compare/v0.44.0...v0.45.0
 [0.44.0]: https://github.com/meinside/clogram/compare/v0.43.1...v0.44.0
 [0.43.1]: https://github.com/meinside/clogram/compare/v0.43.0...v0.43.1
 [0.43.0]: https://github.com/meinside/clogram/compare/v0.42.1...v0.43.0
