@@ -72,7 +72,7 @@
     (h/request bot "deleteWebhook" {"drop_pending_updates" drop-pending-updates})))
 
 (defn get-me
-  "Fetch this bot's info.
+  "Fetch this bot's info, in the form of a BotFullInfo object.
 
   (https://core.telegram.org/bots/api#getme)"
   [bot]
@@ -2413,6 +2413,52 @@
   [bot & options]
   (let [{:keys [for-channels]} options]
     (h/request bot "getMyDefaultAdministratorRights" {"for_channels" for-channels})))
+
+(defn set-my-settings
+  "Change this bot's settings. Settings that aren't specified remain unchanged.
+
+  `options` include:
+    :supports-inline-queries, :inline-query-placeholder, :needs-inline-query-location,
+    :inline-feedback-share-denominator, :can-join-groups, :can-read-all-group-messages,
+    :can-connect-to-business, :can-manage-bots, :supports-guest-queries,
+    :supports-join-request-queries, :has-topics-enabled, :allows-users-to-create-topics,
+    :has-topic-sidebar, :can-communicate-with-bots, and :callback-query-mode.
+
+  :inline-feedback-share-denominator: one of 1, 10, 100, or 1000 (0 to stop receiving chosen inline results).
+  :callback-query-mode: one of \"default\", \"auto\", or \"inline\".
+
+  (https://core.telegram.org/bots/api#setmysettings)"
+  [bot & options]
+  (let [{:keys [supports-inline-queries
+                inline-query-placeholder
+                needs-inline-query-location
+                inline-feedback-share-denominator
+                can-join-groups
+                can-read-all-group-messages
+                can-connect-to-business
+                can-manage-bots
+                supports-guest-queries
+                supports-join-request-queries
+                has-topics-enabled
+                allows-users-to-create-topics
+                has-topic-sidebar
+                can-communicate-with-bots
+                callback-query-mode]} options]
+    (h/request bot "setMySettings" {"supports_inline_queries" supports-inline-queries
+                                    "inline_query_placeholder" inline-query-placeholder
+                                    "needs_inline_query_location" needs-inline-query-location
+                                    "inline_feedback_share_denominator" inline-feedback-share-denominator
+                                    "can_join_groups" can-join-groups
+                                    "can_read_all_group_messages" can-read-all-group-messages
+                                    "can_connect_to_business" can-connect-to-business
+                                    "can_manage_bots" can-manage-bots
+                                    "supports_guest_queries" supports-guest-queries
+                                    "supports_join_request_queries" supports-join-request-queries
+                                    "has_topics_enabled" has-topics-enabled
+                                    "allows_users_to_create_topics" allows-users-to-create-topics
+                                    "has_topic_sidebar" has-topic-sidebar
+                                    "can_communicate_with_bots" can-communicate-with-bots
+                                    "callback_query_mode" callback-query-mode})))
 
 (defn edit-message-text
   "Edit a message's text.

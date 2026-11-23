@@ -407,6 +407,8 @@
 
              ;; TODO: get-my-default-administrator-rights
 
+             ;; TODO: set-my-settings (changes the test bot's settings, e.g. privacy mode)
+
              ;; create-forum-topic
              (let [created (<! (cg/create-forum-topic bot chat-id (str "[clogram] forum topic with chat_id: " chat-id)))]
                (is (:ok created))
